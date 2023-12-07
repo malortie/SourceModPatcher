@@ -222,6 +222,11 @@ namespace test_installsourcecontent
             var stepLogger = new PipelineStepLogger(_writer);
             var stepsLogsResults = new List<PipelineStepLogResult>();
 
+            int numStepsComplete = 0;
+            int numStepsPartiallyComplete = 0;
+            int numStepsFailed = 0;
+            int numStepsCancelled = 0;
+
             // Select only the steps we want to install.
             var appsInstallSteps = _appsSteps.Where(kv => _steamAppsToInstall.Contains(kv.Key));
 
@@ -236,6 +241,8 @@ namespace test_installsourcecontent
 
                 _writer.WriteLine($"Installing [{appID}] {_configuration.GetSteamAppName(appID)}");
                 _writer.WriteLine();
+
+                int stepIndex = 0;
                 foreach (var stepData in installSteps)
                 {
                     // Perform token replacement in step string properties.
@@ -257,22 +264,32 @@ namespace test_installsourcecontent
 
                     // Execute step.
                     var step = _stepsDataToInstallStep[stepData.GetType()];
+
+                    string stepStatusMessage = $"({stepIndex + 1}/{installSteps.Count}) {stepData.Description}";
+
+                    _writer.WriteLine(stepStatusMessage);
                     PipelineStepStatus stepStatus = step.DoStep(stepContext, stepData, stepLogger);
                     switch (stepStatus)
                     {
                         case PipelineStepStatus.Complete:
-                            _writer.WriteLine($"Step completed.");
+                            _writer.WriteLine($"{stepStatusMessage} [COMPLETED]");
+                            ++numStepsComplete;
                             break;
                         case PipelineStepStatus.PartiallyComplete:
-                            _writer.WriteLine($"Step partially completed.");
+                            _writer.WriteLine($"{stepStatusMessage} [PARTIALLY COMPLETED]");
+                            ++numStepsPartiallyComplete;
                             break;
                         case PipelineStepStatus.Failed:
-                            _writer.WriteLine($"Step failed.");
+                            _writer.WriteLine($"{stepStatusMessage} [FAILED]");
+                            ++numStepsFailed;
                             break;
                         case PipelineStepStatus.Cancelled:
-                            _writer.WriteLine($"Step cancelled.");
+                            _writer.WriteLine($"{stepStatusMessage} [CANCELLED]");
+                            ++numStepsCancelled;
                             break;
                     }
+
+                    _writer.WriteLine();
 
                     // Save warnings and errors raised by this step.
                     stepsLogsResults.Add(new PipelineStepLogResult
@@ -281,25 +298,56 @@ namespace test_installsourcecontent
                         Warnings = stepLogger.Warnings.ToList(),
                         Errors = stepLogger.Errors.ToList()
                     });
+
+                    ++stepIndex;
                 }
-                _writer.WriteLine();
 
                 if (PauseAfterEachStep)
                     _pauseHandler.Pause();
             }
 
-            // Write all warnings and errors raised by steps.
-            foreach (var stepLogResult in stepsLogsResults)
+            // Write steps warnings.
+            var logResults = stepsLogsResults.Where(a => a.Warnings.Count > 0).ToArray();
+            if (logResults.Length > 0)
             {
-                // Only write if we have either warnings or errors.
-                if (stepLogResult.Warnings.Count > 0 || stepLogResult.Errors.Count > 0)
+                foreach (var logResult in logResults)
                 {
-                    _writer.WriteLine($"{stepLogResult.StepName}");
-                    foreach (var warning in stepLogResult.Warnings)
-                        _writer.WriteLine($"[WARNING] {warning}");
-                    foreach (var error in stepLogResult.Errors)
-                        _writer.WriteLine($"[ERROR] {error}");
+                    foreach (var warning in logResult.Warnings)
+                        _writer.WriteLine($"[WARNING] {logResult.StepName} {warning}");
                 }
+            }
+
+            // Write steps errors.
+            logResults = stepsLogsResults.Where(a => a.Errors.Count > 0).ToArray();
+            if (logResults.Length > 0)
+            {
+                foreach (var logResult in logResults)
+                {
+                    foreach (var error in logResult.Errors)
+                        _writer.WriteLine($"[ERROR] {logResult.StepName} {error}");
+                }
+            }
+
+            _writer.WriteLine();
+            _writer.WriteLine($"SUMMARY");
+            _writer.WriteLine();
+            _writer.WriteLine($"Completed: {numStepsComplete}");
+            _writer.WriteLine($"Partially completed: {numStepsPartiallyComplete}");
+            _writer.WriteLine($"Failed: {numStepsFailed}");
+            _writer.WriteLine($"Cancelled: {numStepsCancelled}");
+            _writer.WriteLine();
+
+            if (numStepsPartiallyComplete != 0 ||
+                numStepsFailed != 0 ||
+                numStepsCancelled != 0)
+            {
+                _writer.WriteLine("One or more errors occured.");
+                _writer.WriteLine();
+            }
+            else
+            {
+                _writer.WriteLine("All steps successfully completed.");
+                _writer.WriteLine();
             }
         }
     }
