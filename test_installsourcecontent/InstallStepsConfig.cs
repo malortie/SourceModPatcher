@@ -13,6 +13,8 @@ namespace test_installsourcecontent
         public string? Name { get; set; }
         [JsonPropertyName("description")]
         public string? Description { get; set; }
+        [JsonPropertyName("depends_on")]
+        public List<string>? DependsOn { get; set; }
     }
 
     public class JSONExtractVPKInstallStep : JSONInstallStep

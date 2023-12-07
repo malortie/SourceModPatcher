@@ -6,6 +6,7 @@ namespace test_installsourcecontent
     {
         public string Name { get; set; } = "";
         public string Description { get; set; } = "";
+        public List<string> DependsOn { get; set; } = new();
         public string VariableName { get; set; } = "";
         public string VariableValue { get; set; } = "";
 

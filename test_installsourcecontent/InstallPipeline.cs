@@ -108,6 +108,7 @@ namespace test_installsourcecontent
     {
         string Name { get; set; }
         string Description { get; set; }
+        List<string> DependsOn { get; set; }
     }
 
     public interface IPipelineStep
@@ -222,10 +223,10 @@ namespace test_installsourcecontent
             var stepLogger = new PipelineStepLogger(_writer);
             var stepsLogsResults = new List<PipelineStepLogResult>();
 
-            int numStepsComplete = 0;
-            int numStepsPartiallyComplete = 0;
-            int numStepsFailed = 0;
-            int numStepsCancelled = 0;
+            HashSet<string> stepsComplete = new();
+            HashSet<string> stepsPartiallyComplete = new();
+            HashSet<string> stepsFailed = new();
+            HashSet<string> stepsCancelled = new();
 
             // Select only the steps we want to install.
             var appsInstallSteps = _appsSteps.Where(kv => _steamAppsToInstall.Contains(kv.Key));
@@ -242,9 +243,10 @@ namespace test_installsourcecontent
                 _writer.WriteLine($"Installing [{appID}] {_configuration.GetSteamAppName(appID)}");
                 _writer.WriteLine();
 
-                int stepIndex = 0;
-                foreach (var stepData in installSteps)
+                for (int stepIndex = 0; stepIndex < installSteps.Count; ++stepIndex)
                 {
+                    var stepData = installSteps[stepIndex];
+
                     // Perform token replacement in step string properties.
                     tokenReplacer.Variables = new ReadOnlyDictionary<string, string>(context.ContextVariables);
 
@@ -262,44 +264,55 @@ namespace test_installsourcecontent
                     // Clear step logger warnings and errors.
                     stepLogger.Clear();
 
-                    // Execute step.
-                    var step = _stepsDataToInstallStep[stepData.GetType()];
-
                     string stepStatusMessage = $"({stepIndex + 1}/{installSteps.Count}) {stepData.Description}";
 
-                    _writer.WriteLine(stepStatusMessage);
-                    PipelineStepStatus stepStatus = step.DoStep(stepContext, stepData, stepLogger);
+                    PipelineStepStatus stepStatus;
+
+                    var uncompletedDependencies = stepData.DependsOn.Except(stepsComplete).ToArray();
+                    if (uncompletedDependencies.Length > 0)
+                    {
+                        _writer.WriteLine($"Step {stepData.Name} will not be executed: The following dependencies were not completed: <{string.Join(',', stepData.DependsOn)}>");
+                        stepStatus = PipelineStepStatus.Cancelled;
+                    }
+                    else
+                    {
+                        // Execute step.
+                        _writer.WriteLine(stepStatusMessage);
+                        stepStatus = _stepsDataToInstallStep[stepData.GetType()].DoStep(stepContext, stepData, stepLogger);
+                    }
+
                     switch (stepStatus)
                     {
                         case PipelineStepStatus.Complete:
                             _writer.WriteLine($"{stepStatusMessage} [COMPLETED]");
-                            ++numStepsComplete;
+                            stepsComplete.Add(stepData.Name);
                             break;
                         case PipelineStepStatus.PartiallyComplete:
                             _writer.WriteLine($"{stepStatusMessage} [PARTIALLY COMPLETED]");
-                            ++numStepsPartiallyComplete;
+                            stepsPartiallyComplete.Add(stepData.Name);
                             break;
                         case PipelineStepStatus.Failed:
                             _writer.WriteLine($"{stepStatusMessage} [FAILED]");
-                            ++numStepsFailed;
+                            stepsFailed.Add(stepData.Name);
                             break;
                         case PipelineStepStatus.Cancelled:
                             _writer.WriteLine($"{stepStatusMessage} [CANCELLED]");
-                            ++numStepsCancelled;
+                            stepsCancelled.Add(stepData.Name);
                             break;
                     }
 
                     _writer.WriteLine();
 
-                    // Save warnings and errors raised by this step.
-                    stepsLogsResults.Add(new PipelineStepLogResult
+                    if (stepStatus != PipelineStepStatus.Cancelled)
                     {
-                        StepName = stepData.Name,
-                        Warnings = stepLogger.Warnings.ToList(),
-                        Errors = stepLogger.Errors.ToList()
-                    });
-
-                    ++stepIndex;
+                        // Save warnings and errors raised by this step.
+                        stepsLogsResults.Add(new PipelineStepLogResult
+                        {
+                            StepName = stepData.Name,
+                            Warnings = stepLogger.Warnings.ToList(),
+                            Errors = stepLogger.Errors.ToList()
+                        });
+                    }
                 }
 
                 if (PauseAfterEachStep)
@@ -331,15 +344,15 @@ namespace test_installsourcecontent
             _writer.WriteLine();
             _writer.WriteLine($"SUMMARY");
             _writer.WriteLine();
-            _writer.WriteLine($"Completed: {numStepsComplete}");
-            _writer.WriteLine($"Partially completed: {numStepsPartiallyComplete}");
-            _writer.WriteLine($"Failed: {numStepsFailed}");
-            _writer.WriteLine($"Cancelled: {numStepsCancelled}");
+            _writer.WriteLine($"Completed: {stepsComplete.Count}");
+            _writer.WriteLine($"Partially completed: {stepsPartiallyComplete.Count}");
+            _writer.WriteLine($"Failed: {stepsFailed.Count}");
+            _writer.WriteLine($"Cancelled: {stepsCancelled.Count}");
             _writer.WriteLine();
 
-            if (numStepsPartiallyComplete != 0 ||
-                numStepsFailed != 0 ||
-                numStepsCancelled != 0)
+            if (stepsPartiallyComplete.Count != 0 ||
+                stepsFailed.Count != 0 ||
+                stepsCancelled.Count != 0)
             {
                 _writer.WriteLine("One or more errors occured.");
                 _writer.WriteLine();
