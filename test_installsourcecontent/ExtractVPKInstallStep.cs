@@ -4,6 +4,9 @@ namespace test_installsourcecontent
 {
     public class ExtractVPKInstallStepData : IPipelineStepData
     {
+        public string Name { get; set; } = "";
+        public string Description { get; set; } = "";
+
         public List<string> Vpks { get; set; } = new();
         public string OutDir { get; set; } = "";
     }

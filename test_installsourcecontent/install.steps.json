@@ -2,6 +2,8 @@
   "215": [
     {
       "$type": "extract_vpk",
+      "name": "sdkbase2006_extract_content",
+      "description": "Extract Source SDK Base 2006 content",
       "vpks": [
         "vpks/depot_206_dir.vpk",
         "vpks/depot_207_dir.vpk",
@@ -20,13 +22,17 @@
     },
     {
       "$type": "save_variable",
-      "name": "sdkbase2006_content_path",
-      "value": "$(install_settings_install_dir)"
+      "name": "sdkbase2006_save_variable",
+      "description": "Add Source SDK Base 2006 install path to $(variables_config_file_name)",
+      "variable_name": "sdkbase2006_content_path",
+      "variable_value": "$(install_settings_install_dir)"
     }
   ],
   "218": [
     {
       "$type": "extract_vpk",
+      "name": "sdkbase2007_extract_content",
+      "description": "Extract Source SDK Base 2007 content",
       "vpks": [
         "vpks/depot_206_dir.vpk",
         "vpks/depot_207_dir.vpk",
@@ -46,13 +52,17 @@
     },
     {
       "$type": "save_variable",
-      "name": "sdkbase2007_content_path",
-      "value": "$(install_settings_install_dir)"
+      "name": "sdkbase2007_save_variable",
+      "description": "Add Source SDK Base 2007 install path to $(variables_config_file_name)",
+      "variable_name": "sdkbase2007_content_path",
+      "variable_value": "$(install_settings_install_dir)"
     }
   ],
   "220": [
     {
       "$type": "extract_vpk",
+      "name": "hl2_extract_content",
+      "description": "Extract Half-Life 2 content",
       "vpks": [
         "hl2/hl2_misc_dir.vpk",
         "hl2/hl2_pak_dir.vpk",
@@ -64,151 +74,203 @@
     },
     {
       "$type": "save_variable",
-      "name": "hl2_content_path",
-      "value": "$(install_settings_install_dir)"
+      "name": "hl2_save_variable",
+      "description": "Add Half-Life 2 install path to $(variables_config_file_name)",
+      "variable_name": "hl2_content_path",
+      "variable_value": "$(install_settings_install_dir)"
     }
   ],
   "240": [
     {
       "$type": "extract_vpk",
+      "name": "cstrike_extract_content",
+      "description": "Extract Counter-Strike: Source content",
       "vpks": ["cstrike/cstrike_pak_dir.vpk"],
       "outdir": "$(install_settings_install_dir)"
     },
     {
       "$type": "save_variable",
-      "name": "cstrike_content_path",
-      "value": "$(install_settings_install_dir)"
+      "name": "cstrike_save_variable",
+      "description": "Add Counter-Strike: Source install path to $(variables_config_file_name)",
+      "variable_name": "cstrike_content_path",
+      "variable_value": "$(install_settings_install_dir)"
     }
   ],
   "280": [
     {
       "$type": "extract_vpk",
+      "name": "hl1_extract_content",
+      "description": "Extract Half-Life: Source content",
       "vpks": ["hl1/hl1_pak_dir.vpk"],
       "outdir": "$(install_settings_install_dir)"
     },
     {
       "$type": "save_variable",
-      "name": "hl1_content_path",
-      "value": "$(install_settings_install_dir)"
+      "name": "hl1_save_variable",
+      "description": "Add Half-Life: Source install path to $(variables_config_file_name)",
+      "variable_name": "hl1_content_path",
+      "variable_value": "$(install_settings_install_dir)"
     },
     {
       "$type": "extract_vpk",
+      "name": "hl1_hd_extract_content",
+      "description": "Extract Half-Life: Source HD content",
       "vpks": ["hl1_hd/hl1_hd_pak_dir.vpk"],
       "outdir": "$(install_settings_install_dir)/hl1_hd"
     },
     {
       "$type": "save_variable",
-      "name": "hl1_hd_content_path",
-      "value": "$(install_settings_install_dir)/hl1_hd"
+      "name": "hl1_hd_save_variable",
+      "description": "Add Half-Life: Source HD install path to $(variables_config_file_name)",
+      "variable_name": "hl1_hd_content_path",
+      "variable_value": "$(install_settings_install_dir)/hl1_hd"
     }
   ],
   "300": [
     {
       "$type": "extract_vpk",
+      "name": "dod_extract_content",
+      "description": "Extract Day of Defeat: Source content",
       "vpks": ["dod/dod_pak_dir.vpk"],
       "outdir": "$(install_settings_install_dir)"
     },
     {
       "$type": "save_variable",
-      "name": "dod_content_path",
-      "value": "$(install_settings_install_dir)"
+      "name": "dod_save_variable",
+      "description": "Add Day of Defeat: Source install path to $(variables_config_file_name)",
+      "variable_name": "dod_content_path",
+      "variable_value": "$(install_settings_install_dir)"
     }
   ],
   "320": [
     {
       "$type": "extract_vpk",
+      "name": "hl2mp_extract_content",
+      "description": "Extract Half-Life 2: Deathmatch content",
       "vpks": ["hl2mp/hl2mp_pak_dir.vpk"],
       "outdir": "$(install_settings_install_dir)"
     },
     {
       "$type": "save_variable",
-      "name": "hl2mp_content_path",
-      "value": "$(install_settings_install_dir)"
+      "name": "hl2mp_save_variable",
+      "description": "Add Half-Life 2: Deathmatch install path to $(variables_config_file_name)",
+      "variable_name": "hl2mp_content_path",
+      "variable_value": "$(install_settings_install_dir)"
     }
   ],
   "340": [
     {
       "$type": "extract_vpk",
+      "name": "lostcoast_extract_content",
+      "description": "Extract Half-Life 2: Lost Coast content",
       "vpks": ["lostcoast/lostcoast_pak_dir.vpk"],
       "outdir": "$(install_settings_install_dir)"
     },
     {
       "$type": "save_variable",
-      "name": "lostcoast_content_path",
-      "value": "$(install_settings_install_dir)"
+      "name": "lostcoast_save_variable",
+      "description": "Add Half-Life 2: Lost Coast install path to $(variables_config_file_name)",
+      "variable_name": "lostcoast_content_path",
+      "variable_value": "$(install_settings_install_dir)"
     }
   ],
   "360": [
     {
       "$type": "extract_vpk",
+      "name": "hl1mp_extract_content",
+      "description": "Extract Half-Life Deathmatch: Source content",
       "vpks": ["hl1mp/hl1mp_pak_dir.vpk"],
       "outdir": "$(install_settings_install_dir)"
     },
     {
       "$type": "save_variable",
-      "name": "hl1mp_content_path",
-      "value": "$(install_settings_install_dir)"
+      "name": "hl1mp_save_variable",
+      "description": "Add Half-Life Deathmatch: Source install path to $(variables_config_file_name)",
+      "variable_name": "hl1mp_content_path",
+      "variable_value": "$(install_settings_install_dir)"
     }
   ],
   "380": [
     {
       "$type": "extract_vpk",
+      "name": "hl2ep1_extract_content",
+      "description": "Extract Half-Life 2: Episode One content",
       "vpks": ["episodic/ep1_pak_dir.vpk"],
       "outdir": "$(install_settings_install_dir)"
     },
     {
       "$type": "save_variable",
-      "name": "hl2ep1_content_path",
-      "value": "$(install_settings_install_dir)"
+      "name": "hl2ep1_save_variable",
+      "description": "Add Half-Life 2: Episode One install path to $(variables_config_file_name)",
+      "variable_name": "hl2ep1_content_path",
+      "variable_value": "$(install_settings_install_dir)"
     }
   ],
   "400": [
     {
       "$type": "extract_vpk",
+      "name": "portal_extract_content",
+      "description": "Extract Portal content",
       "vpks": ["portal/portal_pak_dir.vpk"],
       "outdir": "$(install_settings_install_dir)"
     },
     {
       "$type": "save_variable",
-      "name": "portal_content_path",
-      "value": "$(install_settings_install_dir)"
+      "name": "portal_save_variable",
+      "description": "Add Portal install path to $(variables_config_file_name)",
+      "variable_name": "portal_content_path",
+      "variable_value": "$(install_settings_install_dir)"
     }
   ],
   "420": [
     {
       "$type": "extract_vpk",
+      "name": "hl2ep2_extract_content",
+      "description": "Extract Half-Life 2: Episode Two content",
       "vpks": ["ep2/ep2_pak_dir.vpk"],
       "outdir": "$(install_settings_install_dir)"
     },
     {
       "$type": "save_variable",
-      "name": "hl2ep2_content_path",
-      "value": "$(install_settings_install_dir)"
+      "name": "hl2ep2_save_variable",
+      "description": "Add Half-Life 2: Episode Two install path to $(variables_config_file_name)",
+      "variable_name": "hl2ep2_content_path",
+      "variable_value": "$(install_settings_install_dir)"
     }
   ],
   "243730": [
     {
       "$type": "extract_vpk",
+      "name": "sdkbase2013sp_hl2ep2_extract_content",
+      "description": "Extract Source SDK Base 2013 Singleplayer EP2 content",
       "vpks": ["ep2/ep2_pak_dir.vpk"],
       "outdir": "$(install_settings_install_dir)/ep2"
     },
     {
       "$type": "save_variable",
-      "name": "sdkbase2013sp_hl2ep2_content_path",
-      "value": "$(install_settings_install_dir)/ep2"
+      "name": "sdkbase2013sp_hl2ep2_save_variable",
+      "description": "Add Source SDK Base 2013 Singleplayer EP2 install path to $(variables_config_file_name)",
+      "variable_name": "sdkbase2013sp_hl2ep2_content_path",
+      "variable_value": "$(install_settings_install_dir)/ep2"
     },
     {
       "$type": "extract_vpk",
+      "name": "sdkbase2013sp_hl2ep1_extract_content",
+      "description": "Extract Source SDK Base 2013 Singleplayer EP1 content",
       "vpks": ["episodic/ep1_pak_dir.vpk"],
       "outdir": "$(install_settings_install_dir)/episodic"
     },
     {
       "$type": "save_variable",
-      "name": "sdkbase2013sp_hl2ep1_content_path",
-      "value": "$(install_settings_install_dir)/episodic"
+      "name": "sdkbase2013sp_hl2ep1_save_variable",
+      "description": "Add Source SDK Base 2013 Singleplayer EP1 install path to $(variables_config_file_name)",
+      "variable_name": "sdkbase2013sp_hl2ep1_content_path",
+      "variable_value": "$(install_settings_install_dir)/episodic"
     },
     {
       "$type": "extract_vpk",
+      "name": "sdkbase2013sp_hl2_extract_content",
+      "description": "Extract Source SDK Base 2013 Singleplayer HL2 content",
       "vpks": [
         "hl2/hl2_misc_dir.vpk",
         "hl2/hl2_sound_misc_dir.vpk",
@@ -219,8 +281,10 @@
     },
     {
       "$type": "save_variable",
-      "name": "sdkbase2013sp_hl2_content_path",
-      "value": "$(install_settings_install_dir)/hl2"
+      "name": "sdkbase2013sp_hl2_save_variable",
+      "description": "Add Source SDK Base 2013 Singleplayer HL2 install path to $(variables_config_file_name)",
+      "variable_name": "sdkbase2013sp_hl2_content_path",
+      "variable_value": "$(install_settings_install_dir)/hl2"
     }
   ],
   "243750": [

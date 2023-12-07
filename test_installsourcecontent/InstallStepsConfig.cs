@@ -9,6 +9,10 @@ namespace test_installsourcecontent
     [JsonDerivedType(typeof(JSONSaveVariableInstallStep), typeDiscriminator: "save_variable")]
     public class JSONInstallStep
     {
+        [JsonPropertyName("name")]
+        public string? Name { get; set; }
+        [JsonPropertyName("description")]
+        public string? Description { get; set; }
     }
 
     public class JSONExtractVPKInstallStep : JSONInstallStep
@@ -21,10 +25,10 @@ namespace test_installsourcecontent
 
     public class JSONSaveVariableInstallStep : JSONInstallStep
     {
-        [JsonPropertyName("name")]
-        public string? Name { get; set; }
-        [JsonPropertyName("value")]
-        public string? Value { get; set; }
+        [JsonPropertyName("variable_name")]
+        public string? VariableName { get; set; }
+        [JsonPropertyName("variable_value")]
+        public string? VariableValue { get; set; }
     }
 
     public class JSONInstallStepsConfig : Dictionary<int, List<JSONInstallStep>>

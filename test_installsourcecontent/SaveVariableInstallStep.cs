@@ -5,7 +5,10 @@ namespace test_installsourcecontent
     public class SaveVariableInstallStepData : IPipelineStepData
     {
         public string Name { get; set; } = "";
-        public string Value { get; set; } = "";
+        public string Description { get; set; } = "";
+        public string VariableName { get; set; } = "";
+        public string VariableValue { get; set; } = "";
+
     }
 
     public class SaveVariableInstallStep : IPipelineStep
@@ -13,8 +16,8 @@ namespace test_installsourcecontent
         public PipelineStepStatus DoStep(StepContext context, IPipelineStepData stepData, IPipelineStepLogger stepLogger)
         {
             var saveVariableData = (SaveVariableInstallStepData)stepData;
-            var Name = saveVariableData.Name;
-            var Value = saveVariableData.Value;
+            var Name = saveVariableData.VariableName;
+            var Value = saveVariableData.VariableValue;
 
             if (null == Name)
             {

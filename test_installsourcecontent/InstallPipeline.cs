@@ -106,6 +106,8 @@ namespace test_installsourcecontent
 
     public interface IPipelineStepData
     {
+        string Name { get; set; }
+        string Description { get; set; }
     }
 
     public interface IPipelineStep
@@ -230,6 +232,8 @@ namespace test_installsourcecontent
                 context.ContextVariables.Clear();
                 context.ContextVariables["install_settings_install_dir"] = PathExtensions.ConvertToUnixDirectorySeparator(_fileSystem, _fileSystem.Path.GetFullPath(_configuration.GetContentInstallDir(appID)));
 
+                context.ContextVariables["variables_config_file_name"] = _configuration.GetVariablesFileName();
+
                 _writer.WriteLine($"Installing [{appID}] {_configuration.GetSteamAppName(appID)}");
                 _writer.WriteLine();
                 foreach (var stepData in installSteps)
@@ -273,7 +277,7 @@ namespace test_installsourcecontent
                     // Save warnings and errors raised by this step.
                     stepsLogsResults.Add(new PipelineStepLogResult
                     {
-                        StepName = step.GetType().ToString(),
+                        StepName = stepData.Name,
                         Warnings = stepLogger.Warnings.ToList(),
                         Errors = stepLogger.Errors.ToList()
                     });
