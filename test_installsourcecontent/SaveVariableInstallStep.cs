@@ -19,12 +19,12 @@ namespace test_installsourcecontent
             if (null == Name)
             {
                 stepLogger.LogError("No variable name specified.");
-                return PipelineStepStatus.Cancelled;
+                return PipelineStepStatus.Failed;
             }
             if (null == Value)
             {
                 stepLogger.LogError("No variable value specified.");
-                return PipelineStepStatus.Cancelled;
+                return PipelineStepStatus.Failed;
             }
 
             // Write the variable.
