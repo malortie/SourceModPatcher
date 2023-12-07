@@ -26,12 +26,12 @@ namespace test_installsourcecontent
             if (null == Vpks || Vpks.Count <= 0)
             {
                 stepLogger.LogError("No vpk(s) specified.");
-                return PipelineStepStatus.Cancelled;
+                return PipelineStepStatus.Failed;
             }
             if (null == OutDir)
             {
                 stepLogger.LogError("No output directory specified.");
-                return PipelineStepStatus.Cancelled;
+                return PipelineStepStatus.Failed;
             }
 
             var vpks = Vpks.Select(vpkPath => PathExtensions.JoinWithSeparator(context.FileSystem, context.GetSteamAppInstallDir(), vpkPath)).ToList();
