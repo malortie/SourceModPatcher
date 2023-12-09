@@ -11,19 +11,17 @@ namespace test_installsourcecontent
     public class ContextFactory : IContextFactory
     {
         IFileSystem _fileSystem;
-        IWriter _writer;
         IConfiguration _configuration;
 
-        public ContextFactory(IFileSystem fileSystem, IWriter writer, IConfiguration configuration)
+        public ContextFactory(IFileSystem fileSystem, IConfiguration configuration)
         {
             _fileSystem = fileSystem;
-            _writer = writer;
             _configuration = configuration;
         }
 
         public Context CreateContext() 
         {
-            return new Context(_fileSystem, _writer, _configuration);
+            return new Context(_fileSystem, _configuration);
         }
 
         public StepContext CreateStepContext(Context context)

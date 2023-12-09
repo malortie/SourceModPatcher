@@ -5,12 +5,12 @@ namespace test_installsourcecontent
 {
     public interface IVPKExtractor
     {
-        void Extract(IFileSystem fileSystem, IWriter writer, string vpkPath, string outputDir);
+        void Extract(IFileSystem fileSystem, IPipelineLogger logger, string vpkPath, string outputDir);
     }
 
     public class VPKExtractor : IVPKExtractor
     {
-        public void Extract(IFileSystem fileSystem, IWriter writer, string vpkPath, string outputDir) 
+        public void Extract(IFileSystem fileSystem, IPipelineLogger logger, string vpkPath, string outputDir) 
         {
             if (!fileSystem.Directory.Exists(outputDir))
                 fileSystem.Directory.CreateDirectory(outputDir);
@@ -30,7 +30,7 @@ namespace test_installsourcecontent
                     string? entryDir = fileSystem.Path.GetDirectoryName(entry.GetFullPath());
                     if (null == entryDir)
                     {
-                        writer.WriteLine($"Error: {entry.GetFullPath()}");
+                        logger.LogError($"Error: {entry.GetFullPath()}");
                         continue;
                     }
                     entryDir = PathExtensions.JoinWithSeparator(fileSystem, outputDir, entryDir.Replace(fileSystem.Path.DirectorySeparatorChar, fileSystem.Path.AltDirectorySeparatorChar));
@@ -38,7 +38,7 @@ namespace test_installsourcecontent
                     if (!fileSystem.Directory.Exists(entryDir))
                         fileSystem.Directory.CreateDirectory(entryDir);
 
-                    writer.WriteLine($"Extracting {entry.GetFullPath()}");
+                    logger.LogInfo($"Extracting {entry.GetFullPath()}");
                     var fullPath = PathExtensions.JoinWithSeparator(fileSystem, outputDir, entry.GetFullPath());
                     package.ReadEntry(entry, out byte[] fileContents);
                     fileSystem.File.WriteAllBytes(fullPath, fileContents);

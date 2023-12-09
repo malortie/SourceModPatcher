@@ -5,18 +5,15 @@ namespace test_installsourcecontent
     public class Context
     {
         IFileSystem _fileSystem;
-        IWriter _writer;
         IConfiguration _configuration;
 
-        public Context(IFileSystem fileSystem, IWriter writer, IConfiguration configuration)
+        public Context(IFileSystem fileSystem, IConfiguration configuration)
         {
             _fileSystem = fileSystem;
-            _writer = writer;
             _configuration = configuration;
         }
 
         public IFileSystem FileSystem { get { return _fileSystem; } }
-        public IWriter Writer { get { return _writer; } }
 
         public int AppID { get; set; } = 0;
 

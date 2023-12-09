@@ -20,7 +20,7 @@ namespace test_installsourcecontent
             _extractor = vpkExtractor;
         }
 
-        public PipelineStepStatus DoStep(StepContext context, IPipelineStepData stepData, IPipelineStepLogger stepLogger)
+        public PipelineStepStatus DoStep(StepContext context, IPipelineStepData stepData, IPipelineLogger logger)
         {
             var stepDataVPK = (ExtractVPKInstallStepData)stepData;
             var Vpks = stepDataVPK.Vpks;
@@ -28,12 +28,12 @@ namespace test_installsourcecontent
 
             if (null == Vpks || Vpks.Count <= 0)
             {
-                stepLogger.LogError("No vpk(s) specified.");
+                logger.LogError("No vpk(s) specified.");
                 return PipelineStepStatus.Failed;
             }
             if (null == OutDir)
             {
-                stepLogger.LogError("No output directory specified.");
+                logger.LogError("No output directory specified.");
                 return PipelineStepStatus.Failed;
             }
 
@@ -67,12 +67,12 @@ namespace test_installsourcecontent
             {
                 if (!context.FileSystem.File.Exists(vpkPath))
                 {
-                    stepLogger.LogWarning($"{vpkPath} does not exist. Skipping...");
+                    logger.LogWarning($"{vpkPath} does not exist. Skipping...");
                     status = PipelineStepStatus.PartiallyComplete;
                     continue;
                 }
-                stepLogger.LogInfo($"Extracting \"{vpkPath}\" to \"{OutDir}\"");
-                _extractor.Extract(context.FileSystem, context.Writer, vpkPath, OutDir);
+                logger.LogInfo($"Extracting \"{vpkPath}\" to \"{OutDir}\"");
+                _extractor.Extract(context.FileSystem, logger, vpkPath, OutDir);
             }
 
             return status;

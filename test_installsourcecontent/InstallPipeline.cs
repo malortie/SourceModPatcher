@@ -23,8 +23,6 @@ namespace test_installsourcecontent
 
         public IFileSystem FileSystem { get { return _context.FileSystem; } }
 
-        public IWriter Writer { get { return _context.Writer; } }
-
         public string GetContextVariable(string variable)
         {
             return _context.ContextVariables[variable];
@@ -54,56 +52,6 @@ namespace test_installsourcecontent
         Cancelled = 3,
     }
 
-    public interface IPipelineStepLogger
-    {
-        ReadOnlyCollection<string> Warnings { get; }
-        ReadOnlyCollection<string> Errors { get; }
-
-        void LogInfo(string message);
-        void LogWarning(string message);
-        void LogError(string message);
-
-        void Clear();
-    }
-
-    public class PipelineStepLogger : IPipelineStepLogger
-    {
-        public readonly List<string> _warnings = new();
-        public readonly List<string> _errors = new();
-        IWriter _writer;
-
-        public ReadOnlyCollection<string> Warnings { get { return new ReadOnlyCollection<string>(_warnings); } }
-        public ReadOnlyCollection<string> Errors { get { return new ReadOnlyCollection<string>(_errors); } }
-
-        public PipelineStepLogger (IWriter writer)
-        {
-            _writer = writer;
-        }
-
-        public void LogInfo(string message)
-        {
-            _writer.WriteLine(message);
-        }
-
-        public void LogWarning(string message)
-        {
-            _writer.WriteLine(message);
-            _warnings.Add(message);
-        }
-
-        public void LogError(string message)
-        {
-            _writer.WriteLine(message);
-            _errors.Add(message);
-        }
-
-        public void Clear()
-        {
-            _warnings.Clear();
-            _errors.Clear();
-        }
-    }
-
     public interface IPipelineStepData
     {
         string Name { get; set; }
@@ -113,7 +61,7 @@ namespace test_installsourcecontent
 
     public interface IPipelineStep
     {
-        PipelineStepStatus DoStep(StepContext context, IPipelineStepData stepData, IPipelineStepLogger stepLogger);
+        PipelineStepStatus DoStep(StepContext context, IPipelineStepData stepData, IPipelineLogger logger);
     }
 
     public class InstallPipelineStepsTypeConverter : ITypeConverter<JSONInstallStepsConfig, InstallPipelineStepDictionary>
@@ -177,17 +125,21 @@ namespace test_installsourcecontent
         };
 
         IFileSystem _fileSystem;
-        IWriter _writer;
+        IPipelineLogger _logger;
         IConfiguration _configuration;
         IPauseHandler _pauseHandler;
         IContextFactory _contextFactory;
         InstallPipelineStepDictionary _appsSteps = new();
         List<int> _steamAppsToInstall = new();
 
-        public InstallPipeline(IFileSystem fileSystem, IWriter writer, IConfiguration configuration, IPauseHandler pauseHandler, IContextFactory contextFactory) 
+        public IPipelineProgressWriter ProgressWriter { get; set; }
+        public IPipelineLogger StepLogger { get; set; }
+        public IPipelineStatsResults StatsResults { get; set; } = new PipelineStatsResults();
+
+        public InstallPipeline(IFileSystem fileSystem, IPipelineLogger logger, IConfiguration configuration, IPauseHandler pauseHandler, IContextFactory contextFactory) 
         {
             _fileSystem = fileSystem;
-            _writer = writer;
+            _logger = logger;
             _configuration = configuration;
             _pauseHandler = pauseHandler;
             _contextFactory = contextFactory;
@@ -205,13 +157,6 @@ namespace test_installsourcecontent
             _appsSteps = new InstallPipelineStepsMapper().Map(installStepsConfig);
         }
 
-        public class PipelineStepLogResult
-        {
-            public string StepName { get; set; }
-            public List<string> Warnings { get; set; }
-            public List<string> Errors { get; set; }
-        }
-
         public void ExecuteSteps()
         {
             ITokenReplacer tokenReplacer = new TokenReplacer();
@@ -220,16 +165,18 @@ namespace test_installsourcecontent
 
             var context = _contextFactory.CreateContext();
             var stepContext = _contextFactory.CreateStepContext(context);
-            var stepLogger = new PipelineStepLogger(_writer);
-            var stepsLogsResults = new List<PipelineStepLogResult>();
+            var progressContext = new PipelineProgressContext();
 
             HashSet<string> stepsComplete = new();
-            HashSet<string> stepsPartiallyComplete = new();
-            HashSet<string> stepsFailed = new();
-            HashSet<string> stepsCancelled = new();
 
             // Select only the steps we want to install.
             var appsInstallSteps = _appsSteps.Where(kv => _steamAppsToInstall.Contains(kv.Key));
+
+            StatsResults.NumStepsTotal = appsInstallSteps.Sum(a => a.Value.Count);
+            StatsResults.NumStepsCompleted = 0;
+            StatsResults.NumStepsPartiallyCompleted = 0;
+            StatsResults.NumStepsFailed = 0;
+            StatsResults.NumStepsCancelled = 0;
 
             foreach (var (appID, installSteps) in appsInstallSteps)
             {
@@ -240,8 +187,7 @@ namespace test_installsourcecontent
 
                 context.ContextVariables["variables_config_file_name"] = _configuration.GetVariablesFileName();
 
-                _writer.WriteLine($"Installing [{appID}] {_configuration.GetSteamAppName(appID)}");
-                _writer.WriteLine();
+                _logger.LogInfo($"Installing [{appID}] {_configuration.GetSteamAppName(appID)}");
 
                 for (int stepIndex = 0; stepIndex < installSteps.Count; ++stepIndex)
                 {
@@ -261,106 +207,51 @@ namespace test_installsourcecontent
                         }
                     }
 
-                    // Clear step logger warnings and errors.
-                    stepLogger.Clear();
+                    progressContext.StepNumber = stepIndex + 1;
+                    progressContext.NumStepsTotal = installSteps.Count;
 
-                    string stepStatusMessage = $"({stepIndex + 1}/{installSteps.Count}) {stepData.Description}";
+                    // Use the step name for the logger name.
+                    StepLogger.Name = stepData.Name;
 
                     PipelineStepStatus stepStatus;
 
                     var uncompletedDependencies = stepData.DependsOn.Except(stepsComplete).ToArray();
                     if (uncompletedDependencies.Length > 0)
                     {
-                        _writer.WriteLine($"Step {stepData.Name} will not be executed: The following dependencies were not completed: <{string.Join(',', stepData.DependsOn)}>");
+                        ProgressWriter.WriteStepDependenciesNotCompleted(progressContext, stepData);
                         stepStatus = PipelineStepStatus.Cancelled;
                     }
                     else
                     {
                         // Execute step.
-                        _writer.WriteLine(stepStatusMessage);
-                        stepStatus = _stepsDataToInstallStep[stepData.GetType()].DoStep(stepContext, stepData, stepLogger);
+                        ProgressWriter.WriteStepExecute(progressContext, stepData);
+                        stepStatus = _stepsDataToInstallStep[stepData.GetType()].DoStep(stepContext, stepData, StepLogger);
                     }
 
                     switch (stepStatus)
                     {
                         case PipelineStepStatus.Complete:
-                            _writer.WriteLine($"{stepStatusMessage} [COMPLETED]");
+                            ProgressWriter.WriteStepCompleted(progressContext, stepData);
+                            ++StatsResults.NumStepsCompleted;
                             stepsComplete.Add(stepData.Name);
                             break;
                         case PipelineStepStatus.PartiallyComplete:
-                            _writer.WriteLine($"{stepStatusMessage} [PARTIALLY COMPLETED]");
-                            stepsPartiallyComplete.Add(stepData.Name);
+                            ProgressWriter.WriteStepPartiallyCompleted(progressContext, stepData);
+                            ++StatsResults.NumStepsPartiallyCompleted;
                             break;
                         case PipelineStepStatus.Failed:
-                            _writer.WriteLine($"{stepStatusMessage} [FAILED]");
-                            stepsFailed.Add(stepData.Name);
+                            ProgressWriter.WriteStepFailed(progressContext, stepData);
+                            ++StatsResults.NumStepsFailed;
                             break;
                         case PipelineStepStatus.Cancelled:
-                            _writer.WriteLine($"{stepStatusMessage} [CANCELLED]");
-                            stepsCancelled.Add(stepData.Name);
+                            ProgressWriter.WriteStepCancelled(progressContext, stepData);
+                            ++StatsResults.NumStepsCancelled;
                             break;
-                    }
-
-                    _writer.WriteLine();
-
-                    if (stepStatus != PipelineStepStatus.Cancelled)
-                    {
-                        // Save warnings and errors raised by this step.
-                        stepsLogsResults.Add(new PipelineStepLogResult
-                        {
-                            StepName = stepData.Name,
-                            Warnings = stepLogger.Warnings.ToList(),
-                            Errors = stepLogger.Errors.ToList()
-                        });
                     }
                 }
 
                 if (PauseAfterEachStep)
                     _pauseHandler.Pause();
-            }
-
-            // Write steps warnings.
-            var logResults = stepsLogsResults.Where(a => a.Warnings.Count > 0).ToArray();
-            if (logResults.Length > 0)
-            {
-                foreach (var logResult in logResults)
-                {
-                    foreach (var warning in logResult.Warnings)
-                        _writer.WriteLine($"[WARNING] {logResult.StepName} {warning}");
-                }
-            }
-
-            // Write steps errors.
-            logResults = stepsLogsResults.Where(a => a.Errors.Count > 0).ToArray();
-            if (logResults.Length > 0)
-            {
-                foreach (var logResult in logResults)
-                {
-                    foreach (var error in logResult.Errors)
-                        _writer.WriteLine($"[ERROR] {logResult.StepName} {error}");
-                }
-            }
-
-            _writer.WriteLine();
-            _writer.WriteLine($"SUMMARY");
-            _writer.WriteLine();
-            _writer.WriteLine($"Completed: {stepsComplete.Count}");
-            _writer.WriteLine($"Partially completed: {stepsPartiallyComplete.Count}");
-            _writer.WriteLine($"Failed: {stepsFailed.Count}");
-            _writer.WriteLine($"Cancelled: {stepsCancelled.Count}");
-            _writer.WriteLine();
-
-            if (stepsPartiallyComplete.Count != 0 ||
-                stepsFailed.Count != 0 ||
-                stepsCancelled.Count != 0)
-            {
-                _writer.WriteLine("One or more errors occured.");
-                _writer.WriteLine();
-            }
-            else
-            {
-                _writer.WriteLine("All steps successfully completed.");
-                _writer.WriteLine();
             }
         }
     }

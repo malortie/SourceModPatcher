@@ -115,17 +115,32 @@ namespace test_installsourcecontent
                     }
                 }
 
+                var progressWriter = new PipelineProgressWriter(writer);
+                var logCollector = new PipelineLogCollector();
+                var logger = new PipelineLogger(logCollector, writer);
+                var stepLogger = new PipelineLogger(logCollector, writer);
+                var logReportWriter = new PipelineLogReportWriter(logCollector, writer, new PipelineLogFormatter());
+                var statsWriter = new PipelineStatsWriter(writer);
+
                 var configuration = new Configuration(steamAppsConfig, installSettings, variablesConfig);
                 var pauseHandler = new ConsolePauseHandler(writer);
-                var contextFactory = new ContextFactory(fileSystem, writer, configuration);
-                var installPipeline = new InstallPipeline(fileSystem, writer, configuration, pauseHandler, contextFactory);
+                var contextFactory = new ContextFactory(fileSystem, configuration);
+                var installPipeline = new InstallPipeline(fileSystem, logger, configuration, pauseHandler, contextFactory);
                 installPipeline.SetupFromConfig(installStepsConfig);
+                installPipeline.StepLogger = stepLogger;
+                installPipeline.ProgressWriter = progressWriter;
+
                 installPipeline.SetSteamAppsToInstall(steamAppsToInstall);
                 installPipeline.PauseAfterEachStep = options.PauseAfterEachStep;
                 installPipeline.ExecuteSteps();
 
+                statsWriter.WriteStats(installPipeline.StatsResults);
                 writer.WriteLine("Installation finished.");
 
+                logReportWriter.WriteInfos();
+                logReportWriter.WriteWarnings();
+                logReportWriter.WriteErrors();
+                
                 int o = 2;
                 o++;
             }
