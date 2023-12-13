@@ -17,8 +17,6 @@ namespace test_installsourcecontent
 
         public int AppID { get; set; } = 0;
 
-        public Dictionary<string, string> ContextVariables = new();
-
         public string GetSteamAppName()
         {
             return _configuration.GetSteamAppName(AppID);
@@ -37,6 +35,11 @@ namespace test_installsourcecontent
         public string GetContentInstallDir()
         {
             return _configuration.GetContentInstallDir(AppID);
+        }
+
+        public string GetVariablesFileName()
+        {
+            return _configuration.GetVariablesFileName();
         }
     }
 }

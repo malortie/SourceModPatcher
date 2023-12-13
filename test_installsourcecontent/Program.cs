@@ -121,6 +121,10 @@ namespace test_installsourcecontent
                 var stepLogger = new PipelineLogger(logCollector, writer);
                 var logReportWriter = new PipelineLogReportWriter(logCollector, writer, new PipelineLogFormatter());
                 var statsWriter = new PipelineStatsWriter(writer);
+                var tokenReplacer = new TokenReplacer();
+                tokenReplacer.Prefix = "$(";
+                tokenReplacer.Suffix = ")";
+                var tokenReplacerVariablesProvider = new TokenReplacerVariablesProvider();
 
                 var configuration = new Configuration(steamAppsConfig, installSettings, variablesConfig);
                 var pauseHandler = new ConsolePauseHandler(writer);
@@ -129,6 +133,8 @@ namespace test_installsourcecontent
                 installPipeline.SetupFromConfig(installStepsConfig);
                 installPipeline.StepLogger = stepLogger;
                 installPipeline.ProgressWriter = progressWriter;
+                installPipeline.TokenReplacer = tokenReplacer;
+                installPipeline.TokenReplacerVariablesProvider = tokenReplacerVariablesProvider;
 
                 installPipeline.SetSteamAppsToInstall(steamAppsToInstall);
                 installPipeline.PauseAfterEachStep = options.PauseAfterEachStep;

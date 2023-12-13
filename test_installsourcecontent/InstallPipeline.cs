@@ -23,11 +23,6 @@ namespace test_installsourcecontent
 
         public IFileSystem FileSystem { get { return _context.FileSystem; } }
 
-        public string GetContextVariable(string variable)
-        {
-            return _context.ContextVariables[variable];
-        }
-
         public string GetSteamAppInstallDir()
         {
             return _context.GetSteamAppInstallDir();
@@ -135,6 +130,8 @@ namespace test_installsourcecontent
         public IPipelineProgressWriter ProgressWriter { get; set; }
         public IPipelineLogger StepLogger { get; set; }
         public IPipelineStatsResults StatsResults { get; set; } = new PipelineStatsResults();
+        public ITokenReplacer TokenReplacer { get; set; }
+        public ITokenReplacerVariablesProvider TokenReplacerVariablesProvider { get; set; }
 
         public InstallPipeline(IFileSystem fileSystem, IPipelineLogger logger, IConfiguration configuration, IPauseHandler pauseHandler, IContextFactory contextFactory) 
         {
@@ -159,10 +156,6 @@ namespace test_installsourcecontent
 
         public void ExecuteSteps()
         {
-            ITokenReplacer tokenReplacer = new TokenReplacer();
-            tokenReplacer.Prefix = "$(";
-            tokenReplacer.Suffix = ")";
-
             var context = _contextFactory.CreateContext();
             var stepContext = _contextFactory.CreateStepContext(context);
             var progressContext = new PipelineProgressContext();
@@ -182,10 +175,6 @@ namespace test_installsourcecontent
             {
                 // Setup context.
                 context.AppID = appID;
-                context.ContextVariables.Clear();
-                context.ContextVariables["install_settings_install_dir"] = PathExtensions.ConvertToUnixDirectorySeparator(_fileSystem, _fileSystem.Path.GetFullPath(_configuration.GetContentInstallDir(appID)));
-
-                context.ContextVariables["variables_config_file_name"] = _configuration.GetVariablesFileName();
 
                 _logger.LogInfo($"Installing [{appID}] {_configuration.GetSteamAppName(appID)}");
 
@@ -194,7 +183,7 @@ namespace test_installsourcecontent
                     var stepData = installSteps[stepIndex];
 
                     // Perform token replacement in step string properties.
-                    tokenReplacer.Variables = new ReadOnlyDictionary<string, string>(context.ContextVariables);
+                    TokenReplacer.Variables = new ReadOnlyDictionary<string, string>(TokenReplacerVariablesProvider.GetVariables(context));
 
                     foreach (PropertyInfo prop in stepData.GetType().GetProperties())
                     {
@@ -203,7 +192,7 @@ namespace test_installsourcecontent
                         {
                             string propertyValue = prop.GetValue(stepData) as string;
                             if (null != propertyValue)
-                                prop.SetValue(stepData, tokenReplacer.Replace(propertyValue));
+                                prop.SetValue(stepData, TokenReplacer.Replace(propertyValue));
                         }
                     }
 
