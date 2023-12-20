@@ -11,7 +11,7 @@ namespace test_installsourcecontent
         public string OutDir { get; set; } = "";
     }
 
-    public class ExtractVPKInstallStep : IPipelineStep
+    public class ExtractVPKInstallStep : IPipelineStep<Context>
     {
         IVPKExtractor _extractor;
 
@@ -20,7 +20,7 @@ namespace test_installsourcecontent
             _extractor = vpkExtractor;
         }
 
-        public PipelineStepStatus DoStep(StepContext context, IPipelineStepData stepData, IPipelineLogger logger)
+        public PipelineStepStatus DoStep(Context context, IPipelineStepData stepData, IPipelineLogger logger)
         {
             var stepDataVPK = (ExtractVPKInstallStepData)stepData;
             var Vpks = stepDataVPK.Vpks;

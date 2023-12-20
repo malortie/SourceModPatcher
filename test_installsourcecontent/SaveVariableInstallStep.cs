@@ -12,9 +12,9 @@ namespace test_installsourcecontent
 
     }
 
-    public class SaveVariableInstallStep : IPipelineStep
+    public class SaveVariableInstallStep : IPipelineStep<Context>
     {
-        public PipelineStepStatus DoStep(StepContext context, IPipelineStepData stepData, IPipelineLogger logger)
+        public PipelineStepStatus DoStep(Context context, IPipelineStepData stepData, IPipelineLogger logger)
         {
             var saveVariableData = (SaveVariableInstallStepData)stepData;
             var Name = saveVariableData.VariableName;

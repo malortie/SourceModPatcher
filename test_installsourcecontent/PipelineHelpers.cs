@@ -15,7 +15,20 @@ namespace test_installsourcecontent
         public int NumStepsTotal { get; set; }
     }
 
-    public interface IPipelineProgressWriter
+    public interface IPipelineProgressContextFactory
+    {
+        IPipelineProgressContext CreateContext();
+    }
+
+    public class PipelineProgressContextFactory : IPipelineProgressContextFactory
+    {
+        public IPipelineProgressContext CreateContext()
+        {
+            return new PipelineProgressContext();
+        }
+    }
+
+    public interface IPipelineProgressWriter<ContextT>
     {
         void WriteStepDependenciesNotCompleted(IPipelineProgressContext pipelineContext, IPipelineStepData stepData);
         void WriteStepExecute(IPipelineProgressContext pipelineContext, IPipelineStepData stepData);
@@ -24,14 +37,14 @@ namespace test_installsourcecontent
         void WriteStepFailed(IPipelineProgressContext pipelineContext, IPipelineStepData stepData);
         void WriteStepCancelled(IPipelineProgressContext pipelineContext, IPipelineStepData stepData);
 
-        void WriteStageExecute(IPipelineProgressContext pipelineContext, IPipelineStage stage);
-        void WriteStageCompleted(IPipelineProgressContext pipelineContext, IPipelineStage stage);
-        void WriteStagePartiallyCompleted(IPipelineProgressContext pipelineContext, IPipelineStage stage);
-        void WriteStageFailed(IPipelineProgressContext pipelineContext, IPipelineStage stage);
-        void WriteStageCancelled(IPipelineProgressContext pipelineContext, IPipelineStage stage);
+        void WriteStageExecute(IPipelineProgressContext pipelineContext, IPipelineStage<ContextT> stage);
+        void WriteStageCompleted(IPipelineProgressContext pipelineContext, IPipelineStage<ContextT> stage);
+        void WriteStagePartiallyCompleted(IPipelineProgressContext pipelineContext, IPipelineStage<ContextT> stage);
+        void WriteStageFailed(IPipelineProgressContext pipelineContext, IPipelineStage<ContextT> stage);
+        void WriteStageCancelled(IPipelineProgressContext pipelineContext, IPipelineStage<ContextT> stage);
     }
 
-    public class PipelineProgressWriter : IPipelineProgressWriter
+    public class PipelineProgressWriter<ContextT> : IPipelineProgressWriter<ContextT>
     {
         IWriter _writer;
 
@@ -45,7 +58,7 @@ namespace test_installsourcecontent
             return $"({pipelineContext.StepNumber}/{pipelineContext.NumStepsTotal}) {stepData.Description}";
         }
 
-        string Format(IPipelineProgressContext pipelineContext, IPipelineStage stage)
+        string Format(IPipelineProgressContext pipelineContext, IPipelineStage<ContextT> stage)
         {
             return $"({pipelineContext.StepNumber}/{pipelineContext.NumStepsTotal}) {stage.Description}";
         }
@@ -80,27 +93,27 @@ namespace test_installsourcecontent
             _writer.WriteLine($"{Format(pipelineContext, stepData)} [CANCELLED]");
         }
 
-        public void WriteStageExecute(IPipelineProgressContext pipelineContext, IPipelineStage stage)
+        public void WriteStageExecute(IPipelineProgressContext pipelineContext, IPipelineStage<ContextT> stage)
         {
             _writer.WriteLine(Format(pipelineContext, stage));
         }
 
-        public void WriteStageCompleted(IPipelineProgressContext pipelineContext, IPipelineStage stage)
+        public void WriteStageCompleted(IPipelineProgressContext pipelineContext, IPipelineStage<ContextT> stage)
         {
             _writer.WriteLine($"{Format(pipelineContext, stage)} [COMPLETED]");
         }
 
-        public void WriteStagePartiallyCompleted(IPipelineProgressContext pipelineContext, IPipelineStage stage)
+        public void WriteStagePartiallyCompleted(IPipelineProgressContext pipelineContext, IPipelineStage<ContextT> stage)
         {
             _writer.WriteLine($"{Format(pipelineContext, stage)} [PARTIALLY COMPLETED]");
         }
 
-        public void WriteStageFailed(IPipelineProgressContext pipelineContext, IPipelineStage stage)
+        public void WriteStageFailed(IPipelineProgressContext pipelineContext, IPipelineStage<ContextT> stage)
         {
             _writer.WriteLine($"{Format(pipelineContext, stage)} [FAILED]");
         }
 
-        public void WriteStageCancelled(IPipelineProgressContext pipelineContext, IPipelineStage stage)
+        public void WriteStageCancelled(IPipelineProgressContext pipelineContext, IPipelineStage<ContextT> stage)
         {
             _writer.WriteLine($"{Format(pipelineContext, stage)} [CANCELLED]");
         }
@@ -385,15 +398,17 @@ namespace test_installsourcecontent
             _writer.WriteLine("=====================");
             _writer.WriteLine("Summary:");
             _writer.WriteLine("=====================");
-            _writer.WriteLine($"Stages completed: {statsResults.NumStagesCompleted}");
-            _writer.WriteLine($"Stages partially completed: {statsResults.NumStagesPartiallyCompleted}");
-            _writer.WriteLine($"Stages failed: {statsResults.NumStagesFailed}");
-            _writer.WriteLine($"Stages cancelled: {statsResults.NumStagesCancelled}");
+            _writer.WriteLine($"[Stages]");
+            _writer.WriteLine($"Completed: {statsResults.NumStagesCompleted}");
+            _writer.WriteLine($"Partially completed: {statsResults.NumStagesPartiallyCompleted}");
+            _writer.WriteLine($"Failed: {statsResults.NumStagesFailed}");
+            _writer.WriteLine($"Cancelled: {statsResults.NumStagesCancelled}");
             _writer.WriteLine();
-            _writer.WriteLine($"Steps completed: {statsResults.NumStepsCompleted}");
-            _writer.WriteLine($"Steps partially completed: {statsResults.NumStepsPartiallyCompleted}");
-            _writer.WriteLine($"Steps failed: {statsResults.NumStepsFailed}");
-            _writer.WriteLine($"Steps cancelled: {statsResults.NumStepsCancelled}");
+            _writer.WriteLine($"[Steps]");
+            _writer.WriteLine($"Completed: {statsResults.NumStepsCompleted}");
+            _writer.WriteLine($"Partially completed: {statsResults.NumStepsPartiallyCompleted}");
+            _writer.WriteLine($"Failed: {statsResults.NumStepsFailed}");
+            _writer.WriteLine($"Cancelled: {statsResults.NumStepsCancelled}");
             _writer.WriteLine("=====================");
         }
     }

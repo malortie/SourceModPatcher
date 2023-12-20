@@ -9,34 +9,6 @@ using System.Collections.Generic;
 
 namespace test_installsourcecontent
 {
-    // More restricted context for steps to disallow access to certain properties.
-    public class StepContext
-    {
-        Context _context;
-
-        public StepContext(Context context)
-        {
-            _context = context;
-        }
-
-        public IFileSystem FileSystem { get { return _context.FileSystem; } }
-
-        public string GetSteamAppInstallDir()
-        {
-            return _context.GetSteamAppInstallDir();
-        }
-
-        public void SaveVariable(string name, string value)
-        {
-            _context.SaveVariable(name, value);
-        }
-
-        public string GetContentInstallDir()
-        {
-            return _context.GetContentInstallDir();
-        }
-    }
-
     public enum PipelineStepStatus
     {
         Complete = 0,
@@ -52,12 +24,12 @@ namespace test_installsourcecontent
         List<string> DependsOn { get; set; }
     }
 
-    public interface IPipelineStep
+    public interface IPipelineStep<ContextT>
     {
-        PipelineStepStatus DoStep(StepContext context, IPipelineStepData stepData, IPipelineLogger logger);
+        PipelineStepStatus DoStep(ContextT context, IPipelineStepData stepData, IPipelineLogger logger);
     }
 
-    public interface IPipelineStage
+    public interface IPipelineStage<ContextT>
     {
         string Name { get; set; }
 
@@ -67,43 +39,166 @@ namespace test_installsourcecontent
 
         IPipelineStepStatsResults StatsResults { get; set; }
 
-        PipelineStepStatus[] DoStage(Context context, IPipelineLogger logger);
+        void SetupContext(ContextT context);
+        void OnBeginStage(ContextT context);
+        PipelineStepStatus ExecuteStep(ContextT context, IPipelineStepData stepData);
+
+        PipelineStepStatus[] DoStage(ContextT context);
     }
 
-    public class Pipeline
+    public abstract class PipelineStage<ContextT> : IPipelineStage<ContextT>
     {
-        IPipelineStage[] _stages;
+        public string Name { get; set; } = string.Empty;
+        public string Description { get; set; } = string.Empty;
 
-        public IPipelineProgressWriter ProgressWriter { get; set; }
+        public bool PauseAfterEachStep { get; set; }
+        public IPipelineStepData[] StepsDatas { get; set; }
+        public IPipelineProgressWriter<ContextT> ProgressWriter { get; set; }
         public IPipelineLogger Logger { get; set; }
+        public IPipelineLogger StepLogger { get; set; }
+        public ITokenReplacer TokenReplacer { get; set; }
+        public ITokenReplacerVariablesProvider<ContextT> TokenReplacerVariablesProvider { get; set; }
+        public IPauseHandler PauseHandler { get; set; }
+        public IPipelineStepStatsResults StatsResults { get; set; } = new PipelineStepStatsResults();
+        public IPipelineProgressContextFactory ProgressContextFactory { get; set; } = new PipelineProgressContextFactory();
 
-        public IPipelineStatsResults StatsResults { get; set; } = new PipelineStatsResults();
-
-        public Pipeline(IPipelineStage[] stages) 
+        public virtual void SetupContext(ContextT context)
         {
-            _stages = stages;
         }
 
-        public void Execute(Context context)
+        public virtual void OnBeginStage(ContextT context)
         {
-            StatsResults.NumStagesTotal = _stages.Length;
-            StatsResults.NumStagesCompleted = 0;
-            StatsResults.NumStagesPartiallyCompleted = 0;
-            StatsResults.NumStagesFailed = 0;
-            StatsResults.NumStagesCancelled = 0;
+        }
 
-            StatsResults.NumStepsTotal = _stages.Sum(a => a.StepsDatas.Length);
+        public abstract PipelineStepStatus ExecuteStep(ContextT context, IPipelineStepData stepData);
+
+        public PipelineStepStatus[] DoStage(ContextT context)
+        {
+            SetupContext(context);
+
+            var progressContext = ProgressContextFactory.CreateContext();
+
+            HashSet<string> stepsComplete = new();
+            var stepStatuses = new List<PipelineStepStatus>();
+
+            StatsResults.NumStepsTotal = StepsDatas.Length;
             StatsResults.NumStepsCompleted = 0;
             StatsResults.NumStepsPartiallyCompleted = 0;
             StatsResults.NumStepsFailed = 0;
             StatsResults.NumStepsCancelled = 0;
 
-            var progressContext = new PipelineProgressContext();
-            progressContext.NumStepsTotal = _stages.Length;
-
-            for (int stageIndex = 0; stageIndex < _stages.Length; ++stageIndex)
+            for (int stepIndex = 0; stepIndex < StepsDatas.Length; ++stepIndex)
             {
-                var stage = _stages[stageIndex];
+                var stepData = StepsDatas[stepIndex];
+
+                // Perform token replacement in step string properties.
+                TokenReplacer.Variables = new ReadOnlyDictionary<string, string>(TokenReplacerVariablesProvider.GetVariables(context));
+
+                foreach (PropertyInfo prop in stepData.GetType().GetProperties())
+                {
+                    var type = Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType;
+                    if (type == typeof(string))
+                    {
+                        string propertyValue = prop.GetValue(stepData) as string;
+                        if (null != propertyValue)
+                            prop.SetValue(stepData, TokenReplacer.Replace(propertyValue));
+                    }
+                }
+
+                progressContext.StepNumber = stepIndex + 1;
+                progressContext.NumStepsTotal = StepsDatas.Length;
+
+                // Use the step name for the logger name.
+                StepLogger.Name = stepData.Name;
+
+                PipelineStepStatus stepStatus;
+
+                var uncompletedDependencies = stepData.DependsOn.Except(stepsComplete).ToArray();
+                if (uncompletedDependencies.Length > 0)
+                {
+                    ProgressWriter.WriteStepDependenciesNotCompleted(progressContext, stepData);
+                    stepStatus = PipelineStepStatus.Cancelled;
+                }
+                else
+                {
+                    // Execute step.
+                    ProgressWriter.WriteStepExecute(progressContext, stepData);
+                    stepStatus = ExecuteStep(context, stepData);
+                }
+
+                stepStatuses.Add(stepStatus);
+
+                switch (stepStatus)
+                {
+                    case PipelineStepStatus.Complete:
+                        ProgressWriter.WriteStepCompleted(progressContext, stepData);
+                        ++StatsResults.NumStepsCompleted;
+                        stepsComplete.Add(stepData.Name);
+                        break;
+                    case PipelineStepStatus.PartiallyComplete:
+                        ProgressWriter.WriteStepPartiallyCompleted(progressContext, stepData);
+                        ++StatsResults.NumStepsPartiallyCompleted;
+                        break;
+                    case PipelineStepStatus.Failed:
+                        ProgressWriter.WriteStepFailed(progressContext, stepData);
+                        ++StatsResults.NumStepsFailed;
+                        break;
+                    case PipelineStepStatus.Cancelled:
+                        ProgressWriter.WriteStepCancelled(progressContext, stepData);
+                        ++StatsResults.NumStepsCancelled;
+                        break;
+                }
+            }
+
+            if (PauseAfterEachStep)
+                PauseHandler.Pause();
+
+            return stepStatuses.ToArray();
+        }
+    }
+
+    public interface IPipeline<ContextT>
+    {
+        void Execute(ContextT context);
+    }
+
+    public class Pipeline<ContextT> : IPipeline<ContextT>
+    {
+        public IPipelineStage<ContextT>[] Stages { get; set; }
+
+        public IPipelineProgressWriter<ContextT> ProgressWriter { get; set; }
+        public IPipelineLogger Logger { get; set; }
+
+        public IPipelineStatsResults StatsResults { get; set; } = new PipelineStatsResults();
+        public IPipelineProgressContextFactory ProgressContextFactory { get; set; } = new PipelineProgressContextFactory();
+
+        public Pipeline(IPipelineStage<ContextT>[] stages, IPipelineLogger logger, IPipelineProgressWriter<ContextT> progressWriter)
+        {
+            Stages = stages;
+            Logger = logger;
+            ProgressWriter = progressWriter;
+        }     
+
+        public void Execute(ContextT context)
+        {
+            StatsResults.NumStagesTotal = Stages.Length;
+            StatsResults.NumStagesCompleted = 0;
+            StatsResults.NumStagesPartiallyCompleted = 0;
+            StatsResults.NumStagesFailed = 0;
+            StatsResults.NumStagesCancelled = 0;
+
+            StatsResults.NumStepsTotal = Stages.Sum(a => a.StepsDatas.Length);
+            StatsResults.NumStepsCompleted = 0;
+            StatsResults.NumStepsPartiallyCompleted = 0;
+            StatsResults.NumStepsFailed = 0;
+            StatsResults.NumStepsCancelled = 0;
+
+            var progressContext = ProgressContextFactory.CreateContext();
+            progressContext.NumStepsTotal = Stages.Length;
+
+            for (int stageIndex = 0; stageIndex < Stages.Length; ++stageIndex)
+            {
+                var stage = Stages[stageIndex];
 
                 progressContext.StepNumber = stageIndex + 1;
 
@@ -112,7 +207,7 @@ namespace test_installsourcecontent
 
                 // Execute stage.
                 ProgressWriter.WriteStageExecute(progressContext, stage);
-                PipelineStepStatus[] stepsStatuses = stage.DoStage(context, Logger);
+                PipelineStepStatus[] stepsStatuses = stage.DoStage(context);
 
                 int numStepsCompleted = stepsStatuses.Count(s => s == PipelineStepStatus.Complete);
                 int numStepsPartiallyCompleted = stepsStatuses.Count(s => s == PipelineStepStatus.PartiallyComplete);
