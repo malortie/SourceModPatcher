@@ -3,7 +3,7 @@
     {
       "$type": "extract_vpk",
       "name": "sdkbase2006_extract_content",
-      "description": "Extract Source SDK Base 2006 content",
+      "description": "Extract $(steamapp_name) content",
       "vpks": [
         {"vpk": "vpks/depot_206_dir.vpk"},
         {"vpk": "vpks/depot_207_dir.vpk"},
@@ -27,7 +27,7 @@
     {
       "$type": "save_variable",
       "name": "sdkbase2006_save_variable",
-      "description": "Add Source SDK Base 2006 install path to $(variables_config_file_name)",
+      "description": "Add $(steamapp_name) install path to $(variables_config_file_name)",
       "depends_on": ["sdkbase2006_extract_content"],
       "variable_name": "sdkbase2006_content_path",
       "variable_value": "$(install_settings_install_dir)"
@@ -37,7 +37,7 @@
     {
       "$type": "extract_vpk",
       "name": "sdkbase2007_extract_content",
-      "description": "Extract Source SDK Base 2007 content",
+      "description": "Extract $(steamapp_name) content",
       "vpks": [
         {"vpk": "vpks/depot_206_dir.vpk"},
         {"vpk": "vpks/depot_207_dir.vpk"},
@@ -62,7 +62,7 @@
     {
       "$type": "save_variable",
       "name": "sdkbase2007_save_variable",
-      "description": "Add Source SDK Base 2007 install path to $(variables_config_file_name)",
+      "description": "Add $(steamapp_name) install path to $(variables_config_file_name)",
       "depends_on": ["sdkbase2007_extract_content"],
       "variable_name": "sdkbase2007_content_path",
       "variable_value": "$(install_settings_install_dir)"
@@ -72,7 +72,7 @@
     {
       "$type": "extract_vpk",
       "name": "hl2_extract_content",
-      "description": "Extract Half-Life 2 content",
+      "description": "Extract $(steamapp_name) content",
       "vpks": [
         {"vpk": "hl2/hl2_misc_dir.vpk"},
         {"vpk": "hl2/hl2_pak_dir.vpk"},
@@ -89,7 +89,7 @@
     {
       "$type": "save_variable",
       "name": "hl2_save_variable",
-      "description": "Add Half-Life 2 install path to $(variables_config_file_name)",
+      "description": "Add $(steamapp_name) install path to $(variables_config_file_name)",
       "depends_on": ["hl2_extract_content"],
       "variable_name": "hl2_content_path",
       "variable_value": "$(install_settings_install_dir)"
@@ -99,7 +99,7 @@
     {
       "$type": "extract_vpk",
       "name": "cstrike_extract_content",
-      "description": "Extract Counter-Strike: Source content",
+      "description": "Extract $(steamapp_name) content",
       "vpks": [{"vpk": "cstrike/cstrike_pak_dir.vpk"}],
       "files_to_exclude": [
         "^.*.dll$",
@@ -110,7 +110,7 @@
     {
       "$type": "save_variable",
       "name": "cstrike_save_variable",
-      "description": "Add Counter-Strike: Source install path to $(variables_config_file_name)",
+      "description": "Add $(steamapp_name) install path to $(variables_config_file_name)",
       "depends_on": ["cstrike_extract_content"],
       "variable_name": "cstrike_content_path",
       "variable_value": "$(install_settings_install_dir)"
@@ -120,7 +120,7 @@
     {
       "$type": "extract_vpk",
       "name": "hl1_extract_content",
-      "description": "Extract Half-Life: Source content",
+      "description": "Extract $(steamapp_name) content",
       "vpks": [{"vpk": "hl1/hl1_pak_dir.vpk"}],
       "files_to_exclude": [
         "^.*.dll$",
@@ -131,7 +131,7 @@
     {
       "$type": "save_variable",
       "name": "hl1_save_variable",
-      "description": "Add Half-Life: Source install path to $(variables_config_file_name)",
+      "description": "Add $(steamapp_name) install path to $(variables_config_file_name)",
       "depends_on": ["hl1_extract_content"],
       "variable_name": "hl1_content_path",
       "variable_value": "$(install_settings_install_dir)"
@@ -139,7 +139,7 @@
     {
       "$type": "extract_vpk",
       "name": "hl1_hd_extract_content",
-      "description": "Extract Half-Life: Source HD content",
+      "description": "Extract $(steamapp_name) HD content",
       "vpks": [{"vpk": "hl1_hd/hl1_hd_pak_dir.vpk"}],
       "files_to_exclude": [
         "^.*.dll$",
@@ -150,7 +150,7 @@
     {
       "$type": "save_variable",
       "name": "hl1_hd_save_variable",
-      "description": "Add Half-Life: Source HD install path to $(variables_config_file_name)",
+      "description": "Add $(steamapp_name) HD install path to $(variables_config_file_name)",
       "depends_on": ["hl1_hd_extract_content"],
       "variable_name": "hl1_hd_content_path",
       "variable_value": "$(install_settings_install_dir)/hl1_hd"
@@ -160,7 +160,7 @@
     {
       "$type": "extract_vpk",
       "name": "dod_extract_content",
-      "description": "Extract Day of Defeat: Source content",
+      "description": "Extract $(steamapp_name) content",
       "vpks": [{"vpk": "dod/dod_pak_dir.vpk"}],
       "files_to_exclude": [
         "^.*.dll$",
@@ -171,7 +171,7 @@
     {
       "$type": "save_variable",
       "name": "dod_save_variable",
-      "description": "Add Day of Defeat: Source install path to $(variables_config_file_name)",
+      "description": "Add $(steamapp_name) install path to $(variables_config_file_name)",
       "depends_on": ["dod_extract_content"],
       "variable_name": "dod_content_path",
       "variable_value": "$(install_settings_install_dir)"
@@ -181,7 +181,7 @@
     {
       "$type": "extract_vpk",
       "name": "hl2mp_extract_content",
-      "description": "Extract Half-Life 2: Deathmatch content",
+      "description": "Extract $(steamapp_name) content",
       "vpks": [{"vpk": "hl2mp/hl2mp_pak_dir.vpk"}],
       "files_to_exclude": [
         "^.*.dll$",
@@ -192,7 +192,7 @@
     {
       "$type": "save_variable",
       "name": "hl2mp_save_variable",
-      "description": "Add Half-Life 2: Deathmatch install path to $(variables_config_file_name)",
+      "description": "Add $(steamapp_name) install path to $(variables_config_file_name)",
       "depends_on": ["hl2mp_extract_content"],
       "variable_name": "hl2mp_content_path",
       "variable_value": "$(install_settings_install_dir)"
@@ -202,7 +202,7 @@
     {
       "$type": "extract_vpk",
       "name": "lostcoast_extract_content",
-      "description": "Extract Half-Life 2: Lost Coast content",
+      "description": "Extract $(steamapp_name) content",
       "vpks": [{"vpk": "lostcoast/lostcoast_pak_dir.vpk"}],
       "files_to_exclude": [
         "^.*.dll$",
@@ -213,7 +213,7 @@
     {
       "$type": "save_variable",
       "name": "lostcoast_save_variable",
-      "description": "Add Half-Life 2: Lost Coast install path to $(variables_config_file_name)",
+      "description": "Add $(steamapp_name) install path to $(variables_config_file_name)",
       "depends_on": ["lostcoast_extract_content"],
       "variable_name": "lostcoast_content_path",
       "variable_value": "$(install_settings_install_dir)"
@@ -223,7 +223,7 @@
     {
       "$type": "extract_vpk",
       "name": "hl1mp_extract_content",
-      "description": "Extract Half-Life Deathmatch: Source content",
+      "description": "Extract $(steamapp_name) content",
       "vpks": [{"vpk": "hl1mp/hl1mp_pak_dir.vpk"}],
       "files_to_exclude": [
         "^.*.dll$",
@@ -234,7 +234,7 @@
     {
       "$type": "save_variable",
       "name": "hl1mp_save_variable",
-      "description": "Add Half-Life Deathmatch: Source install path to $(variables_config_file_name)",
+      "description": "Add $(steamapp_name) install path to $(variables_config_file_name)",
       "depends_on": ["hl1mp_extract_content"],
       "variable_name": "hl1mp_content_path",
       "variable_value": "$(install_settings_install_dir)"
@@ -244,7 +244,7 @@
     {
       "$type": "extract_vpk",
       "name": "hl2ep1_extract_content",
-      "description": "Extract Half-Life 2: Episode One content",
+      "description": "Extract $(steamapp_name) content",
       "vpks": [{"vpk": "episodic/ep1_pak_dir.vpk"}],
       "files_to_exclude": [
         "^.*.dll$",
@@ -255,7 +255,7 @@
     {
       "$type": "save_variable",
       "name": "hl2ep1_save_variable",
-      "description": "Add Half-Life 2: Episode One install path to $(variables_config_file_name)",
+      "description": "Add $(steamapp_name) install path to $(variables_config_file_name)",
       "depends_on": ["hl2ep1_extract_content"],
       "variable_name": "hl2ep1_content_path",
       "variable_value": "$(install_settings_install_dir)"
@@ -265,7 +265,7 @@
     {
       "$type": "extract_vpk",
       "name": "portal_extract_content",
-      "description": "Extract Portal content",
+      "description": "Extract $(steamapp_name) content",
       "vpks": [{"vpk": "portal/portal_pak_dir.vpk"}],
       "files_to_exclude": [
         "^.*.dll$",
@@ -276,7 +276,7 @@
     {
       "$type": "save_variable",
       "name": "portal_save_variable",
-      "description": "Add Portal install path to $(variables_config_file_name)",
+      "description": "Add $(steamapp_name) install path to $(variables_config_file_name)",
       "depends_on": ["portal_extract_content"],
       "variable_name": "portal_content_path",
       "variable_value": "$(install_settings_install_dir)"
@@ -286,7 +286,7 @@
     {
       "$type": "extract_vpk",
       "name": "hl2ep2_extract_content",
-      "description": "Extract Half-Life 2: Episode Two content",
+      "description": "Extract $(steamapp_name) content",
       "vpks": [{"vpk": "ep2/ep2_pak_dir.vpk"}],
       "files_to_exclude": [
         "^.*.dll$",
@@ -297,7 +297,7 @@
     {
       "$type": "save_variable",
       "name": "hl2ep2_save_variable",
-      "description": "Add Half-Life 2: Episode Two install path to $(variables_config_file_name)",
+      "description": "Add $(steamapp_name) install path to $(variables_config_file_name)",
       "depends_on": ["hl2ep2_extract_content"],
       "variable_name": "hl2ep2_content_path",
       "variable_value": "$(install_settings_install_dir)"
@@ -307,7 +307,7 @@
     {
       "$type": "extract_vpk",
       "name": "sdkbase2013sp_hl2ep2_extract_content",
-      "description": "Extract Source SDK Base 2013 Singleplayer EP2 content",
+      "description": "Extract $(steamapp_name) EP2 content",
       "vpks": [{"vpk": "ep2/ep2_pak_dir.vpk"}],
       "files_to_exclude": [
         "^.*.dll$",
@@ -318,7 +318,7 @@
     {
       "$type": "save_variable",
       "name": "sdkbase2013sp_hl2ep2_save_variable",
-      "description": "Add Source SDK Base 2013 Singleplayer EP2 install path to $(variables_config_file_name)",
+      "description": "Add $(steamapp_name) EP2 install path to $(variables_config_file_name)",
       "depends_on": ["sdkbase2013sp_hl2ep2_extract_content"],
       "variable_name": "sdkbase2013sp_hl2ep2_content_path",
       "variable_value": "$(install_settings_install_dir)/ep2"
@@ -326,7 +326,7 @@
     {
       "$type": "extract_vpk",
       "name": "sdkbase2013sp_hl2ep1_extract_content",
-      "description": "Extract Source SDK Base 2013 Singleplayer EP1 content",
+      "description": "Extract $(steamapp_name) EP1 content",
       "vpks": [{"vpk": "episodic/ep1_pak_dir.vpk"}],
       "files_to_exclude": [
         "^.*.dll$",
@@ -337,7 +337,7 @@
     {
       "$type": "save_variable",
       "name": "sdkbase2013sp_hl2ep1_save_variable",
-      "description": "Add Source SDK Base 2013 Singleplayer EP1 install path to $(variables_config_file_name)",
+      "description": "Add $(steamapp_name) EP1 install path to $(variables_config_file_name)",
       "depends_on": ["sdkbase2013sp_hl2ep1_extract_content"],
       "variable_name": "sdkbase2013sp_hl2ep1_content_path",
       "variable_value": "$(install_settings_install_dir)/episodic"
@@ -345,7 +345,7 @@
     {
       "$type": "extract_vpk",
       "name": "sdkbase2013sp_hl2_extract_content",
-      "description": "Extract Source SDK Base 2013 Singleplayer HL2 content",
+      "description": "Extract $(steamapp_name) HL2 content",
       "vpks": [
         {"vpk": "hl2/hl2_misc_dir.vpk"},
         {"vpk": "hl2/hl2_sound_misc_dir.vpk"},
@@ -361,7 +361,7 @@
     {
       "$type": "save_variable",
       "name": "sdkbase2013sp_hl2_save_variable",
-      "description": "Add Source SDK Base 2013 Singleplayer HL2 install path to $(variables_config_file_name)",
+      "description": "Add $(steamapp_name) HL2 install path to $(variables_config_file_name)",
       "depends_on": ["sdkbase2013sp_hl2_extract_content"],
       "variable_name": "sdkbase2013sp_hl2_content_path",
       "variable_value": "$(install_settings_install_dir)/hl2"
@@ -371,7 +371,7 @@
     {
       "$type": "extract_vpk",
       "name": "sdkbase2013mp_hl2_extract_content",
-      "description": "Extract Source SDK Base 2013 Multiplayer HL2 content",
+      "description": "Extract $(steamapp_name) HL2 content",
       "vpks": [
         {"vpk": "hl2/hl2_misc_dir.vpk"},
         {"vpk": "hl2/hl2_sound_misc_dir.vpk"},
@@ -387,7 +387,7 @@
     {
       "$type": "save_variable",
       "name": "sdkbase2013mp_hl2_save_variable",
-      "description": "Add Source SDK Base 2013 Multiplayer HL2 install path to $(variables_config_file_name)",
+      "description": "Add $(steamapp_name) HL2 install path to $(variables_config_file_name)",
       "depends_on": ["sdkbase2013mp_hl2_extract_content"],
       "variable_name": "sdkbase2013mp_hl2_content_path",
       "variable_value": "$(install_settings_install_dir)/hl2"
@@ -395,7 +395,7 @@
     {
       "$type": "extract_vpk",
       "name": "sdkbase2013mp_hl2mp_extract_content",
-      "description": "Extract Source SDK Base 2013 Multiplayer HL2MP content",
+      "description": "Extract $(steamapp_name) HL2MP content",
       "vpks": [{"vpk": "hl2mp/hl2mp_pak_dir.vpk"}],
       "files_to_exclude": [
         "^.*.dll$",
@@ -406,7 +406,7 @@
     {
       "$type": "save_variable",
       "name": "sdkbase2013mp_hl2mp_save_variable",
-      "description": "Add Source SDK Base 2013 Multiplayer HL2MP install path to $(variables_config_file_name)",
+      "description": "Add $(steamapp_name) HL2MP install path to $(variables_config_file_name)",
       "depends_on": ["sdkbase2013mp_hl2mp_extract_content"],
       "variable_name": "sdkbase2013mp_hl2mp_content_path",
       "variable_value": "$(install_settings_install_dir)/hl2mp"

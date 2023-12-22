@@ -121,7 +121,8 @@ namespace test_installsourcecontent
         {
             return new() {
               { "install_settings_install_dir", PathExtensions.ConvertToUnixDirectorySeparator(context.FileSystem, context.FileSystem.Path.GetFullPath(context.GetContentInstallDir())) },
-              { "variables_config_file_name", context.GetVariablesFileName() }
+              { "variables_config_file_name", context.GetVariablesFileName() },
+              { "steamapp_name", context.GetSteamAppName() }
             };
         }
     }
