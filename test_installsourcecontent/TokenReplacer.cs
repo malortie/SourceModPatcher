@@ -23,30 +23,15 @@ namespace test_installsourcecontent
             if (null == Variables || Variables.Count == 0)
                 return str;
 
-            string strTemp = str;
-
-            string regexPrefix = "";
-            foreach (char c in Prefix)
-                regexPrefix += $"\\{c}";
-            string regexSuffix = "";
-            foreach (char c in Suffix)
-                regexSuffix = $"\\{c}";
-
-            string pattern = $"{regexPrefix}([^{Suffix}]*){regexSuffix}";
-
-            Regex tokenSubstitution = new Regex(pattern, RegexOptions.IgnoreCase | RegexOptions.Compiled);
-
-            MatchCollection matches = tokenSubstitution.Matches(str);
-            for (int i = 0; i < matches.Count; ++i)
+            if (str.Contains(Prefix) || str.Contains(Suffix))
             {
-                if (matches[i].Groups.Count > 1)
-                {
-                    string variable = matches[i].Groups[1].Value;
-                    strTemp = strTemp.Replace($"$({variable})", Variables[variable]);
-                }
+                string strTemp = str;
+                foreach (var variable in Variables)
+                    strTemp = strTemp.Replace(Prefix + variable.Key + Suffix, variable.Value);
+                return strTemp;
             }
 
-            return strTemp;
+            return str;
         }
     }
 }
