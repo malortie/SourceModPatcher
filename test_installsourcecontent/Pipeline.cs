@@ -6,6 +6,9 @@ using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Collections.ObjectModel;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using System.Collections;
+using System;
 
 namespace test_installsourcecontent
 {
@@ -15,6 +18,14 @@ namespace test_installsourcecontent
         PartiallyComplete = 1,
         Failed = 2,
         Cancelled = 3,
+    }
+
+    [AttributeUsage(AttributeTargets.Property)]
+    public class PipelineStepReplaceTokenAttribute : Attribute
+    {
+        public PipelineStepReplaceTokenAttribute()
+        {
+        }
     }
 
     public interface IPipelineStepData
@@ -72,6 +83,37 @@ namespace test_installsourcecontent
 
         public abstract PipelineStepStatus ExecuteStep(ContextT context, IPipelineStepData stepData);
 
+        void ReplaceTokensRecursively(object obj)
+        {
+            var propsWithReplacetoken = obj.GetType().GetProperties().Where(p => Attribute.IsDefined(p, typeof(PipelineStepReplaceTokenAttribute)));
+
+            foreach (PropertyInfo prop in propsWithReplacetoken)
+            {
+                var type = Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType;
+                if (type == typeof(string))
+                {
+                    string propertyValue = prop.GetValue(obj) as string;
+                    if (null != propertyValue)
+                        prop.SetValue(obj, TokenReplacer.Replace(propertyValue));
+                }
+                else
+                {
+                    var propertyValue = prop.GetValue(obj);
+                    if (null != propertyValue)
+                    {
+                        var enumerable = propertyValue as IEnumerable;
+                        if (null != enumerable)
+                        {
+                            foreach (var item in enumerable)
+                                ReplaceTokensRecursively(item);
+                        }
+                        else 
+                            ReplaceTokensRecursively(propertyValue);
+                    }
+                }
+            }
+        }
+
         public PipelineStepStatus[] DoStage(ContextT context)
         {
             SetupContext(context);
@@ -94,16 +136,7 @@ namespace test_installsourcecontent
                 // Perform token replacement in step string properties.
                 TokenReplacer.Variables = new ReadOnlyDictionary<string, string>(TokenReplacerVariablesProvider.GetVariables(context));
 
-                foreach (PropertyInfo prop in stepData.GetType().GetProperties())
-                {
-                    var type = Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType;
-                    if (type == typeof(string))
-                    {
-                        string propertyValue = prop.GetValue(stepData) as string;
-                        if (null != propertyValue)
-                            prop.SetValue(stepData, TokenReplacer.Replace(propertyValue));
-                    }
-                }
+                ReplaceTokensRecursively(stepData);
 
                 progressContext.StepNumber = stepIndex + 1;
                 progressContext.NumStepsTotal = StepsDatas.Length;

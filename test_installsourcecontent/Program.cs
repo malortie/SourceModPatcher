@@ -43,6 +43,7 @@ namespace test_installsourcecontent
                     .Include<JSONExtractVPKInstallStep, ExtractVPKInstallStepData>()
                     .Include<JSONSaveVariableInstallStep, SaveVariableInstallStepData>();
                 cfg.CreateMap<JSONExtractVPKInstallStep, ExtractVPKInstallStepData>();
+                cfg.CreateMap<JSONExtractVPKInstallStepVPK, ExtractVPKInstallStepDataVPK>();
                 cfg.CreateMap<JSONSaveVariableInstallStep, SaveVariableInstallStepData>();
                 cfg.CreateMap<JSONInstallStepsConfig, InstallPipelineStepDictionary>().ConvertUsing(new InstallPipelineStepsTypeConverter());
             });

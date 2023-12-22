@@ -5,9 +5,12 @@ namespace test_installsourcecontent
     public class SaveVariableInstallStepData : IPipelineStepData
     {
         public string Name { get; set; } = "";
+        [PipelineStepReplaceToken]
         public string Description { get; set; } = "";
         public List<string> DependsOn { get; set; } = new();
+        [PipelineStepReplaceToken]
         public string VariableName { get; set; } = "";
+        [PipelineStepReplaceToken]
         public string VariableValue { get; set; } = "";
 
     }

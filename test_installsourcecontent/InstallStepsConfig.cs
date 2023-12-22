@@ -3,7 +3,6 @@ using System.Text.Json.Serialization;
 
 namespace test_installsourcecontent
 {
-
     [JsonPolymorphic(TypeDiscriminatorPropertyName = "$type")]
     [JsonDerivedType(typeof(JSONExtractVPKInstallStep), typeDiscriminator: "extract_vpk")]
     [JsonDerivedType(typeof(JSONSaveVariableInstallStep), typeDiscriminator: "save_variable")]
@@ -17,14 +16,24 @@ namespace test_installsourcecontent
         public List<string>? DependsOn { get; set; }
     }
 
+    public class JSONExtractVPKInstallStepVPK
+    {
+        [JsonPropertyName("vpk")]
+        public string? VPKFile { get; set; }
+        [JsonPropertyName("files_to_exclude")]
+        public List<string>? FilesToExclude { get; set; }
+        [JsonPropertyName("files_to_extract")]
+        public List<string>? FilesToExtract { get; set; }
+    }
+
     public class JSONExtractVPKInstallStep : JSONInstallStep
     {
         [JsonPropertyName("vpks")]
-        public List<string>? Vpks { get; set; }
+        public List<JSONExtractVPKInstallStepVPK>? Vpks { get; set; }
         [JsonPropertyName("files_to_exclude")]
-        public List<string> FilesToExclude { get; set; }
+        public List<string>? FilesToExclude { get; set; }
         [JsonPropertyName("files_to_extract")]
-        public List<string> FilesToExtract { get; set; }
+        public List<string>? FilesToExtract { get; set; }
         [JsonPropertyName("outdir")]
         public string? OutDir { get; set; }
     }

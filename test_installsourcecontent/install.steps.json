@@ -5,18 +5,18 @@
       "name": "sdkbase2006_extract_content",
       "description": "Extract Source SDK Base 2006 content",
       "vpks": [
-        "vpks/depot_206_dir.vpk",
-        "vpks/depot_207_dir.vpk",
-        "vpks/depot_208_dir.vpk",
-        "vpks/depot_212_dir.vpk",
-        "vpks/depot_213_dir.vpk",
-        "vpks/depot_215_dir.vpk",
-        "vpks/depot_308_dir.vpk",
-        "vpks/depot_309_dir.vpk",
-        "vpks/depot_381_dir.vpk",
-        "vpks/depot_421_dir.vpk",
-        "vpks/depot_422_dir.vpk",
-        "vpks/depot_423_dir.vpk"
+        {"vpk": "vpks/depot_206_dir.vpk"},
+        {"vpk": "vpks/depot_207_dir.vpk"},
+        {"vpk": "vpks/depot_208_dir.vpk"},
+        {"vpk": "vpks/depot_212_dir.vpk"},
+        {"vpk": "vpks/depot_213_dir.vpk"},
+        {"vpk": "vpks/depot_215_dir.vpk"},
+        {"vpk": "vpks/depot_308_dir.vpk"},
+        {"vpk": "vpks/depot_309_dir.vpk"},
+        {"vpk": "vpks/depot_381_dir.vpk"},
+        {"vpk": "vpks/depot_421_dir.vpk"},
+        {"vpk": "vpks/depot_422_dir.vpk"},
+        {"vpk": "vpks/depot_423_dir.vpk"}
       ],
       "files_to_exclude": [
         "^.*.dll$",
@@ -39,19 +39,19 @@
       "name": "sdkbase2007_extract_content",
       "description": "Extract Source SDK Base 2007 content",
       "vpks": [
-        "vpks/depot_206_dir.vpk",
-        "vpks/depot_207_dir.vpk",
-        "vpks/depot_208_dir.vpk",
-        "vpks/depot_213_dir.vpk",
-        "vpks/depot_215_dir.vpk",
-        "vpks/depot_216_dir.vpk",
-        "vpks/depot_305_dir.vpk",
-        "vpks/depot_306_dir.vpk",
-        "vpks/depot_307_dir.vpk",
-        "vpks/depot_308_dir.vpk",
-        "vpks/depot_309_dir.vpk",
-        "vpks/depot_317_dir.vpk",
-        "vpks/depot_381_dir.vpk"
+        {"vpk": "vpks/depot_206_dir.vpk"},
+        {"vpk": "vpks/depot_207_dir.vpk"},
+        {"vpk": "vpks/depot_208_dir.vpk"},
+        {"vpk": "vpks/depot_213_dir.vpk"},
+        {"vpk": "vpks/depot_215_dir.vpk"},
+        {"vpk": "vpks/depot_216_dir.vpk"},
+        {"vpk": "vpks/depot_305_dir.vpk"},
+        {"vpk": "vpks/depot_306_dir.vpk"},
+        {"vpk": "vpks/depot_307_dir.vpk"},
+        {"vpk": "vpks/depot_308_dir.vpk"},
+        {"vpk": "vpks/depot_309_dir.vpk"},
+        {"vpk": "vpks/depot_317_dir.vpk"},
+        {"vpk": "vpks/depot_381_dir.vpk"}
       ],
       "files_to_exclude": [
         "^.*.dll$",
@@ -74,11 +74,11 @@
       "name": "hl2_extract_content",
       "description": "Extract Half-Life 2 content",
       "vpks": [
-        "hl2/hl2_misc_dir.vpk",
-        "hl2/hl2_pak_dir.vpk",
-        "hl2/hl2_sound_misc_dir.vpk",
-        "hl2/hl2_sound_vo_*_dir.vpk",
-        "hl2/hl2_textures_dir.vpk"
+        {"vpk": "hl2/hl2_misc_dir.vpk"},
+        {"vpk": "hl2/hl2_pak_dir.vpk"},
+        {"vpk": "hl2/hl2_sound_misc_dir.vpk"},
+        {"vpk": "hl2/hl2_sound_vo_*_dir.vpk"},
+        {"vpk": "hl2/hl2_textures_dir.vpk"}
       ],
       "files_to_exclude": [
         "^.*.dll$",
@@ -100,7 +100,7 @@
       "$type": "extract_vpk",
       "name": "cstrike_extract_content",
       "description": "Extract Counter-Strike: Source content",
-      "vpks": ["cstrike/cstrike_pak_dir.vpk"],
+      "vpks": [{"vpk": "cstrike/cstrike_pak_dir.vpk"}],
       "files_to_exclude": [
         "^.*.dll$",
         "^.*.bin$"
@@ -121,7 +121,7 @@
       "$type": "extract_vpk",
       "name": "hl1_extract_content",
       "description": "Extract Half-Life: Source content",
-      "vpks": ["hl1/hl1_pak_dir.vpk"],
+      "vpks": [{"vpk": "hl1/hl1_pak_dir.vpk"}],
       "files_to_exclude": [
         "^.*.dll$",
         "^.*.bin$"
@@ -140,7 +140,7 @@
       "$type": "extract_vpk",
       "name": "hl1_hd_extract_content",
       "description": "Extract Half-Life: Source HD content",
-      "vpks": ["hl1_hd/hl1_hd_pak_dir.vpk"],
+      "vpks": [{"vpk": "hl1_hd/hl1_hd_pak_dir.vpk"}],
       "files_to_exclude": [
         "^.*.dll$",
         "^.*.bin$"
@@ -161,7 +161,7 @@
       "$type": "extract_vpk",
       "name": "dod_extract_content",
       "description": "Extract Day of Defeat: Source content",
-      "vpks": ["dod/dod_pak_dir.vpk"],
+      "vpks": [{"vpk": "dod/dod_pak_dir.vpk"}],
       "files_to_exclude": [
         "^.*.dll$",
         "^.*.bin$"
@@ -182,7 +182,7 @@
       "$type": "extract_vpk",
       "name": "hl2mp_extract_content",
       "description": "Extract Half-Life 2: Deathmatch content",
-      "vpks": ["hl2mp/hl2mp_pak_dir.vpk"],
+      "vpks": [{"vpk": "hl2mp/hl2mp_pak_dir.vpk"}],
       "files_to_exclude": [
         "^.*.dll$",
         "^.*.bin$"
@@ -203,7 +203,7 @@
       "$type": "extract_vpk",
       "name": "lostcoast_extract_content",
       "description": "Extract Half-Life 2: Lost Coast content",
-      "vpks": ["lostcoast/lostcoast_pak_dir.vpk"],
+      "vpks": [{"vpk": "lostcoast/lostcoast_pak_dir.vpk"}],
       "files_to_exclude": [
         "^.*.dll$",
         "^.*.bin$"
@@ -224,7 +224,7 @@
       "$type": "extract_vpk",
       "name": "hl1mp_extract_content",
       "description": "Extract Half-Life Deathmatch: Source content",
-      "vpks": ["hl1mp/hl1mp_pak_dir.vpk"],
+      "vpks": [{"vpk": "hl1mp/hl1mp_pak_dir.vpk"}],
       "files_to_exclude": [
         "^.*.dll$",
         "^.*.bin$"
@@ -245,7 +245,7 @@
       "$type": "extract_vpk",
       "name": "hl2ep1_extract_content",
       "description": "Extract Half-Life 2: Episode One content",
-      "vpks": ["episodic/ep1_pak_dir.vpk"],
+      "vpks": [{"vpk": "episodic/ep1_pak_dir.vpk"}],
       "files_to_exclude": [
         "^.*.dll$",
         "^.*.bin$"
@@ -266,7 +266,7 @@
       "$type": "extract_vpk",
       "name": "portal_extract_content",
       "description": "Extract Portal content",
-      "vpks": ["portal/portal_pak_dir.vpk"],
+      "vpks": [{"vpk": "portal/portal_pak_dir.vpk"}],
       "files_to_exclude": [
         "^.*.dll$",
         "^.*.bin$"
@@ -287,7 +287,7 @@
       "$type": "extract_vpk",
       "name": "hl2ep2_extract_content",
       "description": "Extract Half-Life 2: Episode Two content",
-      "vpks": ["ep2/ep2_pak_dir.vpk"],
+      "vpks": [{"vpk": "ep2/ep2_pak_dir.vpk"}],
       "files_to_exclude": [
         "^.*.dll$",
         "^.*.bin$"
@@ -308,7 +308,7 @@
       "$type": "extract_vpk",
       "name": "sdkbase2013sp_hl2ep2_extract_content",
       "description": "Extract Source SDK Base 2013 Singleplayer EP2 content",
-      "vpks": ["ep2/ep2_pak_dir.vpk"],
+      "vpks": [{"vpk": "ep2/ep2_pak_dir.vpk"}],
       "files_to_exclude": [
         "^.*.dll$",
         "^.*.bin$"
@@ -327,7 +327,7 @@
       "$type": "extract_vpk",
       "name": "sdkbase2013sp_hl2ep1_extract_content",
       "description": "Extract Source SDK Base 2013 Singleplayer EP1 content",
-      "vpks": ["episodic/ep1_pak_dir.vpk"],
+      "vpks": [{"vpk": "episodic/ep1_pak_dir.vpk"}],
       "files_to_exclude": [
         "^.*.dll$",
         "^.*.bin$"
@@ -347,10 +347,10 @@
       "name": "sdkbase2013sp_hl2_extract_content",
       "description": "Extract Source SDK Base 2013 Singleplayer HL2 content",
       "vpks": [
-        "hl2/hl2_misc_dir.vpk",
-        "hl2/hl2_sound_misc_dir.vpk",
-        "hl2/hl2_sound_vo_*_dir.vpk",
-        "hl2/hl2_textures_dir.vpk"
+        {"vpk": "hl2/hl2_misc_dir.vpk"},
+        {"vpk": "hl2/hl2_sound_misc_dir.vpk"},
+        {"vpk": "hl2/hl2_sound_vo_*_dir.vpk"},
+        {"vpk": "hl2/hl2_textures_dir.vpk"}
       ],
       "files_to_exclude": [
         "^.*.dll$",
@@ -373,10 +373,10 @@
       "name": "sdkbase2013mp_hl2_extract_content",
       "description": "Extract Source SDK Base 2013 Multiplayer HL2 content",
       "vpks": [
-        "hl2/hl2_misc_dir.vpk",
-        "hl2/hl2_sound_misc_dir.vpk",
-        "hl2/hl2_sound_vo_*_dir.vpk",
-        "hl2/hl2_textures_dir.vpk"
+        {"vpk": "hl2/hl2_misc_dir.vpk"},
+        {"vpk": "hl2/hl2_sound_misc_dir.vpk"},
+        {"vpk": "hl2/hl2_sound_vo_*_dir.vpk"},
+        {"vpk": "hl2/hl2_textures_dir.vpk"}
       ],
       "files_to_exclude": [
         "^.*.dll$",
@@ -396,7 +396,7 @@
       "$type": "extract_vpk",
       "name": "sdkbase2013mp_hl2mp_extract_content",
       "description": "Extract Source SDK Base 2013 Multiplayer HL2MP content",
-      "vpks": ["hl2mp/hl2mp_pak_dir.vpk"],
+      "vpks": [{"vpk": "hl2mp/hl2mp_pak_dir.vpk"}],
       "files_to_exclude": [
         "^.*.dll$",
         "^.*.bin$"
