@@ -368,5 +368,48 @@
     }
   ],
   "243750": [
+    {
+      "$type": "extract_vpk",
+      "name": "sdkbase2013mp_hl2_extract_content",
+      "description": "Extract Source SDK Base 2013 Multiplayer HL2 content",
+      "vpks": [
+        "hl2/hl2_misc_dir.vpk",
+        "hl2/hl2_sound_misc_dir.vpk",
+        "hl2/hl2_sound_vo_*_dir.vpk",
+        "hl2/hl2_textures_dir.vpk"
+      ],
+      "files_to_exclude": [
+        "^.*.dll$",
+        "^.*.bin$"
+      ],
+      "outdir": "$(install_settings_install_dir)/hl2"
+    },
+    {
+      "$type": "save_variable",
+      "name": "sdkbase2013mp_hl2_save_variable",
+      "description": "Add Source SDK Base 2013 Multiplayer HL2 install path to $(variables_config_file_name)",
+      "depends_on": ["sdkbase2013mp_hl2_extract_content"],
+      "variable_name": "sdkbase2013mp_hl2_content_path",
+      "variable_value": "$(install_settings_install_dir)/hl2"
+    },
+    {
+      "$type": "extract_vpk",
+      "name": "sdkbase2013mp_hl2mp_extract_content",
+      "description": "Extract Source SDK Base 2013 Multiplayer HL2MP content",
+      "vpks": ["hl2mp/hl2mp_pak_dir.vpk"],
+      "files_to_exclude": [
+        "^.*.dll$",
+        "^.*.bin$"
+      ],
+      "outdir": "$(install_settings_install_dir)/hl2mp"
+    },
+    {
+      "$type": "save_variable",
+      "name": "sdkbase2013mp_hl2mp_save_variable",
+      "description": "Add Source SDK Base 2013 Multiplayer HL2MP install path to $(variables_config_file_name)",
+      "depends_on": ["sdkbase2013mp_hl2mp_extract_content"],
+      "variable_name": "sdkbase2013mp_hl2mp_content_path",
+      "variable_value": "$(install_settings_install_dir)/hl2mp"
+    }
   ]
 }
