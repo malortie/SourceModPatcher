@@ -21,6 +21,10 @@ namespace test_installsourcecontent
     {
         [JsonPropertyName("vpks")]
         public List<string>? Vpks { get; set; }
+        [JsonPropertyName("files_to_exclude")]
+        public List<string> FilesToExclude { get; set; }
+        [JsonPropertyName("files_to_extract")]
+        public List<string> FilesToExtract { get; set; }
         [JsonPropertyName("outdir")]
         public string? OutDir { get; set; }
     }

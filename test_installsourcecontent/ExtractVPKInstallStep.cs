@@ -8,7 +8,34 @@ namespace test_installsourcecontent
         public string Description { get; set; } = "";
         public List<string> DependsOn { get; set; } = new();
         public List<string> Vpks { get; set; } = new();
+        public List<string> FilesToExclude { get; set; } = new();
+        public List<string> FilesToExtract { get; set; } = new();
         public string OutDir { get; set; } = "";
+    }
+
+    public class VPKFileFilter : IVPKFileFilter
+    {
+        readonly List<Regex> _filesToExcludeRegex;
+        readonly List<Regex> _filesToExtractRegex;
+
+        public VPKFileFilter(List<Regex> filesToExcludeRegex, List<Regex> filesToExtractRegex)
+        {
+            _filesToExcludeRegex = filesToExcludeRegex;
+            _filesToExtractRegex = filesToExtractRegex;
+        }
+
+        public bool PassesFilter(string vpkFile)
+        {
+            // If input matches one of the file exclusion pattern, ignore.
+            if (_filesToExcludeRegex.Count > 0 && _filesToExcludeRegex.Any(r => r.IsMatch(vpkFile)))
+                return false;
+
+            // If input doesn't match any of the files to extract pattern, ignore.
+            if (_filesToExtractRegex.Count > 0 && !_filesToExtractRegex.Any(r => r.IsMatch(vpkFile)))
+                return false;
+
+            return true;
+        }
     }
 
     public class ExtractVPKInstallStep : IPipelineStep<Context>
@@ -25,6 +52,8 @@ namespace test_installsourcecontent
             var stepDataVPK = (ExtractVPKInstallStepData)stepData;
             var Vpks = stepDataVPK.Vpks;
             var OutDir = stepDataVPK.OutDir;
+            var FilesToExclude = stepDataVPK.FilesToExclude;
+            var FilesToExtract = stepDataVPK.FilesToExtract;
 
             if (null == Vpks || Vpks.Count <= 0)
             {
@@ -36,6 +65,28 @@ namespace test_installsourcecontent
                 logger.LogError("No output directory specified.");
                 return PipelineStepStatus.Failed;
             }
+
+            // Build compiled regex patterns.
+            List<Regex> filesToExcludeRegex, filesToExtractRegex;
+
+            try
+            {
+                filesToExcludeRegex = 0 == FilesToExclude.Count
+                    ? new List<Regex>()
+                    : FilesToExclude.Select(s => new Regex(s, RegexOptions.Compiled | RegexOptions.IgnoreCase)).ToList();
+
+                filesToExtractRegex = 0 == FilesToExtract.Count
+                    ? new List<Regex>()
+                    : FilesToExtract.Select(s => new Regex(s, RegexOptions.Compiled | RegexOptions.IgnoreCase)).ToList();
+            }
+            catch (Exception e)
+            {
+                logger.LogError(e.Message);
+                return PipelineStepStatus.Failed;
+            }
+
+            // Create file filter.
+            var fileFilter = new VPKFileFilter(filesToExcludeRegex, filesToExtractRegex);
 
             var vpks = Vpks.Select(vpkPath => PathExtensions.JoinWithSeparator(context.FileSystem, context.GetSteamAppInstallDir(), vpkPath)).ToList();
 
@@ -72,7 +123,7 @@ namespace test_installsourcecontent
                     continue;
                 }
                 logger.LogInfo($"Extracting \"{vpkPath}\" to \"{OutDir}\"");
-                _extractor.Extract(context.FileSystem, logger, vpkPath, OutDir);
+                _extractor.Extract(context.FileSystem, logger, vpkPath, OutDir, fileFilter);
             }
 
             return status;

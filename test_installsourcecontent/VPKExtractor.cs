@@ -1,16 +1,23 @@
 using SteamDatabase.ValvePak;
+using System.Collections.Generic;
 using System.IO.Abstractions;
+using System.Text.RegularExpressions;
 
 namespace test_installsourcecontent
 {
+    public interface IVPKFileFilter
+    {
+        bool PassesFilter(string vpkFile);
+    }
+
     public interface IVPKExtractor
     {
-        void Extract(IFileSystem fileSystem, IPipelineLogger logger, string vpkPath, string outputDir);
+        void Extract(IFileSystem fileSystem, IPipelineLogger logger, string vpkPath, string outputDir, IVPKFileFilter fileFilter);
     }
 
     public class VPKExtractor : IVPKExtractor
     {
-        public void Extract(IFileSystem fileSystem, IPipelineLogger logger, string vpkPath, string outputDir) 
+        public void Extract(IFileSystem fileSystem, IPipelineLogger logger, string vpkPath, string outputDir, IVPKFileFilter fileFilter) 
         {
             if (!fileSystem.Directory.Exists(outputDir))
                 fileSystem.Directory.CreateDirectory(outputDir);
@@ -27,6 +34,10 @@ namespace test_installsourcecontent
             {
                 foreach (var entry in extension)
                 {
+                    // Only allow entries that pass the filter.
+                    if (!fileFilter.PassesFilter(entry.GetFullPath()))
+                        continue;
+
                     string? entryDir = fileSystem.Path.GetDirectoryName(entry.GetFullPath());
                     if (null == entryDir)
                     {

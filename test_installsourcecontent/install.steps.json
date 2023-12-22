@@ -18,6 +18,10 @@
         "vpks/depot_422_dir.vpk",
         "vpks/depot_423_dir.vpk"
       ],
+      "files_to_exclude": [
+        "^.*.dll$",
+        "^.*.bin$"
+      ],
       "outdir": "$(install_settings_install_dir)"
     },
     {
@@ -49,6 +53,10 @@
         "vpks/depot_317_dir.vpk",
         "vpks/depot_381_dir.vpk"
       ],
+      "files_to_exclude": [
+        "^.*.dll$",
+        "^.*.bin$"
+      ],
       "outdir": "$(install_settings_install_dir)"
     },
     {
@@ -72,6 +80,10 @@
         "hl2/hl2_sound_vo_*_dir.vpk",
         "hl2/hl2_textures_dir.vpk"
       ],
+      "files_to_exclude": [
+        "^.*.dll$",
+        "^.*.bin$"
+      ],
       "outdir": "$(install_settings_install_dir)"
     },
     {
@@ -89,6 +101,10 @@
       "name": "cstrike_extract_content",
       "description": "Extract Counter-Strike: Source content",
       "vpks": ["cstrike/cstrike_pak_dir.vpk"],
+      "files_to_exclude": [
+        "^.*.dll$",
+        "^.*.bin$"
+      ],
       "outdir": "$(install_settings_install_dir)"
     },
     {
@@ -106,6 +122,10 @@
       "name": "hl1_extract_content",
       "description": "Extract Half-Life: Source content",
       "vpks": ["hl1/hl1_pak_dir.vpk"],
+      "files_to_exclude": [
+        "^.*.dll$",
+        "^.*.bin$"
+      ],
       "outdir": "$(install_settings_install_dir)"
     },
     {
@@ -121,6 +141,10 @@
       "name": "hl1_hd_extract_content",
       "description": "Extract Half-Life: Source HD content",
       "vpks": ["hl1_hd/hl1_hd_pak_dir.vpk"],
+      "files_to_exclude": [
+        "^.*.dll$",
+        "^.*.bin$"
+      ],
       "outdir": "$(install_settings_install_dir)/hl1_hd"
     },
     {
@@ -138,6 +162,10 @@
       "name": "dod_extract_content",
       "description": "Extract Day of Defeat: Source content",
       "vpks": ["dod/dod_pak_dir.vpk"],
+      "files_to_exclude": [
+        "^.*.dll$",
+        "^.*.bin$"
+      ],
       "outdir": "$(install_settings_install_dir)"
     },
     {
@@ -155,6 +183,10 @@
       "name": "hl2mp_extract_content",
       "description": "Extract Half-Life 2: Deathmatch content",
       "vpks": ["hl2mp/hl2mp_pak_dir.vpk"],
+      "files_to_exclude": [
+        "^.*.dll$",
+        "^.*.bin$"
+      ],
       "outdir": "$(install_settings_install_dir)"
     },
     {
@@ -172,6 +204,10 @@
       "name": "lostcoast_extract_content",
       "description": "Extract Half-Life 2: Lost Coast content",
       "vpks": ["lostcoast/lostcoast_pak_dir.vpk"],
+      "files_to_exclude": [
+        "^.*.dll$",
+        "^.*.bin$"
+      ],
       "outdir": "$(install_settings_install_dir)"
     },
     {
@@ -189,6 +225,10 @@
       "name": "hl1mp_extract_content",
       "description": "Extract Half-Life Deathmatch: Source content",
       "vpks": ["hl1mp/hl1mp_pak_dir.vpk"],
+      "files_to_exclude": [
+        "^.*.dll$",
+        "^.*.bin$"
+      ],
       "outdir": "$(install_settings_install_dir)"
     },
     {
@@ -206,6 +246,10 @@
       "name": "hl2ep1_extract_content",
       "description": "Extract Half-Life 2: Episode One content",
       "vpks": ["episodic/ep1_pak_dir.vpk"],
+      "files_to_exclude": [
+        "^.*.dll$",
+        "^.*.bin$"
+      ],
       "outdir": "$(install_settings_install_dir)"
     },
     {
@@ -223,6 +267,10 @@
       "name": "portal_extract_content",
       "description": "Extract Portal content",
       "vpks": ["portal/portal_pak_dir.vpk"],
+      "files_to_exclude": [
+        "^.*.dll$",
+        "^.*.bin$"
+      ],
       "outdir": "$(install_settings_install_dir)"
     },
     {
@@ -240,6 +288,10 @@
       "name": "hl2ep2_extract_content",
       "description": "Extract Half-Life 2: Episode Two content",
       "vpks": ["ep2/ep2_pak_dir.vpk"],
+      "files_to_exclude": [
+        "^.*.dll$",
+        "^.*.bin$"
+      ],
       "outdir": "$(install_settings_install_dir)"
     },
     {
@@ -257,6 +309,10 @@
       "name": "sdkbase2013sp_hl2ep2_extract_content",
       "description": "Extract Source SDK Base 2013 Singleplayer EP2 content",
       "vpks": ["ep2/ep2_pak_dir.vpk"],
+      "files_to_exclude": [
+        "^.*.dll$",
+        "^.*.bin$"
+      ],
       "outdir": "$(install_settings_install_dir)/ep2"
     },
     {
@@ -272,6 +328,10 @@
       "name": "sdkbase2013sp_hl2ep1_extract_content",
       "description": "Extract Source SDK Base 2013 Singleplayer EP1 content",
       "vpks": ["episodic/ep1_pak_dir.vpk"],
+      "files_to_exclude": [
+        "^.*.dll$",
+        "^.*.bin$"
+      ],
       "outdir": "$(install_settings_install_dir)/episodic"
     },
     {
@@ -291,6 +351,10 @@
         "hl2/hl2_sound_misc_dir.vpk",
         "hl2/hl2_sound_vo_*_dir.vpk",
         "hl2/hl2_textures_dir.vpk"
+      ],
+      "files_to_exclude": [
+        "^.*.dll$",
+        "^.*.bin$"
       ],
       "outdir": "$(install_settings_install_dir)/hl2"
     },
