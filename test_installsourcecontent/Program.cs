@@ -3,7 +3,9 @@ using CommandLine;
 using Gameloop.Vdf.Linq;
 using NLog;
 using NLog.Targets;
+using Pastel;
 using System.Collections.ObjectModel;
+using System.Drawing;
 using System.IO;
 using System.IO.Abstractions;
 using System.Reflection;
@@ -83,12 +85,12 @@ namespace test_installsourcecontent
 
         public override void OnBeginStage(Context context)
         {
-            Logger.LogInfo($"Installing [{AppID}] {context.GetSteamAppName()}");
+            Writer.Info($"Installing [{AppID}] {context.GetSteamAppName()}");
         }
 
         public override PipelineStepStatus ExecuteStep(Context context, IPipelineStepData stepData)
         {
-            return _stepsDataToInstallStep[stepData.GetType()].DoStep(context, stepData, Logger);
+            return _stepsDataToInstallStep[stepData.GetType()].DoStep(context, stepData, Writer);
         }
     }
 
@@ -104,53 +106,74 @@ namespace test_installsourcecontent
         }
     }
 
-    public class Logger : ILogger
+    public class ConsoleWriter : IConsoleWriter
     {
-        readonly NLog.Logger _logger;
-
-        public Logger(NLog.Logger logger)
+        public void Success(string message)
         {
-            _logger = logger;
+            Console.WriteLine(message.Pastel(Color.FromArgb(0, 255, 0)));
         }
 
-        public void LogInfo(string message)
+        public void Info(string message)
         {
-            _logger.Info(message);
+            Console.WriteLine(message.Pastel(Color.FromArgb(255, 255, 255)));
         }
 
-        public void LogWarning(string message)
+        public void Warning(string message)
         {
-            _logger.Warn(message);
+            Console.WriteLine(message.Pastel(Color.FromArgb(255, 255, 0)));
         }
 
-        public void LogError(string message)
+        public void Error(string message)
         {
-            _logger.Error(message);
+            Console.WriteLine(message.Pastel(Color.FromArgb(255, 0, 0)));
         }
     }
 
-    public class ConsoleLogWriter : IConsoleLogWriter
+    public class Writer : IWriter
     {
-        readonly NLog.Logger _writer;
+        readonly NLog.Logger _logger;
+        readonly IConsoleWriter _consoleWriter;
 
-        public ConsoleLogWriter(NLog.Logger writer)
+        public Writer(NLog.Logger logger, IConsoleWriter consoleWriter)
         {
-            _writer = writer;
+            _logger = logger;
+            _consoleWriter = consoleWriter;
         }
 
-        public void WriteInfo(string message)
+        public void Success(string message)
         {
-            _writer.Info(message);
+            _consoleWriter.Success(message);
+            _logger.Info(message);
         }
 
-        public void WriteWarning(string message)
+        public void Info(string message)
         {
-            _writer.Warn(message);
+            _consoleWriter.Info(message);
+            _logger.Info(message);
         }
 
-        public void WriteError(string message)
+        public void Warning(string message)
         {
-            _writer.Error(message);
+            _consoleWriter.Warning(message);
+            _logger.Warn(message);
+        }
+
+        public void Error(string message)
+        {
+            _consoleWriter.Error(message);
+            _logger.Error(message);
+        }
+
+        public void Failure(string message)
+        {
+            _consoleWriter.Error(message);
+            _logger.Error(message);
+        }
+
+        public void Cancellation(string message)
+        {
+            _consoleWriter.Error(message);
+            _logger.Error(message);
         }
     }
 
@@ -217,15 +240,15 @@ namespace test_installsourcecontent
             var errors = errorMemoryTarget.Logs;
 
             var logProvider = new LogProvider(warningMemoryTarget, errorMemoryTarget);
-            var logger = new Logger(NLog.LogManager.GetCurrentClassLogger());
-            var consoleLogWriter = new ConsoleLogWriter(NLog.LogManager.GetLogger("console"));
+            var consoleWriter = new ConsoleWriter();
+            var writer = new Writer(NLog.LogManager.GetCurrentClassLogger(), consoleWriter);
 
             try
             {
                 if (null == Environment.GetEnvironmentVariable(INSTALL_ENVVAR, EnvironmentVariableTarget.User)) 
                 {
                     // Create a user environment variable to allow locating this application's directory.
-                    logger.LogInfo($"Creating user environment variable {INSTALL_ENVVAR}=\"{Environment.CurrentDirectory}\"");
+                    writer.Info($"Creating user environment variable {INSTALL_ENVVAR}=\"{Environment.CurrentDirectory}\"");
                     Environment.SetEnvironmentVariable(INSTALL_ENVVAR, Environment.CurrentDirectory, EnvironmentVariableTarget.User);
                 }
 
@@ -233,35 +256,35 @@ namespace test_installsourcecontent
 
                 Func<string, string> MakeFullPath = x => PathExtensions.JoinWithSeparator(fileSystem, Environment.CurrentDirectory, x);
 
-                var steamAppsConfig = new SteamAppsConfig(fileSystem, logger, MakeFullPath(STEAMAPPS_CONFIG_FILENAME), new JSONConfigurationSerializer<JSONSteamAppsConfig>());
+                var steamAppsConfig = new SteamAppsConfig(fileSystem, writer, MakeFullPath(STEAMAPPS_CONFIG_FILENAME), new JSONConfigurationSerializer<JSONSteamAppsConfig>());
                 steamAppsConfig.UseConfigFile = options.UseConfigFile;
                 steamAppsConfig.LoadConfig();
 
-                var variablesConfig = new VariablesConfig(fileSystem, logger, MakeFullPath("variables.json"), new JSONConfigurationSerializer<JSONVariablesConfig>());
+                var variablesConfig = new VariablesConfig(fileSystem, writer, MakeFullPath("variables.json"), new JSONConfigurationSerializer<JSONVariablesConfig>());
                 variablesConfig.LoadConfig();
 
-                var installStepsConfig = new InstallStepsConfig(fileSystem, logger, MakeFullPath("install.steps.json"), new JSONConfigurationSerializer<JSONInstallStepsConfig>());
+                var installStepsConfig = new InstallStepsConfig(fileSystem, writer, MakeFullPath("install.steps.json"), new JSONConfigurationSerializer<JSONInstallStepsConfig>());
                 installStepsConfig.LoadConfig();
 
-                var installSettings = new InstallSettings(fileSystem, logger, MakeFullPath(INSTALL_SETTINGS_FILENAME), new JSONConfigurationSerializer<JSONInstallSettings>());
+                var installSettings = new InstallSettings(fileSystem, writer, MakeFullPath(INSTALL_SETTINGS_FILENAME), new JSONConfigurationSerializer<JSONInstallSettings>());
                 installSettings.LoadConfig();
 
-                logger.LogInfo("Installed Source games:");
+                writer.Info("Installed Source games:");
                 foreach (var appID in steamAppsConfig.SupportedSourceGamesAppIDs)
                 {
                     if (steamAppsConfig.IsSteamAppInstalled(appID))
-                        logger.LogInfo($"\t[*] [{appID}] {steamAppsConfig.GetSteamAppName(appID)}");
+                        writer.Info($"\t[*] [{appID}] {steamAppsConfig.GetSteamAppName(appID)}");
                     else
-                        logger.LogInfo($"\t[ ] [{appID}] {steamAppsConfig.GetSteamAppName(appID)}");
+                        writer.Info($"\t[ ] [{appID}] {steamAppsConfig.GetSteamAppName(appID)}");
                 }
 
-                logger.LogInfo("Content marked for installation:");
+                writer.Info("Content marked for installation:");
                 foreach (var appID in steamAppsConfig.SupportedSourceGamesAppIDs)
                 {
                     if (installSettings.IsSteamAppMarkedForInstall(appID))
-                        logger.LogInfo($"\t[*] [{appID}] {steamAppsConfig.GetSteamAppName(appID)}");
+                        writer.Info($"\t[*] [{appID}] {steamAppsConfig.GetSteamAppName(appID)}");
                     else
-                        logger.LogInfo($"\t[ ] [{appID}] {steamAppsConfig.GetSteamAppName(appID)}");
+                        writer.Info($"\t[ ] [{appID}] {steamAppsConfig.GetSteamAppName(appID)}");
                 }
 
                 var installedSteamApps = steamAppsConfig.GetInstalledSteamApps();
@@ -271,13 +294,13 @@ namespace test_installsourcecontent
                 var steamAppsToInstall = installedSteamApps.Intersect(steamAppsUserWantsToInstall).ToList();
                 if (0 == steamAppsToInstall.Count)
                 {
-                    logger.LogInfo("Program exited: No content can be installed.");
+                    writer.Info("Program exited: No content can be installed.");
                     return;
                 }
 
-                logger.LogInfo("The following content will be installed:");
+                writer.Info("The following content will be installed:");
                 foreach (var appID in steamAppsToInstall)
-                    logger.LogInfo($"\t[{appID}] {steamAppsConfig.GetSteamAppName(appID)}");
+                    writer.Info($"\t[{appID}] {steamAppsConfig.GetSteamAppName(appID)}");
 
                 if (options.ConfirmInstallationPrompt)
                 {
@@ -285,33 +308,33 @@ namespace test_installsourcecontent
                     ConsoleKey answer;
                     do
                     {
-                        logger.LogInfo("Do you want to proceed [y/n] : ");
+                        writer.Info("Do you want to proceed [y/n] : ");
                         answer = Console.ReadKey(false).Key;
                     } while (answer != ConsoleKey.Y && answer != ConsoleKey.N);
 
                     if (answer == ConsoleKey.Y)
                     {
                         // User accepted content installation.
-                        logger.LogInfo("Proceeding...");
+                        writer.Info("Proceeding...");
                     }
                     else
                     {
                         // User declined content installation.
-                        logger.LogInfo($"Edit {INSTALL_SETTINGS_FILENAME} and relaunch the program.");
+                        writer.Info($"Edit {INSTALL_SETTINGS_FILENAME} and relaunch the program.");
                         return;
                     }
                 }
 
-                var progressWriter = new PipelineProgressWriter<Context>(logger);
-                var consoleLogReportWriter = new ConsoleLogReportWriter(consoleLogWriter, logProvider);
-                var statsWriter = new PipelineStatsWriter(logger);
+                var progressWriter = new PipelineProgressWriter<Context>(writer);
+                var consoleLogReportWriter = new ConsoleLogReportWriter(consoleWriter, logProvider);
+                var statsWriter = new PipelineStatsWriter(writer);
                 var tokenReplacer = new TokenReplacer();
                 tokenReplacer.Prefix = "$(";
                 tokenReplacer.Suffix = ")";
                 var tokenReplacerVariablesProvider = new TokenReplacerVariablesProvider();
 
                 var configuration = new Configuration(steamAppsConfig, installSettings, variablesConfig);
-                var pauseHandler = new ConsolePauseHandler(logger);
+                var pauseHandler = new ConsolePauseHandler(writer);
                 var context = new Context(fileSystem, configuration);
 
                 // Select only the steps we want to install.
@@ -325,7 +348,7 @@ namespace test_installsourcecontent
                     Name = $"stage_{stageIndex++}",
                     Description = configuration.GetSteamAppName(kv.Key),
                     AppID = kv.Key,
-                    Logger = logger,
+                    Writer = writer,
                     PauseAfterEachStep = options.PauseAfterEachStep,
                     PauseHandler = pauseHandler,
                     ProgressWriter = progressWriter,
@@ -334,22 +357,22 @@ namespace test_installsourcecontent
                     TokenReplacerVariablesProvider = tokenReplacerVariablesProvider
                 }).ToArray();
 
-                var pipeline = new Pipeline<Context>(stages, logger, progressWriter);
+                var pipeline = new Pipeline<Context>(stages, writer, progressWriter);
                 pipeline.Execute(context);
 
                 statsWriter.WriteStats(pipeline.StatsResults);
 
-                logger.LogInfo("Installation finished.");
+                writer.Info("Installation finished.");
                 
                 if (pipeline.StatsResults.NumStagesPartiallyCompleted != 0 ||
                     pipeline.StatsResults.NumStagesFailed != 0 ||
                     pipeline.StatsResults.NumStagesCancelled != 0)
                 {
-                    logger.LogInfo("One or more errors occured.");
+                    writer.Info("One or more errors occured.");
                 }
                 else
                 {
-                    logger.LogInfo("All steps successfully completed.");
+                    writer.Success("All steps successfully completed.");
                 }
 
                 consoleLogReportWriter.WriteWarnings();
@@ -360,7 +383,7 @@ namespace test_installsourcecontent
             }
             catch (Exception e)
             {
-                logger.LogError(e.Message);
+                writer.Error(e.Message);
             }
 
             NLog.LogManager.Shutdown();

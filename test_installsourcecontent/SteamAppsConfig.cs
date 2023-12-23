@@ -39,7 +39,7 @@ namespace test_installsourcecontent
 
         public List<int> SupportedSourceGamesAppIDs = new();
 
-        public SteamAppsConfig(IFileSystem fileSystem, ILogger logger, string filePath, IConfigurationSerializer<JSONSteamAppsConfig> configSerializer) : base(fileSystem, logger, filePath, configSerializer)
+        public SteamAppsConfig(IFileSystem fileSystem, IWriter writer, string filePath, IConfigurationSerializer<JSONSteamAppsConfig> configSerializer) : base(fileSystem, writer, filePath, configSerializer)
         {
         }
 
@@ -120,7 +120,7 @@ namespace test_installsourcecontent
             var steamLibraryPaths = new Dictionary<int, string>();
             var appManifestDictionary = new Dictionary<int, SteamAppManifest>();
 
-            Logger.LogInfo($"Reading {libraryFoldersVDFPath}");
+            Writer.Info($"Reading {libraryFoldersVDFPath}");
             dynamic libraryFoldersVDF = VdfConvert.Deserialize(FileSystem.File.ReadAllText(libraryFoldersVDFPath));
 
             foreach (var libraryfolder in libraryFoldersVDF.Value)
@@ -159,7 +159,7 @@ namespace test_installsourcecontent
 
                 int appID = appManifestKV.Key;
                 string appManifestACFPath = appManifest.FilePath;
-                Logger.LogInfo($"Reading {appManifestACFPath}");
+                Writer.Info($"Reading {appManifestACFPath}");
                 dynamic appManifestACF = VdfConvert.Deserialize(FileSystem.File.ReadAllText(appManifestACFPath));
 
                 string name = (appManifestACF.Value["name"]).ToString();

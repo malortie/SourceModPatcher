@@ -11,14 +11,14 @@ namespace test_installsourcecontent
     public abstract class ConfigurationManager<ConfigT> : IConfigurationManager where ConfigT : new()
     {
         readonly IFileSystem _fileSystem;
-        readonly ILogger _logger;
+        readonly IWriter _writer;
         readonly string _filePath;
         readonly IConfigurationSerializer<ConfigT> _configSerializer;
 
-        public ConfigurationManager(IFileSystem fileSystem, ILogger logger, string filePath, IConfigurationSerializer<ConfigT> configSerializer)
+        public ConfigurationManager(IFileSystem fileSystem, IWriter writer, string filePath, IConfigurationSerializer<ConfigT> configSerializer)
         {
             _fileSystem = fileSystem;
-            _logger = logger;
+            _writer = writer;
             _filePath = filePath;
             _configSerializer = configSerializer;
         }
@@ -28,11 +28,11 @@ namespace test_installsourcecontent
         public ConfigT Config { get; private set; } = new();
 
         protected IFileSystem FileSystem { get { return _fileSystem; } }
-        protected ILogger Logger { get { return _logger; } }
+        protected IWriter Writer { get { return _writer; } }
 
         public void LoadConfig() 
         {
-            _logger.LogInfo($"Reading {_fileSystem.Path.GetFileName(_filePath)}");
+            Writer.Info($"Reading {_fileSystem.Path.GetFileName(_filePath)}");
             var deserializedData = _configSerializer.Deserialize(_fileSystem.File.ReadAllText(_filePath));
             if (null == deserializedData)
                 throw new Exception($"Failed to deserialize {_filePath}");

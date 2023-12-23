@@ -37,7 +37,7 @@ namespace test_installsourcecontent
 
     public interface IPipelineStep<ContextT>
     {
-        PipelineStepStatus DoStep(ContextT context, IPipelineStepData stepData, ILogger logger);
+        PipelineStepStatus DoStep(ContextT context, IPipelineStepData stepData, IWriter writer);
     }
 
     public interface IPipelineStage<ContextT>
@@ -65,7 +65,7 @@ namespace test_installsourcecontent
         public bool PauseAfterEachStep { get; set; }
         public IPipelineStepData[] StepsDatas { get; set; }
         public IPipelineProgressWriter<ContextT> ProgressWriter { get; set; }
-        public ILogger Logger { get; set; }
+        public IWriter Writer { get; set; }
         public ITokenReplacer TokenReplacer { get; set; }
         public ITokenReplacerVariablesProvider<ContextT> TokenReplacerVariablesProvider { get; set; }
         public IPauseHandler PauseHandler { get; set; }
@@ -196,15 +196,15 @@ namespace test_installsourcecontent
         public IPipelineStage<ContextT>[] Stages { get; set; }
 
         public IPipelineProgressWriter<ContextT> ProgressWriter { get; set; }
-        public ILogger Logger { get; set; }
+        public IWriter Writer { get; set; }
 
         public IPipelineStatsResults StatsResults { get; set; } = new PipelineStatsResults();
         public IPipelineProgressContextFactory ProgressContextFactory { get; set; } = new PipelineProgressContextFactory();
 
-        public Pipeline(IPipelineStage<ContextT>[] stages, ILogger logger, IPipelineProgressWriter<ContextT> progressWriter)
+        public Pipeline(IPipelineStage<ContextT>[] stages, IWriter writer, IPipelineProgressWriter<ContextT> progressWriter)
         {
             Stages = stages;
-            Logger = logger;
+            Writer = writer;
             ProgressWriter = progressWriter;
         }
 

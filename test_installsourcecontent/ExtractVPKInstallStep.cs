@@ -66,7 +66,7 @@ namespace test_installsourcecontent
             return 0 == strings.Count ? new List<Regex>() : strings.Select(s => new Regex(s, RegexOptions.Compiled | RegexOptions.IgnoreCase)).ToList();
         }
 
-        public PipelineStepStatus DoStep(Context context, IPipelineStepData stepData, ILogger logger)
+        public PipelineStepStatus DoStep(Context context, IPipelineStepData stepData, IWriter writer)
         {
             var stepDataVPK = (ExtractVPKInstallStepData)stepData;
             var Vpks = stepDataVPK.Vpks;
@@ -76,7 +76,7 @@ namespace test_installsourcecontent
 
             if (null == Vpks || Vpks.Count <= 0)
             {
-                logger.LogError("No vpk(s) specified.");
+                writer.Error("No vpk(s) specified.");
                 return PipelineStepStatus.Failed;
             }
             else
@@ -91,14 +91,14 @@ namespace test_installsourcecontent
 
                 if (emptyVPKsIndices.Count > 0) 
                 {
-                    logger.LogError($"VPK entries [{string.Join(',', emptyVPKsIndices)}] are blank or empty.");
+                    writer.Error($"VPK entries [{string.Join(',', emptyVPKsIndices)}] are blank or empty.");
                     return PipelineStepStatus.Failed;
                 }
             }
 
             if (null == OutDir)
             {
-                logger.LogError("No output directory specified.");
+                writer.Error("No output directory specified.");
                 return PipelineStepStatus.Failed;
             }
 
@@ -111,7 +111,7 @@ namespace test_installsourcecontent
             }
             catch (Exception e)
             {
-                logger.LogError(e.Message);
+                writer.Error(e.Message);
                 return PipelineStepStatus.Failed;
             }
 
@@ -158,7 +158,7 @@ namespace test_installsourcecontent
                 string vpkPath = vpk.VPKFile;
                 if (!context.FileSystem.File.Exists(vpkPath))
                 {
-                    logger.LogWarning($"{vpkPath} does not exist. Skipping...");
+                    writer.Warning($"{vpkPath} does not exist. Skipping...");
                     status = PipelineStepStatus.PartiallyComplete;
                     continue;
                 }
@@ -175,14 +175,14 @@ namespace test_installsourcecontent
                 }
                 catch (Exception e)
                 {
-                    logger.LogError(e.Message);
+                    writer.Error(e.Message);
                     // Other VPKs might work, so mark it as partially completed.
                     status = PipelineStepStatus.PartiallyComplete;
                     continue;
                 }
 
-                logger.LogInfo($"Extracting \"{vpkPath}\" to \"{OutDir}\"");
-                _extractor.Extract(context.FileSystem, logger, vpkPath, OutDir, fileFilter);
+                writer.Info($"Extracting \"{vpkPath}\" to \"{OutDir}\"");
+                _extractor.Extract(context.FileSystem, writer, vpkPath, OutDir, fileFilter);
             }
 
             return status;

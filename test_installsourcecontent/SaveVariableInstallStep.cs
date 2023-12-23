@@ -17,7 +17,7 @@ namespace test_installsourcecontent
 
     public class SaveVariableInstallStep : IPipelineStep<Context>
     {
-        public PipelineStepStatus DoStep(Context context, IPipelineStepData stepData, ILogger logger)
+        public PipelineStepStatus DoStep(Context context, IPipelineStepData stepData, IWriter writer)
         {
             var saveVariableData = (SaveVariableInstallStepData)stepData;
             var Name = saveVariableData.VariableName;
@@ -25,17 +25,17 @@ namespace test_installsourcecontent
 
             if (null == Name)
             {
-                logger.LogError("No variable name specified.");
+                writer.Error("No variable name specified.");
                 return PipelineStepStatus.Failed;
             }
             if (null == Value)
             {
-                logger.LogError("No variable value specified.");
+                writer.Error("No variable value specified.");
                 return PipelineStepStatus.Failed;
             }
 
             // Write the variable.
-            logger.LogInfo($"Writing variable {Name}=\"{Value}\"");
+            writer.Info($"Writing variable {Name}=\"{Value}\"");
             context.SaveVariable(Name, Value);
             return PipelineStepStatus.Complete;
         }

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Drawing;
 
 namespace test_installsourcecontent
 {
@@ -46,11 +47,11 @@ namespace test_installsourcecontent
 
     public class PipelineProgressWriter<ContextT> : IPipelineProgressWriter<ContextT>
     {
-        ILogger _logger;
+        IWriter _writer;
 
-        public PipelineProgressWriter(ILogger logger)
+        public PipelineProgressWriter(IWriter writer)
         {
-            _logger = logger;
+            _writer = writer;
         }
 
         string Format(IPipelineProgressContext pipelineContext, IPipelineStepData stepData)
@@ -65,65 +66,66 @@ namespace test_installsourcecontent
 
         public void WriteStepDependenciesNotCompleted(IPipelineProgressContext pipelineContext, IPipelineStepData stepData)
         {
-            _logger.LogWarning($"Step {stepData.Name} will not be executed: The following dependencies were not completed: <{string.Join(',', stepData.DependsOn)}>");
+            _writer.Warning($"Step {stepData.Name} will not be executed: The following dependencies were not completed: <{string.Join(',', stepData.DependsOn)}>");
         }
 
         public void WriteStepExecute(IPipelineProgressContext pipelineContext, IPipelineStepData stepData)
         {
-            _logger.LogInfo(Format(pipelineContext, stepData));
+            _writer.Info(Format(pipelineContext, stepData));
         }
 
         public void WriteStepCompleted(IPipelineProgressContext pipelineContext, IPipelineStepData stepData)
         {
-            _logger.LogInfo($"{Format(pipelineContext, stepData)} [COMPLETED]");
+            _writer.Success($"{Format(pipelineContext, stepData)} [COMPLETED]");
         }
 
         public void WriteStepPartiallyCompleted(IPipelineProgressContext pipelineContext, IPipelineStepData stepData)
         {
-            _logger.LogInfo($"{Format(pipelineContext, stepData)} [PARTIALLY COMPLETED]");
+            _writer.Warning($"{Format(pipelineContext, stepData)} [PARTIALLY COMPLETED]");
         }
 
         public void WriteStepFailed(IPipelineProgressContext pipelineContext, IPipelineStepData stepData)
         {
-            _logger.LogInfo($"{Format(pipelineContext, stepData)} [FAILED]");
+            _writer.Failure($"{Format(pipelineContext, stepData)} [FAILED]");
         }
 
         public void WriteStepCancelled(IPipelineProgressContext pipelineContext, IPipelineStepData stepData)
         {
-            _logger.LogInfo($"{Format(pipelineContext, stepData)} [CANCELLED]");
+            _writer.Cancellation($"{Format(pipelineContext, stepData)} [CANCELLED]");
         }
 
         public void WriteStageExecute(IPipelineProgressContext pipelineContext, IPipelineStage<ContextT> stage)
         {
-            _logger.LogInfo(Format(pipelineContext, stage));
+            _writer.Info(Format(pipelineContext, stage));
         }
 
         public void WriteStageCompleted(IPipelineProgressContext pipelineContext, IPipelineStage<ContextT> stage)
         {
-            _logger.LogInfo($"{Format(pipelineContext, stage)} [COMPLETED]");
+            _writer.Success($"{Format(pipelineContext, stage)} [COMPLETED]");
         }
 
         public void WriteStagePartiallyCompleted(IPipelineProgressContext pipelineContext, IPipelineStage<ContextT> stage)
         {
-            _logger.LogInfo($"{Format(pipelineContext, stage)} [PARTIALLY COMPLETED]");
+            _writer.Warning($"{Format(pipelineContext, stage)} [PARTIALLY COMPLETED]");
         }
 
         public void WriteStageFailed(IPipelineProgressContext pipelineContext, IPipelineStage<ContextT> stage)
         {
-            _logger.LogInfo($"{Format(pipelineContext, stage)} [FAILED]");
+            _writer.Failure($"{Format(pipelineContext, stage)} [FAILED]");
         }
 
         public void WriteStageCancelled(IPipelineProgressContext pipelineContext, IPipelineStage<ContextT> stage)
         {
-            _logger.LogInfo($"{Format(pipelineContext, stage)} [CANCELLED]");
+            _writer.Cancellation($"{Format(pipelineContext, stage)} [CANCELLED]");
         }
     }
 
-    public interface IConsoleLogWriter
+    public interface IConsoleWriter
     {
-        void WriteInfo(string message);
-        void WriteWarning(string message);
-        void WriteError(string message);
+        void Success(string message);
+        void Info(string message);
+        void Warning(string message);
+        void Error(string message);
     }
 
     public interface ILogProvider
@@ -142,31 +144,31 @@ namespace test_installsourcecontent
 
     public class ConsoleLogReportWriter : IConsoleLogReportWriter
     {
-        IConsoleLogWriter _logWriter;
+        IConsoleWriter _consoleWriter;
         ILogProvider _logProvider;
 
-        public ConsoleLogReportWriter(IConsoleLogWriter logWriter, ILogProvider logProvider)
+        public ConsoleLogReportWriter(IConsoleWriter consoleWriter, ILogProvider logProvider)
         {
-            _logWriter = logWriter;
+            _consoleWriter = consoleWriter;
             _logProvider = logProvider;
         }
 
         public void WriteInfos()
         {
             foreach (var info in _logProvider.GetInfos())
-                _logWriter.WriteInfo(info);
+                _consoleWriter.Info(info);
         }
 
         public void WriteWarnings()
         {
             foreach (var warning in _logProvider.GetWarnings())
-                _logWriter.WriteWarning(warning);
+                _consoleWriter.Warning(warning);
         }
 
         public void WriteErrors()
         {
             foreach (var error in _logProvider.GetErrors())
-                _logWriter.WriteError(error);
+                _consoleWriter.Error(error);
         }
     }
 
@@ -225,30 +227,30 @@ namespace test_installsourcecontent
 
     public class PipelineStatsWriter : IPipelineStatsWriter
     {
-        ILogger _logger;
+        IWriter _writer;
 
-        public PipelineStatsWriter(ILogger logger)
+        public PipelineStatsWriter(IWriter writer)
         {
-            _logger = logger;
+            _writer = writer;
         }
 
         public void WriteStats(IPipelineStatsResults statsResults)
         {
-            _logger.LogInfo("=====================");
-            _logger.LogInfo("Summary:");
-            _logger.LogInfo("=====================");
-            _logger.LogInfo($"[Stages]");
-            _logger.LogInfo($"Completed: {statsResults.NumStagesCompleted}");
-            _logger.LogInfo($"Partially completed: {statsResults.NumStagesPartiallyCompleted}");
-            _logger.LogInfo($"Failed: {statsResults.NumStagesFailed}");
-            _logger.LogInfo($"Cancelled: {statsResults.NumStagesCancelled}");
-            _logger.LogInfo(string.Empty);
-            _logger.LogInfo($"[Steps]");
-            _logger.LogInfo($"Completed: {statsResults.NumStepsCompleted}");
-            _logger.LogInfo($"Partially completed: {statsResults.NumStepsPartiallyCompleted}");
-            _logger.LogInfo($"Failed: {statsResults.NumStepsFailed}");
-            _logger.LogInfo($"Cancelled: {statsResults.NumStepsCancelled}");
-            _logger.LogInfo("=====================");
+            _writer.Info("=====================");
+            _writer.Info("Summary:");
+            _writer.Info("=====================");
+            _writer.Info($"[Stages]");
+            _writer.Info($"Completed: {statsResults.NumStagesCompleted}");
+            _writer.Info($"Partially completed: {statsResults.NumStagesPartiallyCompleted}");
+            _writer.Info($"Failed: {statsResults.NumStagesFailed}");
+            _writer.Info($"Cancelled: {statsResults.NumStagesCancelled}");
+            _writer.Info(string.Empty);
+            _writer.Info($"[Steps]");
+            _writer.Info($"Completed: {statsResults.NumStepsCompleted}");
+            _writer.Info($"Partially completed: {statsResults.NumStepsPartiallyCompleted}");
+            _writer.Info($"Failed: {statsResults.NumStepsFailed}");
+            _writer.Info($"Cancelled: {statsResults.NumStepsCancelled}");
+            _writer.Info("=====================");
         }
     }
 }
