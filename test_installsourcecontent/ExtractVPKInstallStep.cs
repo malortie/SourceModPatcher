@@ -66,7 +66,7 @@ namespace test_installsourcecontent
             return 0 == strings.Count ? new List<Regex>() : strings.Select(s => new Regex(s, RegexOptions.Compiled | RegexOptions.IgnoreCase)).ToList();
         }
 
-        public PipelineStepStatus DoStep(Context context, IPipelineStepData stepData, IPipelineLogger logger)
+        public PipelineStepStatus DoStep(Context context, IPipelineStepData stepData, ILogger logger)
         {
             var stepDataVPK = (ExtractVPKInstallStepData)stepData;
             var Vpks = stepDataVPK.Vpks;

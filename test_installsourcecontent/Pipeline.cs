@@ -37,7 +37,7 @@ namespace test_installsourcecontent
 
     public interface IPipelineStep<ContextT>
     {
-        PipelineStepStatus DoStep(ContextT context, IPipelineStepData stepData, IPipelineLogger logger);
+        PipelineStepStatus DoStep(ContextT context, IPipelineStepData stepData, ILogger logger);
     }
 
     public interface IPipelineStage<ContextT>
@@ -65,8 +65,7 @@ namespace test_installsourcecontent
         public bool PauseAfterEachStep { get; set; }
         public IPipelineStepData[] StepsDatas { get; set; }
         public IPipelineProgressWriter<ContextT> ProgressWriter { get; set; }
-        public IPipelineLogger Logger { get; set; }
-        public IPipelineLogger StepLogger { get; set; }
+        public ILogger Logger { get; set; }
         public ITokenReplacer TokenReplacer { get; set; }
         public ITokenReplacerVariablesProvider<ContextT> TokenReplacerVariablesProvider { get; set; }
         public IPauseHandler PauseHandler { get; set; }
@@ -141,9 +140,6 @@ namespace test_installsourcecontent
                 progressContext.StepNumber = stepIndex + 1;
                 progressContext.NumStepsTotal = StepsDatas.Length;
 
-                // Use the step name for the logger name.
-                StepLogger.Name = stepData.Name;
-
                 PipelineStepStatus stepStatus;
 
                 var uncompletedDependencies = stepData.DependsOn.Except(stepsComplete).ToArray();
@@ -200,17 +196,17 @@ namespace test_installsourcecontent
         public IPipelineStage<ContextT>[] Stages { get; set; }
 
         public IPipelineProgressWriter<ContextT> ProgressWriter { get; set; }
-        public IPipelineLogger Logger { get; set; }
+        public ILogger Logger { get; set; }
 
         public IPipelineStatsResults StatsResults { get; set; } = new PipelineStatsResults();
         public IPipelineProgressContextFactory ProgressContextFactory { get; set; } = new PipelineProgressContextFactory();
 
-        public Pipeline(IPipelineStage<ContextT>[] stages, IPipelineLogger logger, IPipelineProgressWriter<ContextT> progressWriter)
+        public Pipeline(IPipelineStage<ContextT>[] stages, ILogger logger, IPipelineProgressWriter<ContextT> progressWriter)
         {
             Stages = stages;
             Logger = logger;
             ProgressWriter = progressWriter;
-        }     
+        }
 
         public void Execute(ContextT context)
         {
@@ -234,9 +230,6 @@ namespace test_installsourcecontent
                 var stage = Stages[stageIndex];
 
                 progressContext.StepNumber = stageIndex + 1;
-
-                // Use the stage name for the logger name.
-                Logger.Name = stage.Name;
 
                 // Execute stage.
                 ProgressWriter.WriteStageExecute(progressContext, stage);

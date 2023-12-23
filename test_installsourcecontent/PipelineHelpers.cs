@@ -46,11 +46,11 @@ namespace test_installsourcecontent
 
     public class PipelineProgressWriter<ContextT> : IPipelineProgressWriter<ContextT>
     {
-        IWriter _writer;
+        ILogger _logger;
 
-        public PipelineProgressWriter(IWriter writer)
+        public PipelineProgressWriter(ILogger logger)
         {
-            _writer = writer;
+            _logger = logger;
         }
 
         string Format(IPipelineProgressContext pipelineContext, IPipelineStepData stepData)
@@ -65,269 +65,108 @@ namespace test_installsourcecontent
 
         public void WriteStepDependenciesNotCompleted(IPipelineProgressContext pipelineContext, IPipelineStepData stepData)
         {
-            _writer.WriteLine($"Step {stepData.Name} will not be executed: The following dependencies were not completed: <{string.Join(',', stepData.DependsOn)}>");
+            _logger.LogWarning($"Step {stepData.Name} will not be executed: The following dependencies were not completed: <{string.Join(',', stepData.DependsOn)}>");
         }
 
         public void WriteStepExecute(IPipelineProgressContext pipelineContext, IPipelineStepData stepData)
         {
-            _writer.WriteLine(Format(pipelineContext, stepData));
+            _logger.LogInfo(Format(pipelineContext, stepData));
         }
 
         public void WriteStepCompleted(IPipelineProgressContext pipelineContext, IPipelineStepData stepData)
         {
-            _writer.WriteLine($"{Format(pipelineContext, stepData)} [COMPLETED]");
+            _logger.LogInfo($"{Format(pipelineContext, stepData)} [COMPLETED]");
         }
 
         public void WriteStepPartiallyCompleted(IPipelineProgressContext pipelineContext, IPipelineStepData stepData)
         {
-            _writer.WriteLine($"{Format(pipelineContext, stepData)} [PARTIALLY COMPLETED]");
+            _logger.LogInfo($"{Format(pipelineContext, stepData)} [PARTIALLY COMPLETED]");
         }
 
         public void WriteStepFailed(IPipelineProgressContext pipelineContext, IPipelineStepData stepData)
         {
-            _writer.WriteLine($"{Format(pipelineContext, stepData)} [FAILED]");
+            _logger.LogInfo($"{Format(pipelineContext, stepData)} [FAILED]");
         }
 
         public void WriteStepCancelled(IPipelineProgressContext pipelineContext, IPipelineStepData stepData)
         {
-            _writer.WriteLine($"{Format(pipelineContext, stepData)} [CANCELLED]");
+            _logger.LogInfo($"{Format(pipelineContext, stepData)} [CANCELLED]");
         }
 
         public void WriteStageExecute(IPipelineProgressContext pipelineContext, IPipelineStage<ContextT> stage)
         {
-            _writer.WriteLine(Format(pipelineContext, stage));
+            _logger.LogInfo(Format(pipelineContext, stage));
         }
 
         public void WriteStageCompleted(IPipelineProgressContext pipelineContext, IPipelineStage<ContextT> stage)
         {
-            _writer.WriteLine($"{Format(pipelineContext, stage)} [COMPLETED]");
+            _logger.LogInfo($"{Format(pipelineContext, stage)} [COMPLETED]");
         }
 
         public void WriteStagePartiallyCompleted(IPipelineProgressContext pipelineContext, IPipelineStage<ContextT> stage)
         {
-            _writer.WriteLine($"{Format(pipelineContext, stage)} [PARTIALLY COMPLETED]");
+            _logger.LogInfo($"{Format(pipelineContext, stage)} [PARTIALLY COMPLETED]");
         }
 
         public void WriteStageFailed(IPipelineProgressContext pipelineContext, IPipelineStage<ContextT> stage)
         {
-            _writer.WriteLine($"{Format(pipelineContext, stage)} [FAILED]");
+            _logger.LogInfo($"{Format(pipelineContext, stage)} [FAILED]");
         }
 
         public void WriteStageCancelled(IPipelineProgressContext pipelineContext, IPipelineStage<ContextT> stage)
         {
-            _writer.WriteLine($"{Format(pipelineContext, stage)} [CANCELLED]");
+            _logger.LogInfo($"{Format(pipelineContext, stage)} [CANCELLED]");
         }
     }
 
-    public interface IPipelineLogCollector
+    public interface IConsoleLogWriter
+    {
+        void WriteInfo(string message);
+        void WriteWarning(string message);
+        void WriteError(string message);
+    }
+
+    public interface ILogProvider
     {
         ReadOnlyCollection<string> GetInfos();
-        List<KeyValuePair<string, List<string>>> GetInfosPerKeys();
-        ReadOnlyCollection<string> GetInfos(string key);
-
         ReadOnlyCollection<string> GetWarnings();
-        List<KeyValuePair<string, List<string>>> GetWarningsPerKeys();
-        ReadOnlyCollection<string> GetWarnings(string key);
-
         ReadOnlyCollection<string> GetErrors();
-        List<KeyValuePair<string, List<string>>> GetErrorsPerKeys();
-        ReadOnlyCollection<string> GetErrors(string key);
-
-        void LogInfo(string key, string message);
-        void LogWarning(string key, string message);
-        void LogError(string key, string message);
     }
 
-    public class PipelineLogResult
-    {
-        public List<string> Infos { get; set; } = new();
-        public List<string> Warnings { get; set; } = new();
-        public List<string> Errors { get; set; } = new();
-    }
-
-    public class PipelineLogCollector : IPipelineLogCollector
-    {
-        public Dictionary<string, PipelineLogResult> _entries = new();
-
-        public ReadOnlyCollection<string> GetInfos() {
-            return new ReadOnlyCollection<string>(_entries.SelectMany(kv => kv.Value.Infos).ToList());
-        }
-        public List<KeyValuePair<string, List<string>>> GetInfosPerKeys() {
-            var result = new List<KeyValuePair<string, List<string>>>();
-            foreach (var kv in _entries)
-                result.Add(new KeyValuePair<string, List<string>>(kv.Key, kv.Value.Infos));
-            return result;
-        }
-        public ReadOnlyCollection<string> GetInfos(string key) {
-            return new ReadOnlyCollection<string>(_entries[key].Infos.ToList());
-        }
-
-        public ReadOnlyCollection<string> GetWarnings() {
-            return new ReadOnlyCollection<string>(_entries.SelectMany(kv => kv.Value.Warnings).ToList());
-        }
-        public List<KeyValuePair<string, List<string>>> GetWarningsPerKeys() {
-            var result = new List<KeyValuePair<string, List<string>>>();
-            foreach (var kv in _entries)
-                result.Add(new KeyValuePair<string, List<string>>(kv.Key, kv.Value.Warnings));
-            return result;
-        }
-        public ReadOnlyCollection<string> GetWarnings(string key) {
-            return new ReadOnlyCollection<string>(_entries[key].Warnings.ToList());
-        }
-
-        public ReadOnlyCollection<string> GetErrors() {
-            return new ReadOnlyCollection<string>(_entries.SelectMany(kv => kv.Value.Errors).ToList());
-        }
-        public List<KeyValuePair<string, List<string>>> GetErrorsPerKeys() {
-            var result = new List<KeyValuePair<string, List<string>>>();
-            foreach (var kv in _entries)
-                result.Add(new KeyValuePair<string, List<string>>(kv.Key, kv.Value.Errors));
-            return result;
-        }
-        public ReadOnlyCollection<string> GetErrors(string key) {
-            return new ReadOnlyCollection<string>(_entries[key].Errors.ToList());
-        }
-
-        public void LogInfo(string key, string message)
-        {
-            CreateKeyLogResultIfNull(key);
-            _entries[key].Infos.Add(message);
-        }
-        public void LogWarning(string key, string message)
-        {
-            CreateKeyLogResultIfNull(key);
-            _entries[key].Warnings.Add(message);
-        }
-        public void LogError(string key, string message)
-        {
-            CreateKeyLogResultIfNull(key);
-            _entries[key].Errors.Add(message);
-        }
-
-        void CreateKeyLogResultIfNull(string key)
-        {
-            if (!_entries.ContainsKey(key))
-                _entries[key] = new PipelineLogResult();
-        }
-    }
-
-    public interface IPipelineLogFormatter
-    {
-        string FormatInfo(string message);
-        string FormatWarning(string message);
-        string FormatError(string message);
-    }
-
-    public class PipelineLogFormatter : IPipelineLogFormatter
-    {
-        public bool PrefixInfo { get; set; } = false;
-
-        public string FormatInfo(string message)
-        {
-            if (PrefixInfo)
-                return $"[INFO] {message}";
-            else
-                return message;
-        }
-
-        public string FormatWarning(string message)
-        {
-            return $"[WARNING] {message}";
-        }
-
-        public string FormatError(string message)
-        {
-            return $"[ERROR] {message}";
-        }
-    }
-
-    public interface IPipelineLogReportWriter
+    public interface IConsoleLogReportWriter
     {
         void WriteInfos();
         void WriteWarnings();
         void WriteErrors();
     }
 
-    public class PipelineLogReportWriter : IPipelineLogReportWriter
+    public class ConsoleLogReportWriter : IConsoleLogReportWriter
     {
-        IPipelineLogCollector _collector;
-        IWriter _writer;
-        IPipelineLogFormatter _formatter;
+        IConsoleLogWriter _logWriter;
+        ILogProvider _logProvider;
 
-        public PipelineLogReportWriter(IPipelineLogCollector collector, IWriter writer, IPipelineLogFormatter formatter)
+        public ConsoleLogReportWriter(IConsoleLogWriter logWriter, ILogProvider logProvider)
         {
-            _collector = collector;
-            _writer = writer;
-            _formatter = formatter;
+            _logWriter = logWriter;
+            _logProvider = logProvider;
         }
 
         public void WriteInfos()
         {
-            foreach (var infosKV in _collector.GetInfosPerKeys())
-            {
-                foreach (var message in infosKV.Value)
-                    _writer.WriteLine(_formatter.FormatInfo($"{infosKV.Key} {message}"));
-            }
+            foreach (var info in _logProvider.GetInfos())
+                _logWriter.WriteInfo(info);
         }
 
         public void WriteWarnings()
         {
-            foreach (var warningsKV in _collector.GetWarningsPerKeys())
-            {
-                foreach (var message in warningsKV.Value)
-                    _writer.WriteLine(_formatter.FormatWarning($"{warningsKV.Key} {message}"));
-            }
+            foreach (var warning in _logProvider.GetWarnings())
+                _logWriter.WriteWarning(warning);
         }
 
         public void WriteErrors()
         {
-            foreach (var errorsKV in _collector.GetErrorsPerKeys())
-            {
-                foreach (var message in errorsKV.Value)
-                    _writer.WriteLine(_formatter.FormatError($"{errorsKV.Key} {message}"));
-            }
-        }
-    }
-
-    public interface IPipelineLogger
-    {
-        string Name { get; set; }
-        void LogInfo(string message);
-        void LogWarning(string message);
-        void LogError(string message);
-    }
-
-    public class PipelineLogger : IPipelineLogger
-    {
-        IPipelineLogCollector _collector;
-        IWriter _writer;
-
-        public bool LogInfosToCollector { get; set; } = false;
-        public string Name { get; set; } = "null";
-
-        public PipelineLogger(IPipelineLogCollector collector, IWriter writer)
-        {
-            _collector = collector;
-            _writer = writer;
-        }
-
-        public void LogInfo(string message)
-        {
-            _writer.WriteLine(message);
-            if (LogInfosToCollector)
-                _collector.LogInfo(Name, message);
-        }
-
-        public void LogWarning(string message)
-        {
-            _writer.WriteLine(message);
-            _collector.LogWarning(Name, message);
-        }
-
-        public void LogError(string message)
-        {
-            _writer.WriteLine(message);
-            _collector.LogError(Name, message);
+            foreach (var error in _logProvider.GetErrors())
+                _logWriter.WriteError(error);
         }
     }
 
@@ -386,30 +225,30 @@ namespace test_installsourcecontent
 
     public class PipelineStatsWriter : IPipelineStatsWriter
     {
-        IWriter _writer;
+        ILogger _logger;
 
-        public PipelineStatsWriter(IWriter writer)
+        public PipelineStatsWriter(ILogger logger)
         {
-            _writer = writer;
+            _logger = logger;
         }
 
         public void WriteStats(IPipelineStatsResults statsResults)
         {
-            _writer.WriteLine("=====================");
-            _writer.WriteLine("Summary:");
-            _writer.WriteLine("=====================");
-            _writer.WriteLine($"[Stages]");
-            _writer.WriteLine($"Completed: {statsResults.NumStagesCompleted}");
-            _writer.WriteLine($"Partially completed: {statsResults.NumStagesPartiallyCompleted}");
-            _writer.WriteLine($"Failed: {statsResults.NumStagesFailed}");
-            _writer.WriteLine($"Cancelled: {statsResults.NumStagesCancelled}");
-            _writer.WriteLine();
-            _writer.WriteLine($"[Steps]");
-            _writer.WriteLine($"Completed: {statsResults.NumStepsCompleted}");
-            _writer.WriteLine($"Partially completed: {statsResults.NumStepsPartiallyCompleted}");
-            _writer.WriteLine($"Failed: {statsResults.NumStepsFailed}");
-            _writer.WriteLine($"Cancelled: {statsResults.NumStepsCancelled}");
-            _writer.WriteLine("=====================");
+            _logger.LogInfo("=====================");
+            _logger.LogInfo("Summary:");
+            _logger.LogInfo("=====================");
+            _logger.LogInfo($"[Stages]");
+            _logger.LogInfo($"Completed: {statsResults.NumStagesCompleted}");
+            _logger.LogInfo($"Partially completed: {statsResults.NumStagesPartiallyCompleted}");
+            _logger.LogInfo($"Failed: {statsResults.NumStagesFailed}");
+            _logger.LogInfo($"Cancelled: {statsResults.NumStagesCancelled}");
+            _logger.LogInfo(string.Empty);
+            _logger.LogInfo($"[Steps]");
+            _logger.LogInfo($"Completed: {statsResults.NumStepsCompleted}");
+            _logger.LogInfo($"Partially completed: {statsResults.NumStepsPartiallyCompleted}");
+            _logger.LogInfo($"Failed: {statsResults.NumStepsFailed}");
+            _logger.LogInfo($"Cancelled: {statsResults.NumStepsCancelled}");
+            _logger.LogInfo("=====================");
         }
     }
 }

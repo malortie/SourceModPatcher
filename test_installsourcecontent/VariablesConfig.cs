@@ -8,7 +8,7 @@ namespace test_installsourcecontent
 
     public class VariablesConfig : ConfigurationManager<JSONVariablesConfig>
     {
-        public VariablesConfig(IFileSystem fileSystem, IWriter writer, string filePath,IConfigurationSerializer<JSONVariablesConfig> configSerializer) : base(fileSystem, writer, filePath, configSerializer)
+        public VariablesConfig(IFileSystem fileSystem, ILogger logger, string filePath,IConfigurationSerializer<JSONVariablesConfig> configSerializer) : base(fileSystem, logger, filePath, configSerializer)
         {
         }
 

@@ -18,7 +18,7 @@ namespace test_installsourcecontent
 
     public sealed class InstallSettings : ConfigurationManager<JSONInstallSettings>
     {
-        public InstallSettings(IFileSystem fileSystem, IWriter writer, string filePath, IConfigurationSerializer<JSONInstallSettings> configSerializer) : base(fileSystem, writer, filePath, configSerializer)
+        public InstallSettings(IFileSystem fileSystem, ILogger logger, string filePath, IConfigurationSerializer<JSONInstallSettings> configSerializer) : base(fileSystem, logger, filePath, configSerializer)
         {
         }
 

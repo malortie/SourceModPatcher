@@ -52,7 +52,7 @@ namespace test_installsourcecontent
 
     public sealed class InstallStepsConfig : ConfigurationManager<JSONInstallStepsConfig>
     {
-        public InstallStepsConfig(IFileSystem fileSystem, IWriter writer, string filePath, IConfigurationSerializer<JSONInstallStepsConfig> configSerializer) : base(fileSystem, writer,filePath, configSerializer)
+        public InstallStepsConfig(IFileSystem fileSystem, ILogger logger, string filePath, IConfigurationSerializer<JSONInstallStepsConfig> configSerializer) : base(fileSystem, logger,filePath, configSerializer)
         {
         }
     }

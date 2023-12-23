@@ -12,12 +12,12 @@ namespace test_installsourcecontent
 
     public interface IVPKExtractor
     {
-        void Extract(IFileSystem fileSystem, IPipelineLogger logger, string vpkPath, string outputDir, IVPKFileFilter fileFilter);
+        void Extract(IFileSystem fileSystem, ILogger logger, string vpkPath, string outputDir, IVPKFileFilter fileFilter);
     }
 
     public class VPKExtractor : IVPKExtractor
     {
-        public void Extract(IFileSystem fileSystem, IPipelineLogger logger, string vpkPath, string outputDir, IVPKFileFilter fileFilter) 
+        public void Extract(IFileSystem fileSystem, ILogger logger, string vpkPath, string outputDir, IVPKFileFilter fileFilter) 
         {
             if (!fileSystem.Directory.Exists(outputDir))
                 fileSystem.Directory.CreateDirectory(outputDir);

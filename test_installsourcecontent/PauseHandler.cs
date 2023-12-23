@@ -7,19 +7,17 @@ namespace test_installsourcecontent
 
     public class ConsolePauseHandler : IPauseHandler
     {
-        IWriter _writer;
+        ILogger _logger;
 
-        public ConsolePauseHandler(IWriter writer)
+        public ConsolePauseHandler(ILogger logger)
         {
-            _writer = writer;
+            _logger = logger;
         }
 
         public void Pause()
         {
-            _writer.Write("Press any key to continue...");
+            _logger.LogInfo("Press any key to continue...");
             Console.ReadKey();
-            _writer.WriteLine();
-            _writer.WriteLine();
         }
     }
 }
