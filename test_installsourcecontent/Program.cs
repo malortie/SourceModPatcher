@@ -88,9 +88,9 @@ namespace test_installsourcecontent
             Writer.Info($"Installing [{AppID}] {context.GetSteamAppName()}");
         }
 
-        public override PipelineStepStatus ExecuteStep(Context context, IPipelineStepData stepData)
+        public override PipelineStepStatus ExecuteStep(Context context, IPipelineStepData stepData, IWriter stepWriter)
         {
-            return _stepsDataToInstallStep[stepData.GetType()].DoStep(context, stepData, Writer);
+            return _stepsDataToInstallStep[stepData.GetType()].DoStep(context, stepData, stepWriter);
         }
     }
 
@@ -127,53 +127,54 @@ namespace test_installsourcecontent
         {
             Console.WriteLine(message.Pastel(Color.FromArgb(255, 0, 0)));
         }
+
+        public void Failure(string message)
+        {
+            Console.WriteLine(message.Pastel(Color.FromArgb(255, 0, 0)));
+        }
+
+        public void Cancellation(string message)
+        {
+            Console.WriteLine(message.Pastel(Color.FromArgb(255, 0, 0)));
+        }
     }
 
-    public class Writer : IWriter
+    public class Logger : ILogger
     {
         readonly NLog.Logger _logger;
-        readonly IConsoleWriter _consoleWriter;
-
-        public Writer(NLog.Logger logger, IConsoleWriter consoleWriter)
-        {
-            _logger = logger;
-            _consoleWriter = consoleWriter;
+        public Logger(NLog.Logger logger) 
+        { 
+            _logger = logger; 
         }
-
-        public void Success(string message)
+        
+        public void Cancellation(string message)
         {
-            _consoleWriter.Success(message);
-            _logger.Info(message);
-        }
-
-        public void Info(string message)
-        {
-            _consoleWriter.Info(message);
-            _logger.Info(message);
-        }
-
-        public void Warning(string message)
-        {
-            _consoleWriter.Warning(message);
-            _logger.Warn(message);
+            _logger.Error(message);
         }
 
         public void Error(string message)
         {
-            _consoleWriter.Error(message);
             _logger.Error(message);
         }
 
         public void Failure(string message)
         {
-            _consoleWriter.Error(message);
             _logger.Error(message);
         }
 
-        public void Cancellation(string message)
+        public void Info(string message)
         {
-            _consoleWriter.Error(message);
-            _logger.Error(message);
+            _logger.Info(message);
+        }
+
+        public void Success(string message)
+        {
+            _logger.Info(message);
+        }
+
+        public void Warning(string message)
+        {
+            _logger.Warn(message);
         }
     }
 
@@ -241,7 +242,8 @@ namespace test_installsourcecontent
 
             var logProvider = new LogProvider(warningMemoryTarget, errorMemoryTarget);
             var consoleWriter = new ConsoleWriter();
-            var writer = new Writer(NLog.LogManager.GetCurrentClassLogger(), consoleWriter);
+            var logger = new Logger(NLog.LogManager.GetCurrentClassLogger());
+            var writer = new Writer(logger, consoleWriter);
 
             try
             {

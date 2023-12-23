@@ -2,9 +2,11 @@ namespace test_installsourcecontent
 {
     public interface ILogger
     {
-        void LogSuccess(string message);
-        void LogInfo(string message);
-        void LogWarning(string message);
-        void LogError(string message);
+        void Success(string message);
+        void Info(string message);
+        void Warning(string message);
+        void Error(string message);
+        void Failure(string message);
+        void Cancellation(string message);
     }
 }

@@ -126,6 +126,8 @@ namespace test_installsourcecontent
         void Info(string message);
         void Warning(string message);
         void Error(string message);
+        void Failure(string message);
+        void Cancellation(string message);
     }
 
     public interface ILogProvider

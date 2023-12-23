@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Collections;
 using System;
+using System.Security.Cryptography.X509Certificates;
 
 namespace test_installsourcecontent
 {
@@ -52,9 +53,102 @@ namespace test_installsourcecontent
 
         void SetupContext(ContextT context);
         void OnBeginStage(ContextT context);
-        PipelineStepStatus ExecuteStep(ContextT context, IPipelineStepData stepData);
+        PipelineStepStatus ExecuteStep(ContextT context, IPipelineStepData stepData, IWriter stepWriter);
 
         PipelineStepStatus[] DoStage(ContextT context);
+    }
+
+    public interface IStepWriterFormatter
+    {
+        string FormatSuccess(string message, string stageName, string stepName);
+        string FormatInfo(string message, string stageName, string stepName);
+        string FormatError(string message, string stageName, string stepName);
+        string FormatFailure(string message, string stageName, string stepName);
+        string FormatCancellation(string message, string stageName, string stepName);
+        string FormatWarning(string message, string stageName, string stepName);
+    }
+
+    public class StepWriterFormatter : IStepWriterFormatter
+    {
+        string FormatBase(string message, string stageName, string stepName)
+        {
+            return $"{message} [{stageName}][{stepName}]";
+        }
+
+        public string FormatCancellation(string message, string stageName, string stepName)
+        {
+            return FormatBase(message, stageName, stepName);
+        }
+
+        public string FormatError(string message, string stageName, string stepName)
+        {
+            return FormatBase(message, stageName, stepName);
+        }
+
+        public string FormatFailure(string message, string stageName, string stepName)
+        {
+            return FormatBase(message, stageName, stepName);
+        }
+
+        public string FormatInfo(string message, string stageName, string stepName)
+        {
+            return message;
+        }
+
+        public string FormatSuccess(string message, string stageName, string stepName)
+        {
+            return message;
+        }
+
+        public string FormatWarning(string message, string stageName, string stepName)
+        {
+            return FormatBase(message, stageName, stepName);
+        }
+    }
+
+    public class StepWriterDecorator : IWriter
+    {
+        readonly IWriter _writer;
+        readonly IStepWriterFormatter _stepWriterFormatter;
+
+        public string StageName { get; set; } = string.Empty;
+        public string StepName { get; set; } = string.Empty;
+
+        public StepWriterDecorator(IWriter writer, IStepWriterFormatter stepWriterFormatter)
+        {
+            _writer = writer;
+            _stepWriterFormatter = stepWriterFormatter;
+        }
+
+        public void Success(string message)
+        {
+            _writer.Success(_stepWriterFormatter.FormatSuccess(message, StageName, StepName));
+        }
+
+        public void Info(string message)
+        {
+            _writer.Info(_stepWriterFormatter.FormatInfo(message, StageName, StepName));
+        }
+
+        public void Warning(string message)
+        {
+            _writer.Warning(_stepWriterFormatter.FormatWarning(message, StageName, StepName));
+        }
+
+        public void Error(string message)
+        {
+            _writer.Error(_stepWriterFormatter.FormatError(message, StageName, StepName));
+        }
+
+        public void Failure(string message)
+        {
+            _writer.Failure(_stepWriterFormatter.FormatFailure(message, StageName, StepName));
+        }
+
+        public void Cancellation(string message)
+        {
+            _writer.Cancellation(_stepWriterFormatter.FormatCancellation(message, StageName, StepName));
+        }
     }
 
     public abstract class PipelineStage<ContextT> : IPipelineStage<ContextT>
@@ -66,6 +160,7 @@ namespace test_installsourcecontent
         public IPipelineStepData[] StepsDatas { get; set; }
         public IPipelineProgressWriter<ContextT> ProgressWriter { get; set; }
         public IWriter Writer { get; set; }
+        public IStepWriterFormatter StepWriterFormatter { get; set; } = new StepWriterFormatter();
         public ITokenReplacer TokenReplacer { get; set; }
         public ITokenReplacerVariablesProvider<ContextT> TokenReplacerVariablesProvider { get; set; }
         public IPauseHandler PauseHandler { get; set; }
@@ -80,7 +175,7 @@ namespace test_installsourcecontent
         {
         }
 
-        public abstract PipelineStepStatus ExecuteStep(ContextT context, IPipelineStepData stepData);
+        public abstract PipelineStepStatus ExecuteStep(ContextT context, IPipelineStepData stepData, IWriter stepWriter);
 
         void ReplaceTokensRecursively(object obj)
         {
@@ -118,6 +213,7 @@ namespace test_installsourcecontent
             SetupContext(context);
 
             var progressContext = ProgressContextFactory.CreateContext();
+            var stepWriterDecorator = new StepWriterDecorator(Writer, StepWriterFormatter);
 
             HashSet<string> stepsComplete = new();
             var stepStatuses = new List<PipelineStepStatus>();
@@ -150,9 +246,14 @@ namespace test_installsourcecontent
                 }
                 else
                 {
-                    // Execute step.
                     ProgressWriter.WriteStepExecute(progressContext, stepData);
-                    stepStatus = ExecuteStep(context, stepData);
+
+                    // Setup writer decorator.
+                    stepWriterDecorator.StageName = Name;
+                    stepWriterDecorator.StepName = stepData.Name;
+
+                    // Execute step.
+                    stepStatus = ExecuteStep(context, stepData, stepWriterDecorator);
                 }
 
                 stepStatuses.Add(stepStatus);
