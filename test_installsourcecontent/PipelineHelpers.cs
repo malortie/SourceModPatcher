@@ -76,7 +76,7 @@ namespace test_installsourcecontent
 
         public void WriteStepCompleted(IPipelineProgressContext pipelineContext, IPipelineStepData stepData)
         {
-            _writer.Success($"{Format(pipelineContext, stepData)} [COMPLETED]");
+            _writer.Info($"{Format(pipelineContext, stepData)} [COMPLETED]");
         }
 
         public void WriteStepPartiallyCompleted(IPipelineProgressContext pipelineContext, IPipelineStepData stepData)
@@ -101,7 +101,7 @@ namespace test_installsourcecontent
 
         public void WriteStageCompleted(IPipelineProgressContext pipelineContext, IPipelineStage<ContextT> stage)
         {
-            _writer.Success($"{Format(pipelineContext, stage)} [COMPLETED]");
+            _writer.Info($"{Format(pipelineContext, stage)} [COMPLETED]");
         }
 
         public void WriteStagePartiallyCompleted(IPipelineProgressContext pipelineContext, IPipelineStage<ContextT> stage)
@@ -162,13 +162,13 @@ namespace test_installsourcecontent
         public void WriteWarnings()
         {
             foreach (var warning in _logProvider.GetWarnings())
-                _consoleWriter.Warning(warning);
+                _consoleWriter.Warning($"[WARNING] {warning}");
         }
 
         public void WriteErrors()
         {
             foreach (var error in _logProvider.GetErrors())
-                _consoleWriter.Error(error);
+                _consoleWriter.Error($"[ERROR] {error}");
         }
     }
 
