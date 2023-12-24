@@ -1,18 +1,18 @@
 {
   "215": {
-    "install": false,
+    "install": true,
     "install_dir": "C:/Users/marc-/Documents/test_installsourcecontent/content/sdkbase2006"
   },
   "218": {
-    "install": false,
+    "install": true,
     "install_dir": "C:/Users/marc-/Documents/test_installsourcecontent/content/sdkbase2007"
   },
   "220": {
-    "install": false,
+    "install": true,
     "install_dir": "C:/Users/marc-/Documents/test_installsourcecontent/content/hl2"
   },
   "240": {
-    "install": false,
+    "install": true,
     "install_dir": "C:/Users/marc-/Documents/test_installsourcecontent/content/cstrike"
   },
   "280": {
@@ -20,7 +20,7 @@
     "install_dir": "C:/Users/marc-/Documents/test_installsourcecontent/content/hl1"
   },
   "300": {
-    "install": false,
+    "install": true,
     "install_dir": "C:/Users/marc-/Documents/test_installsourcecontent/content/dod"
   },
   "320": {
@@ -36,23 +36,23 @@
     "install_dir": "C:/Users/marc-/Documents/test_installsourcecontent/content/hl1mp"
   },
   "380": {
-    "install": false,
+    "install": true,
     "install_dir": "C:/Users/marc-/Documents/test_installsourcecontent/content/episodic"
   },
   "400": {
-    "install": false,
+    "install": true,
     "install_dir": "C:/Users/marc-/Documents/test_installsourcecontent/content/portal"
   },
   "420": {
-    "install": false,
+    "install": true,
     "install_dir": "C:/Users/marc-/Documents/test_installsourcecontent/content/ep2"
   },
   "243730": {
-    "install": false,
+    "install": true,
     "install_dir": "C:/Users/marc-/Documents/test_installsourcecontent/content/sdkbase2013sp"
   },
   "243750": {
-    "install": false,
+    "install": true,
     "install_dir": "C:/Users/marc-/Documents/test_installsourcecontent/content/sdkbase2013mp"
   }
 }
