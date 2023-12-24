@@ -370,14 +370,33 @@ namespace test_installsourcecontent
                 StatsResults.NumStepsFailed += numStepsFailed;
                 StatsResults.NumStepsCancelled += numStepsCancelled;
 
-                PipelineStepStatus status = PipelineStepStatus.Complete; // Assume that it will be fully completed.
+                PipelineStepStatus status = PipelineStepStatus.Complete;
 
-                if (numStepsPartiallyCompleted > 0)
-                    status = PipelineStepStatus.PartiallyComplete; // At least one step was not fully completed. Mark as partially complete.
-                else if (numStepsCancelled > 0)
-                    status = PipelineStepStatus.PartiallyComplete; // At least one step got cancelled. Mark as partially complete.
-                else if (numStepsFailed > 0)
-                    status = PipelineStepStatus.Failed; // One step failed. Mark as failed.
+                if (numStepsCompleted < stage.StepsDatas.Length)
+                {
+                    // Here, at least one step was either partially completed, failed or cancelled.
+
+                    if (numStepsPartiallyCompleted > 0)
+                    {
+                        // At least one step was not fully completed. Mark as partially complete.
+                        status = PipelineStepStatus.PartiallyComplete;
+                    }
+                    else
+                    {
+                        // Here, no partially completed steps. Only either failed or cancelled steps.
+
+                        if (numStepsFailed > 0)
+                        {
+                            // At least one step failed to complete. Mark as failed.
+                            status = PipelineStepStatus.Failed;
+                        } 
+                        else
+                        {
+                            // All steps were cancelled. Mark as cancelled.
+                            status = PipelineStepStatus.Cancelled;
+                        }
+                    }
+                }
 
                 switch (status)
                 {
