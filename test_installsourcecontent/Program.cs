@@ -379,9 +379,6 @@ namespace test_installsourcecontent
 
                 consoleLogReportWriter.WriteWarnings();
                 consoleLogReportWriter.WriteErrors();
-                
-                int o = 2;
-                o++;
             }
             catch (Exception e)
             {
