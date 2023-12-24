@@ -58,7 +58,6 @@ namespace test_installsourcecontent
         IPipelineStepStatsResults StatsResults { get; set; }
 
         void SetupContext(ContextT context);
-        void OnBeginStage(ContextT context);
         IPipelineStep<ContextT> GetStepForStepData(IPipelineStepData stepData);
         ReadOnlyPipelineStageData GetReadOnlyStageData();
         ReadOnlyPipelineStepData GetReadOnlyStepData(IPipelineStepData stepData);
@@ -184,10 +183,6 @@ namespace test_installsourcecontent
         public IReadOnlyPipelineDataFactory ReadOnlyPipelineStageDataFactory = new ReadOnlyPipelineDataFactory();
 
         public virtual void SetupContext(ContextT context)
-        {
-        }
-
-        public virtual void OnBeginStage(ContextT context)
         {
         }
 

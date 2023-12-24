@@ -80,11 +80,6 @@ namespace test_installsourcecontent
             context.AppID = AppID;
         }
 
-        public override void OnBeginStage(Context context)
-        {
-            Writer.Info($"Installing [{AppID}] {context.GetSteamAppName()}");
-        }
-
         public override IPipelineStep<Context> GetStepForStepData(IPipelineStepData stepData)
         {
             return _stepsDataToInstallStep[stepData.GetType()];
