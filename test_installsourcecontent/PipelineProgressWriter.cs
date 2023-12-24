@@ -40,7 +40,7 @@ namespace test_installsourcecontent
 
     public class StepDependenciesNotCompletedFormatter : IPipelineStageProgressStepFormatter
     {
-        public string Format(IPipelineProgressContext pipelineContext, ReadOnlyPipelineStepData stepData)
+        public virtual string Format(IPipelineProgressContext pipelineContext, ReadOnlyPipelineStepData stepData)
         {
             return $"Step {stepData.Name} will not be executed: The following dependencies were not completed: <{string.Join(',', stepData.DependsOn)}>";
         }
@@ -142,7 +142,7 @@ namespace test_installsourcecontent
 
     public class DefaultPipelineProgressStageFormatter : IPipelineProgressStageFormatter
     {
-        public string Format(IPipelineProgressContext pipelineContext, ReadOnlyPipelineStageData stageData)
+        public virtual string Format(IPipelineProgressContext pipelineContext, ReadOnlyPipelineStageData stageData)
         {
             return $"({pipelineContext.StepNumber}/{pipelineContext.NumStepsTotal}) {stageData.Description}";
         }
@@ -150,7 +150,7 @@ namespace test_installsourcecontent
 
     public class StageCompletedFormatter : DefaultPipelineProgressStageFormatter
     {
-        public string Format(IPipelineProgressContext pipelineContext, ReadOnlyPipelineStageData stageData)
+        public override string Format(IPipelineProgressContext pipelineContext, ReadOnlyPipelineStageData stageData)
         {
             return $"{base.Format(pipelineContext, stageData)} [COMPLETED]";
         }
@@ -158,7 +158,7 @@ namespace test_installsourcecontent
 
     public class StagePartiallyCompletedFormatter : DefaultPipelineProgressStageFormatter
     {
-        public string Format(IPipelineProgressContext pipelineContext, ReadOnlyPipelineStageData stageData)
+        public override string Format(IPipelineProgressContext pipelineContext, ReadOnlyPipelineStageData stageData)
         {
             return $"{base.Format(pipelineContext, stageData)} [PARTIALLY COMPLETED]";
         }
@@ -166,7 +166,7 @@ namespace test_installsourcecontent
 
     public class StageFailedFormatter : DefaultPipelineProgressStageFormatter
     {
-        public string Format(IPipelineProgressContext pipelineContext, ReadOnlyPipelineStageData stageData)
+        public override string Format(IPipelineProgressContext pipelineContext, ReadOnlyPipelineStageData stageData)
         {
             return $"{base.Format(pipelineContext, stageData)} [FAILED]";
         }
@@ -174,7 +174,7 @@ namespace test_installsourcecontent
 
     public class StageCancelledFormatter : DefaultPipelineProgressStageFormatter
     {
-        public string Format(IPipelineProgressContext pipelineContext, ReadOnlyPipelineStageData stageData)
+        public override string Format(IPipelineProgressContext pipelineContext, ReadOnlyPipelineStageData stageData)
         {
             return $"{base.Format(pipelineContext, stageData)} [CANCELLED]";
         }
