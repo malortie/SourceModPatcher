@@ -53,7 +53,7 @@ namespace test_installsourcecontent
 
         void SetupContext(ContextT context);
         void OnBeginStage(ContextT context);
-        PipelineStepStatus ExecuteStep(ContextT context, IPipelineStepData stepData, IWriter stepWriter);
+        IPipelineStep<ContextT> GetStepForStepData(IPipelineStepData stepData);
 
         PipelineStepStatus[] DoStage(ContextT context);
     }
@@ -175,7 +175,7 @@ namespace test_installsourcecontent
         {
         }
 
-        public abstract PipelineStepStatus ExecuteStep(ContextT context, IPipelineStepData stepData, IWriter stepWriter);
+        public abstract IPipelineStep<ContextT> GetStepForStepData(IPipelineStepData stepData);
 
         void ReplaceTokensRecursively(object obj)
         {
@@ -253,7 +253,7 @@ namespace test_installsourcecontent
                     stepWriterDecorator.StepName = stepData.Name;
 
                     // Execute step.
-                    stepStatus = ExecuteStep(context, stepData, stepWriterDecorator);
+                    stepStatus = GetStepForStepData(stepData).DoStep(context, stepData, stepWriterDecorator);
                 }
 
                 stepStatuses.Add(stepStatus);

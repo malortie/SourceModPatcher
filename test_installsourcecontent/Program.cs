@@ -88,9 +88,9 @@ namespace test_installsourcecontent
             Writer.Info($"Installing [{AppID}] {context.GetSteamAppName()}");
         }
 
-        public override PipelineStepStatus ExecuteStep(Context context, IPipelineStepData stepData, IWriter stepWriter)
+        public override IPipelineStep<Context> GetStepForStepData(IPipelineStepData stepData)
         {
-            return _stepsDataToInstallStep[stepData.GetType()].DoStep(context, stepData, stepWriter);
+            return _stepsDataToInstallStep[stepData.GetType()];
         }
     }
 
