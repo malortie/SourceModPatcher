@@ -323,7 +323,8 @@ namespace test_installsourcecontent
                     }
                 }
 
-                var progressWriter = new PipelineProgressWriter<Context>(writer);
+                var progressWriter = new PipelineProgressWriter(writer);
+                var stageProgressWriter = new PipelineStageProgressWriter(writer);
                 var consoleLogReportWriter = new ConsoleLogReportWriter(consoleWriter, logProvider);
                 var statsWriter = new PipelineStatsWriter(writer);
                 var tokenReplacer = new TokenReplacer();
@@ -349,7 +350,7 @@ namespace test_installsourcecontent
                     Writer = writer,
                     PauseAfterEachStep = options.PauseAfterEachStep,
                     PauseHandler = pauseHandler,
-                    ProgressWriter = progressWriter,
+                    ProgressWriter = stageProgressWriter,
                     StepsDatas = kv.Value.ToArray(),
                     TokenReplacer = tokenReplacer,
                     TokenReplacerVariablesProvider = tokenReplacerVariablesProvider
