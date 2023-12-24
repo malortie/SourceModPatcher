@@ -1,5 +1,4 @@
 using Gameloop.Vdf;
-using Microsoft.Win32;
 using System.IO.Abstractions;
 using System.Text.Json.Serialization;
 
@@ -39,8 +38,11 @@ namespace test_installsourcecontent
 
         public List<int> SupportedSourceGamesAppIDs = new();
 
-        public SteamAppsConfig(IFileSystem fileSystem, IWriter writer, string filePath, IConfigurationSerializer<JSONSteamAppsConfig> configSerializer) : base(fileSystem, writer, filePath, configSerializer)
+        ISteamPathFinder _steamPathFinder;
+
+        public SteamAppsConfig(IFileSystem fileSystem, IWriter writer, string filePath, IConfigurationSerializer<JSONSteamAppsConfig> configSerializer, ISteamPathFinder steamPathFinder) : base(fileSystem, writer, filePath, configSerializer)
         {
+            _steamPathFinder = steamPathFinder;
         }
 
         public bool UseConfigFile { get; set; }
@@ -86,24 +88,10 @@ namespace test_installsourcecontent
             // Set Name to value from appmanifest_id.acf
             // Set InstallDir to the found directory using appmanifest
 
-            string? steamPath = null;
-
-            // Read SteamApps from registry.
-
-            using (RegistryKey? steamKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Valve\Steam", false))
-            {
-                if (null == steamKey)
-                {
-                    throw new Exception("Failed to locate Steam directory.");
-                }
-
-                steamPath = steamKey.GetValue("SteamPath") as string;
-
-                if (null == steamPath)
-                {
-                    throw new Exception("Failed to locate Steam directory.");
-                }
-            }
+            // Find SteamPath.
+            string? steamPath = _steamPathFinder.GetSteamPath();
+            if (null == steamPath)
+                throw new Exception("Failed to locate Steam directory.");
 
             string steamappsPath = PathExtensions.JoinWithSeparator(FileSystem, steamPath, "steamapps");
             string libraryFoldersVDFPath = PathExtensions.JoinWithSeparator(FileSystem, steamappsPath, LIBRARYFOLDERS_FILE);

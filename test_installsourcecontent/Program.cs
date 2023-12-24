@@ -6,6 +6,7 @@ using Pastel;
 using System.Collections.ObjectModel;
 using System.Drawing;
 using System.IO.Abstractions;
+using System.Runtime.Versioning;
 
 namespace test_installsourcecontent
 {
@@ -195,6 +196,7 @@ namespace test_installsourcecontent
         }
     }
 
+    [SupportedOSPlatform("windows")]
     internal class Program
     {
         const string INSTALL_ENVVAR = "TEST_INSTALLSOURCECONTENT";
@@ -250,7 +252,7 @@ namespace test_installsourcecontent
 
                 Func<string, string> MakeFullPath = x => PathExtensions.JoinWithSeparator(fileSystem, Environment.CurrentDirectory, x);
 
-                var steamAppsConfig = new SteamAppsConfig(fileSystem, writer, MakeFullPath(STEAMAPPS_CONFIG_FILENAME), new JSONConfigurationSerializer<JSONSteamAppsConfig>());
+                var steamAppsConfig = new SteamAppsConfig(fileSystem, writer, MakeFullPath(STEAMAPPS_CONFIG_FILENAME), new JSONConfigurationSerializer<JSONSteamAppsConfig>(), new WindowsSteamPathFinder());
                 steamAppsConfig.UseConfigFile = options.UseConfigFile;
                 steamAppsConfig.LoadConfig();
 
