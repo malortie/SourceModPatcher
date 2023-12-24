@@ -1,58 +1,58 @@
 {
   "215": {
-    "install": true,
+    "install": false,
     "install_dir": "C:/Users/marc-/Documents/test_installsourcecontent/content/sdkbase2006"
   },
   "218": {
-    "install": true,
+    "install": false,
     "install_dir": "C:/Users/marc-/Documents/test_installsourcecontent/content/sdkbase2007"
   },
   "220": {
-    "install": true,
+    "install": false,
     "install_dir": "C:/Users/marc-/Documents/test_installsourcecontent/content/hl2"
   },
   "240": {
-    "install": true,
+    "install": false,
     "install_dir": "C:/Users/marc-/Documents/test_installsourcecontent/content/cstrike"
   },
   "280": {
-    "install": true,
+    "install": false,
     "install_dir": "C:/Users/marc-/Documents/test_installsourcecontent/content/hl1"
   },
   "300": {
-    "install": true,
+    "install": false,
     "install_dir": "C:/Users/marc-/Documents/test_installsourcecontent/content/dod"
   },
   "320": {
-    "install": true,
+    "install": false,
     "install_dir": "C:/Users/marc-/Documents/test_installsourcecontent/content/hl2mp"
   },
   "340": {
-    "install": true,
+    "install": false,
     "install_dir": "C:/Users/marc-/Documents/test_installsourcecontent/content/lostcoast"
   },
   "360": {
-    "install": true,
+    "install": false,
     "install_dir": "C:/Users/marc-/Documents/test_installsourcecontent/content/hl1mp"
   },
   "380": {
-    "install": true,
+    "install": false,
     "install_dir": "C:/Users/marc-/Documents/test_installsourcecontent/content/episodic"
   },
   "400": {
-    "install": true,
+    "install": false,
     "install_dir": "C:/Users/marc-/Documents/test_installsourcecontent/content/portal"
   },
   "420": {
-    "install": true,
+    "install": false,
     "install_dir": "C:/Users/marc-/Documents/test_installsourcecontent/content/ep2"
   },
   "243730": {
-    "install": true,
+    "install": false,
     "install_dir": "C:/Users/marc-/Documents/test_installsourcecontent/content/sdkbase2013sp"
   },
   "243750": {
-    "install": true,
+    "install": false,
     "install_dir": "C:/Users/marc-/Documents/test_installsourcecontent/content/sdkbase2013mp"
   }
 }
