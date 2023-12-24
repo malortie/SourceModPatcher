@@ -1,5 +1,3 @@
-using System.Text.RegularExpressions;
-
 namespace test_installsourcecontent
 {
     public class SaveVariableInstallStepData : IPipelineStepData

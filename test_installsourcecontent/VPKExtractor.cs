@@ -1,7 +1,5 @@
 using SteamDatabase.ValvePak;
-using System.Collections.Generic;
 using System.IO.Abstractions;
-using System.Text.RegularExpressions;
 
 namespace test_installsourcecontent
 {

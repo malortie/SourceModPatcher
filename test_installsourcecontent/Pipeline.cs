@@ -1,15 +1,6 @@
-using AutoMapper;
-using AutoMapper.Internal.Mappers;
-using System.Collections.Immutable;
-using System.IO.Abstractions;
 using System.Reflection;
-using System.Text.RegularExpressions;
 using System.Collections.ObjectModel;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using System.Collections;
-using System;
-using System.Security.Cryptography.X509Certificates;
 
 namespace test_installsourcecontent
 {

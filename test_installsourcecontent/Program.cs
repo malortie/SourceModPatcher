@@ -1,15 +1,11 @@
 ﻿using AutoMapper;
 using CommandLine;
-using Gameloop.Vdf.Linq;
 using NLog;
 using NLog.Targets;
 using Pastel;
 using System.Collections.ObjectModel;
 using System.Drawing;
-using System.IO;
 using System.IO.Abstractions;
-using System.Reflection;
-using System.Reflection.Metadata.Ecma335;
 
 namespace test_installsourcecontent
 {
