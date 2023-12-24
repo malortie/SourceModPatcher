@@ -3,16 +3,6 @@ using test_installsourcecontent;
 
 namespace test_installsourcecontent_tests
 {
-    public class NullWriter : IWriter
-    {
-        public void Success(string message) { }
-        public void Info(string message) { }
-        public void Warning(string message) { }
-        public void Error(string message) { }
-        public void Failure(string message) { }
-        public void Cancellation(string message) { }
-    }
-
     public class AllowAllVPKFiles : IVPKFileFilter
     {
         public bool PassesFilter(string vpkFile) => true;

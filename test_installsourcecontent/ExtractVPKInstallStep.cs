@@ -6,23 +6,23 @@ namespace test_installsourcecontent
     public class ExtractVPKInstallStepDataVPK
     {
         [PipelineStepReplaceToken]
-        public string VPKFile { get; set; } = "";
-        public List<string> FilesToExclude { get; set; } = new();
-        public List<string> FilesToExtract { get; set; } = new();
+        public string VPKFile { get; set; } = string.Empty;
+        public List<string> FilesToExclude { get; set; } = [];
+        public List<string> FilesToExtract { get; set; } = [];
     }
 
     public class ExtractVPKInstallStepData : IPipelineStepData
     {
-        public string Name { get; set; } = "";
+        public string Name { get; set; } = string.Empty;
         [PipelineStepReplaceToken]
-        public string Description { get; set; } = "";
-        public List<string> DependsOn { get; set; } = new();
+        public string Description { get; set; } = string.Empty;
+        public List<string> DependsOn { get; set; } = [];
         [PipelineStepReplaceToken]
-        public List<ExtractVPKInstallStepDataVPK> Vpks { get; set; } = new();
-        public List<string> FilesToExclude { get; set; } = new();
-        public List<string> FilesToExtract { get; set; } = new();
+        public List<ExtractVPKInstallStepDataVPK> Vpks { get; set; } = [];
+        public List<string> FilesToExclude { get; set; } = [];
+        public List<string> FilesToExtract { get; set; } = [];
         [PipelineStepReplaceToken]
-        public string OutDir { get; set; } = "";
+        public string OutDir { get; set; } = string.Empty;
     }
 
     public class VPKFileFilter : IVPKFileFilter
@@ -81,7 +81,7 @@ namespace test_installsourcecontent
             else
             {
                 // Check for empty VPK strings.
-                List<int> emptyVPKsIndices = new();
+                List<int> emptyVPKsIndices = [];
                 for (int i = 0; i < Vpks.Count; i++)
                 {
                     if (Vpks[i].VPKFile == string.Empty)

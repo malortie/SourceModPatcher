@@ -34,17 +34,17 @@ namespace test_installsourcecontent
 
     public class ReadOnlyPipelineStepData
     {
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public ReadOnlyCollection<string> DependsOn { get; set; }
+        public string Name { get; set; } = string.Empty;
+        public string Description { get; set; } = string.Empty;
+        public ReadOnlyCollection<string> DependsOn { get; set; } = new ReadOnlyCollection<string>([]);
     }
 
     public class ReadOnlyPipelineStageData
     {
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public ReadOnlyPipelineStepData[] StepsDatas { get; set; }
-        public IPipelineStepStatsResults StatsResults { get; set; }
+        public string Name { get; set; } = string.Empty;
+        public string Description { get; set; } = string.Empty;
+        public ReadOnlyPipelineStepData[] StepsDatas { get; set; } = [];
+        public IPipelineStepStatsResults StatsResults { get; set; } = new PipelineStepStatsResults();
     }
 
     public interface IPipelineStage<ContextT>
@@ -120,8 +120,8 @@ namespace test_installsourcecontent
     {
         readonly IWriter _writer;
 
-        public ReadOnlyPipelineStageData StageData { get; set; }
-        public ReadOnlyPipelineStepData StepData { get; set; }
+        public ReadOnlyPipelineStageData StageData { get; set; } = new();
+        public ReadOnlyPipelineStepData StepData { get; set; } = new();
 
         public IStageStepWriterFormatter SuccessFormatter { get; set; } = new IdempotentStageStepWriterFormatter();
         public IStageStepWriterFormatter InfoFormatter { get; set; } = new IdempotentStageStepWriterFormatter();
@@ -171,13 +171,13 @@ namespace test_installsourcecontent
         public string Name { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
 
-        public bool PauseAfterEachStep { get; set; }
-        public IPipelineStepData[] StepsDatas { get; set; }
-        public IPipelineStageProgressWriter ProgressWriter { get; set; }
-        public IWriter Writer { get; set; }
-        public ITokenReplacer TokenReplacer { get; set; }
-        public ITokenReplacerVariablesProvider<ContextT> TokenReplacerVariablesProvider { get; set; }
-        public IPauseHandler PauseHandler { get; set; }
+        public bool PauseAfterEachStep { get; set; } = false;
+        public IPipelineStepData[] StepsDatas { get; set; } = [];
+        public IPipelineStageProgressWriter? ProgressWriter { get; set; }
+        public IWriter Writer { get; set; } = new NullWriter();
+        public ITokenReplacer? TokenReplacer { get; set; }
+        public ITokenReplacerVariablesProvider<ContextT>? TokenReplacerVariablesProvider { get; set; }
+        public IPauseHandler? PauseHandler { get; set; }
         public IPipelineStepStatsResults StatsResults { get; set; } = new PipelineStepStatsResults();
         public IPipelineProgressContextFactory ProgressContextFactory { get; set; } = new PipelineProgressContextFactory();
         public IReadOnlyPipelineDataFactory ReadOnlyPipelineStageDataFactory = new ReadOnlyPipelineDataFactory();
@@ -206,9 +206,9 @@ namespace test_installsourcecontent
                 var type = Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType;
                 if (type == typeof(string))
                 {
-                    string propertyValue = prop.GetValue(obj) as string;
+                    string? propertyValue = prop.GetValue(obj) as string;
                     if (null != propertyValue)
-                        prop.SetValue(obj, TokenReplacer.Replace(propertyValue));
+                        prop.SetValue(obj, TokenReplacer?.Replace(propertyValue) ?? propertyValue);
                 }
                 else
                 {
@@ -235,7 +235,7 @@ namespace test_installsourcecontent
             var progressContext = ProgressContextFactory.CreateContext();
             var stageStepWriterDecorator = new StageStepWriterDecorator(Writer);
 
-            HashSet<string> stepsComplete = new();
+            HashSet<string> stepsComplete = [];
             var stepStatuses = new List<PipelineStepStatus>();
 
             StatsResults.NumStepsTotal = StepsDatas.Length;
@@ -248,10 +248,12 @@ namespace test_installsourcecontent
             {
                 var stepData = StepsDatas[stepIndex];
 
-                // Perform token replacement in step string properties.
-                TokenReplacer.Variables = new ReadOnlyDictionary<string, string>(TokenReplacerVariablesProvider.GetVariables(context));
-
-                ReplaceTokensRecursively(stepData);
+                if (TokenReplacer != null && TokenReplacerVariablesProvider != null)
+                {
+                    // Perform token replacement in step string properties.
+                    TokenReplacer.Variables = new ReadOnlyDictionary<string, string>(TokenReplacerVariablesProvider.GetVariables(context));
+                    ReplaceTokensRecursively(stepData);
+                }
 
                 progressContext.StepNumber = stepIndex + 1;
                 progressContext.NumStepsTotal = StepsDatas.Length;
@@ -261,12 +263,12 @@ namespace test_installsourcecontent
                 var uncompletedDependencies = stepData.DependsOn.Except(stepsComplete).ToArray();
                 if (uncompletedDependencies.Length > 0)
                 {
-                    ProgressWriter.WriteStepDependenciesNotCompleted(progressContext, GetReadOnlyStepData(stepData));
+                    ProgressWriter?.WriteStepDependenciesNotCompleted(progressContext, GetReadOnlyStepData(stepData));
                     stepStatus = PipelineStepStatus.Cancelled;
                 }
                 else
                 {
-                    ProgressWriter.WriteStepExecute(progressContext, GetReadOnlyStepData(stepData));
+                    ProgressWriter?.WriteStepExecute(progressContext, GetReadOnlyStepData(stepData));
 
                     // Setup writer decorator.
                     stageStepWriterDecorator.StageData = GetReadOnlyStageData();
@@ -281,27 +283,27 @@ namespace test_installsourcecontent
                 switch (stepStatus)
                 {
                     case PipelineStepStatus.Complete:
-                        ProgressWriter.WriteStepCompleted(progressContext, GetReadOnlyStepData(stepData));
+                        ProgressWriter?.WriteStepCompleted(progressContext, GetReadOnlyStepData(stepData));
                         ++StatsResults.NumStepsCompleted;
                         stepsComplete.Add(stepData.Name);
                         break;
                     case PipelineStepStatus.PartiallyComplete:
-                        ProgressWriter.WriteStepPartiallyCompleted(progressContext, GetReadOnlyStepData(stepData));
+                        ProgressWriter?.WriteStepPartiallyCompleted(progressContext, GetReadOnlyStepData(stepData));
                         ++StatsResults.NumStepsPartiallyCompleted;
                         break;
                     case PipelineStepStatus.Failed:
-                        ProgressWriter.WriteStepFailed(progressContext, GetReadOnlyStepData(stepData));
+                        ProgressWriter?.WriteStepFailed(progressContext, GetReadOnlyStepData(stepData));
                         ++StatsResults.NumStepsFailed;
                         break;
                     case PipelineStepStatus.Cancelled:
-                        ProgressWriter.WriteStepCancelled(progressContext, GetReadOnlyStepData(stepData));
+                        ProgressWriter?.WriteStepCancelled(progressContext, GetReadOnlyStepData(stepData));
                         ++StatsResults.NumStepsCancelled;
                         break;
                 }
             }
 
             if (PauseAfterEachStep)
-                PauseHandler.Pause();
+                PauseHandler?.Pause();
 
             return stepStatuses.ToArray();
         }
@@ -314,18 +316,16 @@ namespace test_installsourcecontent
 
     public class Pipeline<ContextT> : IPipeline<ContextT>
     {
-        public IPipelineStage<ContextT>[] Stages { get; set; }
+        public IPipelineStage<ContextT>[] Stages { get; set; } = [];
 
-        public IPipelineProgressWriter ProgressWriter { get; set; }
-        public IWriter Writer { get; set; }
+        public IPipelineProgressWriter? ProgressWriter { get; set; }
 
         public IPipelineStatsResults StatsResults { get; set; } = new PipelineStatsResults();
         public IPipelineProgressContextFactory ProgressContextFactory { get; set; } = new PipelineProgressContextFactory();
 
-        public Pipeline(IPipelineStage<ContextT>[] stages, IWriter writer, IPipelineProgressWriter progressWriter)
+        public Pipeline(IPipelineStage<ContextT>[] stages, IPipelineProgressWriter? progressWriter = null)
         {
             Stages = stages;
-            Writer = writer;
             ProgressWriter = progressWriter;
         }
 
@@ -352,7 +352,7 @@ namespace test_installsourcecontent
                 progressContext.StepNumber = stageIndex + 1;
 
                 // Execute stage.
-                ProgressWriter.WriteStageExecute(progressContext, stage.GetReadOnlyStageData());
+                ProgressWriter?.WriteStageExecute(progressContext, stage.GetReadOnlyStageData());
                 PipelineStepStatus[] stepsStatuses = stage.DoStage(context);
 
                 int numStepsCompleted = stepsStatuses.Count(s => s == PipelineStepStatus.Complete);
@@ -396,19 +396,19 @@ namespace test_installsourcecontent
                 switch (status)
                 {
                     case PipelineStepStatus.Complete:
-                        ProgressWriter.WriteStageCompleted(progressContext, stage.GetReadOnlyStageData());
+                        ProgressWriter?.WriteStageCompleted(progressContext, stage.GetReadOnlyStageData());
                         ++StatsResults.NumStagesCompleted;
                         break;
                     case PipelineStepStatus.PartiallyComplete:
-                        ProgressWriter.WriteStagePartiallyCompleted(progressContext, stage.GetReadOnlyStageData());
+                        ProgressWriter?.WriteStagePartiallyCompleted(progressContext, stage.GetReadOnlyStageData());
                         ++StatsResults.NumStagesPartiallyCompleted;
                         break;
                     case PipelineStepStatus.Failed:
-                        ProgressWriter.WriteStageFailed(progressContext, stage.GetReadOnlyStageData());
+                        ProgressWriter?.WriteStageFailed(progressContext, stage.GetReadOnlyStageData());
                         ++StatsResults.NumStagesFailed;
                         break;
                     case PipelineStepStatus.Cancelled:
-                        ProgressWriter.WriteStageCancelled(progressContext, stage.GetReadOnlyStageData());
+                        ProgressWriter?.WriteStageCancelled(progressContext, stage.GetReadOnlyStageData());
                         ++StatsResults.NumStagesCancelled;
                         break;
                 }

@@ -2,14 +2,14 @@ namespace test_installsourcecontent
 {
     public class SaveVariableInstallStepData : IPipelineStepData
     {
-        public string Name { get; set; } = "";
+        public string Name { get; set; } = string.Empty;
         [PipelineStepReplaceToken]
-        public string Description { get; set; } = "";
-        public List<string> DependsOn { get; set; } = new();
+        public string Description { get; set; } = string.Empty;
+        public List<string> DependsOn { get; set; } = [];
         [PipelineStepReplaceToken]
-        public string VariableName { get; set; } = "";
+        public string VariableName { get; set; } = string.Empty;
         [PipelineStepReplaceToken]
-        public string VariableValue { get; set; } = "";
+        public string VariableValue { get; set; } = string.Empty;
 
     }
 

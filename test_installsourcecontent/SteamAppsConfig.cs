@@ -7,11 +7,11 @@ namespace test_installsourcecontent
     public class JSONSteamAppsConfigEntry
     {
         [JsonPropertyName("name")]
-        public string Name { get; set; } = "";
+        public string Name { get; set; } = string.Empty;
         [JsonPropertyName("appmanifest_file")]
-        public string AppManifestFile { get; set; } = "";
+        public string AppManifestFile { get; set; } = string.Empty;
         [JsonPropertyName("install_dir")]
-        public string InstallDir { get; set; } = "";
+        public string InstallDir { get; set; } = string.Empty;
     }
 
     public class JSONSteamAppsConfig : SortedDictionary<int, JSONSteamAppsConfigEntry>
@@ -31,12 +31,12 @@ namespace test_installsourcecontent
         {
             public int AppID { get; set; } = 0;
             public int SteamLibraryFolderID { get; set; } = 0;
-            public string FilePath { get; set; } = "";
+            public string FilePath { get; set; } = string.Empty;
         }
 
         const string LIBRARYFOLDERS_FILE = "libraryfolders.vdf";
 
-        public List<int> SupportedSourceGamesAppIDs = new();
+        public List<int> SupportedSourceGamesAppIDs = [];
 
         ISteamPathFinder _steamPathFinder;
 

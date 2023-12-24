@@ -57,4 +57,14 @@ namespace test_installsourcecontent
             _logger.Cancellation(message);
         }
     }
+
+    public class NullWriter : IWriter
+    {
+        public void Success(string message) { }
+        public void Info(string message) { }
+        public void Warning(string message) { }
+        public void Error(string message) { }
+        public void Failure(string message) { }
+        public void Cancellation(string message) { }
+    }
 }

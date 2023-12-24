@@ -21,7 +21,7 @@ namespace test_installsourcecontent
             // Convert each deserialized step to IPipelineStepData objects.
             foreach (var (appID, steps) in config)
             {
-                convertedSteps[appID] = new();
+                convertedSteps[appID] = [];
                 foreach (var step in steps)
                 {
                     if (step != null)
@@ -355,7 +355,7 @@ namespace test_installsourcecontent
                     TokenReplacerVariablesProvider = tokenReplacerVariablesProvider
                 }).ToArray();
 
-                var pipeline = new Pipeline<Context>(stages, writer, progressWriter);
+                var pipeline = new Pipeline<Context>(stages, progressWriter);
                 pipeline.Execute(context);
 
                 statsWriter.WriteStats(pipeline.StatsResults);

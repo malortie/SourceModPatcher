@@ -8,7 +8,7 @@ namespace test_installsourcecontent
         [JsonPropertyName("install")]
         public bool Install { get; set; } = true;
         [JsonPropertyName("install_dir")]
-        public string InstallDir { get; set; } = "";
+        public string InstallDir { get; set; } = string.Empty;
     }
 
     public sealed class JSONInstallSettings : SortedDictionary<int, JSONInstallSettingsEntry>
