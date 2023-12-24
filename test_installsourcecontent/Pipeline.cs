@@ -60,94 +60,72 @@ namespace test_installsourcecontent
 
     public interface IStepWriterFormatter
     {
-        string FormatSuccess(string message, string stageName, string stepName);
-        string FormatInfo(string message, string stageName, string stepName);
-        string FormatError(string message, string stageName, string stepName);
-        string FormatFailure(string message, string stageName, string stepName);
-        string FormatCancellation(string message, string stageName, string stepName);
-        string FormatWarning(string message, string stageName, string stepName);
+        string Format(string message, string stageName, string stepName);
     }
 
-    public class StepWriterFormatter : IStepWriterFormatter
+    public class DefaultStepWriterFormatter : IStepWriterFormatter
     {
-        string FormatBase(string message, string stageName, string stepName)
+        public string Format(string message, string stageName, string stepName)
         {
             return $"{message} [{stageName}][{stepName}]";
         }
+    }
 
-        public string FormatCancellation(string message, string stageName, string stepName)
-        {
-            return FormatBase(message, stageName, stepName);
-        }
-
-        public string FormatError(string message, string stageName, string stepName)
-        {
-            return FormatBase(message, stageName, stepName);
-        }
-
-        public string FormatFailure(string message, string stageName, string stepName)
-        {
-            return FormatBase(message, stageName, stepName);
-        }
-
-        public string FormatInfo(string message, string stageName, string stepName)
+    public class IdempotentWriterFormatter : IStepWriterFormatter
+    {
+        public string Format(string message, string stageName, string stepName)
         {
             return message;
-        }
-
-        public string FormatSuccess(string message, string stageName, string stepName)
-        {
-            return message;
-        }
-
-        public string FormatWarning(string message, string stageName, string stepName)
-        {
-            return FormatBase(message, stageName, stepName);
         }
     }
 
     public class StepWriterDecorator : IWriter
     {
         readonly IWriter _writer;
-        readonly IStepWriterFormatter _stepWriterFormatter;
 
         public string StageName { get; set; } = string.Empty;
         public string StepName { get; set; } = string.Empty;
 
-        public StepWriterDecorator(IWriter writer, IStepWriterFormatter stepWriterFormatter)
+        public IStepWriterFormatter SuccessFormatter { get; set; } = new IdempotentWriterFormatter();
+        public IStepWriterFormatter InfoFormatter { get; set; } = new IdempotentWriterFormatter();
+        public IStepWriterFormatter WarningFormatter { get; set; } = new DefaultStepWriterFormatter();
+        public IStepWriterFormatter ErrorFormatter { get; set; } = new DefaultStepWriterFormatter();
+        public IStepWriterFormatter FailureFormatter { get; set; } = new DefaultStepWriterFormatter();
+        public IStepWriterFormatter CancellationFormatter { get; set; } = new DefaultStepWriterFormatter();
+
+        public StepWriterDecorator(IWriter writer)
         {
             _writer = writer;
-            _stepWriterFormatter = stepWriterFormatter;
         }
 
         public void Success(string message)
         {
-            _writer.Success(_stepWriterFormatter.FormatSuccess(message, StageName, StepName));
+            _writer.Success(SuccessFormatter.Format(message, StageName, StepName));
         }
 
         public void Info(string message)
         {
-            _writer.Info(_stepWriterFormatter.FormatInfo(message, StageName, StepName));
+            _writer.Info(InfoFormatter.Format(message, StageName, StepName));
         }
 
         public void Warning(string message)
         {
-            _writer.Warning(_stepWriterFormatter.FormatWarning(message, StageName, StepName));
+            _writer.Warning(WarningFormatter.Format(message, StageName, StepName));
         }
 
         public void Error(string message)
         {
-            _writer.Error(_stepWriterFormatter.FormatError(message, StageName, StepName));
+            _writer.Error(ErrorFormatter.Format(message, StageName, StepName));
         }
 
         public void Failure(string message)
         {
-            _writer.Failure(_stepWriterFormatter.FormatFailure(message, StageName, StepName));
+            _writer.Failure(FailureFormatter.Format(message, StageName, StepName));
         }
 
         public void Cancellation(string message)
         {
-            _writer.Cancellation(_stepWriterFormatter.FormatCancellation(message, StageName, StepName));
+            _writer.Cancellation(CancellationFormatter.Format(message, StageName, StepName));
         }
     }
 
@@ -160,7 +138,6 @@ namespace test_installsourcecontent
         public IPipelineStepData[] StepsDatas { get; set; }
         public IPipelineProgressWriter<ContextT> ProgressWriter { get; set; }
         public IWriter Writer { get; set; }
-        public IStepWriterFormatter StepWriterFormatter { get; set; } = new StepWriterFormatter();
         public ITokenReplacer TokenReplacer { get; set; }
         public ITokenReplacerVariablesProvider<ContextT> TokenReplacerVariablesProvider { get; set; }
         public IPauseHandler PauseHandler { get; set; }
@@ -213,7 +190,7 @@ namespace test_installsourcecontent
             SetupContext(context);
 
             var progressContext = ProgressContextFactory.CreateContext();
-            var stepWriterDecorator = new StepWriterDecorator(Writer, StepWriterFormatter);
+            var stepWriterDecorator = new StepWriterDecorator(Writer);
 
             HashSet<string> stepsComplete = new();
             var stepStatuses = new List<PipelineStepStatus>();
