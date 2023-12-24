@@ -151,6 +151,7 @@ namespace test_installsourcecontent
             } while (index >= 0);
             ////////////////////////////
 
+            int numExtractedVPKs = 0;
             PipelineStepStatus status = PipelineStepStatus.Complete;
             foreach (var vpk in vpks)
             {
@@ -181,8 +182,23 @@ namespace test_installsourcecontent
                 }
 
                 writer.Info($"Extracting \"{vpkPath}\" to \"{OutDir}\"");
-                _extractor.Extract(context.FileSystem, writer, vpkPath, OutDir, fileFilter);
+                switch (_extractor.Extract(context.FileSystem, writer, vpkPath, OutDir, fileFilter))
+                {
+                    case VPKExtractionResult.Complete:
+                        // All files were correctly extracted.
+                        ++numExtractedVPKs;
+                        break;
+                    case VPKExtractionResult.CompleteWithErrors: // Not all files were extracted.
+                    case VPKExtractionResult.Failed: // An error occured and extraction was aborted.
+                        // Other VPKs might work, so mark it as partially completed.
+                        status = PipelineStepStatus.PartiallyComplete;
+                        break;
+                }
             }
+
+            // If no VPK has been extracted, mark it as failed.
+            if (numExtractedVPKs == 0)
+                status = PipelineStepStatus.Failed;
 
             return status;
         }
