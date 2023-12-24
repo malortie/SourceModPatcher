@@ -6,7 +6,7 @@ namespace test_installsourcecontent
     public static class PathExtensions
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static string JoinWithSeparator(IFileSystem fileSystem, string path1, string path2) 
+        public static string JoinWithSeparator(IFileSystem fileSystem, string path1, string path2)
         {
             return fileSystem.Path.Join(path1, path2).Replace(fileSystem.Path.DirectorySeparatorChar, fileSystem.Path.AltDirectorySeparatorChar);
         }

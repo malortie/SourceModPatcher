@@ -15,7 +15,7 @@ namespace test_installsourcecontent
             return JsonSerializer.Serialize(value, _serializerOptions);
         }
 
-        public ConfigT? Deserialize(string value) 
+        public ConfigT? Deserialize(string value)
         {
             return JsonSerializer.Deserialize<ConfigT>(value, _deserializerOptions);
         }

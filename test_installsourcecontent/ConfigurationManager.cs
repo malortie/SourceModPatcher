@@ -30,7 +30,7 @@ namespace test_installsourcecontent
         protected IFileSystem FileSystem { get { return _fileSystem; } }
         protected IWriter Writer { get { return _writer; } }
 
-        public void LoadConfig() 
+        public void LoadConfig()
         {
             Writer.Info($"Reading {_fileSystem.Path.GetFileName(_filePath)}");
             var deserializedData = _configSerializer.Deserialize(_fileSystem.File.ReadAllText(_filePath));
@@ -46,7 +46,7 @@ namespace test_installsourcecontent
             _fileSystem.File.WriteAllText(_filePath, serializedConfig);
         }
 
-        protected virtual void PostLoadConfig() 
+        protected virtual void PostLoadConfig()
         {
         }
     }

@@ -38,7 +38,8 @@ namespace test_installsourcecontent
 
         public InstallPipelineStepsMapper()
         {
-            var mapperConfig = new MapperConfiguration(cfg => {
+            var mapperConfig = new MapperConfiguration(cfg =>
+            {
                 cfg.DisableConstructorMapping();
                 cfg.ShouldMapField = fi => false;
                 cfg.ShouldMapMethod = m => false;
@@ -138,11 +139,11 @@ namespace test_installsourcecontent
     public class Logger : ILogger
     {
         readonly NLog.Logger _logger;
-        public Logger(NLog.Logger logger) 
-        { 
-            _logger = logger; 
+        public Logger(NLog.Logger logger)
+        {
+            _logger = logger;
         }
-        
+
         public void Cancellation(string message)
         {
             _logger.Error(message);
@@ -202,8 +203,8 @@ namespace test_installsourcecontent
     internal class Program
     {
         const string INSTALL_ENVVAR = "TEST_INSTALLSOURCECONTENT";
-        const string STEAMAPPS_CONFIG_FILENAME ="steamapps.json";
-        const string INSTALL_SETTINGS_FILENAME ="install.settings.json";
+        const string STEAMAPPS_CONFIG_FILENAME = "steamapps.json";
+        const string INSTALL_SETTINGS_FILENAME = "install.settings.json";
 
         public class Options
         {
@@ -243,7 +244,7 @@ namespace test_installsourcecontent
 
             try
             {
-                if (null == Environment.GetEnvironmentVariable(INSTALL_ENVVAR, EnvironmentVariableTarget.User)) 
+                if (null == Environment.GetEnvironmentVariable(INSTALL_ENVVAR, EnvironmentVariableTarget.User))
                 {
                     // Create a user environment variable to allow locating this application's directory.
                     writer.Info($"Creating user environment variable {INSTALL_ENVVAR}=\"{Environment.CurrentDirectory}\"");
@@ -343,7 +344,8 @@ namespace test_installsourcecontent
 
                 int stageIndex = 0;
                 // Create the stages.
-                IPipelineStage<Context>[] stages = appsStepsDatas.Select(kv => new InstallContentStage() { 
+                IPipelineStage<Context>[] stages = appsStepsDatas.Select(kv => new InstallContentStage()
+                {
                     Name = $"stage_{stageIndex++}",
                     Description = configuration.GetSteamAppName(kv.Key),
                     AppID = kv.Key,
@@ -362,7 +364,7 @@ namespace test_installsourcecontent
                 statsWriter.WriteStats(pipeline.StatsResults);
 
                 writer.Info("Installation finished.");
-                
+
                 if (pipeline.StatsResults.NumStagesPartiallyCompleted != 0 ||
                     pipeline.StatsResults.NumStagesFailed != 0 ||
                     pipeline.StatsResults.NumStagesCancelled != 0)

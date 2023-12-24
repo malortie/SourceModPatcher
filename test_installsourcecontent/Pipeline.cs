@@ -1,6 +1,6 @@
-using System.Reflection;
-using System.Collections.ObjectModel;
 using System.Collections;
+using System.Collections.ObjectModel;
+using System.Reflection;
 
 namespace test_installsourcecontent
 {
@@ -194,7 +194,7 @@ namespace test_installsourcecontent
         public abstract IPipelineStep<ContextT> GetStepForStepData(IPipelineStepData stepData);
 
         public ReadOnlyPipelineStageData GetReadOnlyStageData()
-        { 
+        {
             return ReadOnlyPipelineStageDataFactory.CreateStageData(this);
         }
         public ReadOnlyPipelineStepData GetReadOnlyStepData(IPipelineStepData stepData)
@@ -226,7 +226,7 @@ namespace test_installsourcecontent
                             foreach (var item in enumerable)
                                 ReplaceTokensRecursively(item);
                         }
-                        else 
+                        else
                             ReplaceTokensRecursively(propertyValue);
                     }
                 }
@@ -389,7 +389,7 @@ namespace test_installsourcecontent
                         {
                             // At least one step failed to complete. Mark as failed.
                             status = PipelineStepStatus.Failed;
-                        } 
+                        }
                         else
                         {
                             // All steps were cancelled. Mark as cancelled.

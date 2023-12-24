@@ -1,4 +1,3 @@
-using CommandLine;
 using SteamDatabase.ValvePak;
 using System.IO.Abstractions;
 
@@ -23,7 +22,7 @@ namespace test_installsourcecontent
 
     public class VPKExtractor : IVPKExtractor
     {
-        public VPKExtractionResult Extract(IFileSystem fileSystem, IWriter writer, string vpkPath, string outputDir, IVPKFileFilter fileFilter) 
+        public VPKExtractionResult Extract(IFileSystem fileSystem, IWriter writer, string vpkPath, string outputDir, IVPKFileFilter fileFilter)
         {
             VPKExtractionResult result = VPKExtractionResult.Complete;
 

@@ -21,7 +21,7 @@ namespace test_installsourcecontent
 
     public class SteamDirectoryNotFoundException : Exception
     {
-        public SteamDirectoryNotFoundException() : base() 
+        public SteamDirectoryNotFoundException() : base()
         {
         }
     }
@@ -73,7 +73,7 @@ namespace test_installsourcecontent
                 TrySetupFromRegistry();
         }
 
-        void SetupSupportedSourceGames() 
+        void SetupSupportedSourceGames()
         {
             SupportedSourceGamesAppIDs = Config.Keys.ToList();
             SupportedSourceGamesAppIDs.Sort();
@@ -170,4 +170,4 @@ namespace test_installsourcecontent
             }
         }
     }
- }
+}

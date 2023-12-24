@@ -16,7 +16,7 @@ namespace test_installsourcecontent
         public string Prefix { get; set; } = "$(";
         public string Suffix { get; set; } = ")";
         public ReadOnlyDictionary<string, string> Variables { get; set; }
-        
+
         public string Replace(string str)
         {
             if (null == Variables || Variables.Count == 0)

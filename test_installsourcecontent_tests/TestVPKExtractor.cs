@@ -5,12 +5,12 @@ namespace test_installsourcecontent_tests
 {
     public class NullWriter : IWriter
     {
-        public void Success(string message) {}
-        public void Info(string message) {}
-        public void Warning(string message) {}
-        public void Error(string message) {}
-        public void Failure(string message) {}
-        public void Cancellation(string message) {}
+        public void Success(string message) { }
+        public void Info(string message) { }
+        public void Warning(string message) { }
+        public void Error(string message) { }
+        public void Failure(string message) { }
+        public void Cancellation(string message) { }
     }
 
     public class AllowAllVPKFiles : IVPKFileFilter
@@ -44,7 +44,7 @@ namespace test_installsourcecontent_tests
 
             var extractor = new VPKExtractor();
             extractor.Extract(fileSystem, new NullWriter(), "C:/vpks/simple_vpk.vpk", "C:/output", new ExcludeAllVPKFiles());
-            var expected = new string[] {};
+            var expected = new string[] { };
             var actual = fileSystem.Directory.GetFiles("C:/output").Select(a => PathExtensions.ConvertToUnixDirectorySeparator(fileSystem, a)).ToArray();
             CollectionAssert.AreEquivalent(expected, actual);
         }

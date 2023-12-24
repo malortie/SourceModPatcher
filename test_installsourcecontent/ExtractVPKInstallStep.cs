@@ -54,7 +54,7 @@ namespace test_installsourcecontent
     {
         IVPKExtractor _extractor;
 
-        public ExtractVPKInstallStep(IVPKExtractor vpkExtractor) 
+        public ExtractVPKInstallStep(IVPKExtractor vpkExtractor)
         {
             _extractor = vpkExtractor;
         }
@@ -88,7 +88,7 @@ namespace test_installsourcecontent
                         emptyVPKsIndices.Add(i);
                 }
 
-                if (emptyVPKsIndices.Count > 0) 
+                if (emptyVPKsIndices.Count > 0)
                 {
                     writer.Error($"VPK entries [{string.Join(',', emptyVPKsIndices)}] are blank or empty.");
                     return PipelineStepStatus.Failed;
@@ -114,7 +114,8 @@ namespace test_installsourcecontent
                 return PipelineStepStatus.Failed;
             }
 
-            var vpks = Vpks.Select(vpk => new ExtractVPKInstallStepDataVPK {
+            var vpks = Vpks.Select(vpk => new ExtractVPKInstallStepDataVPK
+            {
                 VPKFile = PathExtensions.JoinWithSeparator(context.FileSystem, context.GetSteamAppInstallDir(), vpk.VPKFile),
                 FilesToExclude = vpk.FilesToExclude,
                 FilesToExtract = vpk.FilesToExtract
@@ -141,7 +142,8 @@ namespace test_installsourcecontent
 
                         var files = context.FileSystem.Directory.GetFiles(vpkDirectory, vpkFileName);
                         vpks.RemoveAt(index);
-                        vpks.InsertRange(index, files.Select(f => new ExtractVPKInstallStepDataVPK { 
+                        vpks.InsertRange(index, files.Select(f => new ExtractVPKInstallStepDataVPK
+                        {
                             VPKFile = PathExtensions.ConvertToUnixDirectorySeparator(context.FileSystem, f),
                             FilesToExclude = filesToExclude,
                             FilesToExtract = filesToExtract
