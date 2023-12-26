@@ -21,7 +21,7 @@ namespace test_installsourcecontent
             var Name = saveVariableData.VariableName;
             var Value = saveVariableData.VariableValue;
 
-            if (null == Name)
+            if (null == Name || Name == string.Empty)
             {
                 writer.Error("No variable name specified.");
                 return PipelineStepStatus.Failed;
