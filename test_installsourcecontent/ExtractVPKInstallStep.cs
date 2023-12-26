@@ -1,3 +1,5 @@
+using System;
+using System.IO.Abstractions;
 using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 
@@ -50,19 +52,92 @@ namespace test_installsourcecontent
         }
     }
 
+    public interface IExtractVPKInstallStepEventHandler
+    {
+        void NoVPKsSpecified();
+        void NoOutDirSpecified();
+        void BlankVPKEntry();
+        void FailedToBuildGlobalRegexList();
+        void FailedToBuildVPKRegexList();
+        void VPKFileDoesNotExist();
+        void VPKExtractionComplete();
+        void VPKExtractionCompleteWithErrors();
+        void VPKExtractionFailed();
+        void NoVPKExtracted();
+    }
+
+    public interface IStringToRegexConverter
+    {
+        Regex StringToRegex(string input);
+    }
+
+    public class StringToRegexConverter : IStringToRegexConverter
+    {
+        public Regex StringToRegex(string input)
+        {
+            return new Regex(input, RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        }
+    }
+
+    public interface IVPKFileResolver
+    {
+        void ResolveFilePaths(IFileSystem fileSystem, List<ExtractVPKInstallStepDataVPK> vpks);
+    }
+
+    public class VPKFileResolver : IVPKFileResolver
+    {
+        public Regex Wildcard = new Regex(@"[*]", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+
+        public void ResolveFilePaths(IFileSystem fileSystem, List<ExtractVPKInstallStepDataVPK> vpks)
+        {
+            int index = 0;
+            do
+            {
+                index = vpks.FindIndex(index, v => Wildcard.IsMatch(v.VPKFile));
+                if (index >= 0)
+                {
+                    string vpkPath = vpks[index].VPKFile;
+                    string? vpkDirectory = fileSystem.Path.GetDirectoryName(vpkPath);
+                    string? vpkFileName = fileSystem.Path.GetFileName(vpkPath);
+                    if (vpkDirectory != null && vpkFileName != null)
+                    {
+                        // backup properties before removing it.
+                        var filesToExclude = vpks[index].FilesToExclude;
+                        var filesToExtract = vpks[index].FilesToExtract;
+
+                        var files = fileSystem.Directory.GetFiles(vpkDirectory, vpkFileName);
+                        vpks.RemoveAt(index);
+                        vpks.InsertRange(index, files.Select(f => new ExtractVPKInstallStepDataVPK
+                        {
+                            VPKFile = PathExtensions.ConvertToUnixDirectorySeparator(fileSystem, f),
+                            FilesToExclude = filesToExclude,
+                            FilesToExtract = filesToExtract
+                        }));
+                    }
+                }
+            } while (index >= 0);
+        }
+    }
+
     public class ExtractVPKInstallStep : IPipelineStep<Context>
     {
         IVPKExtractor _extractor;
+        IStringToRegexConverter _stringToRegexConverter;
+        IVPKFileResolver _fileResolver;
+        IExtractVPKInstallStepEventHandler? _eventHandler;
 
-        public ExtractVPKInstallStep(IVPKExtractor vpkExtractor)
+        public ExtractVPKInstallStep(IVPKExtractor vpkExtractor, IStringToRegexConverter stringToRegexConverter, IVPKFileResolver fileResolver, IExtractVPKInstallStepEventHandler? eventHandler = null)
         {
             _extractor = vpkExtractor;
+            _stringToRegexConverter = stringToRegexConverter;
+            _fileResolver = fileResolver;
+            _eventHandler = eventHandler;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        static List<Regex> StringListToRegexList(List<string> strings)
+        List<Regex> StringListToRegexList(List<string> strings)
         {
-            return 0 == strings.Count ? new List<Regex>() : strings.Select(s => new Regex(s, RegexOptions.Compiled | RegexOptions.IgnoreCase)).ToList();
+            return 0 == strings.Count ? new List<Regex>() : strings.Select(s => _stringToRegexConverter.StringToRegex(s)).ToList();
         }
 
         public PipelineStepStatus DoStep(Context context, IPipelineStepData stepData, IWriter writer)
@@ -75,6 +150,7 @@ namespace test_installsourcecontent
 
             if (null == Vpks || Vpks.Count <= 0)
             {
+                _eventHandler?.NoVPKsSpecified();
                 writer.Error("No vpk(s) specified.");
                 return PipelineStepStatus.Failed;
             }
@@ -90,6 +166,7 @@ namespace test_installsourcecontent
 
                 if (emptyVPKsIndices.Count > 0)
                 {
+                    _eventHandler?.BlankVPKEntry();
                     writer.Error($"VPK entries [{string.Join(',', emptyVPKsIndices)}] are blank or empty.");
                     return PipelineStepStatus.Failed;
                 }
@@ -97,6 +174,7 @@ namespace test_installsourcecontent
 
             if (null == OutDir || OutDir == string.Empty)
             {
+                _eventHandler?.NoOutDirSpecified();
                 writer.Error("No output directory specified.");
                 return PipelineStepStatus.Failed;
             }
@@ -110,6 +188,7 @@ namespace test_installsourcecontent
             }
             catch (Exception e)
             {
+                _eventHandler?.FailedToBuildGlobalRegexList();
                 writer.Error(e.Message);
                 return PipelineStepStatus.Failed;
             }
@@ -121,37 +200,8 @@ namespace test_installsourcecontent
                 FilesToExtract = vpk.FilesToExtract
             }).ToList();
 
-            ////////////////////////////
             // Find wildcards in VPKs and find the files.
-            Regex wildcard = new Regex(@"[*]", RegexOptions.Compiled | RegexOptions.IgnoreCase);
-
-            int index = 0;
-            do
-            {
-                index = vpks.FindIndex(index, v => wildcard.IsMatch(v.VPKFile));
-                if (index >= 0)
-                {
-                    string vpkPath = vpks[index].VPKFile;
-                    string? vpkDirectory = context.FileSystem.Path.GetDirectoryName(vpkPath);
-                    string? vpkFileName = context.FileSystem.Path.GetFileName(vpkPath);
-                    if (vpkDirectory != null && vpkFileName != null)
-                    {
-                        // backup properties before removing it.
-                        var filesToExclude = vpks[index].FilesToExclude;
-                        var filesToExtract = vpks[index].FilesToExtract;
-
-                        var files = context.FileSystem.Directory.GetFiles(vpkDirectory, vpkFileName);
-                        vpks.RemoveAt(index);
-                        vpks.InsertRange(index, files.Select(f => new ExtractVPKInstallStepDataVPK
-                        {
-                            VPKFile = PathExtensions.ConvertToUnixDirectorySeparator(context.FileSystem, f),
-                            FilesToExclude = filesToExclude,
-                            FilesToExtract = filesToExtract
-                        }));
-                    }
-                }
-            } while (index >= 0);
-            ////////////////////////////
+            _fileResolver.ResolveFilePaths(context.FileSystem, vpks);
 
             int numExtractedVPKs = 0;
             PipelineStepStatus status = PipelineStepStatus.Complete;
@@ -160,6 +210,7 @@ namespace test_installsourcecontent
                 string vpkPath = vpk.VPKFile;
                 if (!context.FileSystem.File.Exists(vpkPath))
                 {
+                    _eventHandler?.VPKFileDoesNotExist();
                     writer.Warning($"{vpkPath} does not exist. Skipping...");
                     status = PipelineStepStatus.PartiallyComplete;
                     continue;
@@ -177,6 +228,7 @@ namespace test_installsourcecontent
                 }
                 catch (Exception e)
                 {
+                    _eventHandler?.FailedToBuildVPKRegexList();
                     writer.Error(e.Message);
                     // Other VPKs might work, so mark it as partially completed.
                     status = PipelineStepStatus.PartiallyComplete;
@@ -188,19 +240,27 @@ namespace test_installsourcecontent
                 {
                     case VPKExtractionResult.Complete:
                         // All files were correctly extracted.
+                        _eventHandler?.VPKExtractionComplete();
                         ++numExtractedVPKs;
                         break;
                     case VPKExtractionResult.CompleteWithErrors: // Not all files were extracted.
+                        status = PipelineStepStatus.PartiallyComplete;
+                        _eventHandler?.VPKExtractionCompleteWithErrors();
+                        break;
                     case VPKExtractionResult.Failed: // An error occured and extraction was aborted.
                         // Other VPKs might work, so mark it as partially completed.
                         status = PipelineStepStatus.PartiallyComplete;
+                        _eventHandler?.VPKExtractionFailed();
                         break;
                 }
             }
 
             // If no VPK has been extracted, mark it as failed.
             if (numExtractedVPKs == 0)
+            {
+                _eventHandler?.NoVPKExtracted();
                 status = PipelineStepStatus.Failed;
+            }
 
             return status;
         }

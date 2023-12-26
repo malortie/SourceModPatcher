@@ -72,7 +72,7 @@ namespace test_installsourcecontent
         // Map each step data type to a single step instance.
         static Dictionary<Type, IPipelineStep<Context>> _stepsDataToInstallStep = new()
         {
-            { typeof(ExtractVPKInstallStepData), new ExtractVPKInstallStep(new VPKExtractor()) },
+            { typeof(ExtractVPKInstallStepData), new ExtractVPKInstallStep(new VPKExtractor(), new StringToRegexConverter(), new VPKFileResolver()) },
             { typeof(SaveVariableInstallStepData), new SaveVariableInstallStep() }
         };
 
