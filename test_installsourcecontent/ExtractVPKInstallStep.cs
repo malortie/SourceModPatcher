@@ -246,6 +246,7 @@ namespace test_installsourcecontent
                     case VPKExtractionResult.CompleteWithErrors: // Not all files were extracted.
                         status = PipelineStepStatus.PartiallyComplete;
                         _eventHandler?.VPKExtractionCompleteWithErrors();
+                        ++numExtractedVPKs;
                         break;
                     case VPKExtractionResult.Failed: // An error occured and extraction was aborted.
                         // Other VPKs might work, so mark it as partially completed.
