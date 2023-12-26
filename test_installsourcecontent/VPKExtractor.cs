@@ -39,6 +39,7 @@ namespace test_installsourcecontent
 
                 package.VerifyHashes();
 
+                int numExtractedFiles = 0;
                 foreach (var extension in package.Entries.Values)
                 {
                     foreach (var entry in extension)
@@ -63,10 +64,15 @@ namespace test_installsourcecontent
                         var fullPath = PathExtensions.JoinWithSeparator(fileSystem, outputDir, entry.GetFullPath());
                         package.ReadEntry(entry, out byte[] fileContents);
                         fileSystem.File.WriteAllBytes(fullPath, fileContents);
+                        ++numExtractedFiles;
                     }
                 }
 
                 fs?.Close();
+
+                // If no file has been extracted, mark it as failed.
+                if (numExtractedFiles == 0)
+                    result = VPKExtractionResult.Failed;
             }
             catch (Exception e)
             {
