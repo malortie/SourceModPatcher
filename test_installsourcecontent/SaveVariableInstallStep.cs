@@ -26,7 +26,7 @@ namespace test_installsourcecontent
                 writer.Error("No variable name specified.");
                 return PipelineStepStatus.Failed;
             }
-            if (null == Value)
+            if (null == Value || Value == string.Empty)
             {
                 writer.Error("No variable value specified.");
                 return PipelineStepStatus.Failed;
