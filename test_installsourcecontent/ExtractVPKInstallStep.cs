@@ -95,7 +95,7 @@ namespace test_installsourcecontent
                 }
             }
 
-            if (null == OutDir)
+            if (null == OutDir || OutDir == string.Empty)
             {
                 writer.Error("No output directory specified.");
                 return PipelineStepStatus.Failed;
