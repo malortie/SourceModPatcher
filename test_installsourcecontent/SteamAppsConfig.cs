@@ -96,13 +96,6 @@ namespace test_installsourcecontent
             string steamappsPath = PathExtensions.JoinWithSeparator(FileSystem, steamPath, "steamapps");
             string libraryFoldersVDFPath = PathExtensions.JoinWithSeparator(FileSystem, steamappsPath, LIBRARYFOLDERS_FILE);
 
-            /*
-            if (!FileSystem.File.Exists(libraryFoldersVDFPath))
-            {
-                throw new FileNotFoundException($"{libraryFoldersVDFPath} does not exist.");
-            }
-            */
-
             // Collect appmanifest_id.acf files data.
 
             var steamLibraryPaths = new Dictionary<int, string>();
