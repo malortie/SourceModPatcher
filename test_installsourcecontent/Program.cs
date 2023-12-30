@@ -238,7 +238,9 @@ namespace test_installsourcecontent
                     File.WriteAllText(fullLogFilePath, string.Empty);
             }
 
-            var logProvider = new LogProvider((MemoryTarget)LogManager.Configuration.FindTargetByName("warningmemory"), (MemoryTarget)LogManager.Configuration.FindTargetByName("errormemory"));
+            var logProvider = new LogProvider(
+                (MemoryTarget)LogManager.Configuration.FindTargetByName("warningmemory"),
+                (MemoryTarget)LogManager.Configuration.FindTargetByName("errormemory"));
             var consoleWriter = new ConsoleWriter();
             var logger = new Logger(NLog.LogManager.GetCurrentClassLogger());
             var writer = new Writer(logger, consoleWriter);
