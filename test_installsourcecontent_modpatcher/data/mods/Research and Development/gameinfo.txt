@@ -1,0 +1,25 @@
+"GameInfo"
+{
+	game 		"Research and Development"
+	title		"Research and Development"
+	title2		"Research and Development"
+	developer 	"M. Bortolino"
+	type		singleplayer_only
+	icon		"icon"
+
+	FileSystem
+	{
+		SteamAppId				218 		// GCF for Episode 2
+		ToolsAppId				211		// Tools will load this (ie: source SDK caches) to get things like materials\debug, materials\editor, etc.
+		
+		SearchPaths
+		{
+			Game				|gameinfo_path|.
+			Game				ep2
+			Game				"${{hl2ep2_content_path}}"
+			Game				"${{sdkbase2013sp_hl2ep2_content_path}}"
+			Game				episodic
+			Game				hl2
+		}
+	}
+}

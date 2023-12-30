@@ -1,0 +1,11 @@
+{
+  "coastline_to_atmosphere": {
+    "install": true
+  },
+  "ravenholmncz": {
+    "install": true
+  },
+  "research_and_development": {
+    "install": true
+  }
+}

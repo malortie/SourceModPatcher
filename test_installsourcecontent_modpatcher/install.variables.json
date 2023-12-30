@@ -1,0 +1,9 @@
+{
+  "data_dir": "./data",
+  "data_mods_dir": "./data/mods",
+  "data_sdks_dir": "./data/sdks",
+  "data_sdks_source2006_dir": "./data/sdks/source2006",
+  "data_sdks_source2006_hl2_dir": "./data/sdks/source2006/hl2",
+  "data_sdks_source2007_dir": "./data/sdks/source2007",
+  "data_sdks_source2007_ep2_dir": "./data/sdks/source2007/ep2"
+}

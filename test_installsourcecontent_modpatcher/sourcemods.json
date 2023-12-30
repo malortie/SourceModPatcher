@@ -1,0 +1,14 @@
+{
+  "coastline_to_atmosphere": {
+    "name": "Coastline to Atmosphere",
+    "sourcemod_folder": "Coastline_to_Atmosphere"
+  },
+  "ravenholmncz": {
+    "name": "Ravenholm mod",
+    "sourcemod_folder": "RavenholmNCZ"
+  },
+  "research_and_development": {
+    "name": "Research and Development",
+    "sourcemod_folder": "Research and Development"
+  },
+}

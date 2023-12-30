@@ -1,0 +1,24 @@
+"GameInfo"
+{
+	game	"Coastline to Atmosphere"
+	title	" "
+	title2	"Coastline to Atmosphere"
+	type	singleplayer_only
+
+	developer	"Leon and team"
+	developer_url	"http://www.planetphillip.com/posts/leons-coastline-to-atmosphere-single-player-half-life-2-mod/"
+	icon		"icon"
+	manual		"http://www.sp-mods.com/C_to_A_manual_short"
+
+	FileSystem
+	{
+		SteamAppId				215
+		ToolsAppId				211
+		
+		SearchPaths
+		{
+			Game				|gameinfo_path|.
+			Game				hl2
+		}
+	}
+}
