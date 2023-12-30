@@ -1,0 +1,30 @@
+[
+  {
+    "$type": "copy_files",
+    "name": "ravenholmncz_copy_files",
+    "description": "Copy files to $(sourcemod_folder)",
+    "files": [
+      {
+        "src": "$(data_sdks_source2006_dir)/bin/client.dll",
+        "dest": "$(sourcemod_dir)/bin/client.dll"
+      },
+      {
+        "src": "$(data_sdks_source2006_dir)/bin/server.dll",
+        "dest": "$(sourcemod_dir)/bin/server.dll"
+      },
+      {
+        "src": "$(data_sourcemod_dir)/gameinfo.txt",
+        "dest": "$(sourcemod_dir)/gameinfo.txt"
+      }
+    ]
+  },
+  {
+    "$type": "replace_tokens",
+    "name": "ravenholmncz_replace_tokens",
+    "description": "Replace tokens in $(sourcemod_folder)/gameinfo.txt",
+    "depends_on": ["ravenholmncz_copy_files"],
+    "files": [
+      "$(sourcemod_dir)/gameinfo.txt"
+    ]
+  }
+]
