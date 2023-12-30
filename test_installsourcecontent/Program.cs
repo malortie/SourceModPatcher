@@ -3,6 +3,7 @@ using CommandLine;
 using NLog;
 using NLog.Targets;
 using Pastel;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Drawing;
 using System.IO.Abstractions;
@@ -10,34 +11,43 @@ using System.Runtime.Versioning;
 
 namespace test_installsourcecontent
 {
-    using InstallPipelineStepDictionary = Dictionary<int, List<IPipelineStepData>>;
-
-    public class InstallPipelineStepsTypeConverter : ITypeConverter<JSONInstallStepsConfig, InstallPipelineStepDictionary>
+    public interface IStepMapper<ConfigT>
     {
-        public InstallPipelineStepDictionary Convert(JSONInstallStepsConfig config, InstallPipelineStepDictionary destination, ResolutionContext context)
+        IPipelineStepData Map(ConfigT jsonInstallStep);
+    }
+
+    public class StepsLoader<ConfigT>
+    {
+        IStepMapper<ConfigT> _stepMapper;
+        IConfigurationSerializer<IList<ConfigT>> _serializer;
+        IFileSystem _fileSystem;
+        IWriter _writer;
+
+        public StepsLoader(IFileSystem fileSystem, IWriter writer, IConfigurationSerializer<IList<ConfigT>> serializer, IStepMapper<ConfigT> stepMapper)
         {
-            var convertedSteps = new InstallPipelineStepDictionary();
+            _fileSystem = fileSystem;
+            _writer = writer;
+            _serializer = serializer;
+            _stepMapper = stepMapper;
+        }
 
-            // Convert each deserialized step to IPipelineStepData objects.
-            foreach (var (appID, steps) in config)
-            {
-                convertedSteps[appID] = [];
-                foreach (var step in steps)
-                {
-                    if (step != null)
-                        convertedSteps[appID].Add(context.Mapper.Map<IPipelineStepData>(step));
-                }
-            }
-
-            return convertedSteps;
+        public IList<IPipelineStepData> Load(string stepsFilePath)
+        {
+            var steps = new List<IPipelineStepData>();
+            _writer.Info($"Reading {_fileSystem.Path.GetFileName(stepsFilePath)}");
+            var deserializedStepsList = _serializer.Deserialize(_fileSystem.File.ReadAllText(stepsFilePath));
+            if (null != deserializedStepsList)
+                return deserializedStepsList.Select(a => _stepMapper.Map(a)).ToList();
+            else
+                throw new Exception($"Failed to read {stepsFilePath}");
         }
     }
 
-    public class InstallPipelineStepsMapper
+    public class InstallStepMapper<ConfigT> : IStepMapper<ConfigT>
     {
         IMapper _mapper;
 
-        public InstallPipelineStepsMapper()
+        public InstallStepMapper()
         {
             var mapperConfig = new MapperConfiguration(cfg =>
             {
@@ -50,7 +60,6 @@ namespace test_installsourcecontent
                 cfg.CreateMap<JSONExtractVPKInstallStep, ExtractVPKInstallStepData>();
                 cfg.CreateMap<JSONExtractVPKInstallStepVPK, ExtractVPKInstallStepDataVPK>();
                 cfg.CreateMap<JSONSaveVariableInstallStep, SaveVariableInstallStepData>();
-                cfg.CreateMap<JSONInstallStepsConfig, InstallPipelineStepDictionary>().ConvertUsing(new InstallPipelineStepsTypeConverter());
             });
 #if DEBUG
             mapperConfig.AssertConfigurationIsValid();
@@ -59,9 +68,9 @@ namespace test_installsourcecontent
             _mapper = mapperConfig.CreateMapper();
         }
 
-        public InstallPipelineStepDictionary Map(InstallStepsConfig installStepsConfig)
+        public IPipelineStepData Map(ConfigT jsonInstallStep)
         {
-            return _mapper.Map<InstallPipelineStepDictionary>(installStepsConfig.Config);
+            return _mapper.Map<IPipelineStepData>(jsonInstallStep);
         }
     }
 
@@ -334,10 +343,10 @@ namespace test_installsourcecontent
                 var pauseHandler = new ConsolePauseHandler(writer);
                 var context = new Context(fileSystem, configuration);
 
-                // Select only the steps we want to install.
-                var appsStepsDatas = new InstallPipelineStepsMapper().Map(installStepsConfig)
-                    .Where(kv => steamAppsToInstall.Contains(kv.Key))
-                    .ToList();
+                // Load each steps file and convert them to pipeline step list. 
+                var stepsLoader = new StepsLoader<JSONInstallStep>(fileSystem, writer, new JSONConfigurationSerializer<IList<JSONInstallStep>>(), new InstallStepMapper<JSONInstallStep>());
+                var appsStepsDatas = new Dictionary<int, IList<IPipelineStepData>>();
+                steamAppsToInstall.ForEach(appID => appsStepsDatas.Add(appID, stepsLoader.Load(installStepsConfig.Config[appID])));
 
                 int stageIndex = 0;
                 // Create the stages.

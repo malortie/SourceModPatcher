@@ -46,7 +46,7 @@ namespace test_installsourcecontent
         public string? VariableValue { get; set; }
     }
 
-    public class JSONInstallStepsConfig : Dictionary<int, List<JSONInstallStep>>
+    public class JSONInstallStepsConfig : Dictionary<int, string>
     {
     }
 
