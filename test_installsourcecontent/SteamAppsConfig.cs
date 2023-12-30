@@ -18,13 +18,6 @@ namespace test_installsourcecontent
     {
     }
 
-    public class SteamDirectoryNotFoundException : Exception
-    {
-        public SteamDirectoryNotFoundException() : base()
-        {
-        }
-    }
-
     public class SteamAppsConfig : ConfigurationManager<JSONSteamAppsConfig>
     {
         internal class SteamAppManifest
