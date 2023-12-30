@@ -230,15 +230,9 @@ namespace test_installsourcecontent
 
             NLog.LogManager.Configuration = new NLog.Config.XmlLoggingConfiguration("nlog.config");
 
+            var nlogServant = new NLogServant();
             // Clear existing log files.
-            foreach (var target in NLog.LogManager.Configuration.AllTargets.OfType<FileTarget>())
-            {
-                var dummyEventInfo = new LogEventInfo { TimeStamp = DateTime.UtcNow };
-                var logFilePath = target.FileName.Render(dummyEventInfo);
-                var fullLogFilePath = fileSystem.Path.GetFullPath(logFilePath);
-                if (fileSystem.File.Exists(fullLogFilePath))
-                    fileSystem.File.WriteAllText(fullLogFilePath, string.Empty);
-            }
+            nlogServant.ClearAllLogFiles(NLog.LogManager.Configuration, fileSystem);
 
             var logProvider = new LogProvider(
                 (MemoryTarget)LogManager.Configuration.FindTargetByName("warningmemory"),
