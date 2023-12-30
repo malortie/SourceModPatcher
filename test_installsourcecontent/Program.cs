@@ -226,6 +226,8 @@ namespace test_installsourcecontent
         {
             var options = Parser.Default.ParseArguments<Options>(args).Value;
 
+            var fileSystem = new FileSystem();
+
             NLog.LogManager.Configuration = new NLog.Config.XmlLoggingConfiguration("nlog.config");
 
             // Clear existing log files.
@@ -233,9 +235,9 @@ namespace test_installsourcecontent
             {
                 var dummyEventInfo = new LogEventInfo { TimeStamp = DateTime.UtcNow };
                 var logFilePath = target.FileName.Render(dummyEventInfo);
-                var fullLogFilePath = Path.GetFullPath(logFilePath);
-                if (File.Exists(fullLogFilePath))
-                    File.WriteAllText(fullLogFilePath, string.Empty);
+                var fullLogFilePath = fileSystem.Path.GetFullPath(logFilePath);
+                if (fileSystem.File.Exists(fullLogFilePath))
+                    fileSystem.File.WriteAllText(fullLogFilePath, string.Empty);
             }
 
             var logProvider = new LogProvider(
@@ -253,8 +255,6 @@ namespace test_installsourcecontent
                     writer.Info($"Creating user environment variable {INSTALL_ENVVAR}=\"{Environment.CurrentDirectory}\"");
                     Environment.SetEnvironmentVariable(INSTALL_ENVVAR, Environment.CurrentDirectory, EnvironmentVariableTarget.User);
                 }
-
-                var fileSystem = new FileSystem();
 
                 Func<string, string> MakeFullPath = x => PathExtensions.JoinWithSeparator(fileSystem, Environment.CurrentDirectory, x);
 
