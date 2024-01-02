@@ -1,14 +1,17 @@
 {
   "coastline_to_atmosphere": {
     "name": "Coastline to Atmosphere",
-    "sourcemod_folder": "Coastline_to_Atmosphere"
+    "sourcemod_folder": "Coastline_to_Atmosphere",
+    "data_dir": "./data/mods/Coastline_to_Atmosphere"
   },
   "ravenholmncz": {
     "name": "Ravenholm mod",
-    "sourcemod_folder": "RavenholmNCZ"
+    "sourcemod_folder": "RavenholmNCZ",
+    "data_dir": "./data/mods/RavenholmNCZ"
   },
   "research_and_development": {
     "name": "Research and Development",
-    "sourcemod_folder": "Research and Development"
+    "sourcemod_folder": "Research and Development",
+    "data_dir": "./data/mods/Research and Development"
   }
 }

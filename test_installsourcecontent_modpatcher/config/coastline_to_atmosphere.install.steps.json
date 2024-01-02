@@ -9,14 +9,5 @@
         "dest": "$(sourcemod_dir)/gameinfo.txt"
       }
     ]
-  },
-  {
-    "$type": "replace_tokens",
-    "name": "coastline_to_atmosphere_replace_tokens",
-    "description": "Replace tokens in $(sourcemod_folder)/gameinfo.txt",
-    "depends_on": ["coastline_to_atmosphere_copy_files"],
-    "files": [
-      "$(sourcemod_dir)/gameinfo.txt"
-    ]
   }
 ]
