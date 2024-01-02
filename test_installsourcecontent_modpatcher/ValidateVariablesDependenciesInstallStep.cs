@@ -14,7 +14,7 @@ namespace test_installsourcecontent_modpatcher
         public List<List<string>> Dependencies { get; set; } = [];
     }
 
-    public interface ValidateVariablesDependenciesInstallStepEventHandler
+    public interface IValidateVariablesDependenciesInstallStepEventHandler
     {
         void NoDependenciesSpecified();
         void MissingSingleVariableDependency();
@@ -24,9 +24,9 @@ namespace test_installsourcecontent_modpatcher
 
     public class ValidateVariablesDependenciesInstallStep : IPipelineStep<Context>
     {
-        ValidateVariablesDependenciesInstallStepEventHandler _eventHandler;
+        IValidateVariablesDependenciesInstallStepEventHandler? _eventHandler;
 
-        public ValidateVariablesDependenciesInstallStep(ValidateVariablesDependenciesInstallStepEventHandler? eventHandler = null)
+        public ValidateVariablesDependenciesInstallStep(IValidateVariablesDependenciesInstallStepEventHandler? eventHandler = null)
         {
             _eventHandler = eventHandler;
         }
