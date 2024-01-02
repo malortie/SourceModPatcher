@@ -14,11 +14,11 @@
     "depends_on": ["research_and_development_validate_dependencies"],
     "files": [
       {
-        "src": "$(data_sdks_source2007_dir)/bin/client.dll",
+        "src": "$(data_sdks_source2007_ep2_dir)/bin/client.dll",
         "dest": "$(sourcemod_dir)/bin/client.dll"
       },
       {
-        "src": "$(data_sdks_source2007_dir)/bin/server.dll",
+        "src": "$(data_sdks_source2007_ep2_dir)/bin/server.dll",
         "dest": "$(sourcemod_dir)/bin/server.dll"
       },
       {
