@@ -5,11 +5,11 @@
     "description": "Copy files to $(sourcemod_folder)",
     "files": [
       {
-        "src": "$(data_sdks_source2006_dir)/bin/client.dll",
+        "src": "$(data_sdks_source2006_hl2_dir)/bin/client.dll",
         "dest": "$(sourcemod_dir)/bin/client.dll"
       },
       {
-        "src": "$(data_sdks_source2006_dir)/bin/server.dll",
+        "src": "$(data_sdks_source2006_hl2_dir)/bin/server.dll",
         "dest": "$(sourcemod_dir)/bin/server.dll"
       },
       {
