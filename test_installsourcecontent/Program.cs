@@ -222,6 +222,11 @@ namespace test_installsourcecontent
             public bool PauseAfterEachStep { get; set; }
         }
 
+        static void Dispose()
+        {
+            NLog.LogManager.Shutdown();
+        }
+
         static void Main(string[] args)
         {
             var options = Parser.Default.ParseArguments<Options>(args).Value;
@@ -291,6 +296,7 @@ namespace test_installsourcecontent
                 if (0 == steamAppsToInstall.Count)
                 {
                     writer.Info("Program exited: No content can be installed.");
+                    Dispose();
                     return;
                 }
 
@@ -317,6 +323,7 @@ namespace test_installsourcecontent
                     {
                         // User declined content installation.
                         writer.Info($"Edit {INSTALL_SETTINGS_FILENAME} and relaunch the program.");
+                        Dispose();
                         return;
                     }
                 }
@@ -381,7 +388,7 @@ namespace test_installsourcecontent
                 writer.Error(e.Message);
             }
 
-            NLog.LogManager.Shutdown();
+            Dispose();
         }
     }
 }
