@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Reflection;
 
@@ -218,8 +219,19 @@ namespace test_installsourcecontent
                         var enumerable = propertyValue as IEnumerable;
                         if (null != enumerable)
                         {
-                            foreach (var item in enumerable)
-                                ReplaceTokensRecursively(item);
+                            if (enumerable is IEnumerable<string>)
+                            {
+                                // Replace tokens in string collections.
+                                var newStrings = new List<string>();
+                                foreach (string str in enumerable)
+                                    newStrings.Add(TokenReplacer?.Replace(str) ?? str);
+                                prop.SetValue(obj, newStrings);
+                            }
+                            else
+                            {
+                                foreach (var item in enumerable)
+                                    ReplaceTokensRecursively(item);
+                            }
                         }
                         else
                             ReplaceTokensRecursively(propertyValue);
