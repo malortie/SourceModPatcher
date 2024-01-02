@@ -103,6 +103,18 @@ namespace test_installsourcecontent_modpatcher
                 writer.Info($"Copying \"{sourceFilePath}\" to \"{destFilePath}\"");
                 try
                 {
+                    string? destFileDir = context.FileSystem.Path.GetDirectoryName(destFilePath);
+                    if (null == destFileDir)
+                    {
+                        writer.Error($"Failed to get directory name for {destFilePath}");
+                        // Other files copy might work, so mark it as partially completed.
+                        status = PipelineStepStatus.PartiallyComplete;
+                        continue;
+                    }
+
+                    if (!context.FileSystem.Directory.Exists(destFileDir))
+                        context.FileSystem.Directory.CreateDirectory(destFileDir);
+
                     // Copy file to destination. Overwrite if it exists.
                     context.FileSystem.File.Copy(sourceFilePath, destFilePath, true);
                     // File successfully copied.
