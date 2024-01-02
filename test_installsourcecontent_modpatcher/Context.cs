@@ -29,6 +29,11 @@ namespace test_installsourcecontent_modpatcher
             return _configuration.GetVariables();
         }
 
+        public string GetVariablesFileName()
+        {
+            return _configuration.GetVariablesFileName();
+        }
+
         public ReadOnlyDictionary<string, string> GetInstallVariables()
         {
             return _configuration.GetInstallVariables();

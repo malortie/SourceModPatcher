@@ -8,6 +8,7 @@ namespace test_installsourcecontent_modpatcher
     {
         bool HasVariable(string variableName);
         ReadOnlyDictionary<string, string> GetVariables();
+        string GetVariablesFileName();
         ReadOnlyDictionary<string, string> GetInstallVariables();
         string GetSourceModName(string key);
         string GetSourceModFolder(string key);
@@ -36,6 +37,11 @@ namespace test_installsourcecontent_modpatcher
         public ReadOnlyDictionary<string, string> GetVariables()
         {
             return new ReadOnlyDictionary<string, string>(_variablesConfig.Config);
+        }
+
+        public string GetVariablesFileName()
+        {
+            return _variablesConfig.FileName;
         }
 
         public ReadOnlyDictionary<string, string> GetInstallVariables()

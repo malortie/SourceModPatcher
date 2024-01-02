@@ -1,4 +1,7 @@
+using System.Xml.Linq;
+using System;
 using test_installsourcecontent;
+using System.Linq;
 
 namespace test_installsourcecontent_modpatcher
 {
@@ -11,11 +14,68 @@ namespace test_installsourcecontent_modpatcher
         public List<List<string>> Dependencies { get; set; } = [];
     }
 
+    public interface ValidateVariablesDependenciesInstallStepEventHandler
+    {
+        void NoDependenciesSpecified();
+        void MissingSingleVariableDependency();
+        void MissingMultiVariableDependency();
+        void MissingDependencies();
+    }
+
     public class ValidateVariablesDependenciesInstallStep : IPipelineStep<Context>
     {
+        ValidateVariablesDependenciesInstallStepEventHandler _eventHandler;
+
+        public ValidateVariablesDependenciesInstallStep(ValidateVariablesDependenciesInstallStepEventHandler? eventHandler = null)
+        {
+            _eventHandler = eventHandler;
+        }
+
         public PipelineStepStatus DoStep(Context context, IPipelineStepData stepData, IWriter writer)
         {
-            return PipelineStepStatus.Complete;
+            var validateVariablesDependenciesStepData = (ValidateVariablesDependenciesInstallStepData)stepData;
+            var Dependencies = validateVariablesDependenciesStepData.Dependencies;
+
+            if (null == Dependencies || 0 == Dependencies.Count)
+            {
+                _eventHandler?.NoDependenciesSpecified();
+                writer.Error("No dependencies specified.");
+                return PipelineStepStatus.Failed;
+            }
+
+            var sourceContentVariablesNames = context.GetSourceContentVariables().Keys.ToList();
+
+            int numMissingDependencies = 0;
+            PipelineStepStatus status = PipelineStepStatus.Complete;
+            foreach (var entry in Dependencies)
+            {
+                // Check that at least one of the variables defined in each entry is present.
+                var fulfilledDependencies = entry.Intersect(sourceContentVariablesNames);
+                if (0 == fulfilledDependencies.Count())
+                {
+                    if (entry.Count == 1)
+                    {
+                        _eventHandler?.MissingSingleVariableDependency();
+                        writer.Error($"Missing variable in {context.GetVariablesFileName()} : {entry.First()}");
+                    }
+                    else
+                    {
+                        _eventHandler?.MissingMultiVariableDependency();
+                        writer.Error($"Missing one of the following variables in {context.GetVariablesFileName()} : [{string.Join(" OR ", entry)}]");
+                    }
+
+                    ++numMissingDependencies;
+                }
+            }
+
+            // If at least one dependency is missing, mark it as failed.
+            if (numMissingDependencies > 0)
+            {
+                _eventHandler?.MissingDependencies();
+                status = PipelineStepStatus.Failed;
+            }
+
+            return status;
         }
     }
 }
