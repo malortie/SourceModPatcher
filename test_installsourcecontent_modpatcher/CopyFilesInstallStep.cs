@@ -34,7 +34,7 @@ namespace test_installsourcecontent_modpatcher
 
     public class CopyFilesInstallStep : IPipelineStep<Context>
     {
-        ICopyFilesInstallStepEventHandler _eventHandler;
+        ICopyFilesInstallStepEventHandler? _eventHandler;
 
         public CopyFilesInstallStep(ICopyFilesInstallStepEventHandler? eventHandler = null)
         {
