@@ -1,10 +1,7 @@
+using Pipelines;
+
 namespace test_installsourcecontent
 {
-    public interface IPauseHandler
-    {
-        void Pause();
-    }
-
     public class ConsolePauseHandler : IPauseHandler
     {
         IWriter _writer;

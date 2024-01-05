@@ -1,11 +1,11 @@
 {
   "coastline_to_atmosphere": {
-    "install": true
+    "install": false
   },
   "ravenholmncz": {
-    "install": true
+    "install": false
   },
   "research_and_development": {
-    "install": true
+    "install": false
   }
 }

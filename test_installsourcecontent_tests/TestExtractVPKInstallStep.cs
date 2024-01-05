@@ -1,3 +1,4 @@
+using Pipelines;
 using System.Diagnostics.CodeAnalysis;
 using System.IO.Abstractions;
 using System.IO.Abstractions.TestingHelpers;
@@ -80,10 +81,10 @@ namespace test_installsourcecontent_tests
         [TestMethod]
         public void EmptyVPKListReturnsFailed()
         {
-            var fileSystem = new MockFileSystem(new Dictionary<string, MockFileData>{});
+            var fileSystem = new MockFileSystem(new Dictionary<string, MockFileData> { });
             var eventHandler = new TestExtractVPKInstallStepEventHandler();
             var step = new ExtractVPKInstallStep(Extractor, DefaultStringToRegexConverter, VPKFileResolver, eventHandler);
-            var stepData =  new ExtractVPKInstallStepData();
+            var stepData = new ExtractVPKInstallStepData();
 
             var result = step.DoStep(new Context(fileSystem, NullConfiguration), stepData, NullWriter);
 
@@ -116,7 +117,8 @@ namespace test_installsourcecontent_tests
             var fileSystem = new MockFileSystem(new Dictionary<string, MockFileData> { });
             var eventHandler = new TestExtractVPKInstallStepEventHandler();
             var step = new ExtractVPKInstallStep(Extractor, DefaultStringToRegexConverter, VPKFileResolver, eventHandler);
-            var stepData = new ExtractVPKInstallStepData() { 
+            var stepData = new ExtractVPKInstallStepData()
+            {
                 Vpks = [
                     new ExtractVPKInstallStepDataVPK { VPKFile = "test" }
                 ]
@@ -138,7 +140,8 @@ namespace test_installsourcecontent_tests
             {
                 OutDir = "test",
                 Vpks = [
-                    new ExtractVPKInstallStepDataVPK { 
+                    new ExtractVPKInstallStepDataVPK
+                    {
                         VPKFile = "test"
                     }
                 ],
@@ -312,7 +315,7 @@ namespace test_installsourcecontent_tests
         public void ResolveWildcardsToFiles_WhenWildcardsArePresent()
         {
             string[] languages = ["english", "french"];
-            
+
             var pakVPKS = languages.Select(lang => ($"C:/vpks/hl2_pak_{lang}_dir.vpk")).ToList();
             var soundVPKS = languages.Select(lang => ($"C:/vpks/hl2_sound_vo_{lang}_dir.vpk")).ToList();
 
@@ -327,9 +330,9 @@ namespace test_installsourcecontent_tests
 
             var fileSystem = new MockFileSystem(fileSystemData);
             var vpks = new List<ExtractVPKInstallStepDataVPK> {
-                new ExtractVPKInstallStepDataVPK { 
-                    VPKFile = "C:/vpks/hl2_pak_dir.vpk", 
-                    FilesToExclude = ["test1"], 
+                new ExtractVPKInstallStepDataVPK {
+                    VPKFile = "C:/vpks/hl2_pak_dir.vpk",
+                    FilesToExclude = ["test1"],
                     FilesToExtract = ["test2"]
                 },
                 new ExtractVPKInstallStepDataVPK {
@@ -337,17 +340,17 @@ namespace test_installsourcecontent_tests
                     FilesToExclude = ["test3"],
                     FilesToExtract = ["test4"]
                 },
-                new ExtractVPKInstallStepDataVPK { 
+                new ExtractVPKInstallStepDataVPK {
                     VPKFile = "C:/vpks/hl2_sound_misc_dir.vpk",
                     FilesToExclude = ["test5"],
                     FilesToExtract = ["test6"]
                 },
-                new ExtractVPKInstallStepDataVPK { 
+                new ExtractVPKInstallStepDataVPK {
                     VPKFile = "C:/vpks/hl2_sound_vo_*_dir.vpk",  // Wildcard
                     FilesToExclude = ["test7"],
                     FilesToExtract = ["test8"]
                 },
-                new ExtractVPKInstallStepDataVPK { 
+                new ExtractVPKInstallStepDataVPK {
                     VPKFile = "C:/vpks/hl2_textures_dir.vpk",
                     FilesToExclude = ["test9"],
                     FilesToExtract = ["test10"]
@@ -706,7 +709,8 @@ namespace test_installsourcecontent_tests
             });
 
             var eventHandler = new TestExtractVPKInstallStepEventHandler();
-            var step = new ExtractVPKInstallStep(new TestVPKExtractor() { 
+            var step = new ExtractVPKInstallStep(new TestVPKExtractor()
+            {
                 CompleteWithErrorsOnVpks = ["C:/vpks/test1.vpk"],
                 FailOnVpks = ["C:/vpks/test2.vpk"]
             }, DefaultStringToRegexConverter, VPKFileResolver, eventHandler);

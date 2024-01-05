@@ -1,4 +1,6 @@
 using System.IO.Abstractions;
+using Pipelines;
+using test_installsourcecontent;
 
 namespace test_installsourcecontent
 {

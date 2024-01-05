@@ -3,8 +3,9 @@ using CommandLine;
 using NLog.Targets;
 using NLog;
 using System.Runtime.Versioning;
-using test_installsourcecontent;
 using System.IO.Abstractions;
+using Pipelines;
+using test_installsourcecontent;
 
 namespace test_installsourcecontent_modpatcher
 {
@@ -81,9 +82,9 @@ namespace test_installsourcecontent_modpatcher
     internal class Program
     {
         const string INSTALL_ENVVAR = "TEST_INSTALLSOURCECONTENT";
-        const string COMMON_CONFIG_FILENAME = "common.json";
+        const string COMMON_CONFIG_FILENAME = "sourcemods.common.json";
         const string SOURCEMODS_CONFIG_FILENAME = "sourcemods.json";
-        const string INSTALL_SETTINGS_FILENAME = "install.settings.json";
+        const string INSTALL_SETTINGS_FILENAME = "sourcemods.install.settings.json";
 
         public class Options
         {
@@ -138,7 +139,7 @@ namespace test_installsourcecontent_modpatcher
                 var commonConfig = new CommonConfig(fileSystem, writer, MakeFullPath(COMMON_CONFIG_FILENAME), new JSONConfigurationSerializer<JSONCommonConfig>());
                 commonConfig.LoadConfig();
 
-                var installVariablesConfig = new InstallVariablesConfig(fileSystem, writer, MakeFullPath("install.variables.json"), new JSONConfigurationSerializer<JSONInstallVariablesConfig>());
+                var installVariablesConfig = new InstallVariablesConfig(fileSystem, writer, MakeFullPath("sourcemods.install.variables.json"), new JSONConfigurationSerializer<JSONInstallVariablesConfig>());
                 installVariablesConfig.LoadConfig();
 
                 string? SourceModInstallPath;
@@ -163,7 +164,7 @@ namespace test_installsourcecontent_modpatcher
                 var sourceModsConfig = new SourceModsConfig(fileSystem, writer, MakeFullPath(SOURCEMODS_CONFIG_FILENAME), new JSONConfigurationSerializer<JSONSourceModsConfig>(), SourceModInstallPath);
                 sourceModsConfig.LoadConfig();
 
-                var installStepsConfig = new InstallStepsConfig(fileSystem, writer, MakeFullPath("install.steps.json"), new JSONConfigurationSerializer<JSONInstallStepsConfig>());
+                var installStepsConfig = new InstallStepsConfig(fileSystem, writer, MakeFullPath("sourcemods.install.steps.json"), new JSONConfigurationSerializer<JSONInstallStepsConfig>());
                 installStepsConfig.LoadConfig();
 
                 var installSettings = new InstallSettings(fileSystem, writer, MakeFullPath(INSTALL_SETTINGS_FILENAME), new JSONConfigurationSerializer<JSONInstallSettings>());

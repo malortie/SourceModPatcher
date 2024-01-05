@@ -1,4 +1,4 @@
-namespace test_installsourcecontent
+namespace Pipelines
 {
     public interface IWriter
     {

@@ -1,3 +1,5 @@
+using Pipelines;
+
 namespace test_installsourcecontent
 {
     public class SaveVariableInstallStepData : IPipelineStepData

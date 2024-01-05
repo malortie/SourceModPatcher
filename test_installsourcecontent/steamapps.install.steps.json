@@ -1,0 +1,16 @@
+{
+  "215": "./config/steamapps/215.install.steps.json",
+  "218": "./config/steamapps/218.install.steps.json",
+  "220": "./config/steamapps/220.install.steps.json",
+  "240": "./config/steamapps/240.install.steps.json",
+  "280": "./config/steamapps/280.install.steps.json",
+  "300": "./config/steamapps/300.install.steps.json",
+  "320": "./config/steamapps/320.install.steps.json",
+  "340": "./config/steamapps/340.install.steps.json",
+  "360": "./config/steamapps/360.install.steps.json",
+  "380": "./config/steamapps/380.install.steps.json",
+  "400": "./config/steamapps/400.install.steps.json",
+  "420": "./config/steamapps/420.install.steps.json",
+  "243730": "./config/steamapps/243730.install.steps.json",
+  "243750": "./config/steamapps/243750.install.steps.json"
+}

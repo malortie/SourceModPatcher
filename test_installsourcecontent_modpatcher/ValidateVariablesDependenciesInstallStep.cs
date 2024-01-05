@@ -2,6 +2,7 @@ using System.Xml.Linq;
 using System;
 using test_installsourcecontent;
 using System.Linq;
+using Pipelines;
 
 namespace test_installsourcecontent_modpatcher
 {

@@ -8,41 +8,11 @@ using System.Collections.ObjectModel;
 using System.Drawing;
 using System.IO.Abstractions;
 using System.Runtime.Versioning;
+using Pipelines;
+using test_installsourcecontent;
 
 namespace test_installsourcecontent
 {
-    public interface IStepMapper<ConfigT>
-    {
-        IPipelineStepData Map(ConfigT jsonInstallStep);
-    }
-
-    public class StepsLoader<ConfigT>
-    {
-        IStepMapper<ConfigT> _stepMapper;
-        IConfigurationSerializer<IList<ConfigT>> _serializer;
-        IFileSystem _fileSystem;
-        IWriter _writer;
-
-        public StepsLoader(IFileSystem fileSystem, IWriter writer, IConfigurationSerializer<IList<ConfigT>> serializer, IStepMapper<ConfigT> stepMapper)
-        {
-            _fileSystem = fileSystem;
-            _writer = writer;
-            _serializer = serializer;
-            _stepMapper = stepMapper;
-        }
-
-        public IList<IPipelineStepData> Load(string stepsFilePath)
-        {
-            var steps = new List<IPipelineStepData>();
-            _writer.Info($"Reading {_fileSystem.Path.GetFileName(stepsFilePath)}");
-            var deserializedStepsList = _serializer.Deserialize(_fileSystem.File.ReadAllText(stepsFilePath));
-            if (null != deserializedStepsList)
-                return deserializedStepsList.Select(a => _stepMapper.Map(a)).ToList();
-            else
-                throw new Exception($"Failed to read {stepsFilePath}");
-        }
-    }
-
     public class InstallStepMapper<ConfigT> : IStepMapper<ConfigT>
     {
         IMapper _mapper;
@@ -108,109 +78,12 @@ namespace test_installsourcecontent
         }
     }
 
-    public class ConsoleWriter : IConsoleWriter
-    {
-        public void Success(string message)
-        {
-            Console.WriteLine(message.Pastel(Color.FromArgb(0, 255, 0)));
-        }
-
-        public void Info(string message)
-        {
-            Console.WriteLine(message.Pastel(Color.FromArgb(255, 255, 255)));
-        }
-
-        public void Warning(string message)
-        {
-            Console.WriteLine(message.Pastel(Color.FromArgb(255, 255, 0)));
-        }
-
-        public void Error(string message)
-        {
-            Console.WriteLine(message.Pastel(Color.FromArgb(255, 0, 0)));
-        }
-
-        public void Failure(string message)
-        {
-            Console.WriteLine(message.Pastel(Color.FromArgb(255, 0, 0)));
-        }
-
-        public void Cancellation(string message)
-        {
-            Console.WriteLine(message.Pastel(Color.FromArgb(255, 0, 0)));
-        }
-    }
-
-    public class Logger : ILogger
-    {
-        readonly NLog.Logger _logger;
-        public Logger(NLog.Logger logger)
-        {
-            _logger = logger;
-        }
-
-        public void Cancellation(string message)
-        {
-            _logger.Error(message);
-        }
-
-        public void Error(string message)
-        {
-            _logger.Error(message);
-        }
-
-        public void Failure(string message)
-        {
-            _logger.Error(message);
-        }
-
-        public void Info(string message)
-        {
-            _logger.Info(message);
-        }
-
-        public void Success(string message)
-        {
-            _logger.Info(message);
-        }
-
-        public void Warning(string message)
-        {
-            _logger.Warn(message);
-        }
-    }
-
-    public class LogProvider : ILogProvider
-    {
-        readonly MemoryTarget _warningMemoryTarget, _errorMemoryTarget;
-        public LogProvider(MemoryTarget warningMemoryTarget, MemoryTarget errorMemoryTarget)
-        {
-            _warningMemoryTarget = warningMemoryTarget;
-            _errorMemoryTarget = errorMemoryTarget;
-        }
-
-        public ReadOnlyCollection<string> GetErrors()
-        {
-            return new ReadOnlyCollection<string>(_errorMemoryTarget.Logs);
-        }
-
-        public ReadOnlyCollection<string> GetInfos()
-        {
-            throw new NotImplementedException();
-        }
-
-        public ReadOnlyCollection<string> GetWarnings()
-        {
-            return new ReadOnlyCollection<string>(_warningMemoryTarget.Logs);
-        }
-    }
-
     [SupportedOSPlatform("windows")]
     internal class Program
     {
         const string INSTALL_ENVVAR = "TEST_INSTALLSOURCECONTENT";
         const string STEAMAPPS_CONFIG_FILENAME = "steamapps.json";
-        const string INSTALL_SETTINGS_FILENAME = "install.settings.json";
+        const string INSTALL_SETTINGS_FILENAME = "steamapps.install.settings.json";
 
         public class Options
         {
@@ -264,7 +137,7 @@ namespace test_installsourcecontent
                 var variablesConfig = new VariablesConfig(fileSystem, writer, MakeFullPath("variables.json"), new JSONConfigurationSerializer<JSONVariablesConfig>());
                 variablesConfig.LoadConfig();
 
-                var installStepsConfig = new InstallStepsConfig(fileSystem, writer, MakeFullPath("install.steps.json"), new JSONConfigurationSerializer<JSONInstallStepsConfig>());
+                var installStepsConfig = new InstallStepsConfig(fileSystem, writer, MakeFullPath("steamapps.install.steps.json"), new JSONConfigurationSerializer<JSONInstallStepsConfig>());
                 installStepsConfig.LoadConfig();
 
                 var installSettings = new InstallSettings(fileSystem, writer, MakeFullPath(INSTALL_SETTINGS_FILENAME), new JSONConfigurationSerializer<JSONInstallSettings>());

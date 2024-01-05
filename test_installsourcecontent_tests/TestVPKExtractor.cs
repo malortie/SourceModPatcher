@@ -1,4 +1,5 @@
 using System.IO.Abstractions.TestingHelpers;
+using Pipelines;
 using test_installsourcecontent;
 
 namespace test_installsourcecontent_tests

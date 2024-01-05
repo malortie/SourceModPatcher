@@ -8,19 +8,21 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="12.0.1" />
-    <PackageReference Include="CommandLineParser" Version="2.9.1" />
-    <PackageReference Include="NLog" Version="5.2.7" />
-    <PackageReference Include="Pastel" Version="4.2.0" />
-    <PackageReference Include="System.IO.Abstractions" Version="19.2.87" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\test_installsourcecontent\test_installsourcecontent.csproj" />
+    <ProjectReference Include="..\Pipelines\Pipelines.csproj" />
+	<ProjectReference Include="..\test_installsourcecontent\test_installsourcecontent.csproj" />
   </ItemGroup>
 	
   <ItemGroup>
-    <None Update="common.json">
+    <None Update="config\mods\coastline_to_atmosphere.install.steps.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="config\mods\ravenholmncz.install.steps.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="config\mods\research_and_development.install.steps.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="sourcemods.common.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="config\coastline_to_atmosphere.install.steps.json">
@@ -53,13 +55,13 @@
     <None Update="data\sdks\source2007\ep2\bin\server.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="install.settings.json">
+    <None Update="sourcemods.install.settings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="install.steps.json">
+    <None Update="sourcemods.install.steps.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="install.variables.json">
+    <None Update="sourcemods.install.variables.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="nlog.config">

@@ -1,7 +1,7 @@
 using System.Collections.ObjectModel;
 
 
-namespace test_installsourcecontent
+namespace Pipelines
 {
     public interface ITokenReplacer
     {

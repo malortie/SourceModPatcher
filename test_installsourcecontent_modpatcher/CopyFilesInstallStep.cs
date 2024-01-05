@@ -1,4 +1,5 @@
 using System;
+using Pipelines;
 using test_installsourcecontent;
 
 namespace test_installsourcecontent_modpatcher

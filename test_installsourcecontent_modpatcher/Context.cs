@@ -1,6 +1,5 @@
 using System.Collections.ObjectModel;
 using System.IO.Abstractions;
-using test_installsourcecontent;
 
 namespace test_installsourcecontent_modpatcher
 {

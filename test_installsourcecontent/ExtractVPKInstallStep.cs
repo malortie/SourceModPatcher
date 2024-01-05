@@ -2,6 +2,7 @@ using System;
 using System.IO.Abstractions;
 using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
+using Pipelines;
 
 namespace test_installsourcecontent
 {

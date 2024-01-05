@@ -1,5 +1,0 @@
-{
-  "coastline_to_atmosphere": "./config/coastline_to_atmosphere.install.steps.json",
-  "ravenholmncz": "./config/ravenholmncz.install.steps.json",
-  "research_and_development": "./config/research_and_development.install.steps.json"
-}
