@@ -178,6 +178,7 @@ namespace Pipelines
         public IWriter Writer { get; set; } = new NullWriter();
         public ITokenReplacer? TokenReplacer { get; set; }
         public ITokenReplacerVariablesProvider<ContextT>? TokenReplacerVariablesProvider { get; set; }
+        public IPipelineStepTokenReplacer? PipelineStepTokenReplacer { get; set; } = new PipelineStepTokenReplacer();
         public IPauseHandler? PauseHandler { get; set; }
         public IPipelineStepStatsResults StatsResults { get; set; } = new PipelineStepStatsResults();
         public IPipelineProgressContextFactory ProgressContextFactory { get; set; } = new PipelineProgressContextFactory();
@@ -196,48 +197,6 @@ namespace Pipelines
         public ReadOnlyPipelineStepData GetReadOnlyStepData(IPipelineStepData stepData)
         {
             return ReadOnlyPipelineStageDataFactory.CreateStepData(stepData);
-        }
-
-        void ReplaceTokensRecursively(object obj)
-        {
-            var propsWithReplacetoken = obj.GetType().GetProperties().Where(p => Attribute.IsDefined(p, typeof(PipelineStepReplaceTokenAttribute)));
-
-            foreach (PropertyInfo prop in propsWithReplacetoken)
-            {
-                var type = Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType;
-                if (type == typeof(string))
-                {
-                    string? propertyValue = prop.GetValue(obj) as string;
-                    if (null != propertyValue)
-                        prop.SetValue(obj, TokenReplacer?.Replace(propertyValue) ?? propertyValue);
-                }
-                else
-                {
-                    var propertyValue = prop.GetValue(obj);
-                    if (null != propertyValue)
-                    {
-                        var enumerable = propertyValue as IEnumerable;
-                        if (null != enumerable)
-                        {
-                            if (enumerable is IEnumerable<string>)
-                            {
-                                // Replace tokens in string collections.
-                                var newStrings = new List<string>();
-                                foreach (string str in enumerable)
-                                    newStrings.Add(TokenReplacer?.Replace(str) ?? str);
-                                prop.SetValue(obj, newStrings);
-                            }
-                            else
-                            {
-                                foreach (var item in enumerable)
-                                    ReplaceTokensRecursively(item);
-                            }
-                        }
-                        else
-                            ReplaceTokensRecursively(propertyValue);
-                    }
-                }
-            }
         }
 
         public PipelineStepStatus[] DoStage(ContextT context)
@@ -260,11 +219,11 @@ namespace Pipelines
             {
                 var stepData = StepsDatas[stepIndex];
 
-                if (TokenReplacer != null && TokenReplacerVariablesProvider != null)
+                if (PipelineStepTokenReplacer != null && TokenReplacer != null && TokenReplacerVariablesProvider != null)
                 {
                     // Perform token replacement in step string properties.
                     TokenReplacer.Variables = new ReadOnlyDictionary<string, string>(TokenReplacerVariablesProvider.GetVariables(context));
-                    ReplaceTokensRecursively(stepData);
+                    PipelineStepTokenReplacer?.Replace(stepData, TokenReplacer);
                 }
 
                 progressContext.StepNumber = stepIndex + 1;
