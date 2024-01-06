@@ -24,12 +24,12 @@ namespace test_installsourcecontent_modpatcher
 
     public class ReplaceTokensInstallStep : IPipelineStep<Context>
     {
-        ITokenReplacer _tokenReplacer;
+        IFileTokenReplacer _fileTokenReplacer;
         IReplaceTokensInstallStepEventHandler? _eventHandler;
 
-        public ReplaceTokensInstallStep(ITokenReplacer tokenReplacer, IReplaceTokensInstallStepEventHandler? eventHandler = null)
+        public ReplaceTokensInstallStep(IFileTokenReplacer fileTokenReplacer, IReplaceTokensInstallStepEventHandler? eventHandler = null)
         {
-            _tokenReplacer = tokenReplacer;
+            _fileTokenReplacer = fileTokenReplacer;
             _eventHandler = eventHandler;
         }
 
@@ -48,7 +48,7 @@ namespace test_installsourcecontent_modpatcher
             var files = Files.Select(file => PathExtensions.ConvertToUnixDirectorySeparator(context.FileSystem, context.FileSystem.Path.GetFullPath(file))).ToList();
 
             // Pass source content variables to token replacer.
-            _tokenReplacer.Variables = context.GetSourceContentVariables();
+            _fileTokenReplacer.Variables = context.GetSourceContentVariables();
 
             int numFilesProcessed = 0;
             PipelineStepStatus status = PipelineStepStatus.Complete;
@@ -63,20 +63,14 @@ namespace test_installsourcecontent_modpatcher
                 }
 
                 writer.Info($"Replacing tokens in \"{filePath}\"");
-                try
+                if (_fileTokenReplacer.ReplaceInFile(context.FileSystem, writer, filePath))
                 {
-                    // Replace variables tokens in file.
-                    var text = context.FileSystem.File.ReadAllText(filePath);
-                    text = _tokenReplacer.Replace(text);
-                    context.FileSystem.File.WriteAllText(filePath, text);
-
                     // File successfully processed.
                     _eventHandler?.FileTokenReplacementSucceeded();
                     ++numFilesProcessed;
                 }
-                catch (Exception e)
+                else
                 {
-                    writer.Error(e.Message);
                     // Other files might work, so mark it as partially completed.
                     status = PipelineStepStatus.PartiallyComplete;
                     _eventHandler?.FileTokenReplacementFailed();

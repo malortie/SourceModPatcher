@@ -50,7 +50,7 @@ namespace test_installsourcecontent_modpatcher
         static Dictionary<Type, IPipelineStep<Context>> _stepsDataToInstallStep = new()
         {
             { typeof(CopyFilesInstallStepData), new CopyFilesInstallStep(new FileCopier()) },
-            { typeof(ReplaceTokensInstallStepData), new ReplaceTokensInstallStep(new TokenReplacer { Prefix = "${{", Suffix = "}}" })},
+            { typeof(ReplaceTokensInstallStepData), new ReplaceTokensInstallStep(new FileTokenReplacer(new TokenReplacer { Prefix = "${{", Suffix = "}}" }))},
             { typeof(ValidateVariablesDependenciesInstallStepData), new ValidateVariablesDependenciesInstallStep() }
         };
 
