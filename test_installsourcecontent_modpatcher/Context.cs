@@ -23,7 +23,7 @@ namespace test_installsourcecontent_modpatcher
             return _configuration.HasVariable(variableName);
         }
 
-        public ReadOnlyDictionary<string, string> GetSourceContentVariables()
+        public virtual ReadOnlyDictionary<string, string> GetSourceContentVariables()
         {
             return _configuration.GetVariables();
         }
