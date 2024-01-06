@@ -49,7 +49,7 @@ namespace test_installsourcecontent_modpatcher
         // Map each step data type to a single step instance.
         static Dictionary<Type, IPipelineStep<Context>> _stepsDataToInstallStep = new()
         {
-            { typeof(CopyFilesInstallStepData), new CopyFilesInstallStep() },
+            { typeof(CopyFilesInstallStepData), new CopyFilesInstallStep(new FileCopier()) },
             { typeof(ReplaceTokensInstallStepData), new ReplaceTokensInstallStep(new TokenReplacer { Prefix = "${{", Suffix = "}}" })},
             { typeof(ValidateVariablesDependenciesInstallStepData), new ValidateVariablesDependenciesInstallStep() }
         };

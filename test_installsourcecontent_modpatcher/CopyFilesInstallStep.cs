@@ -35,10 +35,12 @@ namespace test_installsourcecontent_modpatcher
 
     public class CopyFilesInstallStep : IPipelineStep<Context>
     {
+        IFileCopier _fileCopier;
         ICopyFilesInstallStepEventHandler? _eventHandler;
 
-        public CopyFilesInstallStep(ICopyFilesInstallStepEventHandler? eventHandler = null)
+        public CopyFilesInstallStep(IFileCopier fileCopier, ICopyFilesInstallStepEventHandler? eventHandler = null)
         {
+            _fileCopier = fileCopier;
             _eventHandler = eventHandler;
         }
 
@@ -102,29 +104,14 @@ namespace test_installsourcecontent_modpatcher
                 }
 
                 writer.Info($"Copying \"{sourceFilePath}\" to \"{destFilePath}\"");
-                try
+                if (_fileCopier.CopyFile(context.FileSystem, writer, sourceFilePath, destFilePath))
                 {
-                    string? destFileDir = context.FileSystem.Path.GetDirectoryName(destFilePath);
-                    if (null == destFileDir)
-                    {
-                        writer.Error($"Failed to get directory name for {destFilePath}");
-                        // Other files copy might work, so mark it as partially completed.
-                        status = PipelineStepStatus.PartiallyComplete;
-                        continue;
-                    }
-
-                    if (!context.FileSystem.Directory.Exists(destFileDir))
-                        context.FileSystem.Directory.CreateDirectory(destFileDir);
-
-                    // Copy file to destination. Overwrite if it exists.
-                    context.FileSystem.File.Copy(sourceFilePath, destFilePath, true);
                     // File successfully copied.
                     _eventHandler?.FileCopySuccess();
                     ++numCopiedFiles;
                 }
-                catch (Exception e)
+                else
                 {
-                    writer.Error(e.Message);
                     // Other files copy might work, so mark it as partially completed.
                     status = PipelineStepStatus.PartiallyComplete;
                     _eventHandler?.FileCopyFailed();
