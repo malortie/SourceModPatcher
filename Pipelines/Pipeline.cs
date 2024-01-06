@@ -271,10 +271,10 @@ namespace Pipelines
                         ++StatsResults.NumStepsCancelled;
                         break;
                 }
-            }
 
-            if (PauseAfterEachStep)
-                PauseHandler?.Pause();
+                if (PauseAfterEachStep)
+                    PauseHandler?.Pause();
+            }
 
             return stepStatuses.ToArray();
         }
