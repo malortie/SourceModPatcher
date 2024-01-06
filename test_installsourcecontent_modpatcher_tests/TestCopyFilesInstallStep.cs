@@ -85,8 +85,6 @@ namespace test_installsourcecontent_modpatcher_tests
     {
         static IWriter NullWriter = new NullWriter();
         static IConfiguration NullConfiguration = new NullConfiguration();
-        static IFileCopier DefaultFileCopier = new FileCopier();
-
         static IFileCopier AlwaysTrueFileCopier = new AlwaysTrueFileCopier();
         static IFileCopier AlwaysFalseFileCopier = new AlwaysFalseFileCopier();
 
@@ -95,7 +93,7 @@ namespace test_installsourcecontent_modpatcher_tests
         {
             var fileSystem = new MockFileSystem(new Dictionary<string, MockFileData> { });
             var eventHandler = new TestCopyFilesInstallStepEventHandler();
-            var step = new CopyFilesInstallStep(DefaultFileCopier, eventHandler);
+            var step = new CopyFilesInstallStep(AlwaysTrueFileCopier, eventHandler);
             var stepData = new CopyFilesInstallStepData();
 
             var result = step.DoStep(new Context(fileSystem, NullConfiguration), stepData, NullWriter);
