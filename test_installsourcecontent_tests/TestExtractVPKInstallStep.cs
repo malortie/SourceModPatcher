@@ -617,7 +617,7 @@ namespace test_installsourcecontent_tests
             Assert.AreEqual(1, eventHandler.NoVPKExtractedTotal);
         }
 
-        public class TestVPKExtractor : IVPKExtractor
+        public class MockVPKExtractor : IVPKExtractor
         {
             public List<string> CompleteOnVpks { get; set; } = [];
             public List<string> CompleteWithErrorsOnVpks { get; set; } = [];
@@ -645,7 +645,7 @@ namespace test_installsourcecontent_tests
             });
 
             var eventHandler = new TestExtractVPKInstallStepEventHandler();
-            var step = new ExtractVPKInstallStep(new TestVPKExtractor()
+            var step = new ExtractVPKInstallStep(new MockVPKExtractor()
             {
                 CompleteOnVpks = ["C:/vpks/test1.vpk"],
                 CompleteWithErrorsOnVpks = ["C:/vpks/test2.vpk"]
@@ -677,7 +677,7 @@ namespace test_installsourcecontent_tests
             });
 
             var eventHandler = new TestExtractVPKInstallStepEventHandler();
-            var step = new ExtractVPKInstallStep(new TestVPKExtractor()
+            var step = new ExtractVPKInstallStep(new MockVPKExtractor()
             {
                 CompleteOnVpks = ["C:/vpks/test1.vpk"],
                 FailOnVpks = ["C:/vpks/test2.vpk"]
@@ -709,7 +709,7 @@ namespace test_installsourcecontent_tests
             });
 
             var eventHandler = new TestExtractVPKInstallStepEventHandler();
-            var step = new ExtractVPKInstallStep(new TestVPKExtractor()
+            var step = new ExtractVPKInstallStep(new MockVPKExtractor()
             {
                 CompleteWithErrorsOnVpks = ["C:/vpks/test1.vpk"],
                 FailOnVpks = ["C:/vpks/test2.vpk"]
