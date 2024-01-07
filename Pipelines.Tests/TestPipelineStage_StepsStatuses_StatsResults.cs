@@ -6,6 +6,24 @@ namespace Pipelines.Tests
         static NullContext NullContext = new NullContext();
 
         [TestMethod]
+        public void StepsStatuses_StatsResults_NoSteps()
+        {
+            var stage = new NullStage
+            {
+                StepsDatas = []
+            };
+
+            var stepsStatuses = stage.DoStage(NullContext);
+            Assert.AreEqual(0, stepsStatuses.Length);
+
+            Assert.AreEqual(0, stage.StatsResults.NumStepsTotal);
+            Assert.AreEqual(0, stage.StatsResults.NumStepsCompleted);
+            Assert.AreEqual(0, stage.StatsResults.NumStepsPartiallyCompleted);
+            Assert.AreEqual(0, stage.StatsResults.NumStepsFailed);
+            Assert.AreEqual(0, stage.StatsResults.NumStepsCancelled);
+        }
+
+        [TestMethod]
         public void StepsStatuses_StatsResults_OneStepComplete()
         {
             var stage = new NullStage
