@@ -145,7 +145,7 @@ namespace Pipelines.Tests
         }
 
         [TestMethod]
-        public void WriteStepCancelled_Writer_OneOfEachType()
+        public void WriteStep_Writer_OneOfEachType()
         {
             var writer = new WriterMock();
             var stage = new NullStage
