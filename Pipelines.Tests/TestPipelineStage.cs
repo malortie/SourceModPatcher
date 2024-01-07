@@ -64,55 +64,40 @@ namespace Pipelines.Tests
         }
     }
 
-    public class PauseHandlerMock : IPauseHandler
+    public class SetupContextStage : NullStage
     {
-        public int PauseTotal { get; private set; } = 0;
+        public int SetupContextTotal { get; private set; } = 0;
 
-        public void Pause()
+        public override void SetupContext(NullContext context)
         {
-            ++PauseTotal;
+            ++SetupContextTotal;
         }
     }
 
     [TestClass]
     public class TestPipelineStage
     {
+        static NullContext NullContext = new NullContext();
+
         [TestMethod]
-        public void PauseHandler_CalledAfterEachStep_WhenPauseAfterEachStepIsTrue()
+        public void SetupContext_CalledOncePerStageRun()
         {
-            var pauseHandler = new PauseHandlerMock();
-            var stage = new NullStage
+            var stage = new SetupContextStage
             {
-                PauseAfterEachStep = true,
-                PauseHandler = pauseHandler,
                 StepsDatas = [
                     new NullStepDataComplete(),
-                    new NullStepDataComplete(),
-                    new NullStepDataComplete()
+                    new NullStepDataPartiallyComplete(),
+                    new NullStepDataFailed(),
+                    new NullStepDataCancelled(),
                 ]
             };
 
-            stage.DoStage(new NullContext());
-            Assert.AreEqual(3, pauseHandler.PauseTotal);
-        }
-
-        [TestMethod]
-        public void PauseHandler_NotCalledAfterEachStep_WhenPauseAfterEachStepIsFalse()
-        {
-            var pauseHandler = new PauseHandlerMock();
-            var stage = new NullStage
-            {
-                PauseAfterEachStep = false,
-                PauseHandler = pauseHandler,
-                StepsDatas = [
-                    new NullStepDataComplete(),
-                    new NullStepDataComplete(),
-                    new NullStepDataComplete()
-                ]
-            };
-
-            stage.DoStage(new NullContext());
-            Assert.AreEqual(0, pauseHandler.PauseTotal);
+            stage.DoStage(NullContext);
+            Assert.AreEqual(1, stage.SetupContextTotal);
+            stage.DoStage(NullContext);
+            Assert.AreEqual(2, stage.SetupContextTotal);
+            stage.DoStage(NullContext);
+            Assert.AreEqual(3, stage.SetupContextTotal);
         }
     }
 }
