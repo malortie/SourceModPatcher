@@ -1,6 +1,6 @@
 namespace Pipelines.Tests
 {
-    public class FormatterMock : IPipelineStageProgressStepFormatter
+    public class PipelineStageProgressStepFormatterMock : IPipelineStageProgressStepFormatter
     {
         public int FormatTotal { get; private set; } = 0;
 
@@ -20,12 +20,12 @@ namespace Pipelines.Tests
         [TestMethod]
         public void StepExecuteFormatter_Called_WhenAllDependenciesWereCompleted()
         {
-            var stepExecuteFormatter = new FormatterMock();
-            var stepDependenciesNotCompletedFormatter = new FormatterMock();
-            var stepCompletedFormatter = new FormatterMock();
-            var stepPartiallyCompletedFormatter = new FormatterMock();
-            var stepFailedFormatter = new FormatterMock();
-            var stepCancelledFormatter = new FormatterMock();
+            var stepExecuteFormatter = new PipelineStageProgressStepFormatterMock();
+            var stepDependenciesNotCompletedFormatter = new PipelineStageProgressStepFormatterMock();
+            var stepCompletedFormatter = new PipelineStageProgressStepFormatterMock();
+            var stepPartiallyCompletedFormatter = new PipelineStageProgressStepFormatterMock();
+            var stepFailedFormatter = new PipelineStageProgressStepFormatterMock();
+            var stepCancelledFormatter = new PipelineStageProgressStepFormatterMock();
 
             var stage = new NullStage
             {
@@ -62,12 +62,12 @@ namespace Pipelines.Tests
         [TestMethod]
         public void StepExecuteFormatter_NotCalledOnDependents_WhenAtLeastOneDependencyWasNotCompleted()
         {
-            var stepExecuteFormatter = new FormatterMock();
-            var stepDependenciesNotCompletedFormatter = new FormatterMock();
-            var stepCompletedFormatter = new FormatterMock();
-            var stepPartiallyCompletedFormatter = new FormatterMock();
-            var stepFailedFormatter = new FormatterMock();
-            var stepCancelledFormatter = new FormatterMock();
+            var stepExecuteFormatter = new PipelineStageProgressStepFormatterMock();
+            var stepDependenciesNotCompletedFormatter = new PipelineStageProgressStepFormatterMock();
+            var stepCompletedFormatter = new PipelineStageProgressStepFormatterMock();
+            var stepPartiallyCompletedFormatter = new PipelineStageProgressStepFormatterMock();
+            var stepFailedFormatter = new PipelineStageProgressStepFormatterMock();
+            var stepCancelledFormatter = new PipelineStageProgressStepFormatterMock();
 
             var stage = new NullStage
             {
@@ -104,12 +104,12 @@ namespace Pipelines.Tests
         [TestMethod]
         public void StepExecuteFormatter_NotCalledOnDependents_WhenAllDependenciesWereNotCompleted()
         {
-            var stepExecuteFormatter = new FormatterMock();
-            var stepDependenciesNotCompletedFormatter = new FormatterMock();
-            var stepCompletedFormatter = new FormatterMock();
-            var stepPartiallyCompletedFormatter = new FormatterMock();
-            var stepFailedFormatter = new FormatterMock();
-            var stepCancelledFormatter = new FormatterMock();
+            var stepExecuteFormatter = new PipelineStageProgressStepFormatterMock();
+            var stepDependenciesNotCompletedFormatter = new PipelineStageProgressStepFormatterMock();
+            var stepCompletedFormatter = new PipelineStageProgressStepFormatterMock();
+            var stepPartiallyCompletedFormatter = new PipelineStageProgressStepFormatterMock();
+            var stepFailedFormatter = new PipelineStageProgressStepFormatterMock();
+            var stepCancelledFormatter = new PipelineStageProgressStepFormatterMock();
 
             var stage = new NullStage
             {
@@ -146,12 +146,12 @@ namespace Pipelines.Tests
         [TestMethod]
         public void StepDependenciesNotCompletedFormatter_NotCalled_WhenAllDependenciesWereCompleted()
         {
-            var stepExecuteFormatter = new FormatterMock();
-            var stepDependenciesNotCompletedFormatter = new FormatterMock();
-            var stepCompletedFormatter = new FormatterMock();
-            var stepPartiallyCompletedFormatter = new FormatterMock();
-            var stepFailedFormatter = new FormatterMock();
-            var stepCancelledFormatter = new FormatterMock();
+            var stepExecuteFormatter = new PipelineStageProgressStepFormatterMock();
+            var stepDependenciesNotCompletedFormatter = new PipelineStageProgressStepFormatterMock();
+            var stepCompletedFormatter = new PipelineStageProgressStepFormatterMock();
+            var stepPartiallyCompletedFormatter = new PipelineStageProgressStepFormatterMock();
+            var stepFailedFormatter = new PipelineStageProgressStepFormatterMock();
+            var stepCancelledFormatter = new PipelineStageProgressStepFormatterMock();
 
             var stage = new NullStage
             {
@@ -188,12 +188,12 @@ namespace Pipelines.Tests
         [TestMethod]
         public void StepDependenciesNotCompletedFormatter_CalledOnDependents_WhenAtLeastOneDependencyWasNotCompleted()
         {
-            var stepExecuteFormatter = new FormatterMock();
-            var stepDependenciesNotCompletedFormatter = new FormatterMock();
-            var stepCompletedFormatter = new FormatterMock();
-            var stepPartiallyCompletedFormatter = new FormatterMock();
-            var stepFailedFormatter = new FormatterMock();
-            var stepCancelledFormatter = new FormatterMock();
+            var stepExecuteFormatter = new PipelineStageProgressStepFormatterMock();
+            var stepDependenciesNotCompletedFormatter = new PipelineStageProgressStepFormatterMock();
+            var stepCompletedFormatter = new PipelineStageProgressStepFormatterMock();
+            var stepPartiallyCompletedFormatter = new PipelineStageProgressStepFormatterMock();
+            var stepFailedFormatter = new PipelineStageProgressStepFormatterMock();
+            var stepCancelledFormatter = new PipelineStageProgressStepFormatterMock();
 
             var stage = new NullStage
             {
@@ -230,12 +230,12 @@ namespace Pipelines.Tests
         [TestMethod]
         public void StepDependenciesNotCompletedFormatter_CalledOnDependents_WhenAllDependenciesWereNotCompleted()
         {
-            var stepExecuteFormatter = new FormatterMock();
-            var stepDependenciesNotCompletedFormatter = new FormatterMock();
-            var stepCompletedFormatter = new FormatterMock();
-            var stepPartiallyCompletedFormatter = new FormatterMock();
-            var stepFailedFormatter = new FormatterMock();
-            var stepCancelledFormatter = new FormatterMock();
+            var stepExecuteFormatter = new PipelineStageProgressStepFormatterMock();
+            var stepDependenciesNotCompletedFormatter = new PipelineStageProgressStepFormatterMock();
+            var stepCompletedFormatter = new PipelineStageProgressStepFormatterMock();
+            var stepPartiallyCompletedFormatter = new PipelineStageProgressStepFormatterMock();
+            var stepFailedFormatter = new PipelineStageProgressStepFormatterMock();
+            var stepCancelledFormatter = new PipelineStageProgressStepFormatterMock();
 
             var stage = new NullStage
             {
@@ -272,12 +272,12 @@ namespace Pipelines.Tests
         [TestMethod]
         public void StepCompletedFormatter_Called_3_Times()
         {
-            var stepExecuteFormatter = new FormatterMock();
-            var stepDependenciesNotCompletedFormatter = new FormatterMock();
-            var stepCompletedFormatter = new FormatterMock();
-            var stepPartiallyCompletedFormatter = new FormatterMock();
-            var stepFailedFormatter = new FormatterMock();
-            var stepCancelledFormatter = new FormatterMock();
+            var stepExecuteFormatter = new PipelineStageProgressStepFormatterMock();
+            var stepDependenciesNotCompletedFormatter = new PipelineStageProgressStepFormatterMock();
+            var stepCompletedFormatter = new PipelineStageProgressStepFormatterMock();
+            var stepPartiallyCompletedFormatter = new PipelineStageProgressStepFormatterMock();
+            var stepFailedFormatter = new PipelineStageProgressStepFormatterMock();
+            var stepCancelledFormatter = new PipelineStageProgressStepFormatterMock();
 
             var stage = new NullStage
             {
@@ -304,12 +304,12 @@ namespace Pipelines.Tests
         [TestMethod]
         public void StepPartiallyCompletedFormatter_Called_3_Times()
         {
-            var stepExecuteFormatter = new FormatterMock();
-            var stepDependenciesNotCompletedFormatter = new FormatterMock();
-            var stepCompletedFormatter = new FormatterMock();
-            var stepPartiallyCompletedFormatter = new FormatterMock();
-            var stepFailedFormatter = new FormatterMock();
-            var stepCancelledFormatter = new FormatterMock();
+            var stepExecuteFormatter = new PipelineStageProgressStepFormatterMock();
+            var stepDependenciesNotCompletedFormatter = new PipelineStageProgressStepFormatterMock();
+            var stepCompletedFormatter = new PipelineStageProgressStepFormatterMock();
+            var stepPartiallyCompletedFormatter = new PipelineStageProgressStepFormatterMock();
+            var stepFailedFormatter = new PipelineStageProgressStepFormatterMock();
+            var stepCancelledFormatter = new PipelineStageProgressStepFormatterMock();
 
             var stage = new NullStage
             {
@@ -336,12 +336,12 @@ namespace Pipelines.Tests
         [TestMethod]
         public void StepFailedFormatter_Called_3_Times()
         {
-            var stepExecuteFormatter = new FormatterMock();
-            var stepDependenciesNotCompletedFormatter = new FormatterMock();
-            var stepCompletedFormatter = new FormatterMock();
-            var stepPartiallyCompletedFormatter = new FormatterMock();
-            var stepFailedFormatter = new FormatterMock();
-            var stepCancelledFormatter = new FormatterMock();
+            var stepExecuteFormatter = new PipelineStageProgressStepFormatterMock();
+            var stepDependenciesNotCompletedFormatter = new PipelineStageProgressStepFormatterMock();
+            var stepCompletedFormatter = new PipelineStageProgressStepFormatterMock();
+            var stepPartiallyCompletedFormatter = new PipelineStageProgressStepFormatterMock();
+            var stepFailedFormatter = new PipelineStageProgressStepFormatterMock();
+            var stepCancelledFormatter = new PipelineStageProgressStepFormatterMock();
 
             var stage = new NullStage
             {
@@ -368,12 +368,12 @@ namespace Pipelines.Tests
         [TestMethod]
         public void StepCancelledFormatter_Called_3_Times()
         {
-            var stepExecuteFormatter = new FormatterMock();
-            var stepDependenciesNotCompletedFormatter = new FormatterMock();
-            var stepCompletedFormatter = new FormatterMock();
-            var stepPartiallyCompletedFormatter = new FormatterMock();
-            var stepFailedFormatter = new FormatterMock();
-            var stepCancelledFormatter = new FormatterMock();
+            var stepExecuteFormatter = new PipelineStageProgressStepFormatterMock();
+            var stepDependenciesNotCompletedFormatter = new PipelineStageProgressStepFormatterMock();
+            var stepCompletedFormatter = new PipelineStageProgressStepFormatterMock();
+            var stepPartiallyCompletedFormatter = new PipelineStageProgressStepFormatterMock();
+            var stepFailedFormatter = new PipelineStageProgressStepFormatterMock();
+            var stepCancelledFormatter = new PipelineStageProgressStepFormatterMock();
 
             var stage = new NullStage
             {
@@ -400,12 +400,12 @@ namespace Pipelines.Tests
         [TestMethod]
         public void StepFormatter_OneOfEachType()
         {
-            var stepExecuteFormatter = new FormatterMock();
-            var stepDependenciesNotCompletedFormatter = new FormatterMock();
-            var stepCompletedFormatter = new FormatterMock();
-            var stepPartiallyCompletedFormatter = new FormatterMock();
-            var stepFailedFormatter = new FormatterMock();
-            var stepCancelledFormatter = new FormatterMock();
+            var stepExecuteFormatter = new PipelineStageProgressStepFormatterMock();
+            var stepDependenciesNotCompletedFormatter = new PipelineStageProgressStepFormatterMock();
+            var stepCompletedFormatter = new PipelineStageProgressStepFormatterMock();
+            var stepPartiallyCompletedFormatter = new PipelineStageProgressStepFormatterMock();
+            var stepFailedFormatter = new PipelineStageProgressStepFormatterMock();
+            var stepCancelledFormatter = new PipelineStageProgressStepFormatterMock();
 
             var stage = new NullStage
             {

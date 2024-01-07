@@ -1,6 +1,6 @@
 namespace Pipelines.Tests
 {
-    public class ProgressStageFormatterMock : IPipelineProgressStageFormatter
+    public class PipelineProgressStageFormatterMock : IPipelineProgressStageFormatter
     {
         public int FormatTotal { get; private set; } = 0;
 
@@ -20,11 +20,11 @@ namespace Pipelines.Tests
         [TestMethod]
         public void StageExecuteFormatter_Called_3_Times()
         {
-            var stageExecuteFormatter = new ProgressStageFormatterMock();
-            var stageCompletedFormatter = new ProgressStageFormatterMock();
-            var stagePartiallyCompletedFormatter = new ProgressStageFormatterMock();
-            var stageFailedFormatter = new ProgressStageFormatterMock();
-            var stageCancelledFormatter = new ProgressStageFormatterMock();
+            var stageExecuteFormatter = new PipelineProgressStageFormatterMock();
+            var stageCompletedFormatter = new PipelineProgressStageFormatterMock();
+            var stagePartiallyCompletedFormatter = new PipelineProgressStageFormatterMock();
+            var stageFailedFormatter = new PipelineProgressStageFormatterMock();
+            var stageCancelledFormatter = new PipelineProgressStageFormatterMock();
 
             var pipeline = new Pipeline<NullContext>(new[] {
                 new NullStage
@@ -55,11 +55,11 @@ namespace Pipelines.Tests
         [TestMethod]
         public void StageCompletedFormatter_Called_3_Times()
         {
-            var stageExecuteFormatter = new ProgressStageFormatterMock();
-            var stageCompletedFormatter = new ProgressStageFormatterMock();
-            var stagePartiallyCompletedFormatter = new ProgressStageFormatterMock();
-            var stageFailedFormatter = new ProgressStageFormatterMock();
-            var stageCancelledFormatter = new ProgressStageFormatterMock();
+            var stageExecuteFormatter = new PipelineProgressStageFormatterMock();
+            var stageCompletedFormatter = new PipelineProgressStageFormatterMock();
+            var stagePartiallyCompletedFormatter = new PipelineProgressStageFormatterMock();
+            var stageFailedFormatter = new PipelineProgressStageFormatterMock();
+            var stageCancelledFormatter = new PipelineProgressStageFormatterMock();
 
             var pipeline = new Pipeline<NullContext>(new[] {
                 new NullStage
@@ -90,11 +90,11 @@ namespace Pipelines.Tests
         [TestMethod]
         public void StagePartiallyCompletedFormatter_Called_3_Times()
         {
-            var stageExecuteFormatter = new ProgressStageFormatterMock();
-            var stageCompletedFormatter = new ProgressStageFormatterMock();
-            var stagePartiallyCompletedFormatter = new ProgressStageFormatterMock();
-            var stageFailedFormatter = new ProgressStageFormatterMock();
-            var stageCancelledFormatter = new ProgressStageFormatterMock();
+            var stageExecuteFormatter = new PipelineProgressStageFormatterMock();
+            var stageCompletedFormatter = new PipelineProgressStageFormatterMock();
+            var stagePartiallyCompletedFormatter = new PipelineProgressStageFormatterMock();
+            var stageFailedFormatter = new PipelineProgressStageFormatterMock();
+            var stageCancelledFormatter = new PipelineProgressStageFormatterMock();
 
             var pipeline = new Pipeline<NullContext>(new[] {
                 new NullStage
@@ -131,11 +131,11 @@ namespace Pipelines.Tests
         [TestMethod]
         public void StageFailedFormatter_Called_3_Times()
         {
-            var stageExecuteFormatter = new ProgressStageFormatterMock();
-            var stageCompletedFormatter = new ProgressStageFormatterMock();
-            var stagePartiallyCompletedFormatter = new ProgressStageFormatterMock();
-            var stageFailedFormatter = new ProgressStageFormatterMock();
-            var stageCancelledFormatter = new ProgressStageFormatterMock();
+            var stageExecuteFormatter = new PipelineProgressStageFormatterMock();
+            var stageCompletedFormatter = new PipelineProgressStageFormatterMock();
+            var stagePartiallyCompletedFormatter = new PipelineProgressStageFormatterMock();
+            var stageFailedFormatter = new PipelineProgressStageFormatterMock();
+            var stageCancelledFormatter = new PipelineProgressStageFormatterMock();
 
             var pipeline = new Pipeline<NullContext>(new[] {
                 new NullStage
@@ -172,11 +172,11 @@ namespace Pipelines.Tests
         [TestMethod]
         public void StageCancelledFormatter_Called_3_Times()
         {
-            var stageExecuteFormatter = new ProgressStageFormatterMock();
-            var stageCompletedFormatter = new ProgressStageFormatterMock();
-            var stagePartiallyCompletedFormatter = new ProgressStageFormatterMock();
-            var stageFailedFormatter = new ProgressStageFormatterMock();
-            var stageCancelledFormatter = new ProgressStageFormatterMock();
+            var stageExecuteFormatter = new PipelineProgressStageFormatterMock();
+            var stageCompletedFormatter = new PipelineProgressStageFormatterMock();
+            var stagePartiallyCompletedFormatter = new PipelineProgressStageFormatterMock();
+            var stageFailedFormatter = new PipelineProgressStageFormatterMock();
+            var stageCancelledFormatter = new PipelineProgressStageFormatterMock();
 
             var pipeline = new Pipeline<NullContext>(new[] {
                 new NullStage
@@ -213,11 +213,11 @@ namespace Pipelines.Tests
         [TestMethod]
         public void StageFormatter_OneOfEachType()
         {
-            var stageExecuteFormatter = new ProgressStageFormatterMock();
-            var stageCompletedFormatter = new ProgressStageFormatterMock();
-            var stagePartiallyCompletedFormatter = new ProgressStageFormatterMock();
-            var stageFailedFormatter = new ProgressStageFormatterMock();
-            var stageCancelledFormatter = new ProgressStageFormatterMock();
+            var stageExecuteFormatter = new PipelineProgressStageFormatterMock();
+            var stageCompletedFormatter = new PipelineProgressStageFormatterMock();
+            var stagePartiallyCompletedFormatter = new PipelineProgressStageFormatterMock();
+            var stageFailedFormatter = new PipelineProgressStageFormatterMock();
+            var stageCancelledFormatter = new PipelineProgressStageFormatterMock();
 
             var pipeline = new Pipeline<NullContext>(new[] {
                 new NullStage
