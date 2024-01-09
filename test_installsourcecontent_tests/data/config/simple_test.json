@@ -1,0 +1,7 @@
+{
+  "propBool": true,
+  "propInt": 42,
+  "propString": "value1",
+  "propIntList": [1,2,3,4],
+  "propObject": { "hello": "world" }
+}
