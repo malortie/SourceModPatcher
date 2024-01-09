@@ -9,7 +9,7 @@ namespace test_installsourcecontent
         void SaveConfig();
     }
 
-    public abstract class ConfigurationManager<ConfigT> : IConfigurationManager where ConfigT : new()
+    public class ConfigurationManager<ConfigT> : IConfigurationManager where ConfigT : new()
     {
         readonly IFileSystem _fileSystem;
         readonly IWriter _writer;
@@ -26,7 +26,7 @@ namespace test_installsourcecontent
 
         public string FileName { get { return _fileSystem.Path.GetFileName(_filePath); } }
 
-        public ConfigT Config { get; private set; } = new();
+        public ConfigT Config { get; protected set; } = new();
 
         protected IFileSystem FileSystem { get { return _fileSystem; } }
         protected IWriter Writer { get { return _writer; } }
