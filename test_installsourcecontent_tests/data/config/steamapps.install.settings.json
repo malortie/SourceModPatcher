@@ -1,0 +1,18 @@
+{
+  "215": {
+    "install": false,
+    "install_dir": "C:/sdkbase2006"
+  },
+  "218": {
+    "install": true,
+    "install_dir": "C:/sdkbase2007"
+  },
+  "220": {
+    "install": false,
+    "install_dir": "C:/hl2"
+  },
+  "240": {
+    "install": true,
+    "install_dir": "C:/cstrike"
+  }
+}
