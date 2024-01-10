@@ -1,0 +1,14 @@
+{
+  "sourcemod_1": {
+    "install": false
+  },
+  "sourcemod_2": {
+    "install": true
+  },
+  "sourcemod_3": {
+    "install": false
+  },
+  "sourcemod_4": {
+    "install": true
+  }
+}
