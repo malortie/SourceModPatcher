@@ -731,5 +731,39 @@ namespace test_installsourcecontent_tests
             Assert.AreEqual(1, eventHandler.VPKExtractionFailedTotal);
             Assert.AreEqual(0, eventHandler.NoVPKExtractedTotal);
         }
+
+        [TestMethod]
+        public void StepsLoader_Load_Simple()
+        {
+            var fileSystem = new MockFileSystem(new Dictionary<string, MockFileData>{
+                { "C:/step_extract_vpk.json", new MockFileData(File.ReadAllBytes("../../../data/config/step_extract_vpk.json")) },
+            });
+
+            var stepsLoader = new StepsLoader<JSONInstallStep>(fileSystem, NullWriter, new JSONConfigurationSerializer<IList<JSONInstallStep>>(), new InstallStepMapper<JSONInstallStep>());
+
+            var stepsList = stepsLoader.Load("C:/step_extract_vpk.json");
+            Assert.IsNotNull(stepsList);
+
+            var stepData = (ExtractVPKInstallStepData)stepsList[0];
+            Assert.AreEqual("step_extract_content", stepData.Name);
+            Assert.AreEqual("Extract game content", stepData.Description);
+            CollectionAssert.AreEquivalent(new List<string> { "previous_step1" }, stepData.DependsOn);
+            CollectionAssert.AreEquivalent(new List<string> { "file1.txt", "file2.txt" }, stepData.FilesToExclude);
+            CollectionAssert.AreEquivalent(new List<string> { "file3.txt", "file4.txt" }, stepData.FilesToExtract);
+            Assert.AreEqual("C:/output", stepData.OutDir);
+
+            Assert.IsNotNull(stepData.Vpks);
+            Assert.AreEqual(2, stepData.Vpks.Count);
+
+            var vpk = stepData.Vpks[0];
+            Assert.AreEqual("test.vpk", vpk.VPKFile);
+            CollectionAssert.AreEquivalent(new List<string> { "file5.txt", "file6.txt" }, vpk.FilesToExclude);
+            CollectionAssert.AreEquivalent(new List<string> { "file7.txt", "file8.txt" }, vpk.FilesToExtract);
+
+            vpk = stepData.Vpks[1];
+            Assert.AreEqual("test2.vpk", vpk.VPKFile);
+            CollectionAssert.AreEquivalent(new List<string> {}, vpk.FilesToExclude);
+            CollectionAssert.AreEquivalent(new List<string> {}, vpk.FilesToExtract);
+        }
     }
 }

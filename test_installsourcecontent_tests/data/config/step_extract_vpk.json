@@ -1,0 +1,33 @@
+[
+  {
+    "$type": "extract_vpk",
+    "name": "step_extract_content",
+    "description": "Extract game content",
+    "depends_on": ["previous_step1"],
+    "vpks": [
+      {
+        "vpk": "test.vpk",
+        "files_to_exclude": [
+          "file5.txt",
+          "file6.txt"
+        ],
+        "files_to_extract": [
+          "file7.txt",
+          "file8.txt"
+        ]
+      },
+      {
+        "vpk": "test2.vpk"
+      }
+    ],
+    "files_to_exclude": [
+      "file1.txt",
+      "file2.txt"
+    ],
+    "files_to_extract": [
+      "file3.txt",
+      "file4.txt"
+    ],
+    "outdir": "C:/output"
+  }
+]
