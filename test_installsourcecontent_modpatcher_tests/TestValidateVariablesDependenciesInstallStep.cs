@@ -5,7 +5,9 @@ using test_installsourcecontent_modpatcher;
 
 using IConfiguration = test_installsourcecontent_modpatcher.IConfiguration;
 using Context = test_installsourcecontent_modpatcher.Context;
+using JSONInstallStep = test_installsourcecontent_modpatcher.JSONInstallStep;
 using System.Collections.ObjectModel;
+using test_installsourcecontent;
 
 namespace test_installsourcecontent_modpatcher_tests
 {
@@ -508,6 +510,30 @@ namespace test_installsourcecontent_modpatcher_tests
             Assert.AreEqual(0, eventHandler.MissingSingleVariableDependencyTotal);
             Assert.AreEqual(1, eventHandler.MissingMultiVariableDependencyTotal);
             Assert.AreEqual(1, eventHandler.MissingDependenciesTotal);
+        }
+
+        [TestMethod]
+        public void StepsLoader_Load_Simple()
+        {
+            var fileSystem = new MockFileSystem(new Dictionary<string, MockFileData>{
+                { "C:/step_validate_variables_dependencies.json", new MockFileData(File.ReadAllBytes("../../../data/config/step_validate_variables_dependencies.json")) },
+            });
+
+            var stepsLoader = new StepsLoader<JSONInstallStep>(fileSystem, NullWriter, new JSONConfigurationSerializer<IList<JSONInstallStep>>(), new test_installsourcecontent_modpatcher.InstallStepMapper<JSONInstallStep>());
+
+            var stepsList = stepsLoader.Load("C:/step_validate_variables_dependencies.json");
+
+            Assert.IsNotNull(stepsList);
+            var stepData = (ValidateVariablesDependenciesInstallStepData)stepsList[0];
+            Assert.AreEqual("step_validate_variables_dependencies", stepData.Name);
+            Assert.AreEqual("Validate sourcemod variables dependencies", stepData.Description);
+            CollectionAssert.AreEquivalent(new List<string> { "previous_step1" }, stepData.DependsOn);
+
+            Assert.IsNotNull(stepData.Dependencies);
+            Assert.AreEqual(3, stepData.Dependencies.Count);
+            CollectionAssert.AreEquivalent(new List<string> { "dependency_1" }, stepData.Dependencies[0]);
+            CollectionAssert.AreEquivalent(new List<string> { "dependency_2a", "dependency_2b" }, stepData.Dependencies[1]);
+            CollectionAssert.AreEquivalent(new List<string> { "dependency_3" }, stepData.Dependencies[2]);
         }
     }
 }

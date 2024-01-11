@@ -1,0 +1,13 @@
+[
+  {
+    "$type": "validate_variables_dependencies",
+    "name": "step_validate_variables_dependencies",
+    "description": "Validate sourcemod variables dependencies",
+    "depends_on": ["previous_step1"],
+    "dependencies": [
+      ["dependency_1"],
+      ["dependency_2a", "dependency_2b"],
+      ["dependency_3"]
+    ]
+  }
+]
