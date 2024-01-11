@@ -5,6 +5,8 @@ using test_installsourcecontent_modpatcher;
 
 using IConfiguration = test_installsourcecontent_modpatcher.IConfiguration;
 using Context = test_installsourcecontent_modpatcher.Context;
+using JSONInstallStep = test_installsourcecontent_modpatcher.JSONInstallStep;
+using test_installsourcecontent;
 
 namespace test_installsourcecontent_modpatcher_tests
 {
@@ -359,6 +361,35 @@ namespace test_installsourcecontent_modpatcher_tests
             Assert.AreEqual(0, eventHandler.FileCopySuccessTotal);
             Assert.AreEqual(2, eventHandler.FileCopyFailedTotal);
             Assert.AreEqual(1, eventHandler.NoFilesCopiedTotal);
+        }
+
+        [TestMethod]
+        public void StepsLoader_Load_Simple()
+        {
+            var fileSystem = new MockFileSystem(new Dictionary<string, MockFileData>{
+                { "C:/step_copy_files.json", new MockFileData(File.ReadAllBytes("../../../data/config/step_copy_files.json")) },
+            });
+
+            var stepsLoader = new StepsLoader<JSONInstallStep>(fileSystem, NullWriter, new JSONConfigurationSerializer<IList<JSONInstallStep>>(), new test_installsourcecontent_modpatcher.InstallStepMapper<JSONInstallStep>());
+
+            var stepsList = stepsLoader.Load("C:/step_copy_files.json");
+
+            Assert.IsNotNull(stepsList);
+            var stepData = (CopyFilesInstallStepData)stepsList[0];
+            Assert.AreEqual("step_copy_files", stepData.Name);
+            Assert.AreEqual("Copy sourcemod files", stepData.Description);
+            CollectionAssert.AreEquivalent(new List<string> { "previous_step1" }, stepData.DependsOn);
+
+            Assert.IsNotNull(stepData.Files);
+            Assert.AreEqual(2, stepData.Files.Count);
+            
+            var file = stepData.Files[0];
+            Assert.AreEqual("C:/source/bin/client.dll", file.Source);
+            Assert.AreEqual("C:/destination/bin/client.dll", file.Destination);
+
+            file = stepData.Files[1];
+            Assert.AreEqual("C:/source/bin/server.dll", file.Source);
+            Assert.AreEqual("C:/destination/bin/server.dll", file.Destination);
         }
     }
 }

@@ -1,0 +1,18 @@
+[
+  {
+    "$type": "copy_files",
+    "name": "step_copy_files",
+    "description": "Copy sourcemod files",
+    "depends_on": ["previous_step1"],
+    "files": [
+      {
+        "src": "C:/source/bin/client.dll",
+        "dest": "C:/destination/bin/client.dll"
+      },
+      {
+        "src": "C:/source/bin/server.dll",
+        "dest": "C:/destination/bin/server.dll"
+      }
+    ]
+  }
+]
