@@ -1,0 +1,12 @@
+[
+  {
+    "$type": "replace_tokens",
+    "name": "step_replace_tokens",
+    "description": "Replace tokens in sourcemod files",
+    "depends_on": ["previous_step1"],
+    "files": [
+      "C:/file1.txt",
+      "C:/file2.txt"
+    ]
+  }
+]

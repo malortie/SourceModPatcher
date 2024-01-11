@@ -5,7 +5,9 @@ using test_installsourcecontent_modpatcher;
 
 using IConfiguration = test_installsourcecontent_modpatcher.IConfiguration;
 using Context = test_installsourcecontent_modpatcher.Context;
+using JSONInstallStep = test_installsourcecontent_modpatcher.JSONInstallStep;
 using System.Collections.ObjectModel;
+using test_installsourcecontent;
 
 namespace test_installsourcecontent_modpatcher_tests
 {
@@ -314,6 +316,28 @@ namespace test_installsourcecontent_modpatcher_tests
             Assert.AreEqual(0, eventHandler.FileTokenReplacementSucceededTotal);
             Assert.AreEqual(2, eventHandler.FileTokenReplacementFailedTotal);
             Assert.AreEqual(1, eventHandler.NoFilesProcessedTotal);
+        }
+
+        [TestMethod]
+        public void StepsLoader_Load_Simple()
+        {
+            var fileSystem = new MockFileSystem(new Dictionary<string, MockFileData>{
+                { "C:/step_replace_tokens.json", new MockFileData(File.ReadAllBytes("../../../data/config/step_replace_tokens.json")) },
+            });
+
+            var stepsLoader = new StepsLoader<JSONInstallStep>(fileSystem, NullWriter, new JSONConfigurationSerializer<IList<JSONInstallStep>>(), new test_installsourcecontent_modpatcher.InstallStepMapper<JSONInstallStep>());
+
+            var stepsList = stepsLoader.Load("C:/step_replace_tokens.json");
+
+            Assert.IsNotNull(stepsList);
+            var stepData = (ReplaceTokensInstallStepData)stepsList[0];
+            Assert.AreEqual("step_replace_tokens", stepData.Name);
+            Assert.AreEqual("Replace tokens in sourcemod files", stepData.Description);
+            CollectionAssert.AreEquivalent(new List<string> { "previous_step1" }, stepData.DependsOn);
+
+            Assert.IsNotNull(stepData.Files);
+            Assert.AreEqual(2, stepData.Files.Count);
+            CollectionAssert.AreEquivalent(new List<string> { "C:/file1.txt", "C:/file2.txt" }, stepData.Files);
         }
     }
 }
