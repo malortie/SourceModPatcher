@@ -1,0 +1,10 @@
+[
+  {
+    "$type": "save_variable",
+    "name": "step_save_variable",
+    "description": "Add game install path to variables.json",
+    "depends_on": ["previous_step1"],
+    "variable_name": "game_content_path",
+    "variable_value": "value1"
+  }
+]

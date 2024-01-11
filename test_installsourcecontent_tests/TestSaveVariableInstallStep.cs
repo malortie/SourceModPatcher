@@ -70,5 +70,25 @@ namespace test_installsourcecontent_tests
             Assert.AreEqual(0, eventHandler.NoVariableNameSpecifiedTotal);
             Assert.AreEqual(0, eventHandler.NoVariableValueSpecifiedTotal);
         }
+
+        [TestMethod]
+        public void StepsLoader_Load_Simple()
+        {
+            var fileSystem = new MockFileSystem(new Dictionary<string, MockFileData>{
+                { "C:/step_save_variable.json", new MockFileData(File.ReadAllBytes("../../../data/config/step_save_variable.json")) },
+            });
+
+            var stepsLoader = new StepsLoader<JSONInstallStep>(fileSystem, NullWriter, new JSONConfigurationSerializer<IList<JSONInstallStep>>(), new InstallStepMapper<JSONInstallStep>());
+
+            var stepsList = stepsLoader.Load("C:/step_save_variable.json");
+
+            Assert.IsNotNull(stepsList);
+            var stepData = (SaveVariableInstallStepData)stepsList[0];
+            Assert.AreEqual("step_save_variable", stepData.Name);
+            Assert.AreEqual("Add game install path to variables.json", stepData.Description);
+            CollectionAssert.AreEquivalent(new List<string> { "previous_step1" }, stepData.DependsOn);
+            Assert.AreEqual("game_content_path", stepData.VariableName);
+            Assert.AreEqual("value1", stepData.VariableValue);
+        }
     }
 }
