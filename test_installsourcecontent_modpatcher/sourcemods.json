@@ -24,6 +24,11 @@
     "sourcemod_folder": "hoe",
     "data_dir": "./data/mods/hoe"
   },
+  "human_error": {
+    "name": "Human Error EP1",
+    "sourcemod_folder": "Human_Error",
+    "data_dir": "./data/mods/Human_Error"
+  },
   "ravenholmncz": {
     "name": "Ravenholm mod",
     "sourcemod_folder": "RavenholmNCZ",
