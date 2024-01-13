@@ -1,4 +1,9 @@
 {
+  "1187": {
+    "name": "1187: Episode One",
+    "sourcemod_folder": "1187",
+    "data_dir": "./data/mods/1187"
+  },
   "coastline_to_atmosphere": {
     "name": "Coastline to Atmosphere",
     "sourcemod_folder": "Coastline_to_Atmosphere",
