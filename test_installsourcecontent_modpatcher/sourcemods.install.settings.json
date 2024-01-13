@@ -2,6 +2,9 @@
   "1187": {
     "install": false
   },
+  "blacksnow": {
+    "install": false
+  },
   "coastline_to_atmosphere": {
     "install": false
   },

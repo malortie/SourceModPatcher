@@ -4,6 +4,11 @@
     "sourcemod_folder": "1187",
     "data_dir": "./data/mods/1187"
   },
+  "blacksnow": {
+    "name": "BLACK SNOW",
+    "sourcemod_folder": "blacksnow",
+    "data_dir": "./data/mods/blacksnow"
+  },
   "coastline_to_atmosphere": {
     "name": "Coastline to Atmosphere",
     "sourcemod_folder": "Coastline_to_Atmosphere",
