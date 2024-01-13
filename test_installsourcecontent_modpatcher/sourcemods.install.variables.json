@@ -8,6 +8,7 @@
   "data_sdks_source2006_episodic_dir": "./data/sdks/source2006/episodic",
   "data_sdks_source2006_hl2_dir": "./data/sdks/source2006/hl2",
   "data_sdks_source2006_hl2mp_dir": "./data/sdks/source2006/hl2mp",
+  "data_sdks_source2006_template_dir": "./data/sdks/source2006/template",
   "data_sdks_source2007_dir": "./data/sdks/source2007",
   "data_sdks_source2007_ep2_dir": "./data/sdks/source2007/ep2"
 }
