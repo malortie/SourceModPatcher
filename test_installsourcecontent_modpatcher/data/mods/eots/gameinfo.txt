@@ -1,0 +1,25 @@
+ "GameInfo"
+{
+game "Eye of the Storm"
+title ""
+type singleplayer_only
+developer "Lord and team"
+developer_url "http://eots.half-life2.cz/"
+icon "icon"
+
+FileSystem
+	{
+	SteamAppId 218
+	ToolsAppId 211
+
+		SearchPaths
+		{
+		Game |gameinfo_path|.
+		Game ep2
+		Game "${{hl2ep2_content_path}}"
+		Game "${{sdkbase2013sp_hl2ep2_content_path}}"
+		Game episodic
+		Game hl2
+		}
+	}
+}

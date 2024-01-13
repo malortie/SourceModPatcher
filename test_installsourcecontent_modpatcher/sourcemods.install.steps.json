@@ -2,6 +2,7 @@
   "1187": "./config/mods/1187.install.steps.json",
   "blacksnow": "./config/mods/blacksnow.install.steps.json",
   "coastline_to_atmosphere": "./config/mods/coastline_to_atmosphere.install.steps.json",
+  "eots": "./config/mods/eots.install.steps.json",
   "ravenholmncz": "./config/mods/ravenholmncz.install.steps.json",
   "research_and_development": "./config/mods/research_and_development.install.steps.json"
 }

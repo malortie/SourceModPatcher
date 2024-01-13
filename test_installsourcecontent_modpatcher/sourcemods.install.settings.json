@@ -8,6 +8,9 @@
   "coastline_to_atmosphere": {
     "install": false
   },
+  "eots": {
+    "install": false
+  },
   "ravenholmncz": {
     "install": false
   },

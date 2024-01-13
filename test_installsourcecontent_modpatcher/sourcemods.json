@@ -14,6 +14,11 @@
     "sourcemod_folder": "Coastline_to_Atmosphere",
     "data_dir": "./data/mods/Coastline_to_Atmosphere"
   },
+  "eots": {
+    "name": "Eye of the Storm",
+    "sourcemod_folder": "eots",
+    "data_dir": "./data/mods/eots"
+  },
   "ravenholmncz": {
     "name": "Ravenholm mod",
     "sourcemod_folder": "RavenholmNCZ",
