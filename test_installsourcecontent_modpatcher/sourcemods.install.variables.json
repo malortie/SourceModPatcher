@@ -11,6 +11,7 @@
   "data_sdks_source2006_template_dir": "./data/sdks/source2006/template",
   "data_sdks_source2007_dir": "./data/sdks/source2007",
   "data_sdks_source2007_ep2_dir": "./data/sdks/source2007/ep2",
+  "data_sdks_source2007_episodic_dir": "./data/sdks/source2007/episodic",
   "data_sdks_source2007_hl2mp_dir": "./data/sdks/source2007/hl2mp",
   "data_sdks_source2007_template_dir": "./data/sdks/source2007/template"
 }
