@@ -4,6 +4,7 @@
   "data_sdks_dir": "./data/sdks",
   "data_sdks_source2004_dir": "./data/sdks/source2004",
   "data_sdks_source2004_hl2_dir": "./data/sdks/source2004/hl2",
+  "data_sdks_source2004_template_dir": "./data/sdks/source2004/template",
   "data_sdks_source2006_dir": "./data/sdks/source2006",
   "data_sdks_source2006_episodic_dir": "./data/sdks/source2006/episodic",
   "data_sdks_source2006_hl2_dir": "./data/sdks/source2006/hl2",
