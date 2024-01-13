@@ -11,6 +11,9 @@
   "eots": {
     "install": false
   },
+  "hoe": {
+    "install": false
+  },
   "ravenholmncz": {
     "install": false
   },

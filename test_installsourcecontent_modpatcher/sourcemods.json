@@ -19,6 +19,11 @@
     "sourcemod_folder": "eots",
     "data_dir": "./data/mods/eots"
   },
+  "hoe": {
+    "name": "Heart of Evil: Source",
+    "sourcemod_folder": "hoe",
+    "data_dir": "./data/mods/hoe"
+  },
   "ravenholmncz": {
     "name": "Ravenholm mod",
     "sourcemod_folder": "RavenholmNCZ",
