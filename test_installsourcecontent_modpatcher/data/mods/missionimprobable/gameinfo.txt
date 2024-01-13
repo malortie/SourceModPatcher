@@ -1,0 +1,28 @@
+"GameInfo"
+{
+	game	"Mission Improbable"
+	title	" "
+	title2	" "
+	type 	singleplayer_only
+
+	developer	"Magnar Jenssen & Rick Underhill"
+	developer_url	"www.magnarj.net & www.editpoly.net"
+	icon		"icon"
+
+	FileSystem
+	{
+		SteamAppId				218 	
+		ToolsAppId				211		
+		
+
+		SearchPaths
+		{
+			Game				|gameinfo_path|.
+			Game				ep2
+			Game				"${{hl2ep2_content_path}}"
+			Game				"${{sdkbase2013sp_hl2ep2_content_path}}"
+			Game				episodic
+			Game				hl2
+		}
+	}
+}

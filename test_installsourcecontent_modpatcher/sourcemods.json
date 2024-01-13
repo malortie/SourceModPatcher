@@ -29,6 +29,11 @@
     "sourcemod_folder": "Human_Error",
     "data_dir": "./data/mods/Human_Error"
   },
+  "missionimprobable": {
+    "name": "Mission Improbable",
+    "sourcemod_folder": "missionimprobable",
+    "data_dir": "./data/mods/missionimprobable"
+  },
   "ravenholmncz": {
     "name": "Ravenholm mod",
     "sourcemod_folder": "RavenholmNCZ",

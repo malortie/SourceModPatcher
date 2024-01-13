@@ -1,0 +1,39 @@
+[
+  {
+    "$type": "validate_variables_dependencies",
+    "name": "missionimprobable_validate_dependencies",
+    "description": "Validate $(sourcemod_name) variables dependencies",
+    "dependencies": [
+      ["hl2ep2_content_path", "sdkbase2013sp_hl2ep2_content_path"]
+    ]
+  },
+  {
+    "$type": "copy_files",
+    "name": "missionimprobable_copy_files",
+    "description": "Copy files to $(sourcemod_folder)",
+    "depends_on": ["missionimprobable_validate_dependencies"],
+    "files": [
+      {
+        "src": "$(data_sdks_source2007_ep2_dir)/bin/client.dll",
+        "dest": "$(sourcemod_dir)/bin/client.dll"
+      },
+      {
+        "src": "$(data_sdks_source2007_ep2_dir)/bin/server.dll",
+        "dest": "$(sourcemod_dir)/bin/server.dll"
+      },
+      {
+        "src": "$(data_sourcemod_dir)/gameinfo.txt",
+        "dest": "$(sourcemod_dir)/gameinfo.txt"
+      }
+    ]
+  },
+  {
+    "$type": "replace_tokens",
+    "name": "missionimprobable_replace_tokens",
+    "description": "Replace tokens in $(sourcemod_folder)/gameinfo.txt",
+    "depends_on": ["missionimprobable_copy_files"],
+    "files": [
+      "$(sourcemod_dir)/gameinfo.txt"
+    ]
+  }
+]

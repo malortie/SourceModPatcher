@@ -5,6 +5,7 @@
   "eots": "./config/mods/eots.install.steps.json",
   "hoe": "./config/mods/hoe.install.steps.json",
   "human_error": "./config/mods/human_error.install.steps.json",
+  "missionimprobable": "./config/mods/missionimprobable.install.steps.json",
   "ravenholmncz": "./config/mods/ravenholmncz.install.steps.json",
   "research_and_development": "./config/mods/research_and_development.install.steps.json"
 }
