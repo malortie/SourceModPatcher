@@ -112,6 +112,24 @@
     <None Update="data\sdks\source2007\episodic\bin\Server.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="data\sdks\source2007\episodic\models\Humans\female_shared.ani">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="data\sdks\source2007\episodic\models\Humans\female_shared.mdl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="data\sdks\source2007\episodic\models\Humans\male_gestures.ani">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="data\sdks\source2007\episodic\models\Humans\male_gestures.mdl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="data\sdks\source2007\episodic\models\Humans\male_shared.ani">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="data\sdks\source2007\episodic\models\Humans\male_shared.mdl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="data\sdks\source2007\hl2mp\bin\Client.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
