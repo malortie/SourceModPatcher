@@ -76,7 +76,7 @@ namespace test_installsourcecontent
             SupportedSourceGamesAppIDs.Sort();
         }
 
-        void TrySetupFromRegistry()
+        protected virtual void TrySetupFromRegistry()
         {
             // Check if Steam is installed.
             // Set AppID to the one found in steamapps.json
