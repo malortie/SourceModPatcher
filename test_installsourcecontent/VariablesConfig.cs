@@ -14,7 +14,7 @@ namespace test_installsourcecontent
         {
         }
 
-        public void SaveVariable(string name, string value)
+        public virtual void SaveVariable(string name, string value)
         {
             Config[name] = value;
             SaveConfig();

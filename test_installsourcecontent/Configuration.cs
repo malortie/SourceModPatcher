@@ -44,7 +44,7 @@ namespace test_installsourcecontent
 
         public string GetVariablesFileName()
         {
-            return _variablesConfig.FileName;
+            return _variablesConfig.GetFileName();
         }
     }
 }

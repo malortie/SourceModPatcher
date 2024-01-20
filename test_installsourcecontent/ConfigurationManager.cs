@@ -24,7 +24,7 @@ namespace test_installsourcecontent
             _configSerializer = configSerializer;
         }
 
-        public string FileName { get { return _fileSystem.Path.GetFileName(_filePath); } }
+        public virtual string GetFileName() { return _fileSystem.Path.GetFileName(_filePath); }
 
         public ConfigT Config { get; protected set; } = new();
 

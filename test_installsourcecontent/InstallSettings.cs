@@ -18,23 +18,23 @@ namespace test_installsourcecontent
     }
 
 
-    public sealed class InstallSettings : ConfigurationManager<JSONInstallSettings>
+    public class InstallSettings : ConfigurationManager<JSONInstallSettings>
     {
         public InstallSettings(IFileSystem fileSystem, IWriter writer, string filePath, IConfigurationSerializer<JSONInstallSettings> configSerializer) : base(fileSystem, writer, filePath, configSerializer)
         {
         }
 
-        public List<int> GetSteamAppsToInstall()
+        public virtual List<int> GetSteamAppsToInstall()
         {
             return Config.Where(kv => kv.Value.Install).Select(kv => kv.Key).ToList();
         }
 
-        public bool IsSteamAppMarkedForInstall(int appID)
+        public virtual bool IsSteamAppMarkedForInstall(int appID)
         {
             return Config[appID].Install;
         }
 
-        public string GetContentInstallDir(int appID)
+        public virtual string GetContentInstallDir(int appID)
         {
             return Config[appID].InstallDir;
         }

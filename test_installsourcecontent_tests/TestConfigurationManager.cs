@@ -74,7 +74,7 @@ namespace test_installsourcecontent_tests
 
             var configManager = new ConfigurationManager<object>(fileSystem, NullWriter, "C:/Documents/simple_test.json", new NullConfigurationSerializer<object>());
 
-            Assert.AreEqual("simple_test.json", configManager.FileName);
+            Assert.AreEqual("simple_test.json", configManager.GetFileName());
         }
 
         [TestMethod]

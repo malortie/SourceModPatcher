@@ -42,22 +42,22 @@ namespace test_installsourcecontent
 
         public bool UseConfigFile { get; set; }
 
-        public string GetSteamAppName(int appID)
+        public virtual string GetSteamAppName(int appID)
         {
             return Config[appID].Name;
         }
 
-        public string GetSteamAppInstallDir(int appID)
+        public virtual string GetSteamAppInstallDir(int appID)
         {
             return Config[appID].InstallDir;
         }
 
-        public bool IsSteamAppInstalled(int appID)
+        public virtual bool IsSteamAppInstalled(int appID)
         {
             return Config[appID].InstallDir != string.Empty;
         }
 
-        public List<int> GetInstalledSteamApps()
+        public virtual List<int> GetInstalledSteamApps()
         {
             return Config.Where(kv => kv.Value.InstallDir != string.Empty).Select(kv => kv.Key).ToList();
         }
