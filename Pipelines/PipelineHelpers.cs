@@ -1,13 +1,13 @@
-using System.Collections.ObjectModel;
+using System.Collections.Immutable;
 
 namespace Pipelines
 {
 
     public interface ILogProvider
     {
-        ReadOnlyCollection<string> GetInfos();
-        ReadOnlyCollection<string> GetWarnings();
-        ReadOnlyCollection<string> GetErrors();
+        ImmutableList<string> GetInfos();
+        ImmutableList<string> GetWarnings();
+        ImmutableList<string> GetErrors();
     }
 
     public interface IConsoleLogReportWriter

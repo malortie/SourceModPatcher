@@ -1,6 +1,6 @@
 using NLog.Targets;
-using System.Collections.ObjectModel;
 using Pipelines;
+using System.Collections.Immutable;
 
 namespace test_installsourcecontent
 {
@@ -13,19 +13,19 @@ namespace test_installsourcecontent
             _errorMemoryTarget = errorMemoryTarget;
         }
 
-        public ReadOnlyCollection<string> GetErrors()
+        public ImmutableList<string> GetErrors()
         {
-            return new ReadOnlyCollection<string>(_errorMemoryTarget.Logs);
+            return _errorMemoryTarget.Logs.ToImmutableList();
         }
 
-        public ReadOnlyCollection<string> GetInfos()
+        public ImmutableList<string> GetInfos()
         {
             throw new NotImplementedException();
         }
 
-        public ReadOnlyCollection<string> GetWarnings()
+        public ImmutableList<string> GetWarnings()
         {
-            return new ReadOnlyCollection<string>(_warningMemoryTarget.Logs);
+            return _warningMemoryTarget.Logs.ToImmutableList();
         }
     }
 }
