@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Collections.ObjectModel;
 using System.Reflection;
 
@@ -37,7 +38,7 @@ namespace Pipelines
     {
         public string Name { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
-        public ReadOnlyCollection<string> DependsOn { get; set; } = new ReadOnlyCollection<string>([]);
+        public IImmutableList<string> DependsOn { get; set; } = [];
     }
 
     public class ReadOnlyPipelineStageData
@@ -80,7 +81,7 @@ namespace Pipelines
             {
                 Name = stepData.Name,
                 Description = stepData.Description,
-                DependsOn = new ReadOnlyCollection<string>(stepData.DependsOn)
+                DependsOn = stepData.DependsOn.ToImmutableList()
             };
         }
 
