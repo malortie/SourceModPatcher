@@ -9,7 +9,7 @@ namespace test_installsourcecontent_modpatcher
     {
     }
 
-    public sealed class InstallVariablesConfig : ConfigurationManager<JSONInstallVariablesConfig>
+    public class InstallVariablesConfig : ConfigurationManager<JSONInstallVariablesConfig>
     {
         public InstallVariablesConfig(IFileSystem fileSystem, IWriter writer, string filePath, IConfigurationSerializer<JSONInstallVariablesConfig> configSerializer) : base(fileSystem, writer, filePath, configSerializer)
         {

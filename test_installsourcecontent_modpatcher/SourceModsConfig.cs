@@ -19,7 +19,7 @@ namespace test_installsourcecontent_modpatcher
     {
     }
 
-    public sealed class SourceModsConfig : ConfigurationManager<JSONSourceModsConfig>
+    public class SourceModsConfig : ConfigurationManager<JSONSourceModsConfig>
     {
         public SourceModsConfig(IFileSystem fileSystem, IWriter writer, string filePath, IConfigurationSerializer<JSONSourceModsConfig> configSerializer, string sourceModInstallPath) : base(fileSystem, writer, filePath, configSerializer)
         {
@@ -30,22 +30,22 @@ namespace test_installsourcecontent_modpatcher
 
         public string SourceModInstallPath { get; private set; }
 
-        public string GetSourceModName(string key)
+        public virtual string GetSourceModName(string key)
         {
             return Config[key].Name;
         }
 
-        public string GetSourceModFolder(string key)
+        public virtual string GetSourceModFolder(string key)
         {
             return Config[key].SourceModFolder;
         }
 
-        public string GetSourceModDir(string key)
+        public virtual string GetSourceModDir(string key)
         {
             return PathExtensions.JoinWithSeparator(FileSystem, SourceModInstallPath, GetSourceModFolder(key));
         }
 
-        public string GetSourceModDataDir(string key)
+        public virtual string GetSourceModDataDir(string key)
         {
             return Config[key].DataDir;
         }
