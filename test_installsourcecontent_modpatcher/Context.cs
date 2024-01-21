@@ -18,11 +18,6 @@ namespace test_installsourcecontent_modpatcher
 
         public string SourceModKey { get; set; } = string.Empty;
 
-        public bool HasSourceContentVariable(string variableName)
-        {
-            return _configuration.HasVariable(variableName);
-        }
-
         public virtual ReadOnlyDictionary<string, string> GetSourceContentVariables()
         {
             return _configuration.GetVariables();

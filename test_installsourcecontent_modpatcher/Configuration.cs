@@ -6,7 +6,6 @@ namespace test_installsourcecontent_modpatcher
 {
     public interface IConfiguration
     {
-        bool HasVariable(string variableName);
         ReadOnlyDictionary<string, string> GetVariables();
         string GetVariablesFileName();
         ReadOnlyDictionary<string, string> GetInstallVariables();
@@ -27,11 +26,6 @@ namespace test_installsourcecontent_modpatcher
             _sourceModsConfig = sourceModsConfig;
             _installVariablesConfig = installVariablesConfig;
             _variablesConfig = variablesConfig;
-        }
-
-        public bool HasVariable(string variableName)
-        {
-            return _variablesConfig.Config.ContainsKey(variableName);
         }
 
         public ReadOnlyDictionary<string, string> GetVariables()
