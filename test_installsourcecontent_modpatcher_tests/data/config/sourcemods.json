@@ -1,0 +1,17 @@
+{
+  "sourcemod_1": {
+    "name": "Source mod 1",
+    "sourcemod_folder": "sourcemod_1_folder",
+    "data_dir": "./data/mods/sourcemod_1"
+  },
+  "sourcemod_2": {
+    "name": "Source mod 2",
+    "sourcemod_folder": "sourcemod_2_folder",
+    "data_dir": "./data/mods/sourcemod_2"
+  },
+  "sourcemod_3": {
+    "name": "Source mod 3",
+    "sourcemod_folder": "sourcemod_3_folder",
+    "data_dir": "./data/mods/sourcemod_3"
+  }
+}
