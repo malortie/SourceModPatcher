@@ -13,7 +13,7 @@ namespace SourceContentInstaller
         readonly IStepMapper<ConfigT> _stepMapper = stepMapper;
         readonly IConfigurationSerializer<IList<ConfigT>> _serializer = serializer;
         readonly IFileSystem _fileSystem = fileSystem;
-        readonly  IWriter _writer = writer;
+        readonly IWriter _writer = writer;
 
         public IList<IPipelineStepData> Load(string stepsFilePath)
         {
