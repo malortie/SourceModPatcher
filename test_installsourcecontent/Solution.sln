@@ -3,17 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33829.357
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "test_installsourcecontent", "test_installsourcecontent.csproj", "{89E6F881-15BC-44D7-A024-C722581626DD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SourceContentInstaller", "SourceContentInstaller.csproj", "{89E6F881-15BC-44D7-A024-C722581626DD}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "test_installsourcecontent_tests", "..\test_installsourcecontent_tests\test_installsourcecontent_tests.csproj", "{9E46C909-F4F7-423C-8660-1133AA563AE9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SourceContentInstaller.Tests", "..\test_installsourcecontent_tests\SourceContentInstaller.Tests.csproj", "{9E46C909-F4F7-423C-8660-1133AA563AE9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "test_installsourcecontent_modpatcher", "..\test_installsourcecontent_modpatcher\test_installsourcecontent_modpatcher.csproj", "{FB46FA3A-3529-4841-9CB4-3277367E0A07}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SourceModPatcher", "..\test_installsourcecontent_modpatcher\SourceModPatcher.csproj", "{FB46FA3A-3529-4841-9CB4-3277367E0A07}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pipelines", "..\Pipelines\Pipelines.csproj", "{E3E1CE37-F424-4746-9584-7FA8956F1766}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "test_installsourcecontent_modpatcher_tests", "..\test_installsourcecontent_modpatcher_tests\test_installsourcecontent_modpatcher_tests.csproj", "{364DCA51-4535-4209-A213-1C16447EC755}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SourceModPatcher.Tests", "..\test_installsourcecontent_modpatcher_tests\SourceModPatcher.Tests.csproj", "{364DCA51-4535-4209-A213-1C16447EC755}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pipelines.Tests", "..\Pipelines.Tests\Pipelines.Tests.csproj", "{8326C9EB-B792-4911-AE3B-F2CBDAF54A8A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pipelines.Tests", "..\Pipelines.Tests\Pipelines.Tests.csproj", "{8326C9EB-B792-4911-AE3B-F2CBDAF54A8A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

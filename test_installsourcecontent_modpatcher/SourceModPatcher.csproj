@@ -9,7 +9,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Pipelines\Pipelines.csproj" />
-	<ProjectReference Include="..\test_installsourcecontent\test_installsourcecontent.csproj" />
+	<ProjectReference Include="..\test_installsourcecontent\SourceContentInstaller.csproj" />
   </ItemGroup>
 	
   <ItemGroup>
