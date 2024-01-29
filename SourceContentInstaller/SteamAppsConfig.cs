@@ -2,9 +2,9 @@ using Gameloop.Vdf;
 using System.IO.Abstractions;
 using System.Text.Json.Serialization;
 using Pipelines;
-using test_installsourcecontent;
+using SourceContentInstaller;
 
-namespace test_installsourcecontent
+namespace SourceContentInstaller
 {
     public class JSONSteamAppsConfigEntry
     {

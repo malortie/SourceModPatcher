@@ -1,7 +1,7 @@
 using Microsoft.Win32;
 using System.Runtime.Versioning;
 
-namespace test_installsourcecontent_modpatcher
+namespace SourceModPatcher
 {
     public interface ISourceModsPathFinder
     {

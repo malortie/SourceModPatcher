@@ -1,8 +1,7 @@
 using System.IO.Abstractions.TestingHelpers;
 using Pipelines;
-using test_installsourcecontent;
 
-namespace test_installsourcecontent_tests
+namespace SourceContentInstaller.Tests
 {
     public class TestSaveVariableInstallStepEventHandler : ISaveVariableInstallStepEventHandler
     {

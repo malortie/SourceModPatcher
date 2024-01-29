@@ -1,6 +1,6 @@
 using System.Text.Json;
 
-namespace test_installsourcecontent
+namespace SourceContentInstaller
 {
     public interface IConfigurationSerializer<ConfigT>
     {

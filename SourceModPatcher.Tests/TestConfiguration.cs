@@ -1,11 +1,10 @@
 using Pipelines;
 using System.IO.Abstractions;
 using System.IO.Abstractions.TestingHelpers;
-using test_installsourcecontent;
-using test_installsourcecontent_modpatcher;
-using Configuration = test_installsourcecontent_modpatcher.Configuration;
+using SourceContentInstaller;
+using Configuration = SourceModPatcher.Configuration;
 
-namespace test_installsourcecontent_modpatcher_tests
+namespace SourceModPatcher.Tests
 {
     public class NullConfigurationSerializer<ConfigT> : IConfigurationSerializer<ConfigT>
     {

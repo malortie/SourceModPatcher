@@ -1,9 +1,9 @@
 using System.Collections.ObjectModel;
 using System.IO.Abstractions;
 using Pipelines;
-using test_installsourcecontent;
+using SourceContentInstaller;
 
-namespace test_installsourcecontent_modpatcher
+namespace SourceModPatcher
 {
     public class JSONInstallVariablesConfig : Dictionary<string, string>
     {

@@ -1,9 +1,8 @@
 using Pipelines;
 using System.IO.Abstractions;
 using System.IO.Abstractions.TestingHelpers;
-using test_installsourcecontent;
 
-namespace test_installsourcecontent_tests
+namespace SourceContentInstaller.Tests
 {
     public class NullSteamPathFinder : ISteamPathFinder
     {

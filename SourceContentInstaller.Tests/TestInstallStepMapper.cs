@@ -1,6 +1,4 @@
-using test_installsourcecontent;
-
-namespace test_installsourcecontent_tests
+namespace SourceContentInstaller.Tests
 {
     [TestClass]
     public class TestInstallStepMapper

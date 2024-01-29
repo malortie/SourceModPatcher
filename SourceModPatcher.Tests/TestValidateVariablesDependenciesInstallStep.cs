@@ -1,15 +1,14 @@
 using System.IO.Abstractions;
 using System.IO.Abstractions.TestingHelpers;
 using Pipelines;
-using test_installsourcecontent_modpatcher;
 
-using IConfiguration = test_installsourcecontent_modpatcher.IConfiguration;
-using Context = test_installsourcecontent_modpatcher.Context;
-using JSONInstallStep = test_installsourcecontent_modpatcher.JSONInstallStep;
+using IConfiguration = SourceModPatcher.IConfiguration;
+using Context = SourceModPatcher.Context;
+using JSONInstallStep = SourceModPatcher.JSONInstallStep;
 using System.Collections.ObjectModel;
-using test_installsourcecontent;
+using SourceContentInstaller;
 
-namespace test_installsourcecontent_modpatcher_tests
+namespace SourceModPatcher.Tests
 {
     public class TestValidateVariablesDependenciesInstallStepEventHandler : IValidateVariablesDependenciesInstallStepEventHandler
     {
@@ -519,7 +518,7 @@ namespace test_installsourcecontent_modpatcher_tests
                 { "C:/step_validate_variables_dependencies.json", new MockFileData(File.ReadAllBytes("../../../data/config/step_validate_variables_dependencies.json")) },
             });
 
-            var stepsLoader = new StepsLoader<JSONInstallStep>(fileSystem, NullWriter, new JSONConfigurationSerializer<IList<JSONInstallStep>>(), new test_installsourcecontent_modpatcher.InstallStepMapper<JSONInstallStep>());
+            var stepsLoader = new StepsLoader<JSONInstallStep>(fileSystem, NullWriter, new JSONConfigurationSerializer<IList<JSONInstallStep>>(), new SourceModPatcher.InstallStepMapper<JSONInstallStep>());
 
             var stepsList = stepsLoader.Load("C:/step_validate_variables_dependencies.json");
 

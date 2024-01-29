@@ -3,9 +3,8 @@ using System.Diagnostics.CodeAnalysis;
 using System.IO.Abstractions;
 using System.IO.Abstractions.TestingHelpers;
 using System.Text.RegularExpressions;
-using test_installsourcecontent;
 
-namespace test_installsourcecontent_tests
+namespace SourceContentInstaller.Tests
 {
     public class TestExtractVPKInstallStepEventHandler : IExtractVPKInstallStepEventHandler
     {

@@ -2,9 +2,8 @@ using Pipelines;
 using System.IO.Abstractions;
 using System.IO.Abstractions.TestingHelpers;
 using System.Text.Json.Serialization;
-using test_installsourcecontent;
 
-namespace test_installsourcecontent_tests
+namespace SourceContentInstaller.Tests
 {
     public class JSONSimpleTestConfig
     {

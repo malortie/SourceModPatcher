@@ -1,8 +1,8 @@
 using System.IO.Abstractions;
 using Pipelines;
-using test_installsourcecontent;
+using SourceContentInstaller;
 
-namespace test_installsourcecontent
+namespace SourceContentInstaller
 {
     public class JSONVariablesConfig : SortedDictionary<string, string>
     {

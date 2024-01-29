@@ -2,7 +2,7 @@ using NLog.Targets;
 using Pipelines;
 using System.Collections.Immutable;
 
-namespace test_installsourcecontent
+namespace SourceContentInstaller
 {
     public class LogProvider : ILogProvider
     {

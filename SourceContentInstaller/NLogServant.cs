@@ -2,7 +2,7 @@ using NLog.Targets;
 using NLog;
 using System.IO.Abstractions;
 
-namespace test_installsourcecontent
+namespace SourceContentInstaller
 {
     public class NLogServant
     {

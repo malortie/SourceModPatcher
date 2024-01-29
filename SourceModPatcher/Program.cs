@@ -5,9 +5,9 @@ using NLog;
 using System.Runtime.Versioning;
 using System.IO.Abstractions;
 using Pipelines;
-using test_installsourcecontent;
+using SourceContentInstaller;
 
-namespace test_installsourcecontent_modpatcher
+namespace SourceModPatcher
 {
     public class InstallStepMapper<ConfigT> : IStepMapper<ConfigT>
     {
@@ -117,7 +117,7 @@ namespace test_installsourcecontent_modpatcher
                 (MemoryTarget)LogManager.Configuration.FindTargetByName("warningmemory"),
                 (MemoryTarget)LogManager.Configuration.FindTargetByName("errormemory"));
             var consoleWriter = new ConsoleWriter();
-            var logger = new test_installsourcecontent.Logger(NLog.LogManager.GetCurrentClassLogger());
+            var logger = new SourceContentInstaller.Logger(NLog.LogManager.GetCurrentClassLogger());
             var writer = new Writer(logger, consoleWriter);
 
             try

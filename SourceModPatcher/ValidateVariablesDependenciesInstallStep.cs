@@ -1,10 +1,10 @@
 using System.Xml.Linq;
 using System;
-using test_installsourcecontent;
+using SourceContentInstaller;
 using System.Linq;
 using Pipelines;
 
-namespace test_installsourcecontent_modpatcher
+namespace SourceModPatcher
 {
     public class ValidateVariablesDependenciesInstallStepData : IPipelineStepData
     {

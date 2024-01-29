@@ -1,9 +1,9 @@
 using System.IO.Abstractions;
 using System.Text.Json.Serialization;
 using Pipelines;
-using test_installsourcecontent;
+using SourceContentInstaller;
 
-namespace test_installsourcecontent_modpatcher
+namespace SourceModPatcher
 {
     public sealed class JSONInstallSettingsEntry
     {

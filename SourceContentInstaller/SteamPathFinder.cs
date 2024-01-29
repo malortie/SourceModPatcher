@@ -1,7 +1,7 @@
 using Microsoft.Win32;
 using System.Runtime.Versioning;
 
-namespace test_installsourcecontent
+namespace SourceContentInstaller
 {
     public interface ISteamPathFinder
     {

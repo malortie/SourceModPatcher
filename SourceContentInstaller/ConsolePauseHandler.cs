@@ -1,6 +1,6 @@
 using Pipelines;
 
-namespace test_installsourcecontent
+namespace SourceContentInstaller
 {
     public class ConsolePauseHandler : IPauseHandler
     {

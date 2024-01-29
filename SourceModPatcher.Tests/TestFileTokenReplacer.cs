@@ -1,9 +1,8 @@
 using System.Collections.ObjectModel;
 using Pipelines;
 using System.IO.Abstractions.TestingHelpers;
-using test_installsourcecontent_modpatcher;
 
-namespace test_installsourcecontent_modpatcher_tests
+namespace SourceModPatcher.Tests
 {
     [TestClass]
     public class TestFileTokenReplacer

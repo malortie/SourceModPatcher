@@ -1,7 +1,7 @@
 using System.IO.Abstractions;
 using System.Runtime.CompilerServices;
 
-namespace test_installsourcecontent
+namespace SourceContentInstaller
 {
     public static class PathExtensions
     {

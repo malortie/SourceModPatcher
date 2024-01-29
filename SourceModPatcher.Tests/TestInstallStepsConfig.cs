@@ -1,10 +1,10 @@
-using test_installsourcecontent;
-using JSONInstallStepsConfig = test_installsourcecontent_modpatcher.JSONInstallStepsConfig;
-using InstallStepsConfig = test_installsourcecontent_modpatcher.InstallStepsConfig;
+using SourceContentInstaller;
+using JSONInstallStepsConfig = SourceModPatcher.JSONInstallStepsConfig;
+using InstallStepsConfig = SourceModPatcher.InstallStepsConfig;
 using Pipelines;
 using System.IO.Abstractions.TestingHelpers;
 
-namespace test_installsourcecontent_modpatcher_tests
+namespace SourceModPatcher.Tests
 {
     [TestClass]
     public class TestInstallStepsConfig

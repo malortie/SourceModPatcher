@@ -2,7 +2,7 @@ using SteamDatabase.ValvePak;
 using System.IO.Abstractions;
 using Pipelines;
 
-namespace test_installsourcecontent
+namespace SourceContentInstaller
 {
     public interface IVPKFileFilter
     {

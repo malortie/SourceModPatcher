@@ -9,9 +9,9 @@ using System.Drawing;
 using System.IO.Abstractions;
 using System.Runtime.Versioning;
 using Pipelines;
-using test_installsourcecontent;
+using SourceContentInstaller;
 
-namespace test_installsourcecontent
+namespace SourceContentInstaller
 {
     public class InstallStepMapper<ConfigT> : IStepMapper<ConfigT>
     {

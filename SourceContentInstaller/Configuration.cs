@@ -1,4 +1,4 @@
-namespace test_installsourcecontent
+namespace SourceContentInstaller
 {
     public interface IConfiguration
     {

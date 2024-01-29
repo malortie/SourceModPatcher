@@ -1,7 +1,6 @@
 using System.Collections.ObjectModel;
-using test_installsourcecontent_modpatcher;
 
-namespace test_installsourcecontent_modpatcher_tests
+namespace SourceModPatcher.Tests
 {
     public class NullConfiguration : IConfiguration
     {

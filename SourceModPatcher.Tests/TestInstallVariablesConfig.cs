@@ -1,9 +1,8 @@
 using Pipelines;
 using System.IO.Abstractions.TestingHelpers;
-using test_installsourcecontent;
-using test_installsourcecontent_modpatcher;
+using SourceContentInstaller;
 
-namespace test_installsourcecontent_modpatcher_tests
+namespace SourceModPatcher.Tests
 {
     [TestClass]
     public class TestInstallVariablesConfig

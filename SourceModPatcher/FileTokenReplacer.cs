@@ -2,7 +2,7 @@ using Pipelines;
 using System.Collections.ObjectModel;
 using System.IO.Abstractions;
 
-namespace test_installsourcecontent_modpatcher
+namespace SourceModPatcher
 {
     public interface IFileTokenReplacer
     {

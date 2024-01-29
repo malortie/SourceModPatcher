@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using Pipelines;
 
-namespace test_installsourcecontent
+namespace SourceContentInstaller
 {
     public class ExtractVPKInstallStepDataVPK
     {

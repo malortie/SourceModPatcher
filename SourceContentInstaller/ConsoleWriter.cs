@@ -2,7 +2,7 @@ using System.Drawing;
 using Pipelines;
 using Pastel;
 
-namespace test_installsourcecontent
+namespace SourceContentInstaller
 {
     public class ConsoleWriter : IConsoleWriter
     {
