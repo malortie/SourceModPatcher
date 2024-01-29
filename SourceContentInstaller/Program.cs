@@ -103,9 +103,8 @@ namespace SourceContentInstaller
 
             NLog.LogManager.Configuration = new NLog.Config.XmlLoggingConfiguration("nlog.config");
 
-            var nlogServant = new NLogServant();
             // Clear existing log files.
-            nlogServant.ClearAllLogFiles(NLog.LogManager.Configuration, fileSystem);
+            NLogServant.ClearAllLogFiles(NLog.LogManager.Configuration, fileSystem);
 
             var logProvider = new LogProvider(
                 (MemoryTarget)LogManager.Configuration.FindTargetByName("warningmemory"),

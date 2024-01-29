@@ -6,7 +6,7 @@ namespace SourceContentInstaller
 {
     public class NLogServant
     {
-        public void ClearAllLogFiles(NLog.Config.LoggingConfiguration loggingConfiguration, IFileSystem fileSystem)
+        public static void ClearAllLogFiles(NLog.Config.LoggingConfiguration loggingConfiguration, IFileSystem fileSystem)
         {
             foreach (var target in loggingConfiguration.AllTargets.OfType<FileTarget>())
             {
