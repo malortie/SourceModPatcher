@@ -20,7 +20,6 @@
   <ItemGroup>
     <ProjectReference Include="..\SourceContentInstaller\SourceContentInstaller.csproj" />
     <ProjectReference Include="..\SourceModPatcher\SourceModPatcher.csproj" />
-    <ProjectReference Include="..\test_installsourcecontent_modpatcher\SourceModPatcher.csproj" />
   </ItemGroup>
 
 </Project>
