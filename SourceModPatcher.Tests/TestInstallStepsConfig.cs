@@ -1,7 +1,5 @@
-using SourceContentInstaller;
-using JSONInstallStepsConfig = SourceModPatcher.JSONInstallStepsConfig;
-using InstallStepsConfig = SourceModPatcher.InstallStepsConfig;
 using Pipelines;
+using SourceContentInstaller;
 using System.IO.Abstractions.TestingHelpers;
 
 namespace SourceModPatcher.Tests

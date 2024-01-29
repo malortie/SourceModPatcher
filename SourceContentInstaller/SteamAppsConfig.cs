@@ -1,8 +1,7 @@
 using Gameloop.Vdf;
+using Pipelines;
 using System.IO.Abstractions;
 using System.Text.Json.Serialization;
-using Pipelines;
-using SourceContentInstaller;
 
 namespace SourceContentInstaller
 {

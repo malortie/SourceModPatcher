@@ -1,7 +1,3 @@
-using System.Xml.Linq;
-using System;
-using SourceContentInstaller;
-using System.Linq;
 using Pipelines;
 
 namespace SourceModPatcher

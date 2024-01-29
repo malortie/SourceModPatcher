@@ -1,11 +1,7 @@
+using Pipelines;
+using SourceContentInstaller;
 using System.IO.Abstractions;
 using System.IO.Abstractions.TestingHelpers;
-using Pipelines;
-
-using IConfiguration = SourceModPatcher.IConfiguration;
-using Context = SourceModPatcher.Context;
-using JSONInstallStep = SourceModPatcher.JSONInstallStep;
-using SourceContentInstaller;
 
 namespace SourceModPatcher.Tests
 {
@@ -234,7 +230,7 @@ namespace SourceModPatcher.Tests
             var step = new CopyFilesInstallStep(AlwaysTrueFileCopier, eventHandler);
             var stepData = new CopyFilesInstallStepData()
             {
-              Files = [
+                Files = [
                 new CopyFilesInstallStepDataFile { Source = "C:/source/test1.txt", Destination = "C:/destination/test1.txt" }
               ]
             };
@@ -381,7 +377,7 @@ namespace SourceModPatcher.Tests
 
             Assert.IsNotNull(stepData.Files);
             Assert.AreEqual(2, stepData.Files.Count);
-            
+
             var file = stepData.Files[0];
             Assert.AreEqual("C:/source/bin/client.dll", file.Source);
             Assert.AreEqual("C:/destination/bin/client.dll", file.Destination);

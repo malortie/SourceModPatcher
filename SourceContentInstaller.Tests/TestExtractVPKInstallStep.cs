@@ -761,8 +761,8 @@ namespace SourceContentInstaller.Tests
 
             vpk = stepData.Vpks[1];
             Assert.AreEqual("test2.vpk", vpk.VPKFile);
-            CollectionAssert.AreEquivalent(new List<string> {}, vpk.FilesToExclude);
-            CollectionAssert.AreEquivalent(new List<string> {}, vpk.FilesToExtract);
+            CollectionAssert.AreEquivalent(new List<string> { }, vpk.FilesToExclude);
+            CollectionAssert.AreEquivalent(new List<string> { }, vpk.FilesToExtract);
         }
     }
 }

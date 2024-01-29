@@ -3,14 +3,14 @@ namespace Pipelines.Tests
     public abstract class AbstractNullStepData : IPipelineStepData
     {
         public string Name { get; set; } = string.Empty;
-        public string Description { get; set;} = string.Empty;
+        public string Description { get; set; } = string.Empty;
         public List<string> DependsOn { get; set; } = [];
     }
 
-    public class NullStepDataComplete : AbstractNullStepData {}
-    public class NullStepDataPartiallyComplete : AbstractNullStepData {}
-    public class NullStepDataFailed : AbstractNullStepData {}
-    public class NullStepDataCancelled : AbstractNullStepData {}
+    public class NullStepDataComplete : AbstractNullStepData { }
+    public class NullStepDataPartiallyComplete : AbstractNullStepData { }
+    public class NullStepDataFailed : AbstractNullStepData { }
+    public class NullStepDataCancelled : AbstractNullStepData { }
 
     public class NullContext
     {

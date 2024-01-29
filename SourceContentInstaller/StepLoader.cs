@@ -1,5 +1,5 @@
-using System.IO.Abstractions;
 using Pipelines;
+using System.IO.Abstractions;
 
 namespace SourceContentInstaller
 {

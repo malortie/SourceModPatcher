@@ -1,5 +1,3 @@
-using Pipelines;
-
 namespace Pipelines.Tests
 {
     public class ClassWithReplaceTokenAttributeOnAllProperties

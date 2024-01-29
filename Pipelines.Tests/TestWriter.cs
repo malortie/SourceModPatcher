@@ -83,7 +83,8 @@ namespace Pipelines.Tests
     [TestClass]
     public class TestWriter
     {
-        [TestMethod] public void Success_Calls_Logger_And_ConsoleWriter_Success() 
+        [TestMethod]
+        public void Success_Calls_Logger_And_ConsoleWriter_Success()
         {
             var logger = new LoggerMock();
             var consoleWriter = new ConsoleWriterMock();

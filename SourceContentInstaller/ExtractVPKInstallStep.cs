@@ -1,8 +1,7 @@
-using System;
+using Pipelines;
 using System.IO.Abstractions;
 using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
-using Pipelines;
 
 namespace SourceContentInstaller
 {

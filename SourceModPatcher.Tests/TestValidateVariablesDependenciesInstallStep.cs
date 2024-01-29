@@ -1,12 +1,8 @@
+using Pipelines;
+using SourceContentInstaller;
+using System.Collections.ObjectModel;
 using System.IO.Abstractions;
 using System.IO.Abstractions.TestingHelpers;
-using Pipelines;
-
-using IConfiguration = SourceModPatcher.IConfiguration;
-using Context = SourceModPatcher.Context;
-using JSONInstallStep = SourceModPatcher.JSONInstallStep;
-using System.Collections.ObjectModel;
-using SourceContentInstaller;
 
 namespace SourceModPatcher.Tests
 {

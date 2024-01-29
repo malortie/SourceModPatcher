@@ -1,6 +1,3 @@
-using System.Collections.Immutable;
-using System.Xml.Linq;
-
 namespace Pipelines.Tests
 {
     public class DefaultPipelineStepData : AbstractNullStepData { }
@@ -11,7 +8,8 @@ namespace Pipelines.Tests
         [TestMethod]
         public void CreateStepData()
         {
-            var roStepData = new ReadOnlyPipelineDataFactory().CreateStepData(new DefaultPipelineStepData { 
+            var roStepData = new ReadOnlyPipelineDataFactory().CreateStepData(new DefaultPipelineStepData
+            {
                 Name = "step3",
                 Description = "step 3",
                 DependsOn = ["step1", "step2"],
@@ -26,7 +24,8 @@ namespace Pipelines.Tests
         [TestMethod]
         public void CreateStepData_InstanceIsImmutable()
         {
-            var stepData = new DefaultPipelineStepData {
+            var stepData = new DefaultPipelineStepData
+            {
                 Name = "step3",
                 Description = "step 3",
                 DependsOn = ["step1", "step2"],
@@ -50,8 +49,9 @@ namespace Pipelines.Tests
             {
                 Name = "stage_1",
                 Description = "stage 1",
-                StepsDatas = [ 
-                    new DefaultPipelineStepData {
+                StepsDatas = [
+                    new DefaultPipelineStepData
+                    {
                         Name = "step3",
                         Description = "step 3",
                         DependsOn = ["step1", "step2"]
@@ -63,7 +63,8 @@ namespace Pipelines.Tests
                         DependsOn = ["step3", "step4"]
                     }
                 ],
-                StatsResults = new PipelineStepStatsResults {
+                StatsResults = new PipelineStepStatsResults
+                {
                     NumStepsCancelled = 1,
                     NumStepsCompleted = 2,
                     NumStepsFailed = 3,

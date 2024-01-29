@@ -1,6 +1,6 @@
-using System.Drawing;
-using Pipelines;
 using Pastel;
+using Pipelines;
+using System.Drawing;
 
 namespace SourceContentInstaller
 {

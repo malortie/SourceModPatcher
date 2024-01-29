@@ -14,7 +14,7 @@ namespace Pipelines
     public interface IPipelineStepTokenReplacer
     {
         IPropertiesGetter PropertiesGetter { get; set; }
- 
+
         void Replace(object obj, ITokenReplacer tokenReplacer);
     }
 

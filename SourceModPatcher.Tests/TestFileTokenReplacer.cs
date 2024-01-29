@@ -1,5 +1,5 @@
-using System.Collections.ObjectModel;
 using Pipelines;
+using System.Collections.ObjectModel;
 using System.IO.Abstractions.TestingHelpers;
 
 namespace SourceModPatcher.Tests
@@ -16,7 +16,8 @@ namespace SourceModPatcher.Tests
                 { FILE_PATH, new MockFileData("${{token1}} ${{token2}}") },
             });
 
-            var fileTokenCopier = new FileTokenReplacer(new TokenReplacer {
+            var fileTokenCopier = new FileTokenReplacer(new TokenReplacer
+            {
                 Prefix = "${{",
                 Suffix = "}}"
             });

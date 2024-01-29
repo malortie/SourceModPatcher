@@ -1,5 +1,5 @@
-using System.IO.Abstractions.TestingHelpers;
 using Pipelines;
+using System.IO.Abstractions.TestingHelpers;
 
 namespace SourceContentInstaller.Tests
 {
@@ -7,7 +7,7 @@ namespace SourceContentInstaller.Tests
     {
         public int NoVariableNameSpecifiedTotal { get; private set; } = 0;
         public int NoVariableValueSpecifiedTotal { get; private set; } = 0;
-       
+
         public void NoVariableNameSpecified() => ++NoVariableNameSpecifiedTotal;
         public void NoVariableValueSpecified() => ++NoVariableValueSpecifiedTotal;
     }

@@ -39,7 +39,8 @@ namespace Pipelines.Tests
                 {
                     StepsDatas = []
                 }
-            }, new PipelineProgressWriter(NullWriter) { 
+            }, new PipelineProgressWriter(NullWriter)
+            {
                 StageExecuteFormatter = stageExecuteFormatter,
                 StageCompletedFormatter = stageCompletedFormatter,
                 StagePartiallyCompletedFormatter = stagePartiallyCompletedFormatter,
@@ -74,7 +75,8 @@ namespace Pipelines.Tests
                 {
                     StepsDatas = []
                 }
-            }, new PipelineProgressWriter(NullWriter) {
+            }, new PipelineProgressWriter(NullWriter)
+            {
                 StageExecuteFormatter = stageExecuteFormatter,
                 StageCompletedFormatter = stageCompletedFormatter,
                 StagePartiallyCompletedFormatter = stagePartiallyCompletedFormatter,
@@ -115,7 +117,8 @@ namespace Pipelines.Tests
                         new NullStepDataPartiallyComplete()
                     ]
                 }
-            }, new PipelineProgressWriter(NullWriter) {
+            }, new PipelineProgressWriter(NullWriter)
+            {
                 StageExecuteFormatter = stageExecuteFormatter,
                 StageCompletedFormatter = stageCompletedFormatter,
                 StagePartiallyCompletedFormatter = stagePartiallyCompletedFormatter,
@@ -156,7 +159,8 @@ namespace Pipelines.Tests
                         new NullStepDataFailed()
                     ]
                 }
-            }, new PipelineProgressWriter(NullWriter) {
+            }, new PipelineProgressWriter(NullWriter)
+            {
                 StageExecuteFormatter = stageExecuteFormatter,
                 StageCompletedFormatter = stageCompletedFormatter,
                 StagePartiallyCompletedFormatter = stagePartiallyCompletedFormatter,
@@ -197,7 +201,8 @@ namespace Pipelines.Tests
                         new NullStepDataCancelled()
                     ]
                 }
-            }, new PipelineProgressWriter(NullWriter) {
+            }, new PipelineProgressWriter(NullWriter)
+            {
                 StageExecuteFormatter = stageExecuteFormatter,
                 StageCompletedFormatter = stageCompletedFormatter,
                 StagePartiallyCompletedFormatter = stagePartiallyCompletedFormatter,

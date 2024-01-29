@@ -1,5 +1,5 @@
-using NLog.Targets;
 using NLog;
+using NLog.Targets;
 using System.IO.Abstractions;
 
 namespace SourceContentInstaller

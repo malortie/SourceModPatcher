@@ -1,5 +1,5 @@
-using System.IO.Abstractions.TestingHelpers;
 using Pipelines;
+using System.IO.Abstractions.TestingHelpers;
 
 namespace SourceContentInstaller.Tests
 {

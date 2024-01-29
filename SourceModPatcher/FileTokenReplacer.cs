@@ -19,7 +19,8 @@ namespace SourceModPatcher
             _tokenReplacer = tokenReplacer;
         }
 
-        public ReadOnlyDictionary<string, string> Variables { 
+        public ReadOnlyDictionary<string, string> Variables
+        {
             get { return _tokenReplacer.Variables; }
             set { _tokenReplacer.Variables = value; }
         }

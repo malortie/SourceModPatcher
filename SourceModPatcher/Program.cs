@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
 using CommandLine;
-using NLog.Targets;
 using NLog;
-using System.Runtime.Versioning;
-using System.IO.Abstractions;
+using NLog.Targets;
 using Pipelines;
 using SourceContentInstaller;
+using System.IO.Abstractions;
+using System.Runtime.Versioning;
 
 namespace SourceModPatcher
 {

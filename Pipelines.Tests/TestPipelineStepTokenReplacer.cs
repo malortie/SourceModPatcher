@@ -57,7 +57,8 @@ namespace Pipelines.Tests
                 })
             };
 
-            var classInstance = new ClassWithStrings() { 
+            var classInstance = new ClassWithStrings()
+            {
                 String1 = "$(token_1)",
                 String2 = "$(token_2)",
                 String3 = "$(token_3)",
@@ -135,7 +136,8 @@ namespace Pipelines.Tests
 
             var classInstance = new ClassWithCompositeMembers()
             {
-                ClassWithStrings1 = new ClassWithStrings {
+                ClassWithStrings1 = new ClassWithStrings
+                {
                     String1 = "$(token_1a)",
                     String2 = "$(token_1b)",
                     String3 = "$(token_1c)"
@@ -161,7 +163,7 @@ namespace Pipelines.Tests
             };
             var stepTokenReplacer = new PipelineStepTokenReplacer();
             stepTokenReplacer.Replace(classInstance, tokenReplacer);
-            
+
             Assert.AreEqual("value1a", classInstance.ClassWithStrings1.String1);
             Assert.AreEqual("$(token_1b)", classInstance.ClassWithStrings1.String2);
             Assert.AreEqual("value1c", classInstance.ClassWithStrings1.String3);

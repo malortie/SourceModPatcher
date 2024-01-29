@@ -2,14 +2,9 @@
 using CommandLine;
 using NLog;
 using NLog.Targets;
-using Pastel;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Drawing;
+using Pipelines;
 using System.IO.Abstractions;
 using System.Runtime.Versioning;
-using Pipelines;
-using SourceContentInstaller;
 
 namespace SourceContentInstaller
 {

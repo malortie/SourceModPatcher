@@ -1,7 +1,7 @@
-using System.IO.Abstractions;
-using System.Text.Json.Serialization;
 using Pipelines;
 using SourceContentInstaller;
+using System.IO.Abstractions;
+using System.Text.Json.Serialization;
 
 namespace SourceModPatcher
 {

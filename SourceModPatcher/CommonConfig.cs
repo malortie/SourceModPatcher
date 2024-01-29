@@ -1,6 +1,6 @@
-using System.IO.Abstractions;
 using Pipelines;
 using SourceContentInstaller;
+using System.IO.Abstractions;
 
 namespace SourceModPatcher
 {

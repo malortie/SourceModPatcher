@@ -1,7 +1,5 @@
 using Pipelines;
-using System;
 using System.IO.Abstractions;
-using SourceContentInstaller;
 
 namespace SourceModPatcher
 {

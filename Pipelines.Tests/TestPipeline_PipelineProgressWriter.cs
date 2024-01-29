@@ -39,7 +39,7 @@ namespace Pipelines.Tests
         public void WriteStageExecute_Called_3_Times()
         {
             var progressWriter = new PipelineProgressWriterMock();
-    
+
             var pipeline = new Pipeline<NullContext>(new[] {
                 new NullStage
                 {
@@ -62,7 +62,7 @@ namespace Pipelines.Tests
             }, progressWriter);
 
             pipeline.Execute(NullContext);
-    
+
             Assert.AreEqual(3, progressWriter.WriteStageExecuteTotal);
         }
 

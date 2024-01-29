@@ -1,8 +1,7 @@
 using Pipelines;
+using SourceContentInstaller;
 using System.IO.Abstractions;
 using System.IO.Abstractions.TestingHelpers;
-using SourceContentInstaller;
-using Configuration = SourceModPatcher.Configuration;
 
 namespace SourceModPatcher.Tests
 {

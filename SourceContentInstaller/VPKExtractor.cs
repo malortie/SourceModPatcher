@@ -1,6 +1,6 @@
+using Pipelines;
 using SteamDatabase.ValvePak;
 using System.IO.Abstractions;
-using Pipelines;
 
 namespace SourceContentInstaller
 {

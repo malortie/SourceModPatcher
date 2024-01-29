@@ -69,7 +69,7 @@ namespace SourceContentInstaller.Tests
         [TestMethod]
         public void FileName_ReturnsFileNameWithoutPath()
         {
-            var fileSystem = new MockFileSystem(new Dictionary<string, MockFileData> {});
+            var fileSystem = new MockFileSystem(new Dictionary<string, MockFileData> { });
 
             var configManager = new ConfigurationManager<object>(fileSystem, NullWriter, "C:/Documents/simple_test.json", new NullConfigurationSerializer<object>());
 
@@ -92,7 +92,7 @@ namespace SourceContentInstaller.Tests
             Assert.IsTrue(config.PropBool);
             Assert.AreEqual(42, config.PropInt);
             Assert.AreEqual("value1", config.PropString);
-            CollectionAssert.AreEquivalent(new List<int>{1,2,3,4}, config.PropIntList);
+            CollectionAssert.AreEquivalent(new List<int> { 1, 2, 3, 4 }, config.PropIntList);
             Assert.IsNotNull(config.PropObject);
             Assert.IsTrue(config.PropObject.ContainsKey("hello"));
             Assert.AreEqual("world", config.PropObject["hello"]);
@@ -127,7 +127,7 @@ namespace SourceContentInstaller.Tests
         [TestMethod]
         public void SaveConfig_Simple()
         {
-            var fileSystem = new MockFileSystem(new Dictionary<string, MockFileData> {});
+            var fileSystem = new MockFileSystem(new Dictionary<string, MockFileData> { });
 
             var configManager = new ConfigurationManagerMock<JSONSimpleTestConfig>(fileSystem, NullWriter, "C:/simple_test.json", new JSONConfigurationSerializer<JSONSimpleTestConfig>());
 
@@ -136,7 +136,7 @@ namespace SourceContentInstaller.Tests
                 PropBool = false,
                 PropInt = 100,
                 PropString = "test",
-                PropIntList = [5,6,7,8],
+                PropIntList = [5, 6, 7, 8],
                 PropObject = {
                     { "key", "value" }
                 }
