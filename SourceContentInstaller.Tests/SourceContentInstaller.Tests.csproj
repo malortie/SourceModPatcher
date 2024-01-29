@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SourceContentInstaller\SourceContentInstaller.csproj" />
     <ProjectReference Include="..\test_installsourcecontent\SourceContentInstaller.csproj" />
   </ItemGroup>
 
