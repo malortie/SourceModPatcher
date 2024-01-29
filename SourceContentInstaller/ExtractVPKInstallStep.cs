@@ -78,9 +78,15 @@ namespace SourceContentInstaller
         void ResolveFilePaths(IFileSystem fileSystem, List<ExtractVPKInstallStepDataVPK> vpks);
     }
 
+    static partial class VPKFileResolverRegex
+    {
+        [GeneratedRegex(@"[*]", RegexOptions.IgnoreCase)]
+        public static partial Regex GeneratedRegex();
+    }
+
     public class VPKFileResolver : IVPKFileResolver
     {
-        public Regex Wildcard = new(@"[*]", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        public Regex Wildcard = VPKFileResolverRegex.GeneratedRegex();
 
         public void ResolveFilePaths(IFileSystem fileSystem, List<ExtractVPKInstallStepDataVPK> vpks)
         {
