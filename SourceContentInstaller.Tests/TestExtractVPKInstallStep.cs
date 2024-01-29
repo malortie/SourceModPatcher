@@ -66,16 +66,16 @@ namespace SourceContentInstaller.Tests
     [TestClass]
     public class TestExtractVPKInstallStep
     {
-        static IVPKExtractor Extractor = new VPKExtractor();
-        static IVPKExtractor AlwaysCompleteVPKExtractor = new AlwaysCompleteVPKExtractor();
-        static IVPKExtractor AlwaysCompleteWithErrorsVPKExtractor = new AlwaysCompleteWithErrorsVPKExtractor();
-        static IVPKExtractor AlwaysFailedVPKExtractor = new AlwaysFailedVPKExtractor();
+        static readonly IVPKExtractor Extractor = new VPKExtractor();
+        static readonly IVPKExtractor AlwaysCompleteVPKExtractor = new AlwaysCompleteVPKExtractor();
+        static readonly IVPKExtractor AlwaysCompleteWithErrorsVPKExtractor = new AlwaysCompleteWithErrorsVPKExtractor();
+        static readonly IVPKExtractor AlwaysFailedVPKExtractor = new AlwaysFailedVPKExtractor();
 
-        static IWriter NullWriter = new NullWriter();
-        static IStringToRegexConverter DefaultStringToRegexConverter = new StringToRegexConverter();
-        static IStringToRegexConverter BadRegexConverter = new BadRegexConverter();
-        static IConfiguration NullConfiguration = new NullConfiguration();
-        static IVPKFileResolver VPKFileResolver = new VPKFileResolver();
+        static readonly IWriter NullWriter = new NullWriter();
+        static readonly IStringToRegexConverter DefaultStringToRegexConverter = new StringToRegexConverter();
+        static readonly IStringToRegexConverter BadRegexConverter = new BadRegexConverter();
+        static readonly IConfiguration NullConfiguration = new NullConfiguration();
+        static readonly IVPKFileResolver VPKFileResolver = new VPKFileResolver();
 
         [TestMethod]
         public void EmptyVPKListReturnsFailed()
@@ -329,27 +329,27 @@ namespace SourceContentInstaller.Tests
 
             var fileSystem = new MockFileSystem(fileSystemData);
             var vpks = new List<ExtractVPKInstallStepDataVPK> {
-                new ExtractVPKInstallStepDataVPK {
+                new() {
                     VPKFile = "C:/vpks/hl2_pak_dir.vpk",
                     FilesToExclude = ["test1"],
                     FilesToExtract = ["test2"]
                 },
-                new ExtractVPKInstallStepDataVPK {
+                new() {
                     VPKFile = "C:/vpks/hl2_pak_*_dir.vpk", // Wildcard
                     FilesToExclude = ["test3"],
                     FilesToExtract = ["test4"]
                 },
-                new ExtractVPKInstallStepDataVPK {
+                new() {
                     VPKFile = "C:/vpks/hl2_sound_misc_dir.vpk",
                     FilesToExclude = ["test5"],
                     FilesToExtract = ["test6"]
                 },
-                new ExtractVPKInstallStepDataVPK {
+                new() {
                     VPKFile = "C:/vpks/hl2_sound_vo_*_dir.vpk",  // Wildcard
                     FilesToExclude = ["test7"],
                     FilesToExtract = ["test8"]
                 },
-                new ExtractVPKInstallStepDataVPK {
+                new() {
                     VPKFile = "C:/vpks/hl2_textures_dir.vpk",
                     FilesToExclude = ["test9"],
                     FilesToExtract = ["test10"]
@@ -357,37 +357,37 @@ namespace SourceContentInstaller.Tests
             };
 
             var expected = new ExtractVPKInstallStepDataVPK[] {
-                new ExtractVPKInstallStepDataVPK {
+                new() {
                     VPKFile = "C:/vpks/hl2_pak_dir.vpk",
                     FilesToExclude = ["test1"],
                     FilesToExtract = ["test2"]
                 },
-                new ExtractVPKInstallStepDataVPK {
+                new() {
                     VPKFile = "C:/vpks/hl2_pak_english_dir.vpk", // Replaced
                     FilesToExclude = ["test3"],
                     FilesToExtract = ["test4"]
                 },
-                new ExtractVPKInstallStepDataVPK {
+                new() {
                     VPKFile = "C:/vpks/hl2_pak_french_dir.vpk", // Replaced
                     FilesToExclude = ["test3"],
                     FilesToExtract = ["test4"]
                 },
-                new ExtractVPKInstallStepDataVPK {
+                new() {
                     VPKFile = "C:/vpks/hl2_sound_misc_dir.vpk",
                     FilesToExclude = ["test5"],
                     FilesToExtract = ["test6"]
                 },
-                new ExtractVPKInstallStepDataVPK {
+                new() {
                     VPKFile = "C:/vpks/hl2_sound_vo_english_dir.vpk", // Replaced
                     FilesToExclude = ["test7"],
                     FilesToExtract = ["test8"]
                 },
-                new ExtractVPKInstallStepDataVPK {
+                new() {
                     VPKFile = "C:/vpks/hl2_sound_vo_french_dir.vpk", // Replaced
                     FilesToExclude = ["test7"],
                     FilesToExtract = ["test8"]
                 },
-                new ExtractVPKInstallStepDataVPK {
+                new() {
                     VPKFile = "C:/vpks/hl2_textures_dir.vpk",
                     FilesToExclude = ["test9"],
                     FilesToExtract = ["test10"]
@@ -397,7 +397,7 @@ namespace SourceContentInstaller.Tests
             var fileResolver = new VPKFileResolver();
             fileResolver.ResolveFilePaths(fileSystem, vpks);
 
-            Assert.AreEqual(expected.Length, vpks.Count());
+            Assert.AreEqual(expected.Length, vpks.Count);
             for (int i = 0; i < expected.Length; ++i)
                 Assert.AreEqual(expected[i], vpks[i], new ExtractVPKInstallStepDataVPKEqualityComparer());
         }
@@ -414,17 +414,17 @@ namespace SourceContentInstaller.Tests
 
             var fileSystem = new MockFileSystem(fileSystemData);
             var vpks = new List<ExtractVPKInstallStepDataVPK> {
-                new ExtractVPKInstallStepDataVPK {
+                new() {
                     VPKFile = "C:/vpks/hl2_pak_dir.vpk",
                     FilesToExclude = ["test1"],
                     FilesToExtract = ["test2"]
                 },
-                new ExtractVPKInstallStepDataVPK {
+                new() {
                     VPKFile = "C:/vpks/hl2_sound_misc_dir.vpk",
                     FilesToExclude = ["test3"],
                     FilesToExtract = ["test4"]
                 },
-                new ExtractVPKInstallStepDataVPK {
+                new() {
                     VPKFile = "C:/vpks/hl2_textures_dir.vpk",
                     FilesToExclude = ["test5"],
                     FilesToExtract = ["test6"]
@@ -432,17 +432,17 @@ namespace SourceContentInstaller.Tests
             };
 
             var expected = new ExtractVPKInstallStepDataVPK[] {
-                new ExtractVPKInstallStepDataVPK {
+                new() {
                     VPKFile = "C:/vpks/hl2_pak_dir.vpk",
                     FilesToExclude = ["test1"],
                     FilesToExtract = ["test2"]
                 },
-                new ExtractVPKInstallStepDataVPK {
+                new() {
                     VPKFile = "C:/vpks/hl2_sound_misc_dir.vpk",
                     FilesToExclude = ["test3"],
                     FilesToExtract = ["test4"]
                 },
-                new ExtractVPKInstallStepDataVPK {
+                new() {
                     VPKFile = "C:/vpks/hl2_textures_dir.vpk",
                     FilesToExclude = ["test5"],
                     FilesToExtract = ["test6"]
@@ -452,7 +452,7 @@ namespace SourceContentInstaller.Tests
             var fileResolver = new VPKFileResolver();
             fileResolver.ResolveFilePaths(fileSystem, vpks);
 
-            Assert.AreEqual(expected.Length, vpks.Count());
+            Assert.AreEqual(expected.Length, vpks.Count);
             for (int i = 0; i < expected.Length; ++i)
                 Assert.AreEqual(expected[i], vpks[i], new ExtractVPKInstallStepDataVPKEqualityComparer());
         }

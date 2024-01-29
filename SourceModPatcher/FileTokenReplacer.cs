@@ -10,14 +10,9 @@ namespace SourceModPatcher
         bool ReplaceInFile(IFileSystem fileSystem, IWriter writer, string filePath);
     }
 
-    public class FileTokenReplacer : IFileTokenReplacer
+    public class FileTokenReplacer(ITokenReplacer tokenReplacer) : IFileTokenReplacer
     {
-        ITokenReplacer _tokenReplacer;
-
-        public FileTokenReplacer(ITokenReplacer tokenReplacer)
-        {
-            _tokenReplacer = tokenReplacer;
-        }
+        readonly ITokenReplacer _tokenReplacer = tokenReplacer;
 
         public ReadOnlyDictionary<string, string> Variables
         {

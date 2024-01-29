@@ -14,18 +14,11 @@ namespace SourceModPatcher
         string GetSourceModDataDir(string key);
     }
 
-    public class Configuration : IConfiguration
+    public class Configuration(SourceModsConfig sourceModsConfig, InstallVariablesConfig installVariablesConfig, VariablesConfig variablesConfig) : IConfiguration
     {
-        SourceModsConfig _sourceModsConfig;
-        InstallVariablesConfig _installVariablesConfig;
-        VariablesConfig _variablesConfig;
-
-        public Configuration(SourceModsConfig sourceModsConfig, InstallVariablesConfig installVariablesConfig, VariablesConfig variablesConfig)
-        {
-            _sourceModsConfig = sourceModsConfig;
-            _installVariablesConfig = installVariablesConfig;
-            _variablesConfig = variablesConfig;
-        }
+        readonly SourceModsConfig _sourceModsConfig = sourceModsConfig;
+        readonly InstallVariablesConfig _installVariablesConfig = installVariablesConfig;
+        readonly VariablesConfig _variablesConfig = variablesConfig;
 
         public ReadOnlyDictionary<string, string> GetVariables()
         {

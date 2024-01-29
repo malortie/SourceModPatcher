@@ -32,16 +32,10 @@ namespace SourceModPatcher
         void NoFilesCopied();
     }
 
-    public class CopyFilesInstallStep : IPipelineStep<Context>
+    public class CopyFilesInstallStep(IFileCopier fileCopier, ICopyFilesInstallStepEventHandler? eventHandler = null) : IPipelineStep<Context>
     {
-        IFileCopier _fileCopier;
-        ICopyFilesInstallStepEventHandler? _eventHandler;
-
-        public CopyFilesInstallStep(IFileCopier fileCopier, ICopyFilesInstallStepEventHandler? eventHandler = null)
-        {
-            _fileCopier = fileCopier;
-            _eventHandler = eventHandler;
-        }
+        readonly IFileCopier _fileCopier = fileCopier;
+        readonly ICopyFilesInstallStepEventHandler? _eventHandler = eventHandler;
 
         public PipelineStepStatus DoStep(Context context, IPipelineStepData stepData, IWriter writer)
         {

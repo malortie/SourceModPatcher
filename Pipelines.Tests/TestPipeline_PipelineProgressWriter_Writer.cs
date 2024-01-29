@@ -3,7 +3,7 @@ namespace Pipelines.Tests
     [TestClass]
     public class TestPipeline_PipelineProgressWriter_Writer
     {
-        static NullContext NullContext = new NullContext();
+        static readonly NullContext NullContext = new();
 
         [TestMethod]
         public void WriteStageExecute_Writer_Info()

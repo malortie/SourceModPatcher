@@ -3,12 +3,12 @@ namespace Pipelines.Tests
     [TestClass]
     public class TestPipeline_StatsResults
     {
-        static NullContext NullContext = new NullContext();
+        static readonly NullContext NullContext = new();
 
         [TestMethod]
         public void StatsResults_NoStages()
         {
-            var pipeline = new Pipeline<NullContext>(Array.Empty<IPipelineStage<NullContext>>());
+            var pipeline = new Pipeline<NullContext>([]);
 
             pipeline.Execute(NullContext);
 

@@ -57,14 +57,14 @@ namespace Pipelines.Tests
         public Dictionary<string, string> GetVariables(NullContext context)
         {
             ++GetVariablesTotal;
-            return new Dictionary<string, string>();
+            return [];
         }
     }
 
     [TestClass]
     public class TestPipelineStage_PipelineStepTokenReplacer
     {
-        static NullContext NullContext = new NullContext();
+        static readonly NullContext NullContext = new();
 
         [TestMethod]
         public void PipelineStepTokenReplacer_NotCalled_WhenStageHasNoSteps()

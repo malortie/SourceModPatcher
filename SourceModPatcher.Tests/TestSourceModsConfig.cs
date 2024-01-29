@@ -7,7 +7,7 @@ namespace SourceModPatcher.Tests
     [TestClass]
     public class TestSourceModsConfig
     {
-        static IWriter NullWriter = new NullWriter();
+        static readonly IWriter NullWriter = new NullWriter();
 
         [TestMethod]
         public void Deserialize_JSONSourceModsConfigEntry()

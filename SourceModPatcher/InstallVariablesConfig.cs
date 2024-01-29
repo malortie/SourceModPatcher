@@ -8,10 +8,7 @@ namespace SourceModPatcher
     {
     }
 
-    public class InstallVariablesConfig : ConfigurationManager<JSONInstallVariablesConfig>
+    public class InstallVariablesConfig(IFileSystem fileSystem, IWriter writer, string filePath, IConfigurationSerializer<JSONInstallVariablesConfig> configSerializer) : ConfigurationManager<JSONInstallVariablesConfig>(fileSystem, writer, filePath, configSerializer)
     {
-        public InstallVariablesConfig(IFileSystem fileSystem, IWriter writer, string filePath, IConfigurationSerializer<JSONInstallVariablesConfig> configSerializer) : base(fileSystem, writer, filePath, configSerializer)
-        {
-        }
     }
 }

@@ -38,10 +38,5 @@ namespace SourceModPatcher.Tests
         {
             return string.Empty;
         }
-
-        public bool HasVariable(string variableName)
-        {
-            return false;
-        }
     }
 }

@@ -3,7 +3,7 @@ namespace Pipelines.Tests
     [TestClass]
     public class TestPipelineStage_DependsOn
     {
-        static NullContext NullContext = new NullContext();
+        static readonly NullContext NullContext = new();
 
         [TestMethod]
         public void DependsOn_DependentsExecuted_WhenDependencyReturnsComplete()

@@ -7,12 +7,8 @@ namespace SourceContentInstaller
     {
     }
 
-    public class VariablesConfig : ConfigurationManager<JSONVariablesConfig>
+    public class VariablesConfig(IFileSystem fileSystem, IWriter writer, string filePath, IConfigurationSerializer<JSONVariablesConfig> configSerializer) : ConfigurationManager<JSONVariablesConfig>(fileSystem, writer, filePath, configSerializer)
     {
-        public VariablesConfig(IFileSystem fileSystem, IWriter writer, string filePath, IConfigurationSerializer<JSONVariablesConfig> configSerializer) : base(fileSystem, writer, filePath, configSerializer)
-        {
-        }
-
         public virtual void SaveVariable(string name, string value)
         {
             Config[name] = value;

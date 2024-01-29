@@ -31,13 +31,9 @@ namespace SourceModPatcher.Tests
         }
     }
 
-    public class SourceContentVariablesContextMock : Context
+    public class SourceContentVariablesContextMock(IFileSystem fileSystem, IConfiguration configuration) : Context(fileSystem, configuration)
     {
-        public SourceContentVariablesContextMock(IFileSystem fileSystem, IConfiguration configuration) : base(fileSystem, configuration)
-        {
-        }
-
-        public Dictionary<string, string> Dependencies { get; set; } = new Dictionary<string, string>();
+        public Dictionary<string, string> Dependencies { get; set; } = [];
 
         public override ReadOnlyDictionary<string, string> GetSourceContentVariables()
         {
@@ -49,8 +45,8 @@ namespace SourceModPatcher.Tests
     [TestClass]
     public class TestValidateVariablesDependenciesInstallStep
     {
-        static IWriter NullWriter = new NullWriter();
-        static IConfiguration NullConfiguration = new NullConfiguration();
+        static readonly IWriter NullWriter = new NullWriter();
+        static readonly IConfiguration NullConfiguration = new NullConfiguration();
 
         [TestMethod]
         public void EmptyDependenciesListReturnsFailed()

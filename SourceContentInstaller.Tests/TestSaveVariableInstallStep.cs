@@ -15,8 +15,8 @@ namespace SourceContentInstaller.Tests
     [TestClass]
     public class TestSaveVariableInstallStep
     {
-        static IWriter NullWriter = new NullWriter();
-        static IConfiguration NullConfiguration = new NullConfiguration();
+        static readonly IWriter NullWriter = new NullWriter();
+        static readonly IConfiguration NullConfiguration = new NullConfiguration();
 
         [TestMethod]
         public void BlankVariableNameReturnsFailed()

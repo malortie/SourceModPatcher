@@ -17,12 +17,8 @@ namespace SourceContentInstaller
     }
 
 
-    public class InstallSettings : ConfigurationManager<JSONInstallSettings>
+    public class InstallSettings(IFileSystem fileSystem, IWriter writer, string filePath, IConfigurationSerializer<JSONInstallSettings> configSerializer) : ConfigurationManager<JSONInstallSettings>(fileSystem, writer, filePath, configSerializer)
     {
-        public InstallSettings(IFileSystem fileSystem, IWriter writer, string filePath, IConfigurationSerializer<JSONInstallSettings> configSerializer) : base(fileSystem, writer, filePath, configSerializer)
-        {
-        }
-
         public virtual List<int> GetSteamAppsToInstall()
         {
             return Config.Where(kv => kv.Value.Install).Select(kv => kv.Key).ToList();

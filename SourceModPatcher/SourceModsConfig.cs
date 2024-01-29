@@ -19,16 +19,11 @@ namespace SourceModPatcher
     {
     }
 
-    public class SourceModsConfig : ConfigurationManager<JSONSourceModsConfig>
+    public class SourceModsConfig(IFileSystem fileSystem, IWriter writer, string filePath, IConfigurationSerializer<JSONSourceModsConfig> configSerializer, string sourceModInstallPath) : ConfigurationManager<JSONSourceModsConfig>(fileSystem, writer, filePath, configSerializer)
     {
-        public SourceModsConfig(IFileSystem fileSystem, IWriter writer, string filePath, IConfigurationSerializer<JSONSourceModsConfig> configSerializer, string sourceModInstallPath) : base(fileSystem, writer, filePath, configSerializer)
-        {
-            SourceModInstallPath = sourceModInstallPath;
-        }
-
         public List<string> SupportedSourceModsKeys = [];
 
-        public string SourceModInstallPath { get; private set; }
+        public string SourceModInstallPath { get; private set; } = sourceModInstallPath;
 
         public virtual string GetSourceModName(string key)
         {
@@ -68,7 +63,7 @@ namespace SourceModPatcher
 
         void SetupSupportedSourceMods()
         {
-            SupportedSourceModsKeys = Config.Keys.ToList();
+            SupportedSourceModsKeys = [.. Config.Keys];
             SupportedSourceModsKeys.Sort();
         }
     }

@@ -14,12 +14,8 @@ namespace SourceModPatcher
     public sealed class JSONInstallSettings : SortedDictionary<string, JSONInstallSettingsEntry>
     {
     }
-    public sealed class InstallSettings : ConfigurationManager<JSONInstallSettings>
+    public sealed class InstallSettings(IFileSystem fileSystem, IWriter writer, string filePath, IConfigurationSerializer<JSONInstallSettings> configSerializer) : ConfigurationManager<JSONInstallSettings>(fileSystem, writer, filePath, configSerializer)
     {
-        public InstallSettings(IFileSystem fileSystem, IWriter writer, string filePath, IConfigurationSerializer<JSONInstallSettings> configSerializer) : base(fileSystem, writer, filePath, configSerializer)
-        {
-        }
-
         public List<string> GetSourceModsToInstall()
         {
             return Config.Where(kv => kv.Value.Install).Select(kv => kv.Key).ToList();

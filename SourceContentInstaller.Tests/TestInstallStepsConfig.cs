@@ -6,7 +6,7 @@ namespace SourceContentInstaller.Tests
     [TestClass]
     public class TestInstallStepsConfig
     {
-        static IWriter NullWriter = new NullWriter();
+        static readonly IWriter NullWriter = new NullWriter();
 
         [TestMethod]
         public void Deserialize_JSONInstallStepsConfig()

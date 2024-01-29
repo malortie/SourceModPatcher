@@ -14,7 +14,7 @@ namespace Pipelines.Tests
     [TestClass]
     public class TestStageStepWriterDecorator
     {
-        static IWriter NullWriter = new NullWriter();
+        static readonly IWriter NullWriter = new NullWriter();
 
         [TestMethod]
         public void Success_Calls_Writer_Success()

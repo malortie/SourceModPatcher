@@ -2,13 +2,9 @@ using Pipelines;
 
 namespace SourceContentInstaller
 {
-    public class Logger : ILogger
+    public class Logger(NLog.Logger logger) : ILogger
     {
-        readonly NLog.Logger _logger;
-        public Logger(NLog.Logger logger)
-        {
-            _logger = logger;
-        }
+        readonly NLog.Logger _logger = logger;
 
         public void Cancellation(string message)
         {

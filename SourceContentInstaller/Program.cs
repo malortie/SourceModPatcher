@@ -10,7 +10,7 @@ namespace SourceContentInstaller
 {
     public class InstallStepMapper<ConfigT> : IStepMapper<ConfigT>
     {
-        IMapper _mapper;
+        readonly IMapper _mapper;
 
         public InstallStepMapper()
         {
@@ -44,7 +44,7 @@ namespace SourceContentInstaller
         public int AppID { get; set; }
 
         // Map each step data type to a single step instance.
-        static Dictionary<Type, IPipelineStep<Context>> _stepsDataToInstallStep = new()
+        static readonly Dictionary<Type, IPipelineStep<Context>> _stepsDataToInstallStep = new()
         {
             { typeof(ExtractVPKInstallStepData), new ExtractVPKInstallStep(new VPKExtractor(), new StringToRegexConverter(), new VPKFileResolver()) },
             { typeof(SaveVariableInstallStepData), new SaveVariableInstallStep() }
@@ -123,10 +123,12 @@ namespace SourceContentInstaller
                     Environment.SetEnvironmentVariable(INSTALL_ENVVAR, Environment.CurrentDirectory, EnvironmentVariableTarget.User);
                 }
 
-                Func<string, string> MakeFullPath = x => PathExtensions.JoinWithSeparator(fileSystem, Environment.CurrentDirectory, x);
+                string MakeFullPath(string x) => PathExtensions.JoinWithSeparator(fileSystem, Environment.CurrentDirectory, x);
 
-                var steamAppsConfig = new SteamAppsConfig(fileSystem, writer, MakeFullPath(STEAMAPPS_CONFIG_FILENAME), new JSONConfigurationSerializer<JSONSteamAppsConfig>(), new WindowsSteamPathFinder());
-                steamAppsConfig.UseConfigFile = options.UseConfigFile;
+                var steamAppsConfig = new SteamAppsConfig(fileSystem, writer, MakeFullPath(STEAMAPPS_CONFIG_FILENAME), new JSONConfigurationSerializer<JSONSteamAppsConfig>(), new WindowsSteamPathFinder())
+                {
+                    UseConfigFile = options.UseConfigFile
+                };
                 steamAppsConfig.LoadConfig();
 
                 var variablesConfig = new VariablesConfig(fileSystem, writer, MakeFullPath("variables.json"), new JSONConfigurationSerializer<JSONVariablesConfig>());
@@ -200,9 +202,11 @@ namespace SourceContentInstaller
                 var stageProgressWriter = new PipelineStageProgressWriter(writer);
                 var consoleLogReportWriter = new ConsoleLogReportWriter(consoleWriter, logProvider);
                 var statsWriter = new PipelineStatsWriter(writer);
-                var tokenReplacer = new TokenReplacer();
-                tokenReplacer.Prefix = "$(";
-                tokenReplacer.Suffix = ")";
+                var tokenReplacer = new TokenReplacer
+                {
+                    Prefix = "$(",
+                    Suffix = ")"
+                };
                 var tokenReplacerVariablesProvider = new TokenReplacerVariablesProvider();
 
                 var configuration = new Configuration(steamAppsConfig, installSettings, variablesConfig);
@@ -225,7 +229,7 @@ namespace SourceContentInstaller
                     PauseAfterEachStep = options.PauseAfterEachStep,
                     PauseHandler = pauseHandler,
                     ProgressWriter = stageProgressWriter,
-                    StepsDatas = kv.Value.ToArray(),
+                    StepsDatas = [.. kv.Value],
                     TokenReplacer = tokenReplacer,
                     TokenReplacerVariablesProvider = tokenReplacerVariablesProvider
                 }).ToArray();

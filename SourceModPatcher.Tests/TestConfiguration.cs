@@ -9,7 +9,7 @@ namespace SourceModPatcher.Tests
     {
         public ConfigT? Deserialize(string value)
         {
-            return default(ConfigT);
+            return default;
         }
 
         public string Serialize(ConfigT value)
@@ -18,12 +18,8 @@ namespace SourceModPatcher.Tests
         }
     }
 
-    public class SourceModsConfigMock : SourceModsConfig
+    public class SourceModsConfigMock(IFileSystem fileSystem, IWriter writer, string filePath, IConfigurationSerializer<JSONSourceModsConfig> configSerializer, string sourceModInstallPath) : SourceModsConfig(fileSystem, writer, filePath, configSerializer, sourceModInstallPath)
     {
-        public SourceModsConfigMock(IFileSystem fileSystem, IWriter writer, string filePath, IConfigurationSerializer<JSONSourceModsConfig> configSerializer, string sourceModInstallPath) : base(fileSystem, writer, filePath, configSerializer, sourceModInstallPath)
-        {
-        }
-
         public int GetSourceModNameTotal { get; private set; } = 0;
         public int GetSourceModFolderTotal { get; private set; } = 0;
         public int GetSourceModDirTotal { get; private set; } = 0;
@@ -54,20 +50,13 @@ namespace SourceModPatcher.Tests
         }
     }
 
-    public class InstallVariablesConfigMock : InstallVariablesConfig
+    public class InstallVariablesConfigMock(IFileSystem fileSystem, IWriter writer, string filePath, IConfigurationSerializer<JSONInstallVariablesConfig> configSerializer) : InstallVariablesConfig(fileSystem, writer, filePath, configSerializer)
     {
-        public InstallVariablesConfigMock(IFileSystem fileSystem, IWriter writer, string filePath, IConfigurationSerializer<JSONInstallVariablesConfig> configSerializer) : base(fileSystem, writer, filePath, configSerializer)
-        {
-        }
         public JSONInstallVariablesConfig ConfigSetter { set { Config = value; } }
     }
 
-    public class VariablesConfigMock : VariablesConfig
+    public class VariablesConfigMock(IFileSystem fileSystem, IWriter writer, string filePath, IConfigurationSerializer<JSONVariablesConfig> configSerializer) : VariablesConfig(fileSystem, writer, filePath, configSerializer)
     {
-        public VariablesConfigMock(IFileSystem fileSystem, IWriter writer, string filePath, IConfigurationSerializer<JSONVariablesConfig> configSerializer) : base(fileSystem, writer, filePath, configSerializer)
-        {
-        }
-
         public JSONVariablesConfig ConfigSetter { set { Config = value; } }
 
         public int FileNameTotal { get; private set; } = 0;
@@ -83,10 +72,10 @@ namespace SourceModPatcher.Tests
     [TestClass]
     public class TestConfiguration
     {
-        static IWriter NullWriter = new NullWriter();
-        static IConfigurationSerializer<JSONSourceModsConfig> NullSourceModsConfigSerializer = new NullConfigurationSerializer<JSONSourceModsConfig>();
-        static IConfigurationSerializer<JSONInstallVariablesConfig> NullInstallVariablesConfigSerializer = new NullConfigurationSerializer<JSONInstallVariablesConfig>();
-        static IConfigurationSerializer<JSONVariablesConfig> NullVariablesConfigSerializer = new NullConfigurationSerializer<JSONVariablesConfig>();
+        static readonly IWriter NullWriter = new NullWriter();
+        static readonly IConfigurationSerializer<JSONSourceModsConfig> NullSourceModsConfigSerializer = new NullConfigurationSerializer<JSONSourceModsConfig>();
+        static readonly IConfigurationSerializer<JSONInstallVariablesConfig> NullInstallVariablesConfigSerializer = new NullConfigurationSerializer<JSONInstallVariablesConfig>();
+        static readonly IConfigurationSerializer<JSONVariablesConfig> NullVariablesConfigSerializer = new NullConfigurationSerializer<JSONVariablesConfig>();
 
         [TestMethod]
         public void GetVariables_Returns_VariablesConfig_Variables()
@@ -94,13 +83,14 @@ namespace SourceModPatcher.Tests
             var fileSystem = new MockFileSystem();
             var sourceModsConfig = new SourceModsConfigMock(fileSystem, NullWriter, string.Empty, NullSourceModsConfigSerializer, string.Empty);
             var installVariablesConfig = new InstallVariablesConfigMock(fileSystem, NullWriter, string.Empty, NullInstallVariablesConfigSerializer);
-            var variablesConfig = new VariablesConfigMock(fileSystem, NullWriter, string.Empty, NullVariablesConfigSerializer);
-
-            variablesConfig.ConfigSetter = new JSONVariablesConfig
+            var variablesConfig = new VariablesConfigMock(fileSystem, NullWriter, string.Empty, NullVariablesConfigSerializer)
+            {
+                ConfigSetter = new JSONVariablesConfig
             {
                 { "hl2_content_path", "C:/Half-Life 2" },
                 { "sdkbase2006_content_path", "C:/Source SDK Base" },
                 { "sdkbase2007_content_path", "C:/Source SDK Base 2007" }
+            }
             };
 
             var configuration = new Configuration(sourceModsConfig, installVariablesConfig, variablesConfig);

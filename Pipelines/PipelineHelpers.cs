@@ -17,16 +17,10 @@ namespace Pipelines
         void WriteErrors();
     }
 
-    public class ConsoleLogReportWriter : IConsoleLogReportWriter
+    public class ConsoleLogReportWriter(IConsoleWriter consoleWriter, ILogProvider logProvider) : IConsoleLogReportWriter
     {
-        IConsoleWriter _consoleWriter;
-        ILogProvider _logProvider;
-
-        public ConsoleLogReportWriter(IConsoleWriter consoleWriter, ILogProvider logProvider)
-        {
-            _consoleWriter = consoleWriter;
-            _logProvider = logProvider;
-        }
+        readonly IConsoleWriter _consoleWriter = consoleWriter;
+        readonly ILogProvider _logProvider = logProvider;
 
         public void WriteInfos()
         {
@@ -118,14 +112,9 @@ namespace Pipelines
         void WriteStats(IPipelineStatsResults statsResults);
     }
 
-    public class PipelineStatsWriter : IPipelineStatsWriter
+    public class PipelineStatsWriter(IWriter writer) : IPipelineStatsWriter
     {
-        IWriter _writer;
-
-        public PipelineStatsWriter(IWriter writer)
-        {
-            _writer = writer;
-        }
+        readonly IWriter _writer = writer;
 
         public void WriteStats(IPipelineStatsResults statsResults)
         {

@@ -115,9 +115,9 @@ namespace Pipelines
         }
     }
 
-    public class StageStepWriterDecorator : IWriter
+    public class StageStepWriterDecorator(IWriter writer) : IWriter
     {
-        readonly IWriter _writer;
+        readonly IWriter _writer = writer;
 
         public ReadOnlyPipelineStageData StageData { get; set; } = new();
         public ReadOnlyPipelineStepData StepData { get; set; } = new();
@@ -128,11 +128,6 @@ namespace Pipelines
         public IStageStepWriterFormatter ErrorFormatter { get; set; } = new DefaultStageStepWriterFormatter();
         public IStageStepWriterFormatter FailureFormatter { get; set; } = new DefaultStageStepWriterFormatter();
         public IStageStepWriterFormatter CancellationFormatter { get; set; } = new DefaultStageStepWriterFormatter();
-
-        public StageStepWriterDecorator(IWriter writer)
-        {
-            _writer = writer;
-        }
 
         public void Success(string message)
         {
@@ -274,7 +269,7 @@ namespace Pipelines
                     PauseHandler?.Pause();
             }
 
-            return stepStatuses.ToArray();
+            return [.. stepStatuses];
         }
     }
 
@@ -283,20 +278,14 @@ namespace Pipelines
         void Execute(ContextT context);
     }
 
-    public class Pipeline<ContextT> : IPipeline<ContextT>
+    public class Pipeline<ContextT>(IPipelineStage<ContextT>[] stages, IPipelineProgressWriter? progressWriter = null) : IPipeline<ContextT>
     {
-        public IPipelineStage<ContextT>[] Stages { get; set; } = [];
+        public IPipelineStage<ContextT>[] Stages { get; set; } = stages;
 
-        public IPipelineProgressWriter? ProgressWriter { get; set; }
+        public IPipelineProgressWriter? ProgressWriter { get; set; } = progressWriter;
 
         public IPipelineStatsResults StatsResults { get; set; } = new PipelineStatsResults();
         public IPipelineProgressContextFactory ProgressContextFactory { get; set; } = new PipelineProgressContextFactory();
-
-        public Pipeline(IPipelineStage<ContextT>[] stages, IPipelineProgressWriter? progressWriter = null)
-        {
-            Stages = stages;
-            ProgressWriter = progressWriter;
-        }
 
         public void Execute(ContextT context)
         {

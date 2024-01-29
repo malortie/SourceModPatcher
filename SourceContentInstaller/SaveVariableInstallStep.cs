@@ -21,14 +21,9 @@ namespace SourceContentInstaller
         void NoVariableValueSpecified();
     }
 
-    public class SaveVariableInstallStep : IPipelineStep<Context>
+    public class SaveVariableInstallStep(ISaveVariableInstallStepEventHandler? eventHandler = null) : IPipelineStep<Context>
     {
-        ISaveVariableInstallStepEventHandler? _eventHandler;
-
-        public SaveVariableInstallStep(ISaveVariableInstallStepEventHandler? eventHandler = null)
-        {
-            _eventHandler = eventHandler;
-        }
+        readonly ISaveVariableInstallStepEventHandler? _eventHandler = eventHandler;
 
         public PipelineStepStatus DoStep(Context context, IPipelineStepData stepData, IWriter writer)
         {

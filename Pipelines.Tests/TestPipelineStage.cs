@@ -50,7 +50,7 @@ namespace Pipelines.Tests
 
     public class NullStage : PipelineStage<NullContext>
     {
-        static Dictionary<Type, IPipelineStep<NullContext>> _stepsDataToStepMap = new()
+        static readonly Dictionary<Type, IPipelineStep<NullContext>> _stepsDataToStepMap = new()
         {
             { typeof(NullStepDataComplete), new NullStepAlwaysComplete() },
             { typeof(NullStepDataPartiallyComplete), new NullStepAlwaysPartiallyComplete() },
@@ -77,7 +77,7 @@ namespace Pipelines.Tests
     [TestClass]
     public class TestPipelineStage
     {
-        static NullContext NullContext = new NullContext();
+        static readonly NullContext NullContext = new();
 
         [TestMethod]
         public void SetupContext_CalledOncePerStageRun()

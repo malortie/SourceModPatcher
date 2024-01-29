@@ -4,12 +4,8 @@ using System.IO.Abstractions.TestingHelpers;
 
 namespace SourceContentInstaller.Tests
 {
-    public class SteamAppsConfigMock : SteamAppsConfig
+    public class SteamAppsConfigMock(IFileSystem fileSystem, IWriter writer, string filePath, IConfigurationSerializer<JSONSteamAppsConfig> configSerializer, ISteamPathFinder steamPathFinder) : SteamAppsConfig(fileSystem, writer, filePath, configSerializer, steamPathFinder)
     {
-        public SteamAppsConfigMock(IFileSystem fileSystem, IWriter writer, string filePath, IConfigurationSerializer<JSONSteamAppsConfig> configSerializer, ISteamPathFinder steamPathFinder) : base(fileSystem, writer, filePath, configSerializer, steamPathFinder)
-        {
-        }
-
         public int GetSteamAppNameTotal { get; private set; } = 0;
         public int GetSteamAppInstallDirTotal { get; private set; } = 0;
 
@@ -26,12 +22,8 @@ namespace SourceContentInstaller.Tests
         }
     }
 
-    public class InstallSettingsMock : InstallSettings
+    public class InstallSettingsMock(IFileSystem fileSystem, IWriter writer, string filePath, IConfigurationSerializer<JSONInstallSettings> configSerializer) : InstallSettings(fileSystem, writer, filePath, configSerializer)
     {
-        public InstallSettingsMock(IFileSystem fileSystem, IWriter writer, string filePath, IConfigurationSerializer<JSONInstallSettings> configSerializer) : base(fileSystem, writer, filePath, configSerializer)
-        {
-        }
-
         public int GetContentInstallDirTotal { get; private set; } = 0;
 
         public override string GetContentInstallDir(int appID)
@@ -41,12 +33,8 @@ namespace SourceContentInstaller.Tests
         }
     }
 
-    public class VariablesConfigMock : VariablesConfig
+    public class VariablesConfigMock(IFileSystem fileSystem, IWriter writer, string filePath, IConfigurationSerializer<JSONVariablesConfig> configSerializer) : VariablesConfig(fileSystem, writer, filePath, configSerializer)
     {
-        public VariablesConfigMock(IFileSystem fileSystem, IWriter writer, string filePath, IConfigurationSerializer<JSONVariablesConfig> configSerializer) : base(fileSystem, writer, filePath, configSerializer)
-        {
-        }
-
         public int FileNameTotal { get; private set; } = 0;
         public int SaveVariableTotal { get; private set; } = 0;
 
@@ -65,11 +53,11 @@ namespace SourceContentInstaller.Tests
     [TestClass]
     public class TestConfiguration
     {
-        static IWriter NullWriter = new NullWriter();
-        static ISteamPathFinder NullSteamPathFinder = new NullSteamPathFinder();
-        static IConfigurationSerializer<JSONSteamAppsConfig> NullSteamAppsConfigSerializer = new NullConfigurationSerializer<JSONSteamAppsConfig>();
-        static IConfigurationSerializer<JSONInstallSettings> NullInstallSettingsSerializer = new NullConfigurationSerializer<JSONInstallSettings>();
-        static IConfigurationSerializer<JSONVariablesConfig> NullVariablesConfigSerializer = new NullConfigurationSerializer<JSONVariablesConfig>();
+        static readonly IWriter NullWriter = new NullWriter();
+        static readonly ISteamPathFinder NullSteamPathFinder = new NullSteamPathFinder();
+        static readonly IConfigurationSerializer<JSONSteamAppsConfig> NullSteamAppsConfigSerializer = new NullConfigurationSerializer<JSONSteamAppsConfig>();
+        static readonly IConfigurationSerializer<JSONInstallSettings> NullInstallSettingsSerializer = new NullConfigurationSerializer<JSONInstallSettings>();
+        static readonly IConfigurationSerializer<JSONVariablesConfig> NullVariablesConfigSerializer = new NullConfigurationSerializer<JSONVariablesConfig>();
 
         [TestMethod]
         public void Call_SteamAppsConfig_GetSteamAppName()

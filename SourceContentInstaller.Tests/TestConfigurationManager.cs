@@ -16,14 +16,14 @@ namespace SourceContentInstaller.Tests
         [JsonPropertyName("propIntList")]
         public List<int> PropIntList { get; set; } = [];
         [JsonPropertyName("propObject")]
-        public Dictionary<string, string> PropObject { get; set; } = new Dictionary<string, string>();
+        public Dictionary<string, string> PropObject { get; set; } = [];
     }
 
     public class NullConfigurationSerializer<ConfigT> : IConfigurationSerializer<ConfigT>
     {
         public ConfigT? Deserialize(string value)
         {
-            return default(ConfigT);
+            return default;
         }
 
         public string Serialize(ConfigT value)
@@ -45,13 +45,9 @@ namespace SourceContentInstaller.Tests
         }
     }
 
-    public class ConfigurationManagerMock<ConfigT> : ConfigurationManager<ConfigT> where ConfigT : new()
+    public class ConfigurationManagerMock<ConfigT>(IFileSystem fileSystem, IWriter writer, string filePath, IConfigurationSerializer<ConfigT> configSerializer) : ConfigurationManager<ConfigT>(fileSystem, writer, filePath, configSerializer) where ConfigT : new()
     {
         public int PostLoadConfigTotal { get; set; } = 0;
-
-        public ConfigurationManagerMock(IFileSystem fileSystem, IWriter writer, string filePath, IConfigurationSerializer<ConfigT> configSerializer) : base(fileSystem, writer, filePath, configSerializer)
-        {
-        }
 
         public new ConfigT Config { get { return base.Config; } set { base.Config = value; } }
 
@@ -64,7 +60,7 @@ namespace SourceContentInstaller.Tests
     [TestClass]
     public class TestConfigurationManager
     {
-        static IWriter NullWriter = new NullWriter();
+        static readonly IWriter NullWriter = new NullWriter();
 
         [TestMethod]
         public void FileName_ReturnsFileNameWithoutPath()
@@ -129,16 +125,17 @@ namespace SourceContentInstaller.Tests
         {
             var fileSystem = new MockFileSystem(new Dictionary<string, MockFileData> { });
 
-            var configManager = new ConfigurationManagerMock<JSONSimpleTestConfig>(fileSystem, NullWriter, "C:/simple_test.json", new JSONConfigurationSerializer<JSONSimpleTestConfig>());
-
-            configManager.Config = new JSONSimpleTestConfig
+            var configManager = new ConfigurationManagerMock<JSONSimpleTestConfig>(fileSystem, NullWriter, "C:/simple_test.json", new JSONConfigurationSerializer<JSONSimpleTestConfig>())
             {
-                PropBool = false,
-                PropInt = 100,
-                PropString = "test",
-                PropIntList = [5, 6, 7, 8],
-                PropObject = {
+                Config = new JSONSimpleTestConfig
+                {
+                    PropBool = false,
+                    PropInt = 100,
+                    PropString = "test",
+                    PropIntList = [5, 6, 7, 8],
+                    PropObject = {
                     { "key", "value" }
+                }
                 }
             };
 

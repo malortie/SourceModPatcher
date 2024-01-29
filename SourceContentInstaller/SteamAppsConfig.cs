@@ -19,7 +19,7 @@ namespace SourceContentInstaller
     {
     }
 
-    public class SteamAppsConfig : ConfigurationManager<JSONSteamAppsConfig>
+    public class SteamAppsConfig(IFileSystem fileSystem, IWriter writer, string filePath, IConfigurationSerializer<JSONSteamAppsConfig> configSerializer, ISteamPathFinder steamPathFinder) : ConfigurationManager<JSONSteamAppsConfig>(fileSystem, writer, filePath, configSerializer)
     {
         internal class SteamAppManifest
         {
@@ -32,12 +32,7 @@ namespace SourceContentInstaller
 
         public List<int> SupportedSourceGamesAppIDs = [];
 
-        ISteamPathFinder _steamPathFinder;
-
-        public SteamAppsConfig(IFileSystem fileSystem, IWriter writer, string filePath, IConfigurationSerializer<JSONSteamAppsConfig> configSerializer, ISteamPathFinder steamPathFinder) : base(fileSystem, writer, filePath, configSerializer)
-        {
-            _steamPathFinder = steamPathFinder;
-        }
+        readonly ISteamPathFinder _steamPathFinder = steamPathFinder;
 
         public bool UseConfigFile { get; set; }
 
@@ -71,7 +66,7 @@ namespace SourceContentInstaller
 
         void SetupSupportedSourceGames()
         {
-            SupportedSourceGamesAppIDs = Config.Keys.ToList();
+            SupportedSourceGamesAppIDs = [.. Config.Keys];
             SupportedSourceGamesAppIDs.Sort();
         }
 
@@ -137,7 +132,6 @@ namespace SourceContentInstaller
                 Writer.Info($"Reading {appManifestACFPath}");
                 dynamic appManifestACF = VdfConvert.Deserialize(FileSystem.File.ReadAllText(appManifestACFPath));
 
-                string name = (appManifestACF.Value["name"]).ToString();
                 string installDir = (appManifestACF.Value["installdir"]).ToString();
                 string gameInstallDir = PathExtensions.JoinWithSeparator(FileSystem, steamLibraryPaths[appManifest.SteamLibraryFolderID], "steamapps", "common", installDir);
 

@@ -3,16 +3,10 @@ using System.IO.Abstractions;
 
 namespace SourceModPatcher
 {
-    public class Context
+    public class Context(IFileSystem fileSystem, IConfiguration configuration)
     {
-        IFileSystem _fileSystem;
-        IConfiguration _configuration;
-
-        public Context(IFileSystem fileSystem, IConfiguration configuration)
-        {
-            _fileSystem = fileSystem;
-            _configuration = configuration;
-        }
+        readonly IFileSystem _fileSystem = fileSystem;
+        readonly IConfiguration _configuration = configuration;
 
         public IFileSystem FileSystem { get { return _fileSystem; } }
 

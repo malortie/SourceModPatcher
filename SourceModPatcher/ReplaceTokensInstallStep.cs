@@ -22,16 +22,10 @@ namespace SourceModPatcher
         void NoFilesProcessed();
     }
 
-    public class ReplaceTokensInstallStep : IPipelineStep<Context>
+    public class ReplaceTokensInstallStep(IFileTokenReplacer fileTokenReplacer, IReplaceTokensInstallStepEventHandler? eventHandler = null) : IPipelineStep<Context>
     {
-        IFileTokenReplacer _fileTokenReplacer;
-        IReplaceTokensInstallStepEventHandler? _eventHandler;
-
-        public ReplaceTokensInstallStep(IFileTokenReplacer fileTokenReplacer, IReplaceTokensInstallStepEventHandler? eventHandler = null)
-        {
-            _fileTokenReplacer = fileTokenReplacer;
-            _eventHandler = eventHandler;
-        }
+        readonly IFileTokenReplacer _fileTokenReplacer = fileTokenReplacer;
+        readonly IReplaceTokensInstallStepEventHandler? _eventHandler = eventHandler;
 
         public PipelineStepStatus DoStep(Context context, IPipelineStepData stepData, IWriter writer)
         {

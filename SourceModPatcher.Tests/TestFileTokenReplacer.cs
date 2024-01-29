@@ -20,11 +20,13 @@ namespace SourceModPatcher.Tests
             {
                 Prefix = "${{",
                 Suffix = "}}"
-            });
-            fileTokenCopier.Variables = new ReadOnlyDictionary<string, string>(new Dictionary<string, string>(){
+            })
+            {
+                Variables = new ReadOnlyDictionary<string, string>(new Dictionary<string, string>(){
                 {"token1", "hello"},
                 {"token2", "world"}
-            });
+            })
+            };
 
             Assert.IsTrue(fileTokenCopier.ReplaceInFile(fileSystem, new NullWriter(), FILE_PATH));
             Assert.AreEqual("hello world", fileSystem.File.ReadAllText(FILE_PATH));

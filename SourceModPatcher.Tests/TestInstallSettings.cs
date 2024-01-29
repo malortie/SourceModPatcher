@@ -7,7 +7,7 @@ namespace SourceModPatcher.Tests
     [TestClass]
     public class TestInstallSettings
     {
-        static IWriter NullWriter = new NullWriter();
+        static readonly IWriter NullWriter = new NullWriter();
 
         [TestMethod]
         public void Deserialize_JSONInstallSettingsEntry()

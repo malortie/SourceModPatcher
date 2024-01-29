@@ -10,16 +10,10 @@ namespace Pipelines
         void Cancellation(string message);
     }
 
-    public class Writer : IWriter
+    public class Writer(ILogger logger, IConsoleWriter consoleWriter) : IWriter
     {
-        readonly ILogger _logger;
-        readonly IConsoleWriter _consoleWriter;
-
-        public Writer(ILogger logger, IConsoleWriter consoleWriter)
-        {
-            _logger = logger;
-            _consoleWriter = consoleWriter;
-        }
+        readonly ILogger _logger = logger;
+        readonly IConsoleWriter _consoleWriter = consoleWriter;
 
         public void Success(string message)
         {

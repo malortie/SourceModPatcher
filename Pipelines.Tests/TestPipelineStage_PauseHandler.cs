@@ -13,7 +13,7 @@ namespace Pipelines.Tests
     [TestClass]
     public class TestPipelineStage_PauseHandler
     {
-        static NullContext NullContext = new NullContext();
+        static readonly NullContext NullContext = new();
 
         [TestMethod]
         public void PauseHandler_CalledAfterEachStep_WhenPauseAfterEachStepIsTrue()

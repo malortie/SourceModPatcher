@@ -19,14 +19,9 @@ namespace SourceModPatcher
         void MissingDependencies();
     }
 
-    public class ValidateVariablesDependenciesInstallStep : IPipelineStep<Context>
+    public class ValidateVariablesDependenciesInstallStep(IValidateVariablesDependenciesInstallStepEventHandler? eventHandler = null) : IPipelineStep<Context>
     {
-        IValidateVariablesDependenciesInstallStepEventHandler? _eventHandler;
-
-        public ValidateVariablesDependenciesInstallStep(IValidateVariablesDependenciesInstallStepEventHandler? eventHandler = null)
-        {
-            _eventHandler = eventHandler;
-        }
+        readonly IValidateVariablesDependenciesInstallStepEventHandler? _eventHandler = eventHandler;
 
         public PipelineStepStatus DoStep(Context context, IPipelineStepData stepData, IWriter writer)
         {
@@ -48,7 +43,7 @@ namespace SourceModPatcher
             {
                 // Check that at least one of the variables defined in each entry is present.
                 var fulfilledDependencies = entry.Intersect(sourceContentVariablesNames);
-                if (0 == fulfilledDependencies.Count())
+                if (!fulfilledDependencies.Any())
                 {
                     if (entry.Count == 1)
                     {

@@ -2,14 +2,9 @@ using Pipelines;
 
 namespace SourceContentInstaller
 {
-    public class ConsolePauseHandler : IPauseHandler
+    public class ConsolePauseHandler(IWriter writer) : IPauseHandler
     {
-        IWriter _writer;
-
-        public ConsolePauseHandler(IWriter writer)
-        {
-            _writer = writer;
-        }
+        readonly IWriter _writer = writer;
 
         public void Pause()
         {

@@ -20,14 +20,14 @@ namespace SourceContentInstaller
             return JsonSerializer.Deserialize<ConfigT>(value, _deserializerOptions);
         }
 
-        JsonSerializerOptions _serializerOptions = new()
+        readonly JsonSerializerOptions _serializerOptions = new()
         {
             DictionaryKeyPolicy = LowerCaseNamingPolicy.LowerCase,
             PropertyNamingPolicy = LowerCaseNamingPolicy.LowerCase,
             WriteIndented = true
         };
 
-        JsonSerializerOptions _deserializerOptions = new()
+        readonly JsonSerializerOptions _deserializerOptions = new()
         {
             DictionaryKeyPolicy = LowerCaseNamingPolicy.LowerCase,
             PropertyNamingPolicy = LowerCaseNamingPolicy.LowerCase,

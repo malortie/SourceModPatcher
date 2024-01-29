@@ -14,8 +14,8 @@ namespace Pipelines.Tests
     [TestClass]
     public class TestPipelineStage_PipelineStageProgressStepFormatter
     {
-        static NullContext NullContext = new NullContext();
-        static IWriter NullWriter = new NullWriter();
+        static readonly NullContext NullContext = new();
+        static readonly IWriter NullWriter = new NullWriter();
 
         [TestMethod]
         public void StepExecuteFormatter_Called_WhenAllDependenciesWereCompleted()

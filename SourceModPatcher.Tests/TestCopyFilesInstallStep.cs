@@ -80,10 +80,10 @@ namespace SourceModPatcher.Tests
     [TestClass]
     public class TestCopyFilesInstallStep
     {
-        static IWriter NullWriter = new NullWriter();
-        static IConfiguration NullConfiguration = new NullConfiguration();
-        static IFileCopier AlwaysTrueFileCopier = new AlwaysTrueFileCopier();
-        static IFileCopier AlwaysFalseFileCopier = new AlwaysFalseFileCopier();
+        static readonly IWriter NullWriter = new NullWriter();
+        static readonly IConfiguration NullConfiguration = new NullConfiguration();
+        static readonly IFileCopier AlwaysTrueFileCopier = new AlwaysTrueFileCopier();
+        static readonly IFileCopier AlwaysFalseFileCopier = new AlwaysFalseFileCopier();
 
         [TestMethod]
         public void EmptyFilesListReturnsFailed()

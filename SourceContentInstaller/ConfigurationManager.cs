@@ -9,20 +9,12 @@ namespace SourceContentInstaller
         void SaveConfig();
     }
 
-    public class ConfigurationManager<ConfigT> : IConfigurationManager where ConfigT : new()
+    public class ConfigurationManager<ConfigT>(IFileSystem fileSystem, IWriter writer, string filePath, IConfigurationSerializer<ConfigT> configSerializer) : IConfigurationManager where ConfigT : new()
     {
-        readonly IFileSystem _fileSystem;
-        readonly IWriter _writer;
-        readonly string _filePath;
-        readonly IConfigurationSerializer<ConfigT> _configSerializer;
-
-        public ConfigurationManager(IFileSystem fileSystem, IWriter writer, string filePath, IConfigurationSerializer<ConfigT> configSerializer)
-        {
-            _fileSystem = fileSystem;
-            _writer = writer;
-            _filePath = filePath;
-            _configSerializer = configSerializer;
-        }
+        readonly IFileSystem _fileSystem = fileSystem;
+        readonly IWriter _writer = writer;
+        readonly string _filePath = filePath;
+        readonly IConfigurationSerializer<ConfigT> _configSerializer = configSerializer;
 
         public virtual string GetFileName() { return _fileSystem.Path.GetFileName(_filePath); }
 

@@ -89,20 +89,15 @@ namespace Pipelines
         void WriteStepCancelled(IPipelineProgressContext pipelineContext, ReadOnlyPipelineStepData stepData);
     }
 
-    public class PipelineStageProgressWriter : IPipelineStageProgressWriter
+    public class PipelineStageProgressWriter(IWriter writer) : IPipelineStageProgressWriter
     {
-        IWriter _writer;
+        readonly IWriter _writer = writer;
         public IPipelineStageProgressStepFormatter StepExecuteFormatter { get; set; } = new DefaultPipelineStageProgressStepFormatter();
         public IPipelineStageProgressStepFormatter StepDependenciesNotCompletedFormatter { get; set; } = new StepDependenciesNotCompletedFormatter();
         public IPipelineStageProgressStepFormatter StepCompletedFormatter { get; set; } = new StepCompletedFormatter();
         public IPipelineStageProgressStepFormatter StepPartiallyCompletedFormatter { get; set; } = new StepPartiallyCompletedFormatter();
         public IPipelineStageProgressStepFormatter StepFailedFormatter { get; set; } = new StepFailedFormatter();
         public IPipelineStageProgressStepFormatter StepCancelledFormatter { get; set; } = new StepCancelledFormatter();
-
-        public PipelineStageProgressWriter(IWriter writer)
-        {
-            _writer = writer;
-        }
 
         public void WriteStepDependenciesNotCompleted(IPipelineProgressContext pipelineContext, ReadOnlyPipelineStepData stepData)
         {
@@ -189,19 +184,14 @@ namespace Pipelines
         void WriteStageCancelled(IPipelineProgressContext pipelineContext, ReadOnlyPipelineStageData stageData);
     }
 
-    public class PipelineProgressWriter : IPipelineProgressWriter
+    public class PipelineProgressWriter(IWriter writer) : IPipelineProgressWriter
     {
-        IWriter _writer;
+        readonly IWriter _writer = writer;
         public IPipelineProgressStageFormatter StageExecuteFormatter { get; set; } = new DefaultPipelineProgressStageFormatter();
         public IPipelineProgressStageFormatter StageCompletedFormatter { get; set; } = new StageCompletedFormatter();
         public IPipelineProgressStageFormatter StagePartiallyCompletedFormatter { get; set; } = new StagePartiallyCompletedFormatter();
         public IPipelineProgressStageFormatter StageFailedFormatter { get; set; } = new StageFailedFormatter();
         public IPipelineProgressStageFormatter StageCancelledFormatter { get; set; } = new StageCancelledFormatter();
-
-        public PipelineProgressWriter(IWriter writer)
-        {
-            _writer = writer;
-        }
 
         public void WriteStageExecute(IPipelineProgressContext pipelineContext, ReadOnlyPipelineStageData stageData)
         {

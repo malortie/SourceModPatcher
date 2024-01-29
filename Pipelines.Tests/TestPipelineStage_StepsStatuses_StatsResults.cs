@@ -3,7 +3,7 @@ namespace Pipelines.Tests
     [TestClass]
     public class TestPipelineStage_StepsStatuses_StatsResults
     {
-        static NullContext NullContext = new NullContext();
+        static readonly NullContext NullContext = new();
 
         [TestMethod]
         public void StepsStatuses_StatsResults_NoSteps()

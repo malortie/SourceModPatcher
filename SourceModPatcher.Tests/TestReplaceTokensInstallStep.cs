@@ -77,10 +77,10 @@ namespace SourceModPatcher.Tests
     [TestClass]
     public class TestReplaceTokensInstallStep
     {
-        static IWriter NullWriter = new NullWriter();
-        static IConfiguration NullConfiguration = new NullConfiguration();
-        static IFileTokenReplacer AlwaysTrueFileTokenReplacer = new AlwaysTrueFileTokenReplacer();
-        static IFileTokenReplacer AlwaysFalseFileTokenReplacer = new AlwaysFalseFileTokenReplacer();
+        static readonly IWriter NullWriter = new NullWriter();
+        static readonly IConfiguration NullConfiguration = new NullConfiguration();
+        static readonly IFileTokenReplacer AlwaysTrueFileTokenReplacer = new AlwaysTrueFileTokenReplacer();
+        static readonly IFileTokenReplacer AlwaysFalseFileTokenReplacer = new AlwaysFalseFileTokenReplacer();
 
         [TestMethod]
         public void EmptyFilesListReturnsFailed()

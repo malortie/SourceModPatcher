@@ -30,12 +30,8 @@ namespace SourceContentInstaller.Tests
         }
     }
 
-    public class SteamAppsConfigTrySetupFromRegistryMock : SteamAppsConfig
+    public class SteamAppsConfigTrySetupFromRegistryMock(IFileSystem fileSystem, IWriter writer, string filePath, IConfigurationSerializer<JSONSteamAppsConfig> configSerializer, ISteamPathFinder steamPathFinder) : SteamAppsConfig(fileSystem, writer, filePath, configSerializer, steamPathFinder)
     {
-        public SteamAppsConfigTrySetupFromRegistryMock(IFileSystem fileSystem, IWriter writer, string filePath, IConfigurationSerializer<JSONSteamAppsConfig> configSerializer, ISteamPathFinder steamPathFinder) : base(fileSystem, writer, filePath, configSerializer, steamPathFinder)
-        {
-        }
-
         public int TrySetupFromRegistryTotal { get; set; } = 0;
 
         protected override void TrySetupFromRegistry()
@@ -47,8 +43,8 @@ namespace SourceContentInstaller.Tests
     [TestClass]
     public class TestSteamAppsConfig
     {
-        static IWriter NullWriter = new NullWriter();
-        static ISteamPathFinder EmptySteamPathFinder = new EmptySteamPathFinder();
+        static readonly IWriter NullWriter = new NullWriter();
+        static readonly ISteamPathFinder EmptySteamPathFinder = new EmptySteamPathFinder();
 
         [TestMethod]
         public void Deserialize_JSONSteamAppsConfigEntry()
@@ -161,9 +157,10 @@ namespace SourceContentInstaller.Tests
                 { "C:/steamapps.json", new MockFileData(File.ReadAllBytes("../../../data/config/steamapps.json")) }
             });
 
-            var steamAppsConfig = new SteamAppsConfig(fileSystem, NullWriter, "C:/steamapps.json", new JSONConfigurationSerializer<JSONSteamAppsConfig>(), EmptySteamPathFinder);
-
-            steamAppsConfig.UseConfigFile = true;
+            var steamAppsConfig = new SteamAppsConfig(fileSystem, NullWriter, "C:/steamapps.json", new JSONConfigurationSerializer<JSONSteamAppsConfig>(), EmptySteamPathFinder)
+            {
+                UseConfigFile = true
+            };
             steamAppsConfig.LoadConfig();
 
             var config = steamAppsConfig.Config;
@@ -195,9 +192,10 @@ namespace SourceContentInstaller.Tests
                 { "C:/steamapps.json", new MockFileData(File.ReadAllBytes("../../../data/config/steamapps.json")) }
             });
 
-            var steamAppsConfig = new SteamAppsConfigTrySetupFromRegistryMock(fileSystem, NullWriter, "C:/steamapps.json", new JSONConfigurationSerializer<JSONSteamAppsConfig>(), EmptySteamPathFinder);
-
-            steamAppsConfig.UseConfigFile = false;
+            var steamAppsConfig = new SteamAppsConfigTrySetupFromRegistryMock(fileSystem, NullWriter, "C:/steamapps.json", new JSONConfigurationSerializer<JSONSteamAppsConfig>(), EmptySteamPathFinder)
+            {
+                UseConfigFile = false
+            };
             steamAppsConfig.LoadConfig();
 
             Assert.AreEqual(1, steamAppsConfig.TrySetupFromRegistryTotal);
@@ -210,9 +208,10 @@ namespace SourceContentInstaller.Tests
                 { "C:/steamapps.json", new MockFileData(File.ReadAllBytes("../../../data/config/steamapps.json")) }
             });
 
-            var steamAppsConfig = new SteamAppsConfigTrySetupFromRegistryMock(fileSystem, NullWriter, "C:/steamapps.json", new JSONConfigurationSerializer<JSONSteamAppsConfig>(), EmptySteamPathFinder);
-
-            steamAppsConfig.UseConfigFile = true;
+            var steamAppsConfig = new SteamAppsConfigTrySetupFromRegistryMock(fileSystem, NullWriter, "C:/steamapps.json", new JSONConfigurationSerializer<JSONSteamAppsConfig>(), EmptySteamPathFinder)
+            {
+                UseConfigFile = true
+            };
             steamAppsConfig.LoadConfig();
 
             Assert.AreEqual(0, steamAppsConfig.TrySetupFromRegistryTotal);
@@ -225,9 +224,10 @@ namespace SourceContentInstaller.Tests
                 { "C:/steamapps.json", new MockFileData(File.ReadAllBytes("../../../data/config/steamapps.json")) },
             });
 
-            var steamAppsConfig = new SteamAppsConfig(fileSystem, NullWriter, "C:/steamapps.json", new JSONConfigurationSerializer<JSONSteamAppsConfig>(), EmptySteamPathFinder);
-
-            steamAppsConfig.UseConfigFile = true;
+            var steamAppsConfig = new SteamAppsConfig(fileSystem, NullWriter, "C:/steamapps.json", new JSONConfigurationSerializer<JSONSteamAppsConfig>(), EmptySteamPathFinder)
+            {
+                UseConfigFile = true
+            };
             steamAppsConfig.LoadConfig();
 
             Assert.AreEqual("Source SDK Base 2006", steamAppsConfig.GetSteamAppName(215));
@@ -242,9 +242,10 @@ namespace SourceContentInstaller.Tests
                 { "C:/steamapps.json", new MockFileData(File.ReadAllBytes("../../../data/config/steamapps.json")) }
             });
 
-            var steamAppsConfig = new SteamAppsConfig(fileSystem, NullWriter, "C:/steamapps.json", new JSONConfigurationSerializer<JSONSteamAppsConfig>(), EmptySteamPathFinder);
-
-            steamAppsConfig.UseConfigFile = true;
+            var steamAppsConfig = new SteamAppsConfig(fileSystem, NullWriter, "C:/steamapps.json", new JSONConfigurationSerializer<JSONSteamAppsConfig>(), EmptySteamPathFinder)
+            {
+                UseConfigFile = true
+            };
             steamAppsConfig.LoadConfig();
 
             Assert.AreEqual("C:/SteamLibrary/Source SDK Base", steamAppsConfig.GetSteamAppInstallDir(215));
@@ -259,9 +260,10 @@ namespace SourceContentInstaller.Tests
                 { "C:/steamapps_not_installed.json", new MockFileData(File.ReadAllBytes("../../../data/config/steamapps_not_installed.json")) }
             });
 
-            var steamAppsConfig = new SteamAppsConfig(fileSystem, NullWriter, "C:/steamapps_not_installed.json", new JSONConfigurationSerializer<JSONSteamAppsConfig>(), EmptySteamPathFinder);
-
-            steamAppsConfig.UseConfigFile = true;
+            var steamAppsConfig = new SteamAppsConfig(fileSystem, NullWriter, "C:/steamapps_not_installed.json", new JSONConfigurationSerializer<JSONSteamAppsConfig>(), EmptySteamPathFinder)
+            {
+                UseConfigFile = true
+            };
             steamAppsConfig.LoadConfig();
 
             Assert.IsTrue(steamAppsConfig.IsSteamAppInstalled(215));
@@ -276,9 +278,10 @@ namespace SourceContentInstaller.Tests
                 { "C:/steamapps_not_installed.json", new MockFileData(File.ReadAllBytes("../../../data/config/steamapps_not_installed.json")) }
             });
 
-            var steamAppsConfig = new SteamAppsConfig(fileSystem, NullWriter, "C:/steamapps_not_installed.json", new JSONConfigurationSerializer<JSONSteamAppsConfig>(), EmptySteamPathFinder);
-
-            steamAppsConfig.UseConfigFile = true;
+            var steamAppsConfig = new SteamAppsConfig(fileSystem, NullWriter, "C:/steamapps_not_installed.json", new JSONConfigurationSerializer<JSONSteamAppsConfig>(), EmptySteamPathFinder)
+            {
+                UseConfigFile = true
+            };
             steamAppsConfig.LoadConfig();
 
             CollectionAssert.AreEquivalent(new List<int> { 215, 220 }, steamAppsConfig.GetInstalledSteamApps());
@@ -291,9 +294,10 @@ namespace SourceContentInstaller.Tests
                 { "C:/steamapps_unsorted.json", new MockFileData(File.ReadAllBytes("../../../data/config/steamapps_unsorted.json")) }
             });
 
-            var steamAppsConfig = new SteamAppsConfig(fileSystem, NullWriter, "C:/steamapps_unsorted.json", new JSONConfigurationSerializer<JSONSteamAppsConfig>(), EmptySteamPathFinder);
-
-            steamAppsConfig.UseConfigFile = true;
+            var steamAppsConfig = new SteamAppsConfig(fileSystem, NullWriter, "C:/steamapps_unsorted.json", new JSONConfigurationSerializer<JSONSteamAppsConfig>(), EmptySteamPathFinder)
+            {
+                UseConfigFile = true
+            };
             steamAppsConfig.LoadConfig();
 
             CollectionAssert.AreEqual(new List<int> { 215, 218, 220 }, steamAppsConfig.SupportedSourceGamesAppIDs);

@@ -32,7 +32,7 @@ namespace Pipelines.Tests
 
     public class WriterStage : PipelineStage<NullContext>
     {
-        static Dictionary<Type, IPipelineStep<NullContext>> _stepsDataToStepMap = new()
+        static readonly Dictionary<Type, IPipelineStep<NullContext>> _stepsDataToStepMap = new()
         {
             { typeof(SuccessWriterStepData), new WriterStep() },
             { typeof(InfoWriterStepData), new WriterStep() },
@@ -51,7 +51,7 @@ namespace Pipelines.Tests
     [TestClass]
     public class TestPipelineStage_Writer
     {
-        static NullContext NullContext = new NullContext();
+        static readonly NullContext NullContext = new();
 
         [TestMethod]
         public void Writer_Success()

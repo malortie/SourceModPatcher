@@ -8,12 +8,8 @@ namespace SourceModPatcher
     {
     }
 
-    public sealed class CommonConfig : ConfigurationManager<JSONCommonConfig>
+    public sealed class CommonConfig(IFileSystem fileSystem, IWriter writer, string filePath, IConfigurationSerializer<JSONCommonConfig> configSerializer) : ConfigurationManager<JSONCommonConfig>(fileSystem, writer, filePath, configSerializer)
     {
-        public CommonConfig(IFileSystem fileSystem, IWriter writer, string filePath, IConfigurationSerializer<JSONCommonConfig> configSerializer) : base(fileSystem, writer, filePath, configSerializer)
-        {
-        }
-
         public string GetSourceModsPath()
         {
             return Config["sourcemods_path"];

@@ -9,18 +9,11 @@ namespace SourceContentInstaller
         string GetVariablesFileName();
     }
 
-    public class Configuration : IConfiguration
+    public class Configuration(SteamAppsConfig steamAppsConfig, InstallSettings installSettings, VariablesConfig variablesConfig) : IConfiguration
     {
-        SteamAppsConfig _steamAppsConfig;
-        InstallSettings _installSettings;
-        VariablesConfig _variablesConfig;
-
-        public Configuration(SteamAppsConfig steamAppsConfig, InstallSettings installSettings, VariablesConfig variablesConfig)
-        {
-            _steamAppsConfig = steamAppsConfig;
-            _installSettings = installSettings;
-            _variablesConfig = variablesConfig;
-        }
+        readonly SteamAppsConfig _steamAppsConfig = steamAppsConfig;
+        readonly InstallSettings _installSettings = installSettings;
+        readonly VariablesConfig _variablesConfig = variablesConfig;
 
         public string GetSteamAppName(int AppID)
         {

@@ -4,18 +4,13 @@ using System.Collections.Immutable;
 
 namespace SourceContentInstaller
 {
-    public class LogProvider : ILogProvider
+    public class LogProvider(MemoryTarget warningMemoryTarget, MemoryTarget errorMemoryTarget) : ILogProvider
     {
-        readonly MemoryTarget _warningMemoryTarget, _errorMemoryTarget;
-        public LogProvider(MemoryTarget warningMemoryTarget, MemoryTarget errorMemoryTarget)
-        {
-            _warningMemoryTarget = warningMemoryTarget;
-            _errorMemoryTarget = errorMemoryTarget;
-        }
+        readonly MemoryTarget _warningMemoryTarget = warningMemoryTarget, _errorMemoryTarget = errorMemoryTarget;
 
         public ImmutableList<string> GetErrors()
         {
-            return _errorMemoryTarget.Logs.ToImmutableList();
+            return [.. _errorMemoryTarget.Logs];
         }
 
         public ImmutableList<string> GetInfos()
@@ -25,7 +20,7 @@ namespace SourceContentInstaller
 
         public ImmutableList<string> GetWarnings()
         {
-            return _warningMemoryTarget.Logs.ToImmutableList();
+            return [.. _warningMemoryTarget.Logs];
         }
     }
 }

@@ -27,16 +27,10 @@ namespace SourceContentInstaller
         public string OutDir { get; set; } = string.Empty;
     }
 
-    public class VPKFileFilter : IVPKFileFilter
+    public class VPKFileFilter(List<Regex> filesToExcludeRegex, List<Regex> filesToExtractRegex) : IVPKFileFilter
     {
-        readonly List<Regex> _filesToExcludeRegex;
-        readonly List<Regex> _filesToExtractRegex;
-
-        public VPKFileFilter(List<Regex> filesToExcludeRegex, List<Regex> filesToExtractRegex)
-        {
-            _filesToExcludeRegex = filesToExcludeRegex;
-            _filesToExtractRegex = filesToExtractRegex;
-        }
+        readonly List<Regex> _filesToExcludeRegex = filesToExcludeRegex;
+        readonly List<Regex> _filesToExtractRegex = filesToExtractRegex;
 
         public bool PassesFilter(string vpkFile)
         {
@@ -86,7 +80,7 @@ namespace SourceContentInstaller
 
     public class VPKFileResolver : IVPKFileResolver
     {
-        public Regex Wildcard = new Regex(@"[*]", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        public Regex Wildcard = new(@"[*]", RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
         public void ResolveFilePaths(IFileSystem fileSystem, List<ExtractVPKInstallStepDataVPK> vpks)
         {
@@ -119,25 +113,17 @@ namespace SourceContentInstaller
         }
     }
 
-    public class ExtractVPKInstallStep : IPipelineStep<Context>
+    public class ExtractVPKInstallStep(IVPKExtractor vpkExtractor, IStringToRegexConverter stringToRegexConverter, IVPKFileResolver fileResolver, IExtractVPKInstallStepEventHandler? eventHandler = null) : IPipelineStep<Context>
     {
-        IVPKExtractor _extractor;
-        IStringToRegexConverter _stringToRegexConverter;
-        IVPKFileResolver _fileResolver;
-        IExtractVPKInstallStepEventHandler? _eventHandler;
-
-        public ExtractVPKInstallStep(IVPKExtractor vpkExtractor, IStringToRegexConverter stringToRegexConverter, IVPKFileResolver fileResolver, IExtractVPKInstallStepEventHandler? eventHandler = null)
-        {
-            _extractor = vpkExtractor;
-            _stringToRegexConverter = stringToRegexConverter;
-            _fileResolver = fileResolver;
-            _eventHandler = eventHandler;
-        }
+        readonly IVPKExtractor _extractor = vpkExtractor;
+        readonly IStringToRegexConverter _stringToRegexConverter = stringToRegexConverter;
+        readonly IVPKFileResolver _fileResolver = fileResolver;
+        readonly IExtractVPKInstallStepEventHandler? _eventHandler = eventHandler;
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         List<Regex> StringListToRegexList(List<string> strings)
         {
-            return 0 == strings.Count ? new List<Regex>() : strings.Select(s => _stringToRegexConverter.StringToRegex(s)).ToList();
+            return 0 == strings.Count ? [] : strings.Select(s => _stringToRegexConverter.StringToRegex(s)).ToList();
         }
 
         public PipelineStepStatus DoStep(Context context, IPipelineStepData stepData, IWriter writer)
@@ -223,8 +209,8 @@ namespace SourceContentInstaller
                     // Build compiled regex patterns for files filter rules specific to this VPK.
                     // Create file filter.
                     fileFilter = new VPKFileFilter(
-                       globalFilesToExcludeRegex.Concat(StringListToRegexList(vpk.FilesToExclude)).ToList(),
-                       globalFilesToExtractRegex.Concat(StringListToRegexList(vpk.FilesToExtract)).ToList());
+                       [.. globalFilesToExcludeRegex, .. StringListToRegexList(vpk.FilesToExclude)],
+                       [.. globalFilesToExtractRegex, .. StringListToRegexList(vpk.FilesToExtract)]);
                 }
                 catch (Exception e)
                 {

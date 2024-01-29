@@ -51,10 +51,7 @@ namespace SourceContentInstaller
     {
     }
 
-    public sealed class InstallStepsConfig : ConfigurationManager<JSONInstallStepsConfig>
+    public sealed class InstallStepsConfig(IFileSystem fileSystem, IWriter writer, string filePath, IConfigurationSerializer<JSONInstallStepsConfig> configSerializer) : ConfigurationManager<JSONInstallStepsConfig>(fileSystem, writer, filePath, configSerializer)
     {
-        public InstallStepsConfig(IFileSystem fileSystem, IWriter writer, string filePath, IConfigurationSerializer<JSONInstallStepsConfig> configSerializer) : base(fileSystem, writer, filePath, configSerializer)
-        {
-        }
     }
 }
