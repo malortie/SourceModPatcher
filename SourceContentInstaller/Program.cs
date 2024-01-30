@@ -84,7 +84,7 @@ namespace SourceContentInstaller
         {
             [Option('c', "use-config-file", Required = false, Default = false, HelpText = $"Read install path from {STEAMAPPS_CONFIG_FILENAME} file.")]
             public bool UseConfigFile { get; set; }
-            [Option('y', "confirm-install", Required = false, Default = false, HelpText = "Prompt to confirm installation.")]
+            [Option('y', "confirm-install", Required = false, Default = true, HelpText = "Prompt to confirm installation.")]
             public bool ConfirmInstallationPrompt { get; set; }
             [Option('p', "pause-after-step", Required = false, Default = false, HelpText = "Pause after each step.")]
             public bool PauseAfterEachStep { get; set; }
