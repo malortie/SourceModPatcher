@@ -24,7 +24,7 @@
     "install_dir": "C:/Users/marc-/Documents/test_installsourcecontent/content/dod"
   },
   "320": {
-    "install": true,
+    "install": false,
     "install_dir": "C:/Users/marc-/Documents/test_installsourcecontent/content/hl2mp"
   },
   "340": {
