@@ -121,6 +121,7 @@ namespace SourceModPatcher
 
             try
             {
+#if false // Re-enable when Mod patcher is made obsolete.
                 string? sourceContentInstallDirectory = Environment.GetEnvironmentVariable(INSTALL_ENVVAR, EnvironmentVariableTarget.User);
                 if (null == sourceContentInstallDirectory)
                 {
@@ -128,6 +129,9 @@ namespace SourceModPatcher
                     Dispose();
                     return;
                 }
+#else
+                string? sourceContentInstallDirectory = Environment.CurrentDirectory;
+#endif
 
                 string MakeFullPath(string x) => PathExtensions.JoinWithSeparator(fileSystem, Environment.CurrentDirectory, x);
 

@@ -115,12 +115,14 @@ namespace SourceContentInstaller
 
             try
             {
+#if false // Re-enable when Mod patcher is made obsolete.
                 if (null == Environment.GetEnvironmentVariable(INSTALL_ENVVAR, EnvironmentVariableTarget.User))
                 {
                     // Create a user environment variable to allow locating this application's directory.
                     writer.Info($"Creating user environment variable {INSTALL_ENVVAR}=\"{Environment.CurrentDirectory}\"");
                     Environment.SetEnvironmentVariable(INSTALL_ENVVAR, Environment.CurrentDirectory, EnvironmentVariableTarget.User);
                 }
+#endif
 
                 string MakeFullPath(string x) => PathExtensions.JoinWithSeparator(fileSystem, Environment.CurrentDirectory, x);
 
