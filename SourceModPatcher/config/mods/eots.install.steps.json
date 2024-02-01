@@ -46,6 +46,10 @@
         "dest": "$(sourcemod_dir)/models/Humans/male_shared.mdl"
       },
       {
+        "src": "$(data_sourcemod_dir)/materials/models/weapons/v_hand/v_hand_sheet.vmt",
+        "dest": "$(sourcemod_dir)/materials/models/weapons/V_hand/v_hand_sheet.vmt"
+      },
+      {
         "src": "$(data_sourcemod_dir)/gameinfo.txt",
         "dest": "$(sourcemod_dir)/gameinfo.txt"
       }
