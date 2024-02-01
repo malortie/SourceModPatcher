@@ -19,7 +19,6 @@
 		{
 			Game				|gameinfo_path|.
 			Game				ep2
-			Game				"${{hl2ep2_content_path}}"
 			Game				"${{sdkbase2013sp_hl2ep2_content_path}}"
 			Game				episodic
 			Game				hl2

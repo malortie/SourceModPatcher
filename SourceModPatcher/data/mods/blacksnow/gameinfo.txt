@@ -17,7 +17,6 @@
 		{
 			Game				|gameinfo_path|.
 			Game				|all_source_engine_paths|ep2
-			Game				"${{hl2ep2_content_path}}"
 			Game				"${{sdkbase2013sp_hl2ep2_content_path}}"
 			Game				|all_source_engine_paths|episodic
 			Game				|all_source_engine_paths|hl2

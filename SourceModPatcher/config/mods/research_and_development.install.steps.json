@@ -4,7 +4,7 @@
     "name": "research_and_development_validate_dependencies",
     "description": "Validate $(sourcemod_name) variables dependencies",
     "dependencies": [
-      ["hl2ep2_content_path", "sdkbase2013sp_hl2ep2_content_path"]
+      ["sdkbase2013sp_hl2ep2_content_path"]
     ]
   },
   {
