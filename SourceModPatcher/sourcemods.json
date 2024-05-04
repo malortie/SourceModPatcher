@@ -4,6 +4,11 @@
     "sourcemod_folder": "1187",
     "data_dir": "./data/mods/1187"
   },
+  "1187_roguetrain": {
+    "name": "1187: Rogue Train",
+    "sourcemod_folder": "1187",
+    "data_dir": "./data/mods/1187_roguetrain"
+  },
   "blacksnow": {
     "name": "BLACK SNOW",
     "sourcemod_folder": "blacksnow",

@@ -1,0 +1,31 @@
+"GameInfo"
+{
+	game	"1187 - Episode One"
+	title	""
+	title2	""
+	type	singleplayer_only
+
+	developer		"TeamGT"
+	developer_url	"http://www.wix.com/jourev/1187---episodes"
+	icon		"icon"
+
+	nodifficulty	0
+	hasportals	1
+
+	FileSystem
+	{
+		SteamAppId							218
+		AdditionalContentId			420
+		ToolsAppId							211
+
+		SearchPaths
+		{		
+			Game				|gameinfo_path|.
+			Game				|all_source_engine_paths|sourcetest	
+			Game				|all_source_engine_paths|ep2
+			Game				"${{sdkbase2013sp_hl2ep2_content_path}}"
+			Game				|all_source_engine_paths|episodic
+			Game				|all_source_engine_paths|hl2
+		}
+	}
+}

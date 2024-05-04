@@ -1,0 +1,55 @@
+[
+  {
+    "$type": "validate_variables_dependencies",
+    "name": "1187_roguetrain_validate_dependencies",
+    "description": "Validate $(sourcemod_name) variables dependencies",
+    "dependencies": [
+      ["sdkbase2013sp_hl2ep2_content_path"]
+    ]
+  },
+  {
+    "$type": "copy_files",
+    "name": "1187_roguetrain_copy_files",
+    "description": "Copy files to $(sourcemod_folder)",
+    "depends_on": ["1187_roguetrain_validate_dependencies"],
+    "files": [
+      {
+        "src": "$(data_sdks_source2007_episodic_dir)/models/Humans/female_shared.ani",
+        "dest": "$(sourcemod_dir)/models/Humans/female_shared.ani"
+      },
+      {
+        "src": "$(data_sdks_source2007_episodic_dir)/models/Humans/female_shared.mdl",
+        "dest": "$(sourcemod_dir)/models/Humans/female_shared.mdl"
+      },
+      {
+        "src": "$(data_sdks_source2007_episodic_dir)/models/Humans/male_gestures.ani",
+        "dest": "$(sourcemod_dir)/models/Humans/male_gestures.ani"
+      },
+      {
+        "src": "$(data_sdks_source2007_episodic_dir)/models/Humans/male_gestures.mdl",
+        "dest": "$(sourcemod_dir)/models/Humans/male_gestures.mdl"
+      },
+      {
+        "src": "$(data_sdks_source2007_episodic_dir)/models/Humans/male_shared.ani",
+        "dest": "$(sourcemod_dir)/models/Humans/male_shared.ani"
+      },
+      {
+        "src": "$(data_sdks_source2007_episodic_dir)/models/Humans/male_shared.mdl",
+        "dest": "$(sourcemod_dir)/models/Humans/male_shared.mdl"
+      },
+      {
+        "src": "$(data_sourcemod_dir)/gameinfo.txt",
+        "dest": "$(sourcemod_dir)/gameinfo.txt"
+      }
+    ]
+  },
+  {
+    "$type": "replace_tokens",
+    "name": "1187_roguetrain_replace_tokens",
+    "description": "Replace tokens in $(sourcemod_folder)/gameinfo.txt",
+    "depends_on": ["1187_roguetrain_copy_files"],
+    "files": [
+      "$(sourcemod_dir)/gameinfo.txt"
+    ]
+  }
+]
