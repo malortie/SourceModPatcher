@@ -182,13 +182,44 @@ namespace SourceModPatcher
                         writer.Info($"\t[ ] [{key}] {sourceModsConfig.GetSourceModName(key)}");
                 }
 
+                Dictionary<string, List<string>> folderToModKey = [];
                 writer.Info("Content marked for installation:");
                 foreach (var key in sourceModsConfig.SupportedSourceModsKeys)
                 {
                     if (installSettings.IsSourceModMarkedForInstall(key))
+                    {
                         writer.Info($"\t[*] [{key}] {sourceModsConfig.GetSourceModName(key)}");
+
+                        string folder = sourceModsConfig.GetSourceModFolder(key);
+                        if (!folderToModKey.ContainsKey(folder))
+                            folderToModKey[folder] = new();
+                        folderToModKey[folder].Add(key);
+                    }
                     else
                         writer.Info($"\t[ ] [{key}] {sourceModsConfig.GetSourceModName(key)}");
+                }
+
+                // Check if at least two mods have the same SourceMods folder.
+                var modsWithSameFolder = folderToModKey.Where(kv => kv.Value.Count > 1);
+                if (modsWithSameFolder.Any())
+                {
+                    writer.Error($"The following mod(s) have the same SourceMods folder:");
+                    writer.Error(string.Empty);
+                    foreach (var kv in modsWithSameFolder) // For each folder.
+                    {
+                        writer.Error($"Folder: {kv.Key}");
+                        writer.Error($"Mods:");
+                        foreach (var key in kv.Value) // For each mod key.
+                            writer.Error($"\t[{key}] {sourceModsConfig.GetSourceModName(key)}");
+                        writer.Error(string.Empty);
+                    }
+
+                    writer.Info($"Unable to determine which content to install to a specific SourceMods folder.");
+                    writer.Info($"The installation will stop to prevent unintended overwriting.");
+                    writer.Info($"Choose one mod.");
+                    writer.Info($"Edit {INSTALL_SETTINGS_FILENAME} and relaunch the program.");
+                    Dispose();
+                    return;
                 }
 
                 var installedSourceMods = sourceModsConfig.GetInstalledSourceMods();
