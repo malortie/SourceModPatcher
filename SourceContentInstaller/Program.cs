@@ -97,171 +97,172 @@ namespace SourceContentInstaller
 
         static void Main(string[] args)
         {
-            var options = Parser.Default.ParseArguments<Options>(args).Value;
-
-            var fileSystem = new FileSystem();
-
-            NLog.LogManager.Configuration = new NLog.Config.XmlLoggingConfiguration("nlog.config");
-
-            // Clear existing log files.
-            NLogServant.ClearAllLogFiles(NLog.LogManager.Configuration, fileSystem);
-
-            var logProvider = new LogProvider(
-                (MemoryTarget)LogManager.Configuration.FindTargetByName("warningmemory"),
-                (MemoryTarget)LogManager.Configuration.FindTargetByName("errormemory"));
-            var consoleWriter = new ConsoleWriter();
-            var logger = new Logger(NLog.LogManager.GetCurrentClassLogger());
-            var writer = new Writer(logger, consoleWriter);
-
-            try
+            Parser.Default.ParseArguments<Options>(args).WithParsed(options =>
             {
-#if false // Re-enable when Mod patcher is made obsolete.
-                if (null == Environment.GetEnvironmentVariable(INSTALL_ENVVAR, EnvironmentVariableTarget.User))
+                var fileSystem = new FileSystem();
+
+                NLog.LogManager.Configuration = new NLog.Config.XmlLoggingConfiguration("nlog.config");
+
+                // Clear existing log files.
+                NLogServant.ClearAllLogFiles(NLog.LogManager.Configuration, fileSystem);
+
+                var logProvider = new LogProvider(
+                    (MemoryTarget)LogManager.Configuration.FindTargetByName("warningmemory"),
+                    (MemoryTarget)LogManager.Configuration.FindTargetByName("errormemory"));
+                var consoleWriter = new ConsoleWriter();
+                var logger = new Logger(NLog.LogManager.GetCurrentClassLogger());
+                var writer = new Writer(logger, consoleWriter);
+
+                try
                 {
-                    // Create a user environment variable to allow locating this application's directory.
-                    writer.Info($"Creating user environment variable {INSTALL_ENVVAR}=\"{Environment.CurrentDirectory}\"");
-                    Environment.SetEnvironmentVariable(INSTALL_ENVVAR, Environment.CurrentDirectory, EnvironmentVariableTarget.User);
-                }
+#if false // Re-enable when Mod patcher is made obsolete.
+                    if (null == Environment.GetEnvironmentVariable(INSTALL_ENVVAR, EnvironmentVariableTarget.User))
+                    {
+                        // Create a user environment variable to allow locating this application's directory.
+                        writer.Info($"Creating user environment variable {INSTALL_ENVVAR}=\"{Environment.CurrentDirectory}\"");
+                        Environment.SetEnvironmentVariable(INSTALL_ENVVAR, Environment.CurrentDirectory, EnvironmentVariableTarget.User);
+                    }
 #endif
 
-                string MakeFullPath(string x) => PathExtensions.JoinWithSeparator(fileSystem, Environment.CurrentDirectory, x);
+                    string MakeFullPath(string x) => PathExtensions.JoinWithSeparator(fileSystem, Environment.CurrentDirectory, x);
 
-                var steamAppsConfig = new SteamAppsConfig(fileSystem, writer, MakeFullPath(STEAMAPPS_CONFIG_FILENAME), new JSONConfigurationSerializer<JSONSteamAppsConfig>(), new WindowsSteamPathFinder())
-                {
-                    UseConfigFile = options.UseConfigFile
-                };
-                steamAppsConfig.LoadConfig();
-
-                var variablesConfig = new VariablesConfig(fileSystem, writer, MakeFullPath("variables.json"), new JSONConfigurationSerializer<JSONVariablesConfig>());
-                variablesConfig.LoadConfig();
-
-                var installStepsConfig = new InstallStepsConfig(fileSystem, writer, MakeFullPath("steamapps.install.steps.json"), new JSONConfigurationSerializer<JSONInstallStepsConfig>());
-                installStepsConfig.LoadConfig();
-
-                var installSettings = new InstallSettings(fileSystem, writer, MakeFullPath(INSTALL_SETTINGS_FILENAME), new JSONConfigurationSerializer<JSONInstallSettings>());
-                installSettings.LoadConfig();
-
-                writer.Info("Installed Source games:");
-                foreach (var appID in steamAppsConfig.SupportedSourceGamesAppIDs)
-                {
-                    if (steamAppsConfig.IsSteamAppInstalled(appID))
-                        writer.Info($"\t[*] [{appID}] {steamAppsConfig.GetSteamAppName(appID)}");
-                    else
-                        writer.Info($"\t[ ] [{appID}] {steamAppsConfig.GetSteamAppName(appID)}");
-                }
-
-                writer.Info("Content marked for installation:");
-                foreach (var appID in steamAppsConfig.SupportedSourceGamesAppIDs)
-                {
-                    if (installSettings.IsSteamAppMarkedForInstall(appID))
-                        writer.Info($"\t[*] [{appID}] {steamAppsConfig.GetSteamAppName(appID)}");
-                    else
-                        writer.Info($"\t[ ] [{appID}] {steamAppsConfig.GetSteamAppName(appID)}");
-                }
-
-                var installedSteamApps = steamAppsConfig.GetInstalledSteamApps();
-                var steamAppsUserWantsToInstall = installSettings.GetSteamAppsToInstall();
-
-                // Content that we can actually install.
-                var steamAppsToInstall = installedSteamApps.Intersect(steamAppsUserWantsToInstall).ToList();
-                if (0 == steamAppsToInstall.Count)
-                {
-                    writer.Info("Program exited: No content can be installed.");
-                    Dispose();
-                    return;
-                }
-
-                writer.Info("The following content will be installed:");
-                foreach (var appID in steamAppsToInstall)
-                    writer.Info($"\t[{appID}] {steamAppsConfig.GetSteamAppName(appID)}");
-
-                if (options.ConfirmInstallationPrompt)
-                {
-                    // Ask the user to confirm if they want to install the content.
-                    ConsoleKey answer;
-                    do
+                    var steamAppsConfig = new SteamAppsConfig(fileSystem, writer, MakeFullPath(STEAMAPPS_CONFIG_FILENAME), new JSONConfigurationSerializer<JSONSteamAppsConfig>(), new WindowsSteamPathFinder())
                     {
-                        writer.Info("Do you want to proceed [y/n] : ");
-                        answer = Console.ReadKey(false).Key;
-                    } while (answer != ConsoleKey.Y && answer != ConsoleKey.N);
+                        UseConfigFile = options.UseConfigFile
+                    };
+                    steamAppsConfig.LoadConfig();
 
-                    if (answer == ConsoleKey.Y)
+                    var variablesConfig = new VariablesConfig(fileSystem, writer, MakeFullPath("variables.json"), new JSONConfigurationSerializer<JSONVariablesConfig>());
+                    variablesConfig.LoadConfig();
+
+                    var installStepsConfig = new InstallStepsConfig(fileSystem, writer, MakeFullPath("steamapps.install.steps.json"), new JSONConfigurationSerializer<JSONInstallStepsConfig>());
+                    installStepsConfig.LoadConfig();
+
+                    var installSettings = new InstallSettings(fileSystem, writer, MakeFullPath(INSTALL_SETTINGS_FILENAME), new JSONConfigurationSerializer<JSONInstallSettings>());
+                    installSettings.LoadConfig();
+
+                    writer.Info("Installed Source games:");
+                    foreach (var appID in steamAppsConfig.SupportedSourceGamesAppIDs)
                     {
-                        // User accepted content installation.
-                        writer.Info("Proceeding...");
+                        if (steamAppsConfig.IsSteamAppInstalled(appID))
+                            writer.Info($"\t[*] [{appID}] {steamAppsConfig.GetSteamAppName(appID)}");
+                        else
+                            writer.Info($"\t[ ] [{appID}] {steamAppsConfig.GetSteamAppName(appID)}");
                     }
-                    else
+
+                    writer.Info("Content marked for installation:");
+                    foreach (var appID in steamAppsConfig.SupportedSourceGamesAppIDs)
                     {
-                        // User declined content installation.
-                        writer.Info($"Edit {INSTALL_SETTINGS_FILENAME} and relaunch the program.");
+                        if (installSettings.IsSteamAppMarkedForInstall(appID))
+                            writer.Info($"\t[*] [{appID}] {steamAppsConfig.GetSteamAppName(appID)}");
+                        else
+                            writer.Info($"\t[ ] [{appID}] {steamAppsConfig.GetSteamAppName(appID)}");
+                    }
+
+                    var installedSteamApps = steamAppsConfig.GetInstalledSteamApps();
+                    var steamAppsUserWantsToInstall = installSettings.GetSteamAppsToInstall();
+
+                    // Content that we can actually install.
+                    var steamAppsToInstall = installedSteamApps.Intersect(steamAppsUserWantsToInstall).ToList();
+                    if (0 == steamAppsToInstall.Count)
+                    {
+                        writer.Info("Program exited: No content can be installed.");
                         Dispose();
                         return;
                     }
+
+                    writer.Info("The following content will be installed:");
+                    foreach (var appID in steamAppsToInstall)
+                        writer.Info($"\t[{appID}] {steamAppsConfig.GetSteamAppName(appID)}");
+
+                    if (options.ConfirmInstallationPrompt)
+                    {
+                        // Ask the user to confirm if they want to install the content.
+                        ConsoleKey answer;
+                        do
+                        {
+                            writer.Info("Do you want to proceed [y/n] : ");
+                            answer = Console.ReadKey(false).Key;
+                        } while (answer != ConsoleKey.Y && answer != ConsoleKey.N);
+
+                        if (answer == ConsoleKey.Y)
+                        {
+                            // User accepted content installation.
+                            writer.Info("Proceeding...");
+                        }
+                        else
+                        {
+                            // User declined content installation.
+                            writer.Info($"Edit {INSTALL_SETTINGS_FILENAME} and relaunch the program.");
+                            Dispose();
+                            return;
+                        }
+                    }
+
+                    var progressWriter = new PipelineProgressWriter(writer);
+                    var stageProgressWriter = new PipelineStageProgressWriter(writer);
+                    var consoleLogReportWriter = new ConsoleLogReportWriter(consoleWriter, logProvider);
+                    var statsWriter = new PipelineStatsWriter(writer);
+                    var tokenReplacer = new TokenReplacer
+                    {
+                        Prefix = "$(",
+                        Suffix = ")"
+                    };
+                    var tokenReplacerVariablesProvider = new TokenReplacerVariablesProvider();
+
+                    var configuration = new Configuration(steamAppsConfig, installSettings, variablesConfig);
+                    var pauseHandler = new ConsolePauseHandler(writer);
+                    var context = new Context(fileSystem, configuration);
+
+                    // Load each steps file and convert them to pipeline step list. 
+                    var stepsLoader = new StepsLoader<JSONInstallStep>(fileSystem, writer, new JSONConfigurationSerializer<IList<JSONInstallStep>>(), new InstallStepMapper<JSONInstallStep>());
+                    var appsStepsDatas = new Dictionary<int, IList<IPipelineStepData>>();
+                    steamAppsToInstall.ForEach(appID => appsStepsDatas.Add(appID, stepsLoader.Load(installStepsConfig.Config[appID])));
+
+                    int stageIndex = 0;
+                    // Create the stages.
+                    IPipelineStage<Context>[] stages = appsStepsDatas.Select(kv => new InstallContentStage()
+                    {
+                        Name = $"stage_{stageIndex++}",
+                        Description = configuration.GetSteamAppName(kv.Key),
+                        AppID = kv.Key,
+                        Writer = writer,
+                        PauseAfterEachStep = options.PauseAfterEachStep,
+                        PauseHandler = pauseHandler,
+                        ProgressWriter = stageProgressWriter,
+                        StepsDatas = [.. kv.Value],
+                        TokenReplacer = tokenReplacer,
+                        TokenReplacerVariablesProvider = tokenReplacerVariablesProvider
+                    }).ToArray();
+
+                    var pipeline = new Pipeline<Context>(stages, progressWriter);
+                    pipeline.Execute(context);
+
+                    statsWriter.WriteStats(pipeline.StatsResults);
+
+                    writer.Info("Installation finished.");
+
+                    if (pipeline.StatsResults.NumStagesPartiallyCompleted != 0 ||
+                        pipeline.StatsResults.NumStagesFailed != 0 ||
+                        pipeline.StatsResults.NumStagesCancelled != 0)
+                    {
+                        writer.Info("One or more errors occured.");
+                    }
+                    else
+                    {
+                        writer.Success("All steps successfully completed.");
+                    }
+
+                    consoleLogReportWriter.WriteWarnings();
+                    consoleLogReportWriter.WriteErrors();
+                }
+                catch (Exception e)
+                {
+                    writer.Error(e.Message);
                 }
 
-                var progressWriter = new PipelineProgressWriter(writer);
-                var stageProgressWriter = new PipelineStageProgressWriter(writer);
-                var consoleLogReportWriter = new ConsoleLogReportWriter(consoleWriter, logProvider);
-                var statsWriter = new PipelineStatsWriter(writer);
-                var tokenReplacer = new TokenReplacer
-                {
-                    Prefix = "$(",
-                    Suffix = ")"
-                };
-                var tokenReplacerVariablesProvider = new TokenReplacerVariablesProvider();
-
-                var configuration = new Configuration(steamAppsConfig, installSettings, variablesConfig);
-                var pauseHandler = new ConsolePauseHandler(writer);
-                var context = new Context(fileSystem, configuration);
-
-                // Load each steps file and convert them to pipeline step list. 
-                var stepsLoader = new StepsLoader<JSONInstallStep>(fileSystem, writer, new JSONConfigurationSerializer<IList<JSONInstallStep>>(), new InstallStepMapper<JSONInstallStep>());
-                var appsStepsDatas = new Dictionary<int, IList<IPipelineStepData>>();
-                steamAppsToInstall.ForEach(appID => appsStepsDatas.Add(appID, stepsLoader.Load(installStepsConfig.Config[appID])));
-
-                int stageIndex = 0;
-                // Create the stages.
-                IPipelineStage<Context>[] stages = appsStepsDatas.Select(kv => new InstallContentStage()
-                {
-                    Name = $"stage_{stageIndex++}",
-                    Description = configuration.GetSteamAppName(kv.Key),
-                    AppID = kv.Key,
-                    Writer = writer,
-                    PauseAfterEachStep = options.PauseAfterEachStep,
-                    PauseHandler = pauseHandler,
-                    ProgressWriter = stageProgressWriter,
-                    StepsDatas = [.. kv.Value],
-                    TokenReplacer = tokenReplacer,
-                    TokenReplacerVariablesProvider = tokenReplacerVariablesProvider
-                }).ToArray();
-
-                var pipeline = new Pipeline<Context>(stages, progressWriter);
-                pipeline.Execute(context);
-
-                statsWriter.WriteStats(pipeline.StatsResults);
-
-                writer.Info("Installation finished.");
-
-                if (pipeline.StatsResults.NumStagesPartiallyCompleted != 0 ||
-                    pipeline.StatsResults.NumStagesFailed != 0 ||
-                    pipeline.StatsResults.NumStagesCancelled != 0)
-                {
-                    writer.Info("One or more errors occured.");
-                }
-                else
-                {
-                    writer.Success("All steps successfully completed.");
-                }
-
-                consoleLogReportWriter.WriteWarnings();
-                consoleLogReportWriter.WriteErrors();
-            }
-            catch (Exception e)
-            {
-                writer.Error(e.Message);
-            }
-
-            Dispose();
+                Dispose();
+            });
         }
     }
 }
