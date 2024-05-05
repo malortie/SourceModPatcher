@@ -22,6 +22,10 @@
         "dest": "$(sourcemod_dir)/bin/server.dll"
       },
       {
+        "src": "$(data_sdks_source2007_ep2_dir)/scripts/hudlayout.res",
+        "dest": "$(sourcemod_dir)/scripts/hudlayout.res"
+      },
+      {
         "src": "$(data_sdks_source2007_episodic_dir)/models/Humans/female_shared.ani",
         "dest": "$(sourcemod_dir)/models/Humans/female_shared.ani"
       },
