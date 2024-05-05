@@ -205,11 +205,11 @@ namespace SourceModPatcher
                     {
                         writer.Error($"The following mod(s) have the same SourceMods folder:");
                         writer.Error(string.Empty);
-                        foreach (var kv in modsWithSameFolder) // For each folder.
+                        foreach (var (folder, modKeys) in modsWithSameFolder) // For each folder.
                         {
-                            writer.Error($"Folder: {kv.Key}");
+                            writer.Error($"Folder: {folder}");
                             writer.Error($"Mods:");
-                            foreach (var key in kv.Value) // For each mod key.
+                            foreach (var key in modKeys) // For each mod key.
                                 writer.Error($"\t[{key}] {sourceModsConfig.GetSourceModName(key)}");
                             writer.Error(string.Empty);
                         }
