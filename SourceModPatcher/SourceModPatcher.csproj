@@ -97,6 +97,9 @@
     <None Update="data\mods\missionimprobable\gameinfo.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="data\mods\missionimprobable\resource\ClientScheme.res">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="data\sdks\source2004\hl2\bin\client.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
