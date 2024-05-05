@@ -15,6 +15,14 @@
       {
         "src": "$(data_sourcemod_dir)/gameinfo.txt",
         "dest": "$(sourcemod_dir)/gameinfo.txt"
+      },
+      {
+        "src": "$(data_sourcemod_dir)/resource/OptionsSubAudio.res",
+        "dest": "$(sourcemod_dir)/resource/OptionsSubAudio.res"
+      },
+      {
+        "src": "$(data_sourcemod_dir)/resource/OptionsSubVideoAdvancedDlg.res",
+        "dest": "$(sourcemod_dir)/resource/OptionsSubVideoAdvancedDlg.res"
       }
     ]
   }
