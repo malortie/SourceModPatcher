@@ -157,6 +157,9 @@
     <None Update="data\sdks\source2007\hl2\bin\server.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="data\sdks\source2007\hl2\scripts\hudlayout.res">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="data\sdks\source2007\template\bin\Client.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
