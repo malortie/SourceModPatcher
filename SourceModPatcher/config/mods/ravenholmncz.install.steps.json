@@ -17,6 +17,14 @@
         "dest": "$(sourcemod_dir)/gameinfo.txt"
       },
       {
+        "src": "$(data_sourcemod_dir)/maps/Ravenholmbonus_l_0.lmp",
+        "dest": "$(sourcemod_dir)/maps/Ravenholmbonus_l_0.lmp"
+      },
+      {
+        "src": "$(data_sourcemod_dir)/materials/Decals/physhide_glow.vmt",
+        "dest": "$(sourcemod_dir)/materials/Decals/physhide_glow.vmt"
+      },
+      {
         "src": "$(data_sourcemod_dir)/resource/OptionsSubAudio.res",
         "dest": "$(sourcemod_dir)/resource/OptionsSubAudio.res"
       },
