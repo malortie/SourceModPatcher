@@ -100,6 +100,9 @@
     <None Update="data\mods\missionimprobable\resource\ClientScheme.res">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="data\mods\RavenholmNCZ\maps\Ravenholm22.bsp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="data\mods\RavenholmNCZ\maps\Ravenholmbonus_l_0.lmp">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

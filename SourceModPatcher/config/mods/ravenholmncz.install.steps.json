@@ -17,6 +17,10 @@
         "dest": "$(sourcemod_dir)/gameinfo.txt"
       },
       {
+        "src": "$(data_sourcemod_dir)/maps/Ravenholm22.bsp",
+        "dest": "$(sourcemod_dir)/maps/Ravenholm22.bsp"
+      },
+      {
         "src": "$(data_sourcemod_dir)/maps/Ravenholmbonus_l_0.lmp",
         "dest": "$(sourcemod_dir)/maps/Ravenholmbonus_l_0.lmp"
       },
