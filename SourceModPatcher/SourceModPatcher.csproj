@@ -88,6 +88,9 @@
     <None Update="data\mods\hoe\gameinfo.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="data\mods\hoe\materials\models\islave\chrome_1.vmt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="data\mods\hoe\resource\ClientScheme.res">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

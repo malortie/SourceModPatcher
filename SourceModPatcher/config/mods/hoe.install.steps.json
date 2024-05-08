@@ -19,6 +19,10 @@
         "dest": "$(sourcemod_dir)/gameinfo.txt"
       },
       {
+        "src": "$(data_sourcemod_dir)/materials/models/islave/chrome_1.vmt",
+        "dest": "$(sourcemod_dir)/materials/models/islave/chrome_1.vmt"
+      },
+      {
         "src": "$(data_sourcemod_dir)/resource/ClientScheme.res",
         "dest": "$(sourcemod_dir)/resource/ClientScheme.res"
       },
