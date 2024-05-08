@@ -21,6 +21,10 @@
       {
         "src": "$(data_sourcemod_dir)/resource/ClientScheme.res",
         "dest": "$(sourcemod_dir)/resource/ClientScheme.res"
+      },
+      {
+        "src": "$(data_sourcemod_dir)/resource/hoe_english.txt",
+        "dest": "$(sourcemod_dir)/resource/hoe_english.txt"
       }
     ]
   },
