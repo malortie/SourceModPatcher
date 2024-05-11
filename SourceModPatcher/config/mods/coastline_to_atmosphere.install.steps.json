@@ -7,6 +7,22 @@
       {
         "src": "$(data_sourcemod_dir)/gameinfo.txt",
         "dest": "$(sourcemod_dir)/gameinfo.txt"
+      },
+      {
+        "src": "$(data_sourcemod_dir)/maps/leonhl2-2g_l_0.lmp",
+        "dest": "$(sourcemod_dir)/maps/leonhl2-2g_l_0.lmp"
+      },
+      {
+        "src": "$(data_sourcemod_dir)/maps/leonhl2-2h_l_0.lmp",
+        "dest": "$(sourcemod_dir)/maps/leonhl2-2h_l_0.lmp"
+      },
+      {
+        "src": "$(data_sourcemod_dir)/maps/leonhl2-2i_l_0.lmp",
+        "dest": "$(sourcemod_dir)/maps/leonhl2-2i_l_0.lmp"
+      },
+      {
+        "src": "$(data_sourcemod_dir)/maps/leonhl2-2m_l_0.lmp",
+        "dest": "$(sourcemod_dir)/maps/leonhl2-2m_l_0.lmp"
       }
     ]
   }

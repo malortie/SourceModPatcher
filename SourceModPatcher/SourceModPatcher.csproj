@@ -79,6 +79,18 @@
     <None Update="data\mods\blacksnow\scripts\HudLayout.res">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="data\mods\Coastline_to_Atmosphere\maps\leonhl2-2g_l_0.lmp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="data\mods\Coastline_to_Atmosphere\maps\leonhl2-2h_l_0.lmp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="data\mods\Coastline_to_Atmosphere\maps\leonhl2-2i_l_0.lmp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="data\mods\Coastline_to_Atmosphere\maps\leonhl2-2m_l_0.lmp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="data\mods\eots\gameinfo.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
