@@ -26,6 +26,10 @@ SourceModPatcher is a tool used to automatically detect specific Pre-Steampipe S
 - [SourceContentInstaller](docs/SourceContentInstaller/README.md)
 - [SourceModPatcher](docs/SourceModPatcher/README.md)
 
+## Built with
+
+- [Visual Studio 2022](https://visualstudio.microsoft.com)
+
 ## Contributing
 
 See [contribution guidelines](CONTRIBUTING.md).
