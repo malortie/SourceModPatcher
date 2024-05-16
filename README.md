@@ -30,10 +30,15 @@ SourceModPatcher is a tool used to automatically detect specific Pre-Steampipe S
 
 See [contribution guidelines](CONTRIBUTING.md).
 
+## License
+
+See [license](LICENSE.md).
+
 ## Acknowledgments
 
 Thanks to the following resources for templates, guides and or general structural inspiration.
 
+- [MIT License](https://en.wikipedia.org/wiki/MIT_License)
 - [Best README Template](https://github.com/othneildrew/Best-README-Template)
 - [Keep a Changelog](https://keepachangelog.com/)
 - [ValveSoftware/halflife's code of conduct](https://github.com/ValveSoftware/halflife?tab=readme-ov-file#conduct)
