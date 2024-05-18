@@ -6,7 +6,7 @@
 
 ## Installation
 
-1. Go to Library &gt; Tools
+1. Go to Library
 2. Install Day of Defeat: Source
 3. Restart Steam
 4. Launch Day of Defeat: Source

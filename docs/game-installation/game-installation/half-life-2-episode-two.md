@@ -6,7 +6,7 @@
 
 ## Installation
 
-1. Go to Library &gt; Tools
+1. Go to Library
 2. Install Half-Life 2: Episode Two
 3. Restart Steam
 4. Launch Half-Life 2: Episode Two

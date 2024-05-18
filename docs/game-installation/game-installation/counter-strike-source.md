@@ -6,7 +6,7 @@
 
 ## Installation
 
-1. Go to Library &gt; Tools
+1. Go to Library
 2. Install Counter-Strike: Source
 3. Restart Steam
 4. Launch Counter-Strike: Source

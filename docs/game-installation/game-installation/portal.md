@@ -6,7 +6,7 @@
 
 ## Installation
 
-1. Go to Library &gt; Tools
+1. Go to Library
 2. Install Portal
 3. Restart Steam
 4. Launch Portal
