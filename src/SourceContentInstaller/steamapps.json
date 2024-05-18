@@ -12,61 +12,61 @@
   "220": {
     "name": "Half-Life 2",
     "appmanifest_file": "appmanifest_220.acf",
-    "install_dir": "D:/SteamLibrary/steamapps/common/Half-Life 2"
+    "install_dir": "C:/Program Files (x86)/Steam/steamapps/common/Half-Life 2"
   },
   "240": {
     "name": "Counter-Strike: Source",
     "appmanifest_file": "appmanifest_240.acf",
-    "install_dir": "D:/SteamLibrary/steamapps/common/Counter-Strike Source"
+    "install_dir": "C:/Program Files (x86)/Steam/steamapps/common/Counter-Strike Source"
   },
   "280": {
     "name": "Half-Life: Source",
     "appmanifest_file": "appmanifest_280.acf",
-    "install_dir": "D:/SteamLibrary/steamapps/common/Half-Life 2"
+    "install_dir": "C:/Program Files (x86)/Steam/steamapps/common/Half-Life 2"
   },
   "300": {
     "name": "Day of Defeat: Source",
     "appmanifest_file": "appmanifest_300.acf",
-    "install_dir": ""
+    "install_dir": "C:/Program Files (x86)/Steam/steamapps/common/day of defeat source"
   },
   "320": {
     "name": "Half-Life 2: Deathmatch",
     "appmanifest_file": "appmanifest_320.acf",
-    "install_dir": "D:/SteamLibrary/steamapps/common/Half-Life 2 Deathmatch"
+    "install_dir": "C:/Program Files (x86)/Steam/steamapps/common/Half-Life 2 Deathmatch"
   },
   "340": {
     "name": "Half-Life 2: Lost Coast",
     "appmanifest_file": "appmanifest_340.acf",
-    "install_dir": "D:/SteamLibrary/steamapps/common/Half-Life 2"
+    "install_dir": "C:/Program Files (x86)/Steam/steamapps/common/Half-Life 2"
   },
   "360": {
     "name": "Half-Life Deathmatch: Source",
     "appmanifest_file": "appmanifest_360.acf",
-    "install_dir": "D:/SteamLibrary/steamapps/common/Half-Life 1 Source Deathmatch"
+    "install_dir": "C:/Program Files (x86)/Steam/steamapps/common/Half-Life 1 Source Deathmatch"
   },
   "380": {
     "name": "Half-Life 2: Episode One",
     "appmanifest_file": "appmanifest_380.acf",
-    "install_dir": "D:/SteamLibrary/steamapps/common/Half-Life 2"
+    "install_dir": "C:/Program Files (x86)/Steam/steamapps/common/Half-Life 2"
   },
   "400": {
     "name": "Portal",
     "appmanifest_file": "appmanifest_400.acf",
-    "install_dir": "D:/SteamLibrary/steamapps/common/Portal"
+    "install_dir": "C:/Program Files (x86)/Steam/steamapps/common/Portal"
   },
   "420": {
     "name": "Half-Life 2: Episode Two",
     "appmanifest_file": "appmanifest_420.acf",
-    "install_dir": "D:/SteamLibrary/steamapps/common/Half-Life 2"
+    "install_dir": "C:/Program Files (x86)/Steam/steamapps/common/Half-Life 2"
   },
   "243730": {
     "name": "Source SDK Base 2013 Singleplayer",
     "appmanifest_file": "appmanifest_243730.acf",
-    "install_dir": "D:/SteamLibrary/steamapps/common/Source SDK Base 2013 Singleplayer"
+    "install_dir": "C:/Program Files (x86)/Steam/steamapps/common/Source SDK Base 2013 Singleplayer"
   },
   "243750": {
     "name": "Source SDK Base 2013 Multiplayer",
     "appmanifest_file": "appmanifest_243750.acf",
-    "install_dir": ""
+    "install_dir": "C:/Program Files (x86)/Steam/steamapps/common/Source SDK Base 2013 Multiplayer"
   }
 }
