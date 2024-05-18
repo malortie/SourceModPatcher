@@ -14,14 +14,15 @@ This will guide you through a basic use case of SourceModPatcher and SourceConte
 ### Table of Contents (Use case)
 
 1. [Install Source SDK Base 2007](#1-install-source-sdk-base-2007)
-2. [Download and install Heart of Evil: Source](#2-download-and-install-heart-of-evil-source)
-3. [Configure SourceModPatcher to patch Heart of Evil: Source](#3-configure-sourcemodpatcher-to-patch-heart-of-evil-source)
-4. [Launching SourceModPatcher](#4-launching-sourcemodpatcher)
+2. [Install Half-Life: Source](#2-install-half-life-source)
+3. [Download and install Heart of Evil: Source](#3-download-and-install-heart-of-evil-source)
+4. [Configure SourceModPatcher to patch Heart of Evil: Source](#4-configure-sourcemodpatcher-to-patch-heart-of-evil-source)
+5. [Launching SourceModPatcher](#5-launching-sourcemodpatcher)
    - [Diagnosing the error message](#diagnosing-the-error-message)
-5. [Install Source games content](#5-install-source-games-content)
-6. [Launching SourceModPatcher (again)](#6-launching-sourcemodpatcher-again)
-7. [Restart Steam](#7-restart-steam)
-8. [Launch Heart of Evil: Source](#8-launch-heart-of-evil-source)
+6. [Install Source games content](#6-install-source-games-content)
+7. [Launching SourceModPatcher (again)](#7-launching-sourcemodpatcher-again)
+8. [Restart Steam](#8-restart-steam)
+9. [Launch Heart of Evil: Source](#9-launch-heart-of-evil-source)
 
 ### 1. Install Source SDK Base 2007
 
@@ -32,7 +33,14 @@ Install Source SDK Base 2007 in Steam :
 3. Restart Steam
 4. Launch Source SDK Base 2007
 
-### 2. Download and install Heart of Evil: Source
+### 2. Install Half-Life: Source
+
+1. Go to Library
+2. Install Half-Life: Source
+3. Restart Steam
+4. Launch Half-Life: Source
+
+### 3. Download and install Heart of Evil: Source
 
 Download the mod: <https://www.moddb.com/mods/heart-of-evil-source-port/downloads/heart-of-evil-source-update-101008>
 
@@ -42,7 +50,7 @@ Install the mod to your sourcemods folder :
 C:\Program Files (x86)\Steam\steamapps\sourcemods\hoe
 ```
 
-### 3. Configure SourceModPatcher to patch Heart of Evil: Source
+### 4. Configure SourceModPatcher to patch Heart of Evil: Source
 
 Enable Heart of Evil: Source in `sourcemods.install.settings.json`
 
@@ -54,7 +62,7 @@ Enable Heart of Evil: Source in `sourcemods.install.settings.json`
 
 See [Mod IDs](mod-ids.md) for more information.
 
-### 4. Launching SourceModPatcher
+### 5. Launching SourceModPatcher
 
 Launch SourceModPatcher
 
@@ -122,7 +130,7 @@ For SourceModPatcher, these dependencies translate to:
 
 The installation checks that you have the aforementionned content installed. In this case, it does so by checking if `hl1_content_path` and `sdkbase2013sp_hl2ep2_content_path` are present in `variables.json`. These [variables](../../SourceContentInstaller/v0/variables.md) are automatically added in the file when you install Source content using SourceContentInstaller. Since they don't exist, the installation fails and displays the above error message.
 
-### 5. Install Source games content
+### 6. Install Source games content
 
 Open `steamapps.install.settings.json` and enable Half-Life: Source and Source SDK Base 2013 Singleplayer by setting `280` and `243730` to `true`. See [Steam Application IDs](https://developer.valvesoftware.com/wiki/Steam_Application_IDs#Source_Engine_Games) for the list of Source games IDs.
 
@@ -204,7 +212,7 @@ In `variables.json`, you should have the following entries, which define the ins
 }
 ```
 
-### 6. Launching SourceModPatcher (again)
+### 7. Launching SourceModPatcher (again)
 
 Now that we have `hl1_content_path` and `sdkbase2013sp_hl2ep2_content_path` defined, we can retry Heart of Evil: Source installation.
 
@@ -240,9 +248,9 @@ Installation finished.
 All steps successfully completed.
 ```
 
-### 7. Restart Steam
+### 8. Restart Steam
 
-### 8. Launch Heart of Evil: Source
+### 9. Launch Heart of Evil: Source
 
 1. Go to Library
 2. Launch  Heart of Evil: Source
