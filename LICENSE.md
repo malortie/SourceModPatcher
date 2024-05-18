@@ -2,7 +2,7 @@
 
 The current project may rely on or use external dependencies such as frameworks, libraries, etc. All dependencies licenses apply.
 
-Everything within `src/SourceModPatcher/data` is based on the work of Valve Sofware or community mods. The Source SDK [License](https://github.com/ValveSoftware/source-sdk-2013/blob/master/LICENSE) apply.
+Everything within `src/SourceModPatcher/data` is based on the work of Valve Software or community mods. The Source SDK [License](https://github.com/ValveSoftware/source-sdk-2013/blob/master/LICENSE) apply.
 
 Everything else falls under the following license:
 
