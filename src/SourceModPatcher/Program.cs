@@ -90,8 +90,8 @@ namespace SourceModPatcher
         {
             [Option('c', "use-config-file", Required = false, Default = false, HelpText = $"Read install path from {COMMON_CONFIG_FILENAME} file.")]
             public bool UseConfigFile { get; set; }
-            [Option('y', "confirm-install", Required = false, Default = true, HelpText = "Prompt to confirm installation.")]
-            public bool ConfirmInstallationPrompt { get; set; }
+            [Option('y', "no-confirm-install", Required = false, Default = false, HelpText = "Suppress prompt to confirm installation.")]
+            public bool NoConfirmInstallationPrompt { get; set; }
             [Option('p', "pause-after-step", Required = false, Default = false, HelpText = "Pause after each step.")]
             public bool PauseAfterEachStep { get; set; }
         }
@@ -238,7 +238,7 @@ namespace SourceModPatcher
                     foreach (var key in sourceModsToInstall)
                         writer.Info($"\t[{key}] {sourceModsConfig.GetSourceModName(key)}");
 
-                    if (options.ConfirmInstallationPrompt)
+                    if (!options.NoConfirmInstallationPrompt)
                     {
                         // Ask the user to confirm if they want to install the content.
                         ConsoleKey answer;

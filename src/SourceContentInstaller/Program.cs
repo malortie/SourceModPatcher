@@ -84,8 +84,8 @@ namespace SourceContentInstaller
         {
             [Option('c', "use-config-file", Required = false, Default = false, HelpText = $"Read install path from {STEAMAPPS_CONFIG_FILENAME} file.")]
             public bool UseConfigFile { get; set; }
-            [Option('y', "confirm-install", Required = false, Default = true, HelpText = "Prompt to confirm installation.")]
-            public bool ConfirmInstallationPrompt { get; set; }
+            [Option('y', "no-confirm-install", Required = false, Default = false, HelpText = "Suppress prompt to confirm installation.")]
+            public bool NoConfirmInstallationPrompt { get; set; }
             [Option('p', "pause-after-step", Required = false, Default = false, HelpText = "Pause after each step.")]
             public bool PauseAfterEachStep { get; set; }
         }
@@ -175,7 +175,7 @@ namespace SourceContentInstaller
                     foreach (var appID in steamAppsToInstall)
                         writer.Info($"\t[{appID}] {steamAppsConfig.GetSteamAppName(appID)}");
 
-                    if (options.ConfirmInstallationPrompt)
+                    if (!options.NoConfirmInstallationPrompt)
                     {
                         // Ask the user to confirm if they want to install the content.
                         ConsoleKey answer;
