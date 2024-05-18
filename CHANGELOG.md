@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## Added
+### Added
 
 - Initial release
 - Content
@@ -37,12 +37,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Ravenholm
   - Research and Development
 
-## Changed
+### Changed
 
 - Coastline to Atmosphere
   - Make HUD visible in several Coastline to Atmosphere
 
-## Fixed
+### Fixed
 
 - 1187: Episode One
   - Missing entry for HL2_Enable_Commentary
