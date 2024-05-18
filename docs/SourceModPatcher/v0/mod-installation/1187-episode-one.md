@@ -9,7 +9,7 @@
 
 1. Download the mod
 
-   - <https://www.moddb.com/mods/1187/downloads/1187-episode-one-13-full-exe>
+   - <https://www.moddb.com/mods/1187/downloads/1187-episode-one-13-full-7z>
 
 2. Install the mod to your sourcemods folder i.e.
 
