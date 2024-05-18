@@ -55,7 +55,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Alien slave chrome
   - Missing entry for HL2_Enable_Commentary
   - Missing flashlight icon
-- Ravenholm:
+- Ravenholm
   - Errors in Ravenholm22.bsp
   - Bonus decal not visible
   - Audio and Video schemes
@@ -64,5 +64,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - HUDHistoryResource glitch
 - Research and development
   - HUDHistoryResource glitch
-- Source 2007 mods:
+- Source 2007 mods
   - Male and female gestures
