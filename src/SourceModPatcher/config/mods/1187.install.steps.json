@@ -40,6 +40,10 @@
       {
         "src": "$(data_sourcemod_dir)/gameinfo.txt",
         "dest": "$(sourcemod_dir)/gameinfo.txt"
+      },
+      {
+        "src": "$(data_sourcemod_dir)/resource/1187_english.txt",
+        "dest": "$(sourcemod_dir)/resource/1187_english.txt"
       }
     ]
   },
