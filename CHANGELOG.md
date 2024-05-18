@@ -44,8 +44,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Fixed
 
+- 1187: Episode One
+  - Missing entry for HL2_Enable_Commentary
 - 1187: Rogue Train
   - Missing entry for 1187_Chapter11_Title
+  - Missing entry for HL2_Enable_Commentary
 - Black Snow
   - HUDHistoryResource glitch
 - Eye of the storm
