@@ -108,6 +108,8 @@ One or more errors occured.
 
 #### Diagnosing the error message
 
+> **Note:** Infos, warnings, errors are logged to `output.log`, `warning.log`, `error.log`.
+
 To begin with, Heart of Evil: Source depends on content from these games:
 
 - Half-Life: Source
