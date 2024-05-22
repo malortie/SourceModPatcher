@@ -3,6 +3,7 @@
 	// This is what shows up in the 'Third Party Games' area of the Steam games list.
 	game	"HalloweenHL2PN"
 	title	"Halloween HL2: Pumpkin Night"
+	type	singleplayer_only
 	"icon"			"resource/game"
 
 	

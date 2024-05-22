@@ -21,6 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Halloween HL2: Pumpkin Night
   - Missing entry for Halloween_Chapter1_Title
   - Localization strings on weapons names
+  - Remove Voice and Multiplayer tab in Options
 
 ## [0.0.0] - 2024-05-18
 
