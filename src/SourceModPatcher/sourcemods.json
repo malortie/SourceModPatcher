@@ -34,6 +34,11 @@
     "sourcemod_folder": "Halloween",
     "data_dir": "./data/mods/Halloween"
   },
+  "halloween_redux": {
+    "name": "Halloween HL2: Pumpkin Night (Redux)",
+    "sourcemod_folder": "Halloween HL2 PN",
+    "data_dir": "./data/mods/Halloween HL2 PN"
+  },
   "hoe": {
     "name": "Heart of Evil: Source",
     "sourcemod_folder": "hoe",

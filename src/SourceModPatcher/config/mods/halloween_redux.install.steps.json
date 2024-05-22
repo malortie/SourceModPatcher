@@ -1,0 +1,13 @@
+[
+  {
+    "$type": "copy_files",
+    "name": "halloween_redux_copy_files",
+    "description": "Copy files to $(sourcemod_folder)",
+    "files": [
+      {
+        "src": "$(data_sourcemod_dir)/gameinfo.txt",
+        "dest": "$(sourcemod_dir)/gameinfo.txt"
+      }
+    ]
+  }
+]

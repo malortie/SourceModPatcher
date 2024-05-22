@@ -20,6 +20,9 @@
   "halloween": {
     "install": false
   },
+  "halloween_redux": {
+    "install": false
+  },
   "hoe": {
     "install": false
   },

@@ -6,6 +6,7 @@
   "eclipse": "./config/mods/eclipse.install.steps.json",
   "eots": "./config/mods/eots.install.steps.json",
   "halloween": "./config/mods/halloween.install.steps.json",
+  "halloween_redux": "./config/mods/halloween_redux.install.steps.json",
   "hoe": "./config/mods/hoe.install.steps.json",
   "human_error": "./config/mods/human_error.install.steps.json",
   "missionimprobable": "./config/mods/missionimprobable.install.steps.json",
