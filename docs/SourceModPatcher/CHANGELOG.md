@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Mods
+  - Eclipse
+  - Get a Life
+  - Halloween HL2: Pumpkin Night
+  - Halloween HL2: Pumpkin Night (Redux)
+  - Shantytown
+
 ## [0.0.0] - 2024-05-18
 
 ### Added
