@@ -124,6 +124,9 @@
     <None Update="data\mods\Halloween HL2 PN\gameinfo.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="data\mods\Halloween HL2 PN\resource\Halloween HL2 PN_english.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="data\mods\Halloween\gameinfo.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
