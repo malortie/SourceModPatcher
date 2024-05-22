@@ -5,6 +5,7 @@
   "coastline_to_atmosphere": "./config/mods/coastline_to_atmosphere.install.steps.json",
   "eclipse": "./config/mods/eclipse.install.steps.json",
   "eots": "./config/mods/eots.install.steps.json",
+  "get_a_life": "./config/mods/get_a_life.install.steps.json",
   "halloween": "./config/mods/halloween.install.steps.json",
   "halloween_redux": "./config/mods/halloween_redux.install.steps.json",
   "hoe": "./config/mods/hoe.install.steps.json",

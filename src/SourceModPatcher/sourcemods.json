@@ -29,6 +29,11 @@
     "sourcemod_folder": "eots",
     "data_dir": "./data/mods/eots"
   },
+  "get_a_life": {
+    "name": "Get a Life",
+    "sourcemod_folder": "Get_A_Life",
+    "data_dir": "./data/mods/Get_A_Life"
+  },
   "halloween": {
     "name": "Halloween HL2: Pumpkin Night",
     "sourcemod_folder": "Halloween",

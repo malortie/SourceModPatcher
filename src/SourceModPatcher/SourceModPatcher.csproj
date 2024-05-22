@@ -34,6 +34,9 @@
     <None Update="config\mods\eots.install.steps.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="config\mods\get_a_life.install.steps.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="config\mods\halloween.install.steps.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -110,6 +113,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="data\mods\eots\materials\models\weapons\v_hand\v_hand_sheet.vmt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="data\mods\Get_A_Life\gameinfo.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="data\mods\Halloween HL2 PN\gameinfo.txt">

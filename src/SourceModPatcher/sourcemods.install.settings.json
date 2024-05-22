@@ -17,6 +17,9 @@
   "eots": {
     "install": false
   },
+  "get_a_life": {
+    "install": false
+  },
   "halloween": {
     "install": false
   },
