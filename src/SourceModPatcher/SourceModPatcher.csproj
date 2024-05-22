@@ -127,6 +127,9 @@
     <None Update="data\mods\Halloween\gameinfo.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="data\mods\Halloween\resource\Halloween_english.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="data\mods\hoe\gameinfo.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
