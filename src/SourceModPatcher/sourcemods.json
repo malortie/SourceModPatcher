@@ -19,6 +19,11 @@
     "sourcemod_folder": "Coastline_to_Atmosphere",
     "data_dir": "./data/mods/Coastline_to_Atmosphere"
   },
+  "eclipse": {
+    "name": "Eclipse",
+    "sourcemod_folder": "Eclipse",
+    "data_dir": "./data/mods/Eclipse"
+  },
   "eots": {
     "name": "Eye of the Storm",
     "sourcemod_folder": "eots",

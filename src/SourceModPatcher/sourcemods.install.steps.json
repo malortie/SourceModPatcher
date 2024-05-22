@@ -3,6 +3,7 @@
   "1187_roguetrain": "./config/mods/1187_roguetrain.install.steps.json",
   "blacksnow": "./config/mods/blacksnow.install.steps.json",
   "coastline_to_atmosphere": "./config/mods/coastline_to_atmosphere.install.steps.json",
+  "eclipse": "./config/mods/eclipse.install.steps.json",
   "eots": "./config/mods/eots.install.steps.json",
   "hoe": "./config/mods/hoe.install.steps.json",
   "human_error": "./config/mods/human_error.install.steps.json",

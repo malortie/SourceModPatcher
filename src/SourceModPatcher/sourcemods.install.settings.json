@@ -11,6 +11,9 @@
   "coastline_to_atmosphere": {
     "install": false
   },
+  "eclipse": {
+    "install": false
+  },
   "eots": {
     "install": false
   },
