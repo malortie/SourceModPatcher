@@ -12,5 +12,6 @@
   "human_error": "./config/mods/human_error.install.steps.json",
   "missionimprobable": "./config/mods/missionimprobable.install.steps.json",
   "ravenholmncz": "./config/mods/ravenholmncz.install.steps.json",
-  "research_and_development": "./config/mods/research_and_development.install.steps.json"
+  "research_and_development": "./config/mods/research_and_development.install.steps.json",
+  "shantytown": "./config/mods/shantytown.install.steps.json"
 }

@@ -68,5 +68,10 @@
     "name": "Research and Development",
     "sourcemod_folder": "Research and Development",
     "data_dir": "./data/mods/Research and Development"
+  },
+  "shantytown": {
+    "name": "Shantytown",
+    "sourcemod_folder": "Shantytown",
+    "data_dir": "./data/mods/Shantytown"
   }
 }

@@ -40,5 +40,8 @@
   },
   "research_and_development": {
     "install": false
+  },
+  "shantytown": {
+    "install": false
   }
 }
