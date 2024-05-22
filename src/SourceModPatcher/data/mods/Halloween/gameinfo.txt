@@ -1,0 +1,20 @@
+"GameInfo"
+{
+	// This is what shows up in the 'Third Party Games' area of the Steam games list.
+	game	"HalloweenHL2PN"
+	title	"Halloween HL2: Pumpkin Night"
+	"icon"			"resource/game"
+
+	
+	FileSystem
+	{
+		SteamAppId				215
+		ToolsAppId				211
+
+		SearchPaths
+		{
+			Game				|gameinfo_path|.
+			Game				hl2
+		}
+	}
+}
