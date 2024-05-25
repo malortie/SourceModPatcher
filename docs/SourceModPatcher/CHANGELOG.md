@@ -23,6 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Eclipse
   - Missing widescreen background materials
+  - Enable culling on player textures
 
 - Get a Life
   - Missing widescreen background materials
