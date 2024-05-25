@@ -9,6 +9,10 @@
         "dest": "$(sourcemod_dir)/gameinfo.txt"
       },
       {
+        "src": "$(data_sourcemod_dir)/materials/console/background01_widescreen.vtf",
+        "dest": "$(sourcemod_dir)/materials/console/background01_widescreen.vtf"
+      },
+      {
         "src": "$(data_sourcemod_dir)/resource/Halloween_english.txt",
         "dest": "$(sourcemod_dir)/resource/Halloween_english.txt"
       }
