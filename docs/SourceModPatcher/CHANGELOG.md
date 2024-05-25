@@ -35,6 +35,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Remove Voice and Multiplayer tab in Options
   - Map hood01_final
     - Remove buggy skateboard
+    - Make non-interactible houses doors start locked
 
 - Halloween HL2: Pumpkin Night (Redux)
   - Missing entry for Halloween HL2 PN_Chapter1_Title
