@@ -27,6 +27,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Missing entry for Halloween HL2 PN_Chapter1_Title
   - Localization strings on weapons names
   - Remove Voice and Multiplayer tab in Options
+  - Map hoodrd_01b
+    - Remove underscore in text `hint: Follow_toby`
 
 ## [0.0.0] - 2024-05-18
 

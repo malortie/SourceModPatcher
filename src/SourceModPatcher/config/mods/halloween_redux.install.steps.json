@@ -9,6 +9,10 @@
         "dest": "$(sourcemod_dir)/gameinfo.txt"
       },
       {
+        "src": "$(data_sourcemod_dir)/maps/hoodrd_01b_l_0.lmp",
+        "dest": "$(sourcemod_dir)/maps/hoodrd_01b_l_0.lmp"
+      },
+      {
         "src": "$(data_sourcemod_dir)/resource/Halloween HL2 PN_english.txt",
         "dest": "$(sourcemod_dir)/resource/Halloween HL2 PN_english.txt"
       }
