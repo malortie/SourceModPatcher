@@ -21,6 +21,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Eclipse
   - Missing widescreen background materials
 
+- Get a Life
+  - Missing widescreen background materials
+
 - Halloween HL2: Pumpkin Night
   - Missing entry for Halloween_Chapter1_Title
   - Missing widescreen background materials
