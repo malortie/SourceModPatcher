@@ -1,0 +1,11 @@
+"UnlitGeneric"
+{
+	"$basetexture" "console/blacksnow_menu1_widescreen"
+	"$nodecal" 1
+	"$nolod" 1
+	"$nofog" 1
+	"$ignorez" 1
+	"$vertexcolor" 1
+	"$vertexalpha" 1
+	"$no_fullbright" "1"
+}

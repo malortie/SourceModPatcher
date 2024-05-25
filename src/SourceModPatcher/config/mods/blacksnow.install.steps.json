@@ -50,6 +50,30 @@
         "dest": "$(sourcemod_dir)/gameinfo.txt"
       },
       {
+        "src": "$(data_sourcemod_dir)/materials/console/blacksnow_menu1.vmt",
+        "dest": "$(sourcemod_dir)/materials/console/blacksnow_menu1.vmt"
+      },
+      {
+        "src": "$(data_sourcemod_dir)/materials/console/blacksnow_menu1.vtf",
+        "dest": "$(sourcemod_dir)/materials/console/blacksnow_menu1.vtf"
+      },
+      {
+        "src": "$(data_sourcemod_dir)/materials/console/blacksnow_menu1_widescreen.vmt",
+        "dest": "$(sourcemod_dir)/materials/console/blacksnow_menu1_widescreen.vmt"
+      },
+      {
+        "src": "$(data_sourcemod_dir)/materials/console/blacksnow_menu1_widescreen.vtf",
+        "dest": "$(sourcemod_dir)/materials/console/blacksnow_menu1_widescreen.vtf"
+      },
+      {
+        "src": "$(data_sourcemod_dir)/materials/console/blacksnow_menu2_widescreen.vmt",
+        "dest": "$(sourcemod_dir)/materials/console/blacksnow_menu2_widescreen.vmt"
+      },
+      {
+        "src": "$(data_sourcemod_dir)/materials/console/blacksnow_menu2_widescreen.vtf",
+        "dest": "$(sourcemod_dir)/materials/console/blacksnow_menu2_widescreen.vtf"
+      },
+      {
         "src": "$(data_sourcemod_dir)/scripts/HudLayout.res",
         "dest": "$(sourcemod_dir)/scripts/HudLayout.res"
       }

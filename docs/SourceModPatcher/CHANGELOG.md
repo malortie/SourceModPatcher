@@ -18,6 +18,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Black Snow
+  - Missing widescreen background materials
+
 - Eclipse
   - Missing widescreen background materials
 
