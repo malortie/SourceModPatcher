@@ -7,6 +7,18 @@
       {
         "src": "$(data_sourcemod_dir)/gameinfo.txt",
         "dest": "$(sourcemod_dir)/gameinfo.txt"
+      },
+      {
+        "src": "$(data_sourcemod_dir)/materials/console/background01_widescreen.vtf",
+        "dest": "$(sourcemod_dir)/materials/console/background01_widescreen.vtf"
+      },
+      {
+        "src": "$(data_sourcemod_dir)/materials/console/background02_widescreen.vtf",
+        "dest": "$(sourcemod_dir)/materials/console/background02_widescreen.vtf"
+      },
+      {
+        "src": "$(data_sourcemod_dir)/materials/console/background03_widescreen.vtf",
+        "dest": "$(sourcemod_dir)/materials/console/background03_widescreen.vtf"
       }
     ]
   }
