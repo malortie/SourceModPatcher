@@ -9,6 +9,10 @@
         "dest": "$(sourcemod_dir)/gameinfo.txt"
       },
       {
+        "src": "$(data_sourcemod_dir)/maps/hood01_final_l_0.lmp",
+        "dest": "$(sourcemod_dir)/maps/hood01_final_l_0.lmp"
+      },
+      {
         "src": "$(data_sourcemod_dir)/materials/console/background01_widescreen.vtf",
         "dest": "$(sourcemod_dir)/materials/console/background01_widescreen.vtf"
       },
