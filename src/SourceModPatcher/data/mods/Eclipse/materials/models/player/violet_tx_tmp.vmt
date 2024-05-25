@@ -1,0 +1,6 @@
+"vertexlitgeneric"
+{
+	"$baseTexture" "Models/Player/violet_tx_tmp"
+        "$nocull"  1
+	"$alphatest"  1
+}

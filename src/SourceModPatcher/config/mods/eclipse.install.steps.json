@@ -19,6 +19,10 @@
       {
         "src": "$(data_sourcemod_dir)/materials/console/background03_widescreen.vtf",
         "dest": "$(sourcemod_dir)/materials/console/background03_widescreen.vtf"
+      },
+      {
+        "src": "$(data_sourcemod_dir)/materials/models/player/violet_tx_tmp.vmt",
+        "dest": "$(sourcemod_dir)/materials/models/player/violet_tx_tmp.vmt"
       }
     ]
   }
