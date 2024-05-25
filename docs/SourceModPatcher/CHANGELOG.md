@@ -48,6 +48,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - Remove underscore in text `hint: Follow_toby`
   - Map hoodrd_02a
     - Fix � symbols in texts `game_text_end01`, `game_text_end08`, `game_text_end09`
+    - Make non-interactible houses doors start locked
 
 ## [0.0.0] - 2024-05-18
 
