@@ -28,6 +28,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Get a Life
   - Missing widescreen background materials
   - Remove duplicate entry in credits
+  - Localization strings in credits
 
 - Halloween HL2: Pumpkin Night
   - Missing entry for Halloween_Chapter1_Title

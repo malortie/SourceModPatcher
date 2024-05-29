@@ -202,7 +202,7 @@
 	"Cheaterno1 (German)"   "CreditsOutroText"
 	"Mr. Sugar (Czech)"   "CreditsOutroText"
 	"Bolosfura (Spanish)"   "CreditsOutroText"
-	"Mischa Sildén (Finnish)"   "CreditsOutroText"
+	"Mischa SildÃ©n (Finnish)"   "CreditsOutroText"
 	"Dennis Bagstevold (Swedish)"   "CreditsOutroText"
 	" "   "CreditsOutroText"
 	" "   "CreditsOutroText"
