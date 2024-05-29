@@ -15,6 +15,10 @@
       {
         "src": "$(data_sourcemod_dir)/scripts/credits.txt",
         "dest": "$(sourcemod_dir)/scripts/credits.txt"
+      },
+      {
+        "src": "$(data_sourcemod_dir)/scripts/HudLayout.res",
+        "dest": "$(sourcemod_dir)/scripts/HudLayout.res"
       }
     ]
   }
