@@ -11,6 +11,10 @@
       {
         "src": "$(data_sourcemod_dir)/materials/console/background01_widescreen.vtf",
         "dest": "$(sourcemod_dir)/materials/console/background01_widescreen.vtf"
+      },
+      {
+        "src": "$(data_sourcemod_dir)/scripts/credits.txt",
+        "dest": "$(sourcemod_dir)/scripts/credits.txt"
       }
     ]
   }
