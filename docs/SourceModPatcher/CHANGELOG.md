@@ -30,6 +30,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Remove duplicate entry in credits
   - Localization strings in credits
   - Missing topoffset in HudCloseCaption
+  - Missing closed captions in closecaption_russian.txt
+  - Missing closed captions in closecaption_schinese.txt
+  - Missing closed captions in closecaption_tchinese.txt
+  - Remove unnecessary new lines in closed captions
 
 - Halloween HL2: Pumpkin Night
   - Missing entry for Halloween_Chapter1_Title
