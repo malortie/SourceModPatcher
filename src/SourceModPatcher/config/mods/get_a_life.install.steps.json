@@ -13,6 +13,66 @@
         "dest": "$(sourcemod_dir)/materials/console/background01_widescreen.vtf"
       },
       {
+        "src": "$(data_sourcemod_dir)/resource/closecaption_english.dat",
+        "dest": "$(sourcemod_dir)/resource/closecaption_english.dat"
+      },
+      {
+        "src": "$(data_sourcemod_dir)/resource/closecaption_finnish.dat",
+        "dest": "$(sourcemod_dir)/resource/closecaption_finnish.dat"
+      },
+      {
+        "src": "$(data_sourcemod_dir)/resource/closecaption_french.dat",
+        "dest": "$(sourcemod_dir)/resource/closecaption_french.dat"
+      },
+      {
+        "src": "$(data_sourcemod_dir)/resource/closecaption_german.dat",
+        "dest": "$(sourcemod_dir)/resource/closecaption_german.dat"
+      },
+      {
+        "src": "$(data_sourcemod_dir)/resource/closecaption_italian.dat",
+        "dest": "$(sourcemod_dir)/resource/closecaption_italian.dat"
+      },
+      {
+        "src": "$(data_sourcemod_dir)/resource/closecaption_japanese.dat",
+        "dest": "$(sourcemod_dir)/resource/closecaption_japanese.dat"
+      },
+      {
+        "src": "$(data_sourcemod_dir)/resource/closecaption_korean.dat",
+        "dest": "$(sourcemod_dir)/resource/closecaption_korean.dat"
+      },
+      {
+        "src": "$(data_sourcemod_dir)/resource/closecaption_koreana.dat",
+        "dest": "$(sourcemod_dir)/resource/closecaption_koreana.dat"
+      },
+      {
+        "src": "$(data_sourcemod_dir)/resource/closecaption_portuguese.dat",
+        "dest": "$(sourcemod_dir)/resource/closecaption_portuguese.dat"
+      },
+      {
+        "src": "$(data_sourcemod_dir)/resource/closecaption_russian.dat",
+        "dest": "$(sourcemod_dir)/resource/closecaption_russian.dat"
+      },
+      {
+        "src": "$(data_sourcemod_dir)/resource/closecaption_schinese.dat",
+        "dest": "$(sourcemod_dir)/resource/closecaption_schinese.dat"
+      },
+      {
+        "src": "$(data_sourcemod_dir)/resource/closecaption_spanish.dat",
+        "dest": "$(sourcemod_dir)/resource/closecaption_spanish.dat"
+      },
+      {
+        "src": "$(data_sourcemod_dir)/resource/closecaption_swedish.dat",
+        "dest": "$(sourcemod_dir)/resource/closecaption_swedish.dat"
+      },
+      {
+        "src": "$(data_sourcemod_dir)/resource/closecaption_tchinese.dat",
+        "dest": "$(sourcemod_dir)/resource/closecaption_tchinese.dat"
+      },
+      {
+        "src": "$(data_sourcemod_dir)/resource/closecaption_thai.dat",
+        "dest": "$(sourcemod_dir)/resource/closecaption_thai.dat"
+      },
+      {
         "src": "$(data_sourcemod_dir)/resource/closecaption_english.txt",
         "dest": "$(sourcemod_dir)/resource/closecaption_english.txt"
       },
