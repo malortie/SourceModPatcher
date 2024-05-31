@@ -16,3 +16,4 @@
 | missionimprobable | Mission Improbable |
 | ravenholmncz | Ravenholm |
 | research_and_development | Research and Development |
+| shantytown | Shantytown |

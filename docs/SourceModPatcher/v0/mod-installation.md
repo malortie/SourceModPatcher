@@ -14,3 +14,4 @@
 - [Mission Improbable](mod-installation/mission-improbable.md)
 - [Ravenholm](mod-installation/ravenholm.md)
 - [Research and Development](mod-installation/research-and-development.md)
+- [Shantytown](mod-installation/shantytown.md)
