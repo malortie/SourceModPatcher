@@ -9,6 +9,7 @@
 | eclipse | Eclipse |
 | eots | Eye of the Storm |
 | get_a_life | Get a Life |
+| halloween | Halloween HL2: Pumpkin Night |
 | hoe | Heart of Evil: Source |
 | human_error | Human Error |
 | missionimprobable | Mission Improbable |
