@@ -3,6 +3,7 @@
 ## Guides
 
 - [Quick start](quick-start.md)
+- [Updates](updates.md)
 
 ## Usage
 
