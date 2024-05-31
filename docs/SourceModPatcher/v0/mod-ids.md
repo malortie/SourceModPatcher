@@ -6,6 +6,7 @@
 | 1187_roguetrain | 1187: Rogue Train |
 | blacksnow | Black Snow |
 | coastline_to_atmosphere | Coastline to Atmosphere |
+| eclipse | Eclipse |
 | eots | Eye of the Storm |
 | hoe | Heart of Evil: Source |
 | human_error | Human Error |
