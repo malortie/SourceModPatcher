@@ -10,6 +10,7 @@
 | eots | Eye of the Storm |
 | get_a_life | Get a Life |
 | halloween | Halloween HL2: Pumpkin Night |
+| halloween_redux | Halloween HL2: Pumpkin Night (Redux) |
 | hoe | Heart of Evil: Source |
 | human_error | Human Error |
 | missionimprobable | Mission Improbable |
