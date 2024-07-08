@@ -2,16 +2,19 @@
   "220": {
     "name": "Half-Life 2",
     "appmanifest_file": "appmanifest_220.acf",
-    "install_dir": "E:/SteamLibrary/Half-Life 2"
+    "install_dir": "E:/SteamLibrary/Half-Life 2",
+    "install_dir_variable": "steamapps_hl2_install_dir"
   },
   "218": {
     "name": "Source SDK Base 2007",
     "appmanifest_file": "appmanifest_218.acf",
-    "install_dir": "D:/SteamLibrary/Source SDK Base 2007"
+    "install_dir": "D:/SteamLibrary/Source SDK Base 2007",
+    "install_dir_variable": "steamapps_sdkbase2007_install_dir"
   },
   "215": {
     "name": "Source SDK Base 2006",
     "appmanifest_file": "appmanifest_215.acf",
-    "install_dir": "C:/SteamLibrary/Source SDK Base"
+    "install_dir": "C:/SteamLibrary/Source SDK Base",
+    "install_dir_variable": "steamapps_sdkbase2006_install_dir"
   }
 }

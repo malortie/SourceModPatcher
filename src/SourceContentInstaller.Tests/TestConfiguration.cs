@@ -22,11 +22,30 @@ namespace SourceContentInstaller.Tests
         }
     }
 
+    public class ContentsConfigMock(IFileSystem fileSystem, IWriter writer, string filePath, IConfigurationSerializer<JSONContentsConfig> configSerializer) : ContentsConfig(fileSystem, writer, filePath, configSerializer)
+    {
+        public int GetContentNameTotal { get; private set; } = 0;
+        public int GetContentSteamAppsDependenciesTotal { get; private set; } = 0;
+
+        public override string GetContentName(string contentID)
+        {
+            ++GetContentNameTotal;
+            return string.Empty;
+        }
+
+        public override List<int> GetContentSteamAppsDependencies(string contentID)
+        {
+            ++GetContentSteamAppsDependenciesTotal;
+            return [];
+        }
+    }
+
+
     public class InstallSettingsMock(IFileSystem fileSystem, IWriter writer, string filePath, IConfigurationSerializer<JSONInstallSettings> configSerializer) : InstallSettings(fileSystem, writer, filePath, configSerializer)
     {
         public int GetContentInstallDirTotal { get; private set; } = 0;
 
-        public override string GetContentInstallDir(int appID)
+        public override string GetContentInstallDir(string contentID)
         {
             ++GetContentInstallDirTotal;
             return string.Empty;
@@ -56,6 +75,7 @@ namespace SourceContentInstaller.Tests
         static readonly IWriter NullWriter = new NullWriter();
         static readonly ISteamPathFinder NullSteamPathFinder = new NullSteamPathFinder();
         static readonly IConfigurationSerializer<JSONSteamAppsConfig> NullSteamAppsConfigSerializer = new NullConfigurationSerializer<JSONSteamAppsConfig>();
+        static readonly IConfigurationSerializer<JSONContentsConfig> NullContentsConfigSerializer = new NullConfigurationSerializer<JSONContentsConfig>();
         static readonly IConfigurationSerializer<JSONInstallSettings> NullInstallSettingsSerializer = new NullConfigurationSerializer<JSONInstallSettings>();
         static readonly IConfigurationSerializer<JSONVariablesConfig> NullVariablesConfigSerializer = new NullConfigurationSerializer<JSONVariablesConfig>();
 
@@ -64,10 +84,11 @@ namespace SourceContentInstaller.Tests
         {
             var fileSystem = new MockFileSystem();
             var steamAppsConfig = new SteamAppsConfigMock(fileSystem, NullWriter, string.Empty, NullSteamAppsConfigSerializer, NullSteamPathFinder);
+            var contentsConfig = new ContentsConfigMock(fileSystem, NullWriter, string.Empty, NullContentsConfigSerializer);
             var installSettingsConfig = new InstallSettingsMock(fileSystem, NullWriter, string.Empty, NullInstallSettingsSerializer);
             var variablesConfig = new VariablesConfigMock(fileSystem, NullWriter, string.Empty, NullVariablesConfigSerializer);
 
-            var configuration = new Configuration(steamAppsConfig, installSettingsConfig, variablesConfig);
+            var configuration = new Configuration(steamAppsConfig, contentsConfig, installSettingsConfig, variablesConfig);
             configuration.GetSteamAppName(0);
             Assert.AreEqual(1, steamAppsConfig.GetSteamAppNameTotal);
         }
@@ -77,10 +98,11 @@ namespace SourceContentInstaller.Tests
         {
             var fileSystem = new MockFileSystem();
             var steamAppsConfig = new SteamAppsConfigMock(fileSystem, NullWriter, string.Empty, NullSteamAppsConfigSerializer, NullSteamPathFinder);
+            var contentsConfig = new ContentsConfigMock(fileSystem, NullWriter, string.Empty, NullContentsConfigSerializer);
             var installSettingsConfig = new InstallSettingsMock(fileSystem, NullWriter, string.Empty, NullInstallSettingsSerializer);
             var variablesConfig = new VariablesConfigMock(fileSystem, NullWriter, string.Empty, NullVariablesConfigSerializer);
 
-            var configuration = new Configuration(steamAppsConfig, installSettingsConfig, variablesConfig);
+            var configuration = new Configuration(steamAppsConfig, contentsConfig, installSettingsConfig, variablesConfig);
             configuration.GetSteamAppInstallDir(0);
             Assert.AreEqual(1, steamAppsConfig.GetSteamAppInstallDirTotal);
         }
@@ -90,10 +112,11 @@ namespace SourceContentInstaller.Tests
         {
             var fileSystem = new MockFileSystem();
             var steamAppsConfig = new SteamAppsConfigMock(fileSystem, NullWriter, string.Empty, NullSteamAppsConfigSerializer, NullSteamPathFinder);
+            var contentsConfig = new ContentsConfigMock(fileSystem, NullWriter, string.Empty, NullContentsConfigSerializer);
             var installSettingsConfig = new InstallSettingsMock(fileSystem, NullWriter, string.Empty, NullInstallSettingsSerializer);
             var variablesConfig = new VariablesConfigMock(fileSystem, NullWriter, string.Empty, NullVariablesConfigSerializer);
 
-            var configuration = new Configuration(steamAppsConfig, installSettingsConfig, variablesConfig);
+            var configuration = new Configuration(steamAppsConfig, contentsConfig, installSettingsConfig, variablesConfig);
             configuration.SaveVariable("hl2_content_path", "C:/Half-Life 2");
             Assert.AreEqual(1, variablesConfig.SaveVariableTotal);
         }
@@ -103,11 +126,12 @@ namespace SourceContentInstaller.Tests
         {
             var fileSystem = new MockFileSystem();
             var steamAppsConfig = new SteamAppsConfigMock(fileSystem, NullWriter, string.Empty, NullSteamAppsConfigSerializer, NullSteamPathFinder);
+            var contentsConfig = new ContentsConfigMock(fileSystem, NullWriter, string.Empty, NullContentsConfigSerializer);
             var installSettingsConfig = new InstallSettingsMock(fileSystem, NullWriter, string.Empty, NullInstallSettingsSerializer);
             var variablesConfig = new VariablesConfigMock(fileSystem, NullWriter, string.Empty, NullVariablesConfigSerializer);
 
-            var configuration = new Configuration(steamAppsConfig, installSettingsConfig, variablesConfig);
-            configuration.GetContentInstallDir(0);
+            var configuration = new Configuration(steamAppsConfig, contentsConfig, installSettingsConfig, variablesConfig);
+            configuration.GetContentInstallDir(string.Empty);
             Assert.AreEqual(1, installSettingsConfig.GetContentInstallDirTotal);
         }
 
@@ -116,10 +140,11 @@ namespace SourceContentInstaller.Tests
         {
             var fileSystem = new MockFileSystem();
             var steamAppsConfig = new SteamAppsConfigMock(fileSystem, NullWriter, string.Empty, NullSteamAppsConfigSerializer, NullSteamPathFinder);
+            var contentsConfig = new ContentsConfigMock(fileSystem, NullWriter, string.Empty, NullContentsConfigSerializer);
             var installSettingsConfig = new InstallSettingsMock(fileSystem, NullWriter, string.Empty, NullInstallSettingsSerializer);
             var variablesConfig = new VariablesConfigMock(fileSystem, NullWriter, string.Empty, NullVariablesConfigSerializer);
 
-            var configuration = new Configuration(steamAppsConfig, installSettingsConfig, variablesConfig);
+            var configuration = new Configuration(steamAppsConfig, contentsConfig, installSettingsConfig, variablesConfig);
             configuration.GetVariablesFileName();
             Assert.AreEqual(1, variablesConfig.FileNameTotal);
         }

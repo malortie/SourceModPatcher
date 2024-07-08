@@ -1,0 +1,24 @@
+[
+  {
+    "$type": "extract_vpk",
+    "name": "hl1_hd_extract_content",
+    "description": "Extract Half-Life: Source HD content",
+    "steamappid": 280,
+    "vpks": [{"vpk": "hl1_hd/hl1_hd_pak_dir.vpk"}],
+    "files_to_exclude": [
+      "^.*\\.dll$",
+      "^.*\\.bin$",
+      "^.*\\.so$",
+      "^.*\\.dylib$"
+    ],
+    "outdir": "$(install_settings_install_dir)"
+  },
+  {
+    "$type": "save_variable",
+    "name": "hl1_hd_save_variable",
+    "description": "Add $(content_name) HD install path to $(variables_config_file_name)",
+    "depends_on": ["hl1_hd_extract_content"],
+    "variable_name": "hl1_hd_content_path",
+    "variable_value": "$(install_settings_install_dir)"
+  }
+]

@@ -13,5 +13,16 @@
   "missionimprobable": "./config/mods/missionimprobable.install.steps.json",
   "ravenholmncz": "./config/mods/ravenholmncz.install.steps.json",
   "research_and_development": "./config/mods/research_and_development.install.steps.json",
-  "shantytown": "./config/mods/shantytown.install.steps.json"
+  "shantytown": "./config/mods/shantytown.install.steps.json",
+  "source_2004_mod_hl2": "./config/mods/source_2004_mod_hl2.install.steps.json",
+  "source_2004_mod_sdk": "./config/mods/source_2004_mod_sdk.install.steps.json",
+  "source_2006_mod_episodic": "./config/mods/source_2006_mod_episodic.install.steps.json",
+  "source_2006_mod_hl2": "./config/mods/source_2006_mod_hl2.install.steps.json",
+  "source_2006_mod_hl2mp": "./config/mods/source_2006_mod_hl2mp.install.steps.json",
+  "source_2006_mod_sdksample": "./config/mods/source_2006_mod_sdksample.install.steps.json",
+  "source_2007_mod_ep2": "./config/mods/source_2007_mod_ep2.install.steps.json",
+  "source_2007_mod_episodic": "./config/mods/source_2007_mod_episodic.install.steps.json",
+  "source_2007_mod_hl2": "./config/mods/source_2007_mod_hl2.install.steps.json",
+  "source_2007_mod_hl2mp": "./config/mods/source_2007_mod_hl2mp.install.steps.json",
+  "source_2007_mod_template": "./config/mods/source_2007_mod_template.install.steps.json"
 }

@@ -1,0 +1,35 @@
+[
+  {
+    "$type": "extract_vpk",
+    "name": "source2007_episodic_extract_content",
+    "description": "Extract Source SDK Base 2007 (Episodic) content",
+    "steamappid": 218,
+    "vpks": [
+      {"vpk": "vpks/depot_216_dir.vpk"},
+      {"vpk": "vpks/depot_305_dir.vpk"},
+      {"vpk": "vpks/depot_306_dir.vpk"},
+      {"vpk": "vpks/depot_307_dir.vpk"},
+      {"vpk": "vpks/depot_308_dir.vpk"},
+      {"vpk": "vpks/depot_309_dir.vpk"}
+    ],
+    "files_to_extract": [
+      "^episodic/.*$"
+    ],
+    "files_to_exclude": [
+      "^.*\\.dll$",
+      "^.*\\.bin$",
+      "^.*\\.so$",
+      "^.*\\.dylib$",
+      "^episodic/maps/.*$"
+    ],
+    "outdir": "$(install_settings_install_dir)"
+  },
+  {
+    "$type": "save_variable",
+    "name": "source2007_episodic_save_variable",
+    "description": "Add $(content_name) install path to $(variables_config_file_name)",
+    "depends_on": ["source2007_episodic_extract_content"],
+    "variable_name": "source2007_episodic_content_path",
+    "variable_value": "$(install_settings_install_dir)/episodic"
+  }
+]

@@ -12,6 +12,10 @@ namespace SourceModPatcher.Tests
         public int GetSourceModFolderTotal { get; private set; } = 0;
         public int GetSourceModDirTotal { get; private set; } = 0;
         public int GetSourceModDataDirTotal { get; private set; } = 0;
+        public int GetRequiredContentDependenciesTotal { get; private set; } = 0;
+        public int GetOptionalContentDependenciesTotal { get; private set; } = 0;
+        public int GetContentNameTotal { get; private set; } = 0;
+        public int GetContentOutputVariablesTotal { get; private set; } = 0;
 
         public ReadOnlyDictionary<string, string> GetVariables()
         {
@@ -54,6 +58,30 @@ namespace SourceModPatcher.Tests
             ++GetSourceModDataDirTotal;
             return string.Empty;
         }
+
+        public List<List<string>> GetRequiredContentDependencies(string sourcemodID)
+        {
+            ++GetRequiredContentDependenciesTotal;
+            return [];
+        }
+
+        public List<List<string>> GetOptionalContentDependencies(string sourcemodID)
+        {
+            ++GetOptionalContentDependenciesTotal;
+            return [];
+        }
+
+        public string GetContentName(string contentID)
+        {
+            ++GetContentNameTotal;
+            return string.Empty;
+        }
+
+        public List<string> GetContentOutputVariables(string contentID)
+        {
+            ++GetContentOutputVariablesTotal;
+            return [];
+        }
     }
 
     [TestClass]
@@ -75,15 +103,6 @@ namespace SourceModPatcher.Tests
             var context = new Context(new MockFileSystem(), configuration);
             context.GetVariablesFileName();
             Assert.AreEqual(1, configuration.GetVariablesFileNameTotal);
-        }
-
-        [TestMethod]
-        public void Call_Configuration_GetInstallVariables()
-        {
-            var configuration = new ConfigurationMock();
-            var context = new Context(new MockFileSystem(), configuration);
-            context.GetInstallVariables();
-            Assert.AreEqual(1, configuration.GetInstallVariablesTotal);
         }
 
         [TestMethod]

@@ -11,17 +11,22 @@
 
 	FileSystem
 	{
-		SteamAppId				218 	
-		ToolsAppId				211		
-		
+		SteamAppId				218
+		ToolsAppId				211
 
 		SearchPaths
 		{
-			Game				|gameinfo_path|.
-			Game				ep2
-			Game				"${{sdkbase2013sp_hl2ep2_content_path}}"
-			Game				episodic
-			Game				hl2
+			Game	|gameinfo_path|.
+			Game	"${{source2007_ep2_binaries_path}}"
+			Game	"${{source2007_ep2_patches_path}}"
+			Game	"${{source2007_ep2_content_path}}"
+			Game	|all_source_engine_paths|ep2
+			Game	"${{source2007_episodic_patches_path}}"
+			Game	"${{source2007_episodic_content_path}}"
+			Game	|all_source_engine_paths|episodic
+			Game	"${{source2007_hl2_patches_path}}"
+			Game	"${{source2007_hl2_content_path}}"
+			Game	|all_source_engine_paths|hl2
 		}
 	}
 }

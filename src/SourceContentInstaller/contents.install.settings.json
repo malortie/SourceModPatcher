@@ -1,0 +1,134 @@
+{
+  "cstrike": {
+    "install": false,
+    "install_dir": "./content/cstrike"
+  },
+  "cstrike_maps": {
+    "install": false,
+    "install_dir": "./content/cstrike_maps"
+  },
+  "dod": {
+    "install": false,
+    "install_dir": "./content/dod"
+  },
+  "dod_maps": {
+    "install": false,
+    "install_dir": "./content/dod_maps"
+  },
+  "hl1": {
+    "install": false,
+    "install_dir": "./content/hl1"
+  },
+  "hl1_hd": {
+    "install": false,
+    "install_dir": "./content/hl1_hd"
+  },
+  "hl1_maps": {
+    "install": false,
+    "install_dir": "./content/hl1_maps"
+  },
+  "hl1mp": {
+    "install": false,
+    "install_dir": "./content/hl1mp"
+  },
+  "hl1mp_maps": {
+    "install": false,
+    "install_dir": "./content/hl1mp_maps"
+  },
+  "hl2": {
+    "install": false,
+    "install_dir": "./content/hl2"
+  },
+  "hl2_maps": {
+    "install": false,
+    "install_dir": "./content/hl2_maps"
+  },
+  "hl2ep1": {
+    "install": false,
+    "install_dir": "./content/hl2ep1"
+  },
+  "hl2ep2": {
+    "install": false,
+    "install_dir": "./content/hl2ep2"
+  },
+  "hl2mp": {
+    "install": false,
+    "install_dir": "./content/hl2mp"
+  },
+  "hl2mp_maps": {
+    "install": false,
+    "install_dir": "./content/hl2mp_maps"
+  },
+  "lostcoast": {
+    "install": false,
+    "install_dir": "./content/lostcoast"
+  },
+  "lostcoast_maps": {
+    "install": false,
+    "install_dir": "./content/lostcoast_maps"
+  },
+  "portal": {
+    "install": false,
+    "install_dir": "./content/portal"
+  },
+  "portal_maps": {
+    "install": false,
+    "install_dir": "./content/portal_maps"
+  },
+  "sdkbase2006": {
+    "install": false,
+    "install_dir": "./content/sdkbase2006"
+  },
+  "sdkbase2007": {
+    "install": false,
+    "install_dir": "./content/sdkbase2007"
+  },
+  "sdkbase2013mp_hl2": {
+    "install": false,
+    "install_dir": "./content/sdkbase2013mp/hl2"
+  },
+  "sdkbase2013mp_hl2mp": {
+    "install": false,
+    "install_dir": "./content/sdkbase2013mp/hl2mp"
+  },
+  "sdkbase2013sp_hl2": {
+    "install": false,
+    "install_dir": "./content/sdkbase2013sp/hl2"
+  },
+  "sdkbase2013sp_hl2ep1": {
+    "install": false,
+    "install_dir": "./content/sdkbase2013sp/episodic"
+  },
+  "sdkbase2013sp_hl2ep2": {
+    "install": false,
+    "install_dir": "./content/sdkbase2013sp/ep2"
+  },
+  "sdkbase2013sp_hl2ep2_maps": {
+    "install": false,
+    "install_dir": "./content/sdkbase2013sp/ep2_maps"
+  },
+  "source2006_episodic": {
+    "install": false,
+    "install_dir": "./content/source2006"
+  },
+  "source2006_episodic_maps": {
+    "install": false,
+    "install_dir": "./content/source2006_episodic_maps"
+  },
+  "source2006_hl2": {
+    "install": false,
+    "install_dir": "./content/source2006"
+  },
+  "source2007_episodic": {
+    "install": false,
+    "install_dir": "./content/source2007"
+  },
+  "source2007_episodic_maps": {
+    "install": false,
+    "install_dir": "./content/source2007_episodic_maps"
+  },
+  "source2007_hl2": {
+    "install": false,
+    "install_dir": "./content/source2007"
+  }
+}

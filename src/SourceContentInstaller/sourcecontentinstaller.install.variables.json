@@ -1,0 +1,25 @@
+{
+  "source2004_hl2_binaries_path": "./data/binaries/source2004/hl2",
+  "source2004_hl2_patches_path": "./data/patches/source2004/hl2",
+
+  "source2006_episodic_binaries_path": "./data/binaries/source2006/episodic",
+  "source2006_episodic_patches_path": "./data/patches/source2006/episodic",
+
+  "source2006_hl2_binaries_path": "./data/binaries/source2006/hl2",
+  "source2006_hl2_patches_path": "./data/patches/source2006/hl2",
+
+  "source2006_hl2mp_binaries_path": "./data/binaries/source2006/hl2mp",
+  "source2006_hl2mp_patches_path": "./data/patches/source2006/hl2mp",
+
+  "source2007_ep2_binaries_path": "./data/binaries/source2007/ep2",
+  "source2007_ep2_patches_path": "./data/patches/source2007/ep2",
+
+  "source2007_episodic_binaries_path": "./data/binaries/source2007/episodic",
+  "source2007_episodic_patches_path": "./data/patches/source2007/episodic",
+
+  "source2007_hl2_binaries_path": "./data/binaries/source2007/hl2",
+  "source2007_hl2_patches_path": "./data/patches/source2007/hl2",
+
+  "source2007_hl2mp_binaries_path": "./data/binaries/source2007/hl2mp",
+  "source2007_hl2mp_patches_path": "./data/patches/source2007/hl2mp"
+}

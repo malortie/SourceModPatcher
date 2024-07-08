@@ -16,11 +16,20 @@ namespace SourceContentInstaller.Tests
             return string.Empty;
         }
 
+        public Dictionary<string, string> GetSteamAppsInstallDirVariables()
+        {
+            return new();
+        }
+
         public void SaveVariable(string name, string value)
         {
         }
+        public string GetContentName(string ContentID)
+        {
+            return string.Empty;
+        }
 
-        public string GetContentInstallDir(int AppID)
+        public string GetContentInstallDir(string ContentID)
         {
             return string.Empty;
         }

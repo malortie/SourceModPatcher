@@ -4,6 +4,7 @@ using NLog;
 using NLog.Targets;
 using Pipelines;
 using System.IO.Abstractions;
+using System.Linq;
 using System.Runtime.Versioning;
 
 namespace SourceContentInstaller
@@ -41,7 +42,7 @@ namespace SourceContentInstaller
 
     public class InstallContentStage : PipelineStage<Context>
     {
-        public int AppID { get; set; }
+        public string ContentID { get; set; } = string.Empty;
 
         // Map each step data type to a single step instance.
         static readonly Dictionary<Type, IPipelineStep<Context>> _stepsDataToInstallStep = new()
@@ -52,7 +53,7 @@ namespace SourceContentInstaller
 
         public override void SetupContext(Context context)
         {
-            context.AppID = AppID;
+            context.ContentID = ContentID;
         }
 
         public override IPipelineStep<Context> GetStepForStepData(IPipelineStepData stepData)
@@ -65,11 +66,13 @@ namespace SourceContentInstaller
     {
         public Dictionary<string, string> GetVariables(Context context)
         {
-            return new() {
+            return new Dictionary<string, string>() {
               { "install_settings_install_dir", PathExtensions.ConvertToUnixDirectorySeparator(context.FileSystem, context.FileSystem.Path.GetFullPath(context.GetContentInstallDir())) },
               { "variables_config_file_name", context.GetVariablesFileName() },
-              { "steamapp_name", context.GetSteamAppName() }
-            };
+              { "content_name", context.GetContentName() }
+            }
+            .Concat(context.GetSteamAppsInstallDirVariables())
+            .ToDictionary();
         }
     }
 
@@ -77,8 +80,10 @@ namespace SourceContentInstaller
     internal class Program
     {
         const string INSTALL_ENVVAR = "TEST_INSTALLSOURCECONTENT";
+        const string VARIABLES_CONFIG_FILENAME = "variables.json";
         const string STEAMAPPS_CONFIG_FILENAME = "steamapps.json";
-        const string INSTALL_SETTINGS_FILENAME = "steamapps.install.settings.json";
+        const string CONTENTS_CONFIG_FILENAME = "contents.json";
+        const string INSTALL_SETTINGS_FILENAME = "contents.install.settings.json";
 
         public class Options
         {
@@ -132,14 +137,25 @@ namespace SourceContentInstaller
                     };
                     steamAppsConfig.LoadConfig();
 
-                    var variablesConfig = new VariablesConfig(fileSystem, writer, MakeFullPath("variables.json"), new JSONConfigurationSerializer<JSONVariablesConfig>());
+                    var contentsConfig = new ContentsConfig(fileSystem, writer, MakeFullPath(CONTENTS_CONFIG_FILENAME), new JSONConfigurationSerializer<JSONContentsConfig>());
+                    contentsConfig.LoadConfig();
+
+                    var variablesConfig = new VariablesConfig(fileSystem, writer, MakeFullPath(VARIABLES_CONFIG_FILENAME), new JSONConfigurationSerializer<JSONVariablesConfig>());
                     variablesConfig.LoadConfig();
 
-                    var installStepsConfig = new InstallStepsConfig(fileSystem, writer, MakeFullPath("steamapps.install.steps.json"), new JSONConfigurationSerializer<JSONInstallStepsConfig>());
+                    var installVariablesConfig = new InstallVariablesConfig(fileSystem, writer, MakeFullPath("sourcecontentinstaller.install.variables.json"), new JSONConfigurationSerializer<JSONInstallVariablesConfig>());
+                    installVariablesConfig.LoadConfig();
+
+                    // Add install variables to variables file.
+                    variablesConfig.SaveVariables(installVariablesConfig.InstallVariables);
+
+                    var installStepsConfig = new InstallStepsConfig(fileSystem, writer, MakeFullPath("contents.install.steps.json"), new JSONConfigurationSerializer<JSONInstallStepsConfig>());
                     installStepsConfig.LoadConfig();
 
                     var installSettings = new InstallSettings(fileSystem, writer, MakeFullPath(INSTALL_SETTINGS_FILENAME), new JSONConfigurationSerializer<JSONInstallSettings>());
                     installSettings.LoadConfig();
+
+                    var contentSteamAppsDependencies = new ContentSteamAppsDependencies(steamAppsConfig, contentsConfig, variablesConfig);
 
                     writer.Info("Installed Source games:");
                     foreach (var appID in steamAppsConfig.SupportedSourceGamesAppIDs)
@@ -150,21 +166,31 @@ namespace SourceContentInstaller
                             writer.Info($"\t[ ] [{appID}] {steamAppsConfig.GetSteamAppName(appID)}");
                     }
 
-                    writer.Info("Content marked for installation:");
-                    foreach (var appID in steamAppsConfig.SupportedSourceGamesAppIDs)
+                    writer.Info("Content installed:");
+                    foreach (var contentID in contentsConfig.SupportedContentIDs)
                     {
-                        if (installSettings.IsSteamAppMarkedForInstall(appID))
-                            writer.Info($"\t[*] [{appID}] {steamAppsConfig.GetSteamAppName(appID)}");
+                        if (contentSteamAppsDependencies.IsContentInstalled(contentID))
+                            writer.Info($"\t[*] [{contentID}] {contentsConfig.GetContentName(contentID)}");
                         else
-                            writer.Info($"\t[ ] [{appID}] {steamAppsConfig.GetSteamAppName(appID)}");
+                            writer.Info($"\t[ ] [{contentID}] {contentsConfig.GetContentName(contentID)}");
+                    }
+
+                    writer.Info("Content marked for installation:");
+                    foreach (var contentID in contentsConfig.SupportedContentIDs)
+                    {
+                        if (installSettings.IsContentMarkedForInstall(contentID))
+                            writer.Info($"\t[*] [{contentID}] {contentsConfig.GetContentName(contentID)}");
+                        else
+                            writer.Info($"\t[ ] [{contentID}] {contentsConfig.GetContentName(contentID)}");
                     }
 
                     var installedSteamApps = steamAppsConfig.GetInstalledSteamApps();
-                    var steamAppsUserWantsToInstall = installSettings.GetSteamAppsToInstall();
+                    var contentsUserWantsToInstall = installSettings.GetContentsToInstall();
 
                     // Content that we can actually install.
-                    var steamAppsToInstall = installedSteamApps.Intersect(steamAppsUserWantsToInstall).ToList();
-                    if (0 == steamAppsToInstall.Count)
+                    var contentsToInstall = contentSteamAppsDependencies.GetInstallableContent()
+                        .Intersect(contentsUserWantsToInstall).ToList();
+                    if (0 == contentsToInstall.Count)
                     {
                         writer.Info("Program exited: No content can be installed.");
                         Dispose();
@@ -172,8 +198,8 @@ namespace SourceContentInstaller
                     }
 
                     writer.Info("The following content will be installed:");
-                    foreach (var appID in steamAppsToInstall)
-                        writer.Info($"\t[{appID}] {steamAppsConfig.GetSteamAppName(appID)}");
+                    foreach (var contentID in contentsToInstall)
+                        writer.Info($"\t[{contentID}] {contentsConfig.GetContentName(contentID)}");
 
                     if (!options.NoConfirmInstallationPrompt)
                     {
@@ -210,22 +236,22 @@ namespace SourceContentInstaller
                     };
                     var tokenReplacerVariablesProvider = new TokenReplacerVariablesProvider();
 
-                    var configuration = new Configuration(steamAppsConfig, installSettings, variablesConfig);
+                    var configuration = new Configuration(steamAppsConfig, contentsConfig, installSettings, variablesConfig);
                     var pauseHandler = new ConsolePauseHandler(writer);
                     var context = new Context(fileSystem, configuration);
 
                     // Load each steps file and convert them to pipeline step list. 
                     var stepsLoader = new StepsLoader<JSONInstallStep>(fileSystem, writer, new JSONConfigurationSerializer<IList<JSONInstallStep>>(), new InstallStepMapper<JSONInstallStep>());
-                    var appsStepsDatas = new Dictionary<int, IList<IPipelineStepData>>();
-                    steamAppsToInstall.ForEach(appID => appsStepsDatas.Add(appID, stepsLoader.Load(installStepsConfig.Config[appID])));
+                    var contentsStepsDatas = new Dictionary<string, IList<IPipelineStepData>>();
+                    contentsToInstall.ForEach(contentID => contentsStepsDatas.Add(contentID, stepsLoader.Load(installStepsConfig.Config[contentID])));
 
                     int stageIndex = 0;
                     // Create the stages.
-                    IPipelineStage<Context>[] stages = appsStepsDatas.Select(kv => new InstallContentStage()
+                    IPipelineStage<Context>[] stages = contentsStepsDatas.Select(kv => new InstallContentStage()
                     {
                         Name = $"stage_{stageIndex++}",
-                        Description = configuration.GetSteamAppName(kv.Key),
-                        AppID = kv.Key,
+                        Description = configuration.GetContentName(kv.Key),
+                        ContentID = kv.Key,
                         Writer = writer,
                         PauseAfterEachStep = options.PauseAfterEachStep,
                         PauseHandler = pauseHandler,

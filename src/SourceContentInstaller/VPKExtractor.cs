@@ -38,7 +38,20 @@ namespace SourceContentInstaller
                 package.SetFileName(vpkPath);
                 package.Read(fs);
 
-                package.VerifyHashes();
+                const bool VALIDATE_CRC = false;
+                if (VALIDATE_CRC)
+                  package.VerifyHashes();
+
+                int numExpectedFilesToExtract = 0;
+                foreach (var extension in package.Entries.Values)
+                {
+                    foreach (var entry in extension)
+                    {
+                        // Only allow entries that pass the filter.
+                        if (fileFilter.PassesFilter(entry.GetFullPath()))
+                            ++numExpectedFilesToExtract;
+                    }
+                }
 
                 int numExtractedFiles = 0;
                 foreach (var extension in package.Entries.Values)
@@ -63,7 +76,7 @@ namespace SourceContentInstaller
 
                         writer.Info($"Extracting {entry.GetFullPath()}");
                         var fullPath = PathExtensions.JoinWithSeparator(fileSystem, outputDir, entry.GetFullPath());
-                        package.ReadEntry(entry, out byte[] fileContents);
+                        package.ReadEntry(entry, out byte[] fileContents, VALIDATE_CRC);
                         fileSystem.File.WriteAllBytes(fullPath, fileContents);
                         ++numExtractedFiles;
                     }
@@ -71,8 +84,8 @@ namespace SourceContentInstaller
 
                 fs?.Close();
 
-                // If no file has been extracted, mark it as failed.
-                if (numExtractedFiles == 0)
+                // If at least one file was to be extracted and none were extracted, mark it as failed.
+                if (numExpectedFilesToExtract > 0 && numExtractedFiles == 0)
                     result = VPKExtractionResult.Failed;
             }
             catch (Exception e)

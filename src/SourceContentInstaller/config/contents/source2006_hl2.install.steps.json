@@ -1,0 +1,42 @@
+[
+  {
+    "$type": "extract_vpk",
+    "name": "source2006_hl2_extract_content",
+    "description": "Extract Source SDK Base 2006 (HL2) content",
+    "steamappid": 215,
+    "vpks": [
+      {
+        "vpk": "vpks/depot_381_dir.vpk",
+        "files_to_extract": [
+          "^hl2/scenes/k_lab/teleport04.vcd",
+          "^hl2/scenes/k_lab2/k_lab02_01.vcd"
+        ]
+      }
+    ],
+    "files_to_exclude": [
+      "^.*\\.dll$",
+      "^.*\\.bin$",
+      "^.*\\.so$",
+      "^.*\\.dylib$",
+      "^hl2/maps/.*$",
+      "^hl2/shaders/.*$"
+    ],
+    "outdir": "$(install_settings_install_dir)"
+  },
+  {
+    "$type": "save_variable",
+    "name": "source2006_hl2_save_variable",
+    "description": "Add $(content_name) install path to $(variables_config_file_name)",
+    "depends_on": ["source2006_hl2_extract_content"],
+    "variable_name": "source2006_hl2_content_path",
+    "variable_value": "$(install_settings_install_dir)/hl2"
+  },
+  {
+    "$type": "save_variable",
+    "name": "source2004_hl2_save_variable",
+    "description": "Add $(content_name) (source2004 alias) install path to $(variables_config_file_name)",
+    "depends_on": ["source2006_hl2_extract_content"],
+    "variable_name": "source2004_hl2_content_path",
+    "variable_value": "$(install_settings_install_dir)/hl2"
+  }
+]

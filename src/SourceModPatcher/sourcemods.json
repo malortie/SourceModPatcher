@@ -2,76 +2,264 @@
   "1187": {
     "name": "1187: Episode One",
     "sourcemod_folder": "1187",
-    "data_dir": "./data/mods/1187"
+    "data_dir": "./data/mods/1187",
+    "dependencies": {
+      "required": [
+        ["sdkbase2013sp_hl2ep2"],
+        ["source2007_episodic"],
+        ["source2007_hl2"]
+      ]
+    }
   },
   "1187_roguetrain": {
     "name": "1187: Rogue Train",
     "sourcemod_folder": "1187",
-    "data_dir": "./data/mods/1187_roguetrain"
+    "data_dir": "./data/mods/1187_roguetrain",
+    "dependencies": {
+      "required": [
+        ["sdkbase2013sp_hl2ep2"],
+        ["source2007_episodic"],
+        ["source2007_hl2"]
+      ]
+    }
   },
   "blacksnow": {
     "name": "BLACK SNOW",
     "sourcemod_folder": "blacksnow",
-    "data_dir": "./data/mods/blacksnow"
+    "data_dir": "./data/mods/blacksnow",
+    "dependencies": {
+      "required": [
+        ["sdkbase2013sp_hl2ep2"],
+        ["source2007_episodic"],
+        ["source2007_hl2"]
+      ]
+    }
   },
   "coastline_to_atmosphere": {
     "name": "Coastline to Atmosphere",
     "sourcemod_folder": "Coastline_to_Atmosphere",
-    "data_dir": "./data/mods/Coastline_to_Atmosphere"
+    "data_dir": "./data/mods/Coastline_to_Atmosphere",
+    "dependencies": {
+      "required": [["source2006_hl2"]]
+    }
   },
   "eclipse": {
     "name": "Eclipse",
     "sourcemod_folder": "Eclipse",
-    "data_dir": "./data/mods/Eclipse"
+    "data_dir": "./data/mods/Eclipse",
+    "dependencies": {
+      "required": [["source2006_hl2"]]
+    }
   },
   "eots": {
     "name": "Eye of the Storm",
     "sourcemod_folder": "eots",
-    "data_dir": "./data/mods/eots"
+    "data_dir": "./data/mods/eots",
+    "dependencies": {
+      "required": [
+        ["sdkbase2013sp_hl2ep2"],
+        ["source2007_episodic"],
+        ["source2007_hl2"]
+      ]
+    }
   },
   "get_a_life": {
     "name": "Get a Life",
     "sourcemod_folder": "Get_A_Life",
-    "data_dir": "./data/mods/Get_A_Life"
+    "data_dir": "./data/mods/Get_A_Life",
+    "dependencies": {
+      "required": [["source2006_hl2"]]
+    }
   },
   "halloween": {
     "name": "Halloween HL2: Pumpkin Night",
     "sourcemod_folder": "Halloween",
-    "data_dir": "./data/mods/Halloween"
+    "data_dir": "./data/mods/Halloween",
+    "dependencies": {
+      "required": [["source2006_hl2"]]
+    }
   },
   "halloween_redux": {
     "name": "Halloween HL2: Pumpkin Night (Redux)",
     "sourcemod_folder": "Halloween HL2 PN",
-    "data_dir": "./data/mods/Halloween HL2 PN"
+    "data_dir": "./data/mods/Halloween HL2 PN",
+    "dependencies": {
+      "required": [["source2006_hl2"]]
+    }
   },
   "hoe": {
     "name": "Heart of Evil: Source",
     "sourcemod_folder": "hoe",
-    "data_dir": "./data/mods/hoe"
+    "data_dir": "./data/mods/hoe",
+    "dependencies": {
+      "required": [
+        ["hl1"],
+        ["sdkbase2013sp_hl2ep2"],
+        ["source2007_episodic"],
+        ["source2007_hl2"]
+      ]
+    }
   },
   "human_error": {
     "name": "Human Error EP1",
     "sourcemod_folder": "Human_Error",
-    "data_dir": "./data/mods/Human_Error"
+    "data_dir": "./data/mods/Human_Error",
+    "dependencies": {
+      "required": [
+        ["sdkbase2013sp_hl2ep2"],
+        ["source2007_episodic"],
+        ["source2007_hl2"]
+      ]
+    }
   },
   "missionimprobable": {
     "name": "Mission Improbable",
     "sourcemod_folder": "missionimprobable",
-    "data_dir": "./data/mods/missionimprobable"
+    "data_dir": "./data/mods/missionimprobable",
+    "dependencies": {
+      "required": [
+        ["sdkbase2013sp_hl2ep2"],
+        ["source2007_episodic"],
+        ["source2007_hl2"]
+      ]
+    }
   },
   "ravenholmncz": {
     "name": "Ravenholm mod",
     "sourcemod_folder": "RavenholmNCZ",
-    "data_dir": "./data/mods/RavenholmNCZ"
+    "data_dir": "./data/mods/RavenholmNCZ",
+    "dependencies": {
+      "required": [["source2006_hl2"]]
+    }
   },
   "research_and_development": {
     "name": "Research and Development",
     "sourcemod_folder": "Research and Development",
-    "data_dir": "./data/mods/Research and Development"
+    "data_dir": "./data/mods/Research and Development",
+    "dependencies": {
+      "required": [
+        ["sdkbase2013sp_hl2ep2"],
+        ["source2007_episodic"],
+        ["source2007_hl2"]
+      ]
+    }
   },
   "shantytown": {
     "name": "Shantytown",
     "sourcemod_folder": "Shantytown",
-    "data_dir": "./data/mods/Shantytown"
+    "data_dir": "./data/mods/Shantytown",
+    "dependencies": {
+      "required": [["source2006_hl2"]]
+    }
+  },
+  "source_2004_mod_hl2": {
+    "name": "Source 2004 (Mod HL2)",
+    "sourcemod_folder": "source_2004_mod_hl2",
+    "data_dir": "./data/mods/source_2004_mod_hl2",
+    "dependencies": {
+      "required": [["source2006_hl2"]]
+    }
+  },
+  "source_2004_mod_sdk": {
+    "name": "Source 2004 (Mod SDK)",
+    "sourcemod_folder": "source_2004_mod_sdk",
+    "data_dir": "./data/mods/source_2004_mod_sdk",
+    "dependencies": {
+      "required": [["source2006_hl2"]]
+    }
+  },
+  "source_2006_mod_episodic": {
+    "name": "Source 2006 (Mod Episodic)",
+    "sourcemod_folder": "source_2006_mod_episodic",
+    "data_dir": "./data/mods/source_2006_mod_episodic",
+    "dependencies": {
+      "required": [
+        ["source2006_episodic"],
+        ["source2006_hl2"]
+      ],
+      "optional": [["source2006_episodic_maps"]]
+    }
+  },
+  "source_2006_mod_hl2": {
+    "name": "Source 2006 (Mod HL2)",
+    "sourcemod_folder": "source_2006_mod_hl2",
+    "data_dir": "./data/mods/source_2006_mod_hl2",
+    "dependencies": {
+      "required": [["source2006_hl2"]]
+    }
+  },
+  "source_2006_mod_hl2mp": {
+    "name": "Source 2006 (Mod HL2MP)",
+    "sourcemod_folder": "source_2006_mod_hl2mp",
+    "data_dir": "./data/mods/source_2006_mod_hl2mp",
+    "dependencies": {
+      "required": [
+        ["sdkbase2013mp_hl2mp"],
+        ["source2006_hl2"]
+      ],
+      "optional": [["hl2mp_maps"]]
+    }
+  },
+  "source_2006_mod_sdksample": {
+    "name": "Source 2006 (Mod SDK Sample)",
+    "sourcemod_folder": "source_2006_mod_sdksample",
+    "data_dir": "./data/mods/source_2006_mod_sdksample",
+    "dependencies": {
+      "required": [["source2006_hl2"]]
+    }
+  },
+  "source_2007_mod_ep2": {
+    "name": "Source 2007 (Mod EP2)",
+    "sourcemod_folder": "source_2007_mod_ep2",
+    "data_dir": "./data/mods/source_2007_mod_ep2",
+    "dependencies": {
+      "required": [
+        ["sdkbase2013sp_hl2ep2"],
+        ["source2007_episodic"],
+        ["source2007_hl2"]
+      ],
+      "optional": [["sdkbase2013sp_hl2ep2_maps"]]
+    }
+  },
+  "source_2007_mod_episodic": {
+    "name": "Source 2007 (Mod Episodic)",
+    "sourcemod_folder": "source_2007_mod_episodic",
+    "data_dir": "./data/mods/source_2007_mod_episodic",
+    "dependencies": {
+      "required": [
+        ["source2007_episodic"],
+        ["source2007_hl2"]
+      ],
+      "optional": [["source2007_episodic_maps"]]
+    }
+  },
+  "source_2007_mod_hl2": {
+    "name": "Source 2007 (Mod HL2)",
+    "sourcemod_folder": "source_2007_mod_hl2",
+    "data_dir": "./data/mods/source_2007_mod_hl2",
+    "dependencies": {
+      "required": [["source2007_hl2"]],
+      "optional": [["hl2_maps"]]
+    }
+  },
+  "source_2007_mod_hl2mp": {
+    "name": "Source 2007 (Mod HL2MP)",
+    "sourcemod_folder": "source_2007_mod_hl2mp",
+    "data_dir": "./data/mods/source_2007_mod_hl2mp",
+    "dependencies": {
+      "required": [
+        ["sdkbase2013mp_hl2mp"],
+        ["source2007_hl2"]
+      ],
+      "optional": [["hl2mp_maps"]]
+    }
+  },
+  "source_2007_mod_template": {
+    "name": "Source 2007 (Mod SDK Template)",
+    "sourcemod_folder": "source_2007_mod_template",
+    "data_dir": "./data/mods/source_2007_mod_template",
+    "dependencies": {
+      "required": [["source2007_hl2"]]
+    }
   }
 }

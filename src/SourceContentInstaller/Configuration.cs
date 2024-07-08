@@ -4,14 +4,17 @@ namespace SourceContentInstaller
     {
         string GetSteamAppName(int AppID);
         string GetSteamAppInstallDir(int AppID);
+        Dictionary<string, string> GetSteamAppsInstallDirVariables();
         void SaveVariable(string name, string value);
-        string GetContentInstallDir(int AppID);
+        string GetContentName(string contentID);
+        string GetContentInstallDir(string contentID);
         string GetVariablesFileName();
     }
 
-    public class Configuration(SteamAppsConfig steamAppsConfig, InstallSettings installSettings, VariablesConfig variablesConfig) : IConfiguration
+    public class Configuration(SteamAppsConfig steamAppsConfig, ContentsConfig contentsConfig, InstallSettings installSettings, VariablesConfig variablesConfig) : IConfiguration
     {
         readonly SteamAppsConfig _steamAppsConfig = steamAppsConfig;
+        readonly ContentsConfig _contentsConfig = contentsConfig;
         readonly InstallSettings _installSettings = installSettings;
         readonly VariablesConfig _variablesConfig = variablesConfig;
 
@@ -25,14 +28,23 @@ namespace SourceContentInstaller
             return _steamAppsConfig.GetSteamAppInstallDir(AppID);
         }
 
+        public Dictionary<string, string> GetSteamAppsInstallDirVariables()
+        {
+            return _steamAppsConfig.GetSteamAppsInstallDirVariables();
+        }
+
         public void SaveVariable(string name, string value)
         {
             _variablesConfig.SaveVariable(name, value);
         }
-
-        public string GetContentInstallDir(int AppID)
+        public string GetContentName(string contentID)
         {
-            return _installSettings.GetContentInstallDir(AppID);
+            return _contentsConfig.GetContentName(contentID);
+        }
+
+        public string GetContentInstallDir(string ContentID)
+        {
+            return _installSettings.GetContentInstallDir(ContentID);
         }
 
         public string GetVariablesFileName()

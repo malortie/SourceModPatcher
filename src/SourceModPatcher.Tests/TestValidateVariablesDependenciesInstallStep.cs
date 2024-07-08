@@ -8,523 +8,569 @@ namespace SourceModPatcher.Tests
 {
     public class TestValidateVariablesDependenciesInstallStepEventHandler : IValidateVariablesDependenciesInstallStepEventHandler
     {
-        public int NoDependenciesSpecifiedTotal { get; private set; } = 0;
-        public int MissingSingleVariableDependencyTotal { get; private set; } = 0;
-        public int MissingMultiVariableDependencyTotal { get; private set; } = 0;
-        public int MissingDependenciesTotal { get; private set; } = 0;
+        public int MissingSingleVariableRequiredDependencyTotal { get; private set; } = 0;
+        public int MissingMultiVariableRequiredDependencyTotal { get; private set; } = 0;
 
-        public void NoDependenciesSpecified()
+        public int MissingSingleVariableOptionalDependencyTotal { get; private set; } = 0;
+        public int MissingMultiVariableOptionalDependencyTotal { get; private set; } = 0;
+
+        public void MissingSingleVariableRequiredDependency()
         {
-            ++NoDependenciesSpecifiedTotal;
+            ++MissingSingleVariableRequiredDependencyTotal;
         }
-        public void MissingSingleVariableDependency()
+        public void MissingMultiVariableRequiredDependency()
         {
-            ++MissingSingleVariableDependencyTotal;
+            ++MissingMultiVariableRequiredDependencyTotal;
         }
-        public void MissingMultiVariableDependency()
+
+        public void MissingSingleVariableOptionalDependency()
         {
-            ++MissingMultiVariableDependencyTotal;
+            ++MissingSingleVariableOptionalDependencyTotal;
         }
-        public void MissingDependencies()
+        public void MissingMultiVariableOptionalDependency()
         {
-            ++MissingDependenciesTotal;
+            ++MissingMultiVariableOptionalDependencyTotal;
         }
     }
-
-    public class SourceContentVariablesContextMock(IFileSystem fileSystem, IConfiguration configuration) : Context(fileSystem, configuration)
-    {
-        public Dictionary<string, string> Dependencies { get; set; } = [];
-
-        public override ReadOnlyDictionary<string, string> GetSourceContentVariables()
-        {
-            return new ReadOnlyDictionary<string, string>(Dependencies);
-        }
-    }
-
 
     [TestClass]
     public class TestValidateVariablesDependenciesInstallStep
     {
         static readonly IWriter NullWriter = new NullWriter();
         static readonly IConfiguration NullConfiguration = new NullConfiguration();
+        static readonly IDependencyValidation DefaultDependencyValidator = new DependencyValidation();
 
         [TestMethod]
-        public void EmptyDependenciesListReturnsFailed()
+        public void ValidateDependenciesStep_RequiredSingleAllFulfilled_ReturnsCompleted()
         {
             var fileSystem = new MockFileSystem(new Dictionary<string, MockFileData> { });
             var eventHandler = new TestValidateVariablesDependenciesInstallStepEventHandler();
-            var step = new ValidateVariablesDependenciesInstallStep(eventHandler);
+            var step = new ValidateVariablesDependenciesInstallStep(DefaultDependencyValidator, eventHandler);
             var stepData = new ValidateVariablesDependenciesInstallStepData();
-
-            var result = step.DoStep(new Context(fileSystem, NullConfiguration), stepData, NullWriter);
-
-            Assert.AreEqual(PipelineStepStatus.Failed, result);
-            Assert.AreEqual(1, eventHandler.NoDependenciesSpecifiedTotal);
-        }
-
-        [TestMethod]
-        public void AllDependenciesMissing_SingleOnly_ReturnsFailed()
-        {
-            var fileSystem = new MockFileSystem(new Dictionary<string, MockFileData> { });
-            var eventHandler = new TestValidateVariablesDependenciesInstallStepEventHandler();
-            var step = new ValidateVariablesDependenciesInstallStep(eventHandler);
-            var stepData = new ValidateVariablesDependenciesInstallStepData
+            var configuration = new MockDependencyValidationConfiguration
             {
-                Dependencies = [
-                    ["dependency_1"],
-                    ["dependency_2"],
-                    ["dependency_3"]
-                ]
-            };
-
-            var result = step.DoStep(new Context(fileSystem, NullConfiguration), stepData, NullWriter);
-
-            Assert.AreEqual(PipelineStepStatus.Failed, result);
-            Assert.AreEqual(3, eventHandler.MissingSingleVariableDependencyTotal);
-            Assert.AreEqual(0, eventHandler.MissingMultiVariableDependencyTotal);
-            Assert.AreEqual(1, eventHandler.MissingDependenciesTotal);
-        }
-
-        [TestMethod]
-        public void AllDependenciesMissing_MultiOnly_ReturnsFailed()
-        {
-            var fileSystem = new MockFileSystem(new Dictionary<string, MockFileData> { });
-            var eventHandler = new TestValidateVariablesDependenciesInstallStepEventHandler();
-            var step = new ValidateVariablesDependenciesInstallStep(eventHandler);
-            var stepData = new ValidateVariablesDependenciesInstallStepData
-            {
-                Dependencies = [
-                    ["dependency_1a", "dependency_1b"],
-                    ["dependency_2a", "dependency_2b"],
-                    ["dependency_3a", "dependency_3b"]
-                ]
-            };
-
-            var result = step.DoStep(new Context(fileSystem, NullConfiguration), stepData, NullWriter);
-
-            Assert.AreEqual(PipelineStepStatus.Failed, result);
-            Assert.AreEqual(0, eventHandler.MissingSingleVariableDependencyTotal);
-            Assert.AreEqual(3, eventHandler.MissingMultiVariableDependencyTotal);
-            Assert.AreEqual(1, eventHandler.MissingDependenciesTotal);
-        }
-
-        [TestMethod]
-        public void AllDependenciesMissing_Single_And_Multi_ReturnsFailed()
-        {
-            var fileSystem = new MockFileSystem(new Dictionary<string, MockFileData> { });
-            var eventHandler = new TestValidateVariablesDependenciesInstallStepEventHandler();
-            var step = new ValidateVariablesDependenciesInstallStep(eventHandler);
-            var stepData = new ValidateVariablesDependenciesInstallStepData
-            {
-                Dependencies = [
-                    ["dependency_1"],
-                    ["dependency_2a", "dependency_2b"],
-                    ["dependency_3"]
-                ]
-            };
-
-            var result = step.DoStep(new Context(fileSystem, NullConfiguration), stepData, NullWriter);
-
-            Assert.AreEqual(PipelineStepStatus.Failed, result);
-            Assert.AreEqual(2, eventHandler.MissingSingleVariableDependencyTotal);
-            Assert.AreEqual(1, eventHandler.MissingMultiVariableDependencyTotal);
-            Assert.AreEqual(1, eventHandler.MissingDependenciesTotal);
-        }
-
-
-        [TestMethod]
-        public void AtLeastOneDependencyMissing_SingleOnly_ReturnsFailed()
-        {
-            var fileSystem = new MockFileSystem(new Dictionary<string, MockFileData> { });
-            var eventHandler = new TestValidateVariablesDependenciesInstallStepEventHandler();
-            var step = new ValidateVariablesDependenciesInstallStep(eventHandler);
-            var stepData = new ValidateVariablesDependenciesInstallStepData
-            {
-                Dependencies = [
-                    ["dependency_1"],
-                    ["dependency_2"],
-                    ["dependency_3"]
-                ]
-            };
-
-            var context = new SourceContentVariablesContextMock(fileSystem, NullConfiguration)
-            {
-                Dependencies = new Dictionary<string, string>() {
-                    { "dependency_1", "" },
-                    { "dependency_2", "" },
+                Variables = new Dictionary<string, string> {
+                    { "content_1_output_1", "value1" },
+                    { "content_2_output_1", "value2" }
+                },
+                Contents = new Dictionary<string, MockContent> {
+                    { "content_1", new MockContent { OutputVariables = ["content_1_output_1"] } },
+                    { "content_2", new MockContent { OutputVariables = ["content_2_output_1"] } },
+                },
+                SourceMods = new Dictionary<string, MockSourceModConfigEntry> {
+                    {  "sourcemod_1", new MockSourceModConfigEntry{ 
+                        Dependencies = new MockSourceModConfigDependencies { 
+                            Required = [["content_1"],["content_2"]]
+                        }
+                    } }
                 }
             };
-            var result = step.DoStep(context, stepData, NullWriter);
 
-            Assert.AreEqual(PipelineStepStatus.Failed, result);
-            Assert.AreEqual(1, eventHandler.MissingSingleVariableDependencyTotal);
-            Assert.AreEqual(0, eventHandler.MissingMultiVariableDependencyTotal);
-            Assert.AreEqual(1, eventHandler.MissingDependenciesTotal);
-        }
-
-        [TestMethod]
-        public void AtLeastOneDependencyMissing_MultiOnly_ReturnsFailed()
-        {
-            var fileSystem = new MockFileSystem(new Dictionary<string, MockFileData> { });
-            var eventHandler = new TestValidateVariablesDependenciesInstallStepEventHandler();
-            var step = new ValidateVariablesDependenciesInstallStep(eventHandler);
-            var stepData = new ValidateVariablesDependenciesInstallStepData
-            {
-                Dependencies = [
-                    ["dependency_1a", "dependency_1b"],
-                    ["dependency_2a", "dependency_2b"],
-                    ["dependency_3a", "dependency_3b"]
-                ]
-            };
-
-            var context = new SourceContentVariablesContextMock(fileSystem, NullConfiguration)
-            {
-                Dependencies = new Dictionary<string, string>() {
-                    { "dependency_1a", "" },
-                    { "dependency_2a", "" }
-                }
-            };
-            var result = step.DoStep(context, stepData, NullWriter);
-
-            Assert.AreEqual(PipelineStepStatus.Failed, result);
-            Assert.AreEqual(0, eventHandler.MissingSingleVariableDependencyTotal);
-            Assert.AreEqual(1, eventHandler.MissingMultiVariableDependencyTotal);
-            Assert.AreEqual(1, eventHandler.MissingDependenciesTotal);
-        }
-
-        [TestMethod]
-        public void AtLeastOneDependencyMissing_Single_And_Multi_ReturnsFailed()
-        {
-            var fileSystem = new MockFileSystem(new Dictionary<string, MockFileData> { });
-            var eventHandler = new TestValidateVariablesDependenciesInstallStepEventHandler();
-            var step = new ValidateVariablesDependenciesInstallStep(eventHandler);
-            var stepData = new ValidateVariablesDependenciesInstallStepData
-            {
-                Dependencies = [
-                    ["dependency_1"],
-                    ["dependency_2a", "dependency_2b"],
-                    ["dependency_3"],
-                    ["dependency_4a", "dependency_4b"],
-                    ["dependency_5"],
-                    ["dependency_6a", "dependency_6b"],
-                ]
-            };
-
-            var context = new SourceContentVariablesContextMock(fileSystem, NullConfiguration)
-            {
-                Dependencies = new Dictionary<string, string>() {
-                    { "dependency_1", "" },
-                    { "dependency_2a", "" },
-                    { "dependency_3", "" },
-                    { "dependency_4a", "" }
-                }
-            };
-            var result = step.DoStep(context, stepData, NullWriter);
-
-            Assert.AreEqual(PipelineStepStatus.Failed, result);
-            Assert.AreEqual(1, eventHandler.MissingSingleVariableDependencyTotal);
-            Assert.AreEqual(1, eventHandler.MissingMultiVariableDependencyTotal);
-            Assert.AreEqual(1, eventHandler.MissingDependenciesTotal);
-        }
-
-        [TestMethod]
-        public void AllDependenciesFulfilled_Single_ReturnsCompleted()
-        {
-            var fileSystem = new MockFileSystem(new Dictionary<string, MockFileData> { });
-            var eventHandler = new TestValidateVariablesDependenciesInstallStepEventHandler();
-            var step = new ValidateVariablesDependenciesInstallStep(eventHandler);
-            var stepData = new ValidateVariablesDependenciesInstallStepData
-            {
-                Dependencies = [
-                    ["dependency_1"],
-                    ["dependency_2"],
-                    ["dependency_3"]
-                ]
-            };
-
-            var context = new SourceContentVariablesContextMock(fileSystem, NullConfiguration)
-            {
-                Dependencies = new Dictionary<string, string>() {
-                    { "dependency_1", "" },
-                    { "dependency_2", "" },
-                    { "dependency_3", "" }
-                }
-            };
-            var result = step.DoStep(context, stepData, NullWriter);
+            var result = step.DoStep(new Context(fileSystem, configuration) { SourceModID = "sourcemod_1" }, stepData, NullWriter);
 
             Assert.AreEqual(PipelineStepStatus.Complete, result);
-            Assert.AreEqual(0, eventHandler.MissingSingleVariableDependencyTotal);
-            Assert.AreEqual(0, eventHandler.MissingMultiVariableDependencyTotal);
-            Assert.AreEqual(0, eventHandler.MissingDependenciesTotal);
+            Assert.AreEqual(0, eventHandler.MissingSingleVariableRequiredDependencyTotal);
+            Assert.AreEqual(0, eventHandler.MissingMultiVariableRequiredDependencyTotal);
+            Assert.AreEqual(0, eventHandler.MissingSingleVariableOptionalDependencyTotal);
+            Assert.AreEqual(0, eventHandler.MissingMultiVariableOptionalDependencyTotal);
         }
 
+
         [TestMethod]
-        public void AllDependenciesFulfilled_Multi_ReturnsCompleted()
+        public void ValidateDependenciesStep_RequiredSingleOneNotFulfilled_ReturnsFailed()
         {
             var fileSystem = new MockFileSystem(new Dictionary<string, MockFileData> { });
             var eventHandler = new TestValidateVariablesDependenciesInstallStepEventHandler();
-            var step = new ValidateVariablesDependenciesInstallStep(eventHandler);
-            var stepData = new ValidateVariablesDependenciesInstallStepData
+            var step = new ValidateVariablesDependenciesInstallStep(DefaultDependencyValidator, eventHandler);
+            var stepData = new ValidateVariablesDependenciesInstallStepData();
+            var configuration = new MockDependencyValidationConfiguration
             {
-                Dependencies = [
-                    ["dependency_1a", "dependency_1b"],
-                    ["dependency_2a", "dependency_2b"],
-                    ["dependency_3a", "dependency_3b"]
-                ]
-            };
-
-            var context = new SourceContentVariablesContextMock(fileSystem, NullConfiguration)
-            {
-                Dependencies = new Dictionary<string, string>() {
-                    { "dependency_1a", "" },
-                    { "dependency_2a", "" },
-                    { "dependency_3a", "" }
+                Variables = new Dictionary<string, string> {
+                    { "content_1_output_1", "value1" },
+                },
+                Contents = new Dictionary<string, MockContent> {
+                    { "content_1", new MockContent { OutputVariables = ["content_1_output_1"] } },
+                    { "content_2", new MockContent { OutputVariables = ["content_2_output_1"] } },
+                },
+                SourceMods = new Dictionary<string, MockSourceModConfigEntry> {
+                    {  "sourcemod_1", new MockSourceModConfigEntry{
+                        Dependencies = new MockSourceModConfigDependencies {
+                            Required = [["content_1"],["content_2"]]
+                        }
+                    } }
                 }
             };
-            var result = step.DoStep(context, stepData, NullWriter);
 
-            Assert.AreEqual(PipelineStepStatus.Complete, result);
-            Assert.AreEqual(0, eventHandler.MissingSingleVariableDependencyTotal);
-            Assert.AreEqual(0, eventHandler.MissingMultiVariableDependencyTotal);
-            Assert.AreEqual(0, eventHandler.MissingDependenciesTotal);
-        }
-
-        [TestMethod]
-        public void AllDependenciesFulfilled_Single_And_Multi_ReturnsCompleted()
-        {
-            var fileSystem = new MockFileSystem(new Dictionary<string, MockFileData> { });
-            var eventHandler = new TestValidateVariablesDependenciesInstallStepEventHandler();
-            var step = new ValidateVariablesDependenciesInstallStep(eventHandler);
-            var stepData = new ValidateVariablesDependenciesInstallStepData
-            {
-                Dependencies = [
-                    ["dependency_1"],
-                    ["dependency_2a", "dependency_2b"],
-                    ["dependency_3"],
-                    ["dependency_4a", "dependency_4b"]
-                ]
-            };
-
-            var context = new SourceContentVariablesContextMock(fileSystem, NullConfiguration)
-            {
-                Dependencies = new Dictionary<string, string>() {
-                    { "dependency_1", "" },
-                    { "dependency_2a", "" },
-                    { "dependency_3", "" },
-                    { "dependency_4a", "" },
-                }
-            };
-            var result = step.DoStep(context, stepData, NullWriter);
-
-            Assert.AreEqual(PipelineStepStatus.Complete, result);
-            Assert.AreEqual(0, eventHandler.MissingSingleVariableDependencyTotal);
-            Assert.AreEqual(0, eventHandler.MissingMultiVariableDependencyTotal);
-            Assert.AreEqual(0, eventHandler.MissingDependenciesTotal);
-        }
-
-        [TestMethod]
-        public void TwoDependencies_Multi_SecondInFirstFulfilled_SecondInLastNotFulfilled_ReturnsFailed()
-        {
-            var fileSystem = new MockFileSystem(new Dictionary<string, MockFileData> { });
-            var eventHandler = new TestValidateVariablesDependenciesInstallStepEventHandler();
-            var step = new ValidateVariablesDependenciesInstallStep(eventHandler);
-            var stepData = new ValidateVariablesDependenciesInstallStepData
-            {
-                Dependencies = [
-                    ["dependency_1a", "dependency_1b"],
-                    ["dependency_2a", "dependency_2b"],
-                ]
-            };
-
-            var context = new SourceContentVariablesContextMock(fileSystem, NullConfiguration)
-            {
-                Dependencies = new Dictionary<string, string>() {
-                    { "dependency_1b", "" },
-                }
-            };
-            var result = step.DoStep(context, stepData, NullWriter);
+            var result = step.DoStep(new Context(fileSystem, configuration) { SourceModID = "sourcemod_1" }, stepData, NullWriter);
 
             Assert.AreEqual(PipelineStepStatus.Failed, result);
-            Assert.AreEqual(0, eventHandler.MissingSingleVariableDependencyTotal);
-            Assert.AreEqual(1, eventHandler.MissingMultiVariableDependencyTotal);
-            Assert.AreEqual(1, eventHandler.MissingDependenciesTotal);
+            Assert.AreEqual(1, eventHandler.MissingSingleVariableRequiredDependencyTotal);
+            Assert.AreEqual(0, eventHandler.MissingMultiVariableRequiredDependencyTotal);
+            Assert.AreEqual(0, eventHandler.MissingSingleVariableOptionalDependencyTotal);
+            Assert.AreEqual(0, eventHandler.MissingMultiVariableOptionalDependencyTotal);
         }
 
+
         [TestMethod]
-        public void TwoDependencies_Multi_SecondInFirstNotFulfilled_SecondInLastFulfilled_ReturnsFailed()
+        public void ValidateDependenciesStep_RequiredSingleAllNotFulfilled_ReturnsFailed()
         {
             var fileSystem = new MockFileSystem(new Dictionary<string, MockFileData> { });
             var eventHandler = new TestValidateVariablesDependenciesInstallStepEventHandler();
-            var step = new ValidateVariablesDependenciesInstallStep(eventHandler);
-            var stepData = new ValidateVariablesDependenciesInstallStepData
+            var step = new ValidateVariablesDependenciesInstallStep(DefaultDependencyValidator, eventHandler);
+            var stepData = new ValidateVariablesDependenciesInstallStepData();
+            var configuration = new MockDependencyValidationConfiguration
             {
-                Dependencies = [
-                    ["dependency_1a", "dependency_1b"],
-                    ["dependency_2a", "dependency_2b"],
-                ]
-            };
-
-            var context = new SourceContentVariablesContextMock(fileSystem, NullConfiguration)
-            {
-                Dependencies = new Dictionary<string, string>() {
-                    { "dependency_2b", "" },
+                Variables = new Dictionary<string, string> {},
+                Contents = new Dictionary<string, MockContent> {
+                    { "content_1", new MockContent { OutputVariables = ["content_1_output_1"] } },
+                    { "content_2", new MockContent { OutputVariables = ["content_2_output_1"] } },
+                },
+                SourceMods = new Dictionary<string, MockSourceModConfigEntry> {
+                    {  "sourcemod_1", new MockSourceModConfigEntry{
+                        Dependencies = new MockSourceModConfigDependencies {
+                            Required = [["content_1"],["content_2"]]
+                        }
+                    } }
                 }
             };
-            var result = step.DoStep(context, stepData, NullWriter);
+
+            var result = step.DoStep(new Context(fileSystem, configuration) { SourceModID = "sourcemod_1" }, stepData, NullWriter);
 
             Assert.AreEqual(PipelineStepStatus.Failed, result);
-            Assert.AreEqual(0, eventHandler.MissingSingleVariableDependencyTotal);
-            Assert.AreEqual(1, eventHandler.MissingMultiVariableDependencyTotal);
-            Assert.AreEqual(1, eventHandler.MissingDependenciesTotal);
+            Assert.AreEqual(2, eventHandler.MissingSingleVariableRequiredDependencyTotal);
+            Assert.AreEqual(0, eventHandler.MissingMultiVariableRequiredDependencyTotal);
+            Assert.AreEqual(0, eventHandler.MissingSingleVariableOptionalDependencyTotal);
+            Assert.AreEqual(0, eventHandler.MissingMultiVariableOptionalDependencyTotal);
         }
 
         [TestMethod]
-        public void TwoDependencies_Multi_AllSecondsFulfilled_ReturnsCompleted()
+        public void ValidateDependenciesStep_OptionalSingleAllFulfilled_ReturnsCompleted()
         {
             var fileSystem = new MockFileSystem(new Dictionary<string, MockFileData> { });
             var eventHandler = new TestValidateVariablesDependenciesInstallStepEventHandler();
-            var step = new ValidateVariablesDependenciesInstallStep(eventHandler);
-            var stepData = new ValidateVariablesDependenciesInstallStepData
+            var step = new ValidateVariablesDependenciesInstallStep(DefaultDependencyValidator, eventHandler);
+            var stepData = new ValidateVariablesDependenciesInstallStepData();
+            var configuration = new MockDependencyValidationConfiguration
             {
-                Dependencies = [
-                    ["dependency_1a", "dependency_1b"],
-                    ["dependency_2a", "dependency_2b"],
-                ]
-            };
-
-            var context = new SourceContentVariablesContextMock(fileSystem, NullConfiguration)
-            {
-                Dependencies = new Dictionary<string, string>() {
-                    { "dependency_1b", "" },
-                    { "dependency_2b", "" },
+                Variables = new Dictionary<string, string> {
+                    { "content_1_output_1", "value1" },
+                    { "content_2_output_1", "value2" }
+                },
+                Contents = new Dictionary<string, MockContent> {
+                    { "content_1", new MockContent { OutputVariables = ["content_1_output_1"] } },
+                    { "content_2", new MockContent { OutputVariables = ["content_2_output_1"] } },
+                },
+                SourceMods = new Dictionary<string, MockSourceModConfigEntry> {
+                    {  "sourcemod_1", new MockSourceModConfigEntry{
+                        Dependencies = new MockSourceModConfigDependencies {
+                            Optional = [["content_1"],["content_2"]]
+                        }
+                    } }
                 }
             };
-            var result = step.DoStep(context, stepData, NullWriter);
+
+            var result = step.DoStep(new Context(fileSystem, configuration) { SourceModID = "sourcemod_1" }, stepData, NullWriter);
 
             Assert.AreEqual(PipelineStepStatus.Complete, result);
-            Assert.AreEqual(0, eventHandler.MissingSingleVariableDependencyTotal);
-            Assert.AreEqual(0, eventHandler.MissingMultiVariableDependencyTotal);
-            Assert.AreEqual(0, eventHandler.MissingDependenciesTotal);
+            Assert.AreEqual(0, eventHandler.MissingSingleVariableRequiredDependencyTotal);
+            Assert.AreEqual(0, eventHandler.MissingMultiVariableRequiredDependencyTotal);
+            Assert.AreEqual(0, eventHandler.MissingSingleVariableOptionalDependencyTotal);
+            Assert.AreEqual(0, eventHandler.MissingMultiVariableOptionalDependencyTotal);
         }
 
+
         [TestMethod]
-        public void OnlyOneDependency_Single_Fulfilled_ReturnsCompleted()
+        public void ValidateDependenciesStep_OptionalSingleOneNotFulfilled_ReturnsCompleted()
         {
             var fileSystem = new MockFileSystem(new Dictionary<string, MockFileData> { });
             var eventHandler = new TestValidateVariablesDependenciesInstallStepEventHandler();
-            var step = new ValidateVariablesDependenciesInstallStep(eventHandler);
-            var stepData = new ValidateVariablesDependenciesInstallStepData
+            var step = new ValidateVariablesDependenciesInstallStep(DefaultDependencyValidator, eventHandler);
+            var stepData = new ValidateVariablesDependenciesInstallStepData();
+            var configuration = new MockDependencyValidationConfiguration
             {
-                Dependencies = [
-                    ["dependency_1"]
-                ]
-            };
-
-            var context = new SourceContentVariablesContextMock(fileSystem, NullConfiguration)
-            {
-                Dependencies = new Dictionary<string, string>() {
-                    { "dependency_1", "" },
+                Variables = new Dictionary<string, string> {
+                    { "content_1_output_1", "value1" },
+                },
+                Contents = new Dictionary<string, MockContent> {
+                    { "content_1", new MockContent { OutputVariables = ["content_1_output_1"] } },
+                    { "content_2", new MockContent { OutputVariables = ["content_2_output_1"] } },
+                },
+                SourceMods = new Dictionary<string, MockSourceModConfigEntry> {
+                    {  "sourcemod_1", new MockSourceModConfigEntry{
+                        Dependencies = new MockSourceModConfigDependencies {
+                            Optional = [["content_1"],["content_2"]]
+                        }
+                    } }
                 }
             };
-            var result = step.DoStep(context, stepData, NullWriter);
+
+            var result = step.DoStep(new Context(fileSystem, configuration) { SourceModID = "sourcemod_1" }, stepData, NullWriter);
 
             Assert.AreEqual(PipelineStepStatus.Complete, result);
-            Assert.AreEqual(0, eventHandler.MissingSingleVariableDependencyTotal);
-            Assert.AreEqual(0, eventHandler.MissingMultiVariableDependencyTotal);
-            Assert.AreEqual(0, eventHandler.MissingDependenciesTotal);
+            Assert.AreEqual(0, eventHandler.MissingSingleVariableRequiredDependencyTotal);
+            Assert.AreEqual(0, eventHandler.MissingMultiVariableRequiredDependencyTotal);
+            Assert.AreEqual(1, eventHandler.MissingSingleVariableOptionalDependencyTotal);
+            Assert.AreEqual(0, eventHandler.MissingMultiVariableOptionalDependencyTotal);
         }
 
         [TestMethod]
-        public void OnlyOneDependency_Single_NotFulfilled_ReturnsFailed()
+        public void ValidateDependenciesStep_OptionalSingleAllNotFulfilled_ReturnsCompleted()
         {
             var fileSystem = new MockFileSystem(new Dictionary<string, MockFileData> { });
             var eventHandler = new TestValidateVariablesDependenciesInstallStepEventHandler();
-            var step = new ValidateVariablesDependenciesInstallStep(eventHandler);
-            var stepData = new ValidateVariablesDependenciesInstallStepData
+            var step = new ValidateVariablesDependenciesInstallStep(DefaultDependencyValidator, eventHandler);
+            var stepData = new ValidateVariablesDependenciesInstallStepData();
+            var configuration = new MockDependencyValidationConfiguration
             {
-                Dependencies = [
-                    ["dependency_1"]
-                ]
+                Variables = new Dictionary<string, string> { },
+                Contents = new Dictionary<string, MockContent> {
+                    { "content_1", new MockContent { OutputVariables = ["content_1_output_1"] } },
+                    { "content_2", new MockContent { OutputVariables = ["content_2_output_1"] } },
+                },
+                SourceMods = new Dictionary<string, MockSourceModConfigEntry> {
+                    {  "sourcemod_1", new MockSourceModConfigEntry{
+                        Dependencies = new MockSourceModConfigDependencies {
+                            Optional = [["content_1"],["content_2"]]
+                        }
+                    } }
+                }
             };
 
-            var result = step.DoStep(new Context(fileSystem, NullConfiguration), stepData, NullWriter);
+            var result = step.DoStep(new Context(fileSystem, configuration) { SourceModID = "sourcemod_1" }, stepData, NullWriter);
+
+            Assert.AreEqual(PipelineStepStatus.Complete, result);
+            Assert.AreEqual(0, eventHandler.MissingSingleVariableRequiredDependencyTotal);
+            Assert.AreEqual(0, eventHandler.MissingMultiVariableRequiredDependencyTotal);
+            Assert.AreEqual(2, eventHandler.MissingSingleVariableOptionalDependencyTotal);
+            Assert.AreEqual(0, eventHandler.MissingMultiVariableOptionalDependencyTotal);
+        }
+
+        [TestMethod]
+        public void ValidateDependenciesStep_RequiredSingleFulfilled_OptionalSingleFulfilled_ReturnsCompleted()
+        {
+            var fileSystem = new MockFileSystem(new Dictionary<string, MockFileData> { });
+            var eventHandler = new TestValidateVariablesDependenciesInstallStepEventHandler();
+            var step = new ValidateVariablesDependenciesInstallStep(DefaultDependencyValidator, eventHandler);
+            var stepData = new ValidateVariablesDependenciesInstallStepData();
+            var configuration = new MockDependencyValidationConfiguration
+            {
+                Variables = new Dictionary<string, string> {
+                    { "content_1_output_1", "value1" },
+                    { "content_2_output_1", "value2" }
+                },
+                Contents = new Dictionary<string, MockContent> {
+                    { "content_1", new MockContent { OutputVariables = ["content_1_output_1"] } },
+                    { "content_2", new MockContent { OutputVariables = ["content_2_output_1"] } },
+                },
+                SourceMods = new Dictionary<string, MockSourceModConfigEntry> {
+                    {  "sourcemod_1", new MockSourceModConfigEntry{
+                        Dependencies = new MockSourceModConfigDependencies {
+                            Required = [["content_1"]],
+                            Optional = [["content_2"]]
+                        }
+                    } }
+                }
+            };
+
+            var result = step.DoStep(new Context(fileSystem, configuration) { SourceModID = "sourcemod_1" }, stepData, NullWriter);
+
+            Assert.AreEqual(PipelineStepStatus.Complete, result);
+            Assert.AreEqual(0, eventHandler.MissingSingleVariableRequiredDependencyTotal);
+            Assert.AreEqual(0, eventHandler.MissingMultiVariableRequiredDependencyTotal);
+            Assert.AreEqual(0, eventHandler.MissingSingleVariableOptionalDependencyTotal);
+            Assert.AreEqual(0, eventHandler.MissingMultiVariableOptionalDependencyTotal);
+        }
+
+        [TestMethod]
+        public void ValidateDependenciesStep_RequiredSingleFulfilled_OptionalSingleNotFulfilled_ReturnsCompleted()
+        {
+            var fileSystem = new MockFileSystem(new Dictionary<string, MockFileData> { });
+            var eventHandler = new TestValidateVariablesDependenciesInstallStepEventHandler();
+            var step = new ValidateVariablesDependenciesInstallStep(DefaultDependencyValidator, eventHandler);
+            var stepData = new ValidateVariablesDependenciesInstallStepData();
+            var configuration = new MockDependencyValidationConfiguration
+            {
+                Variables = new Dictionary<string, string> {
+                    { "content_1_output_1", "value1" },
+                },
+                Contents = new Dictionary<string, MockContent> {
+                    { "content_1", new MockContent { OutputVariables = ["content_1_output_1"] } },
+                    { "content_2", new MockContent { OutputVariables = ["content_2_output_1"] } },
+                },
+                SourceMods = new Dictionary<string, MockSourceModConfigEntry> {
+                    {  "sourcemod_1", new MockSourceModConfigEntry{
+                        Dependencies = new MockSourceModConfigDependencies {
+                            Required = [["content_1"]],
+                            Optional = [["content_2"]]
+                        }
+                    } }
+                }
+            };
+
+            var result = step.DoStep(new Context(fileSystem, configuration) { SourceModID = "sourcemod_1" }, stepData, NullWriter);
+
+            Assert.AreEqual(PipelineStepStatus.Complete, result);
+            Assert.AreEqual(0, eventHandler.MissingSingleVariableRequiredDependencyTotal);
+            Assert.AreEqual(0, eventHandler.MissingMultiVariableRequiredDependencyTotal);
+            Assert.AreEqual(1, eventHandler.MissingSingleVariableOptionalDependencyTotal);
+            Assert.AreEqual(0, eventHandler.MissingMultiVariableOptionalDependencyTotal);
+        }
+
+        [TestMethod]
+        public void ValidateDependenciesStep_RequiredSingleNotFulfilled_OptionalSingleFulfilled_ReturnsFailed()
+        {
+            var fileSystem = new MockFileSystem(new Dictionary<string, MockFileData> { });
+            var eventHandler = new TestValidateVariablesDependenciesInstallStepEventHandler();
+            var step = new ValidateVariablesDependenciesInstallStep(DefaultDependencyValidator, eventHandler);
+            var stepData = new ValidateVariablesDependenciesInstallStepData();
+            var configuration = new MockDependencyValidationConfiguration
+            {
+                Variables = new Dictionary<string, string> {
+                    { "content_2_output_1", "value2" },
+                },
+                Contents = new Dictionary<string, MockContent> {
+                    { "content_1", new MockContent { OutputVariables = ["content_1_output_1"] } },
+                    { "content_2", new MockContent { OutputVariables = ["content_2_output_1"] } },
+                },
+                SourceMods = new Dictionary<string, MockSourceModConfigEntry> {
+                    {  "sourcemod_1", new MockSourceModConfigEntry{
+                        Dependencies = new MockSourceModConfigDependencies {
+                            Required = [["content_1"]],
+                            Optional = [["content_2"]]
+                        }
+                    } }
+                }
+            };
+
+            var result = step.DoStep(new Context(fileSystem, configuration) { SourceModID = "sourcemod_1" }, stepData, NullWriter);
 
             Assert.AreEqual(PipelineStepStatus.Failed, result);
-            Assert.AreEqual(1, eventHandler.MissingSingleVariableDependencyTotal);
-            Assert.AreEqual(0, eventHandler.MissingMultiVariableDependencyTotal);
-            Assert.AreEqual(1, eventHandler.MissingDependenciesTotal);
+            Assert.AreEqual(1, eventHandler.MissingSingleVariableRequiredDependencyTotal);
+            Assert.AreEqual(0, eventHandler.MissingMultiVariableRequiredDependencyTotal);
+            Assert.AreEqual(0, eventHandler.MissingSingleVariableOptionalDependencyTotal);
+            Assert.AreEqual(0, eventHandler.MissingMultiVariableOptionalDependencyTotal);
         }
 
+
         [TestMethod]
-        public void OnlyOneDependency_Multi_Fulfilled_ReturnsCompleted()
+        public void ValidateDependenciesStep_RequiredSingleNotFulfilled_OptionalSingleNotFulfilled_ReturnsFailed()
         {
             var fileSystem = new MockFileSystem(new Dictionary<string, MockFileData> { });
             var eventHandler = new TestValidateVariablesDependenciesInstallStepEventHandler();
-            var step = new ValidateVariablesDependenciesInstallStep(eventHandler);
-            var stepData = new ValidateVariablesDependenciesInstallStepData
+            var step = new ValidateVariablesDependenciesInstallStep(DefaultDependencyValidator, eventHandler);
+            var stepData = new ValidateVariablesDependenciesInstallStepData();
+            var configuration = new MockDependencyValidationConfiguration
             {
-                Dependencies = [
-                    ["dependency_1", "dependency_2"]
-                ]
-            };
-
-            var context = new SourceContentVariablesContextMock(fileSystem, NullConfiguration)
-            {
-                Dependencies = new Dictionary<string, string>() {
-                    { "dependency_1", "" },
+                Variables = new Dictionary<string, string> {},
+                Contents = new Dictionary<string, MockContent> {
+                    { "content_1", new MockContent { OutputVariables = ["content_1_output_1"] } },
+                    { "content_2", new MockContent { OutputVariables = ["content_2_output_1"] } },
+                },
+                SourceMods = new Dictionary<string, MockSourceModConfigEntry> {
+                    {  "sourcemod_1", new MockSourceModConfigEntry{
+                        Dependencies = new MockSourceModConfigDependencies {
+                            Required = [["content_1"]],
+                            Optional = [["content_2"]]
+                        }
+                    } }
                 }
             };
-            var result = step.DoStep(context, stepData, NullWriter);
 
-            Assert.AreEqual(PipelineStepStatus.Complete, result);
-            Assert.AreEqual(0, eventHandler.MissingSingleVariableDependencyTotal);
-            Assert.AreEqual(0, eventHandler.MissingMultiVariableDependencyTotal);
-            Assert.AreEqual(0, eventHandler.MissingDependenciesTotal);
+            var result = step.DoStep(new Context(fileSystem, configuration) { SourceModID = "sourcemod_1" }, stepData, NullWriter);
+
+            Assert.AreEqual(PipelineStepStatus.Failed, result);
+            Assert.AreEqual(1, eventHandler.MissingSingleVariableRequiredDependencyTotal);
+            Assert.AreEqual(0, eventHandler.MissingMultiVariableRequiredDependencyTotal);
+            Assert.AreEqual(1, eventHandler.MissingSingleVariableOptionalDependencyTotal);
+            Assert.AreEqual(0, eventHandler.MissingMultiVariableOptionalDependencyTotal);
         }
 
         [TestMethod]
-        public void OnlyOneDependency_Multi_NotFulfilled_ReturnsFailed()
+        public void ValidateDependenciesStep_RequiredMultiFulfilled_OptionalMultiFulfilled_NoMissingVariable_ReturnsCompleted()
         {
             var fileSystem = new MockFileSystem(new Dictionary<string, MockFileData> { });
             var eventHandler = new TestValidateVariablesDependenciesInstallStepEventHandler();
-            var step = new ValidateVariablesDependenciesInstallStep(eventHandler);
-            var stepData = new ValidateVariablesDependenciesInstallStepData
+            var step = new ValidateVariablesDependenciesInstallStep(DefaultDependencyValidator, eventHandler);
+            var stepData = new ValidateVariablesDependenciesInstallStepData();
+            var configuration = new MockDependencyValidationConfiguration
             {
-                Dependencies = [
-                    ["dependency_1", "dependency_2"]
-                ]
+                Variables = new Dictionary<string, string> {
+                    { "content_1_output_1", "value1" },
+                    { "content_2_output_1", "value2" },
+                    { "content_3_output_1", "value3" },
+                    { "content_4_output_1", "value4" },
+                },
+                Contents = new Dictionary<string, MockContent> {
+                    { "content_1", new MockContent { OutputVariables = ["content_1_output_1"] } },
+                    { "content_2", new MockContent { OutputVariables = ["content_2_output_1"] } },
+                    { "content_3", new MockContent { OutputVariables = ["content_3_output_1"] } },
+                    { "content_4", new MockContent { OutputVariables = ["content_4_output_1"] } },
+                },
+                SourceMods = new Dictionary<string, MockSourceModConfigEntry> {
+                    {  "sourcemod_1", new MockSourceModConfigEntry{
+                        Dependencies = new MockSourceModConfigDependencies {
+                            Required = [["content_1", "content_2"]],
+                            Optional = [["content_3", "content_4"]]
+                        }
+                    } }
+                }
             };
 
-            var result = step.DoStep(new Context(fileSystem, NullConfiguration), stepData, NullWriter);
+            var result = step.DoStep(new Context(fileSystem, configuration) { SourceModID = "sourcemod_1" }, stepData, NullWriter);
 
-            Assert.AreEqual(PipelineStepStatus.Failed, result);
-            Assert.AreEqual(0, eventHandler.MissingSingleVariableDependencyTotal);
-            Assert.AreEqual(1, eventHandler.MissingMultiVariableDependencyTotal);
-            Assert.AreEqual(1, eventHandler.MissingDependenciesTotal);
+            Assert.AreEqual(PipelineStepStatus.Complete, result);
+            Assert.AreEqual(0, eventHandler.MissingSingleVariableRequiredDependencyTotal);
+            Assert.AreEqual(0, eventHandler.MissingMultiVariableRequiredDependencyTotal);
+            Assert.AreEqual(0, eventHandler.MissingSingleVariableOptionalDependencyTotal);
+            Assert.AreEqual(0, eventHandler.MissingMultiVariableOptionalDependencyTotal);
         }
 
         [TestMethod]
-        public void StepsLoader_Load_Simple()
+        public void ValidateDependenciesStep_RequiredMultiFulfilled_OptionalMultiFulfilled_WithMissingVariables_ReturnsCompleted()
         {
-            var fileSystem = new MockFileSystem(new Dictionary<string, MockFileData>{
-                { "C:/step_validate_variables_dependencies.json", new MockFileData(File.ReadAllBytes("../../../data/config/step_validate_variables_dependencies.json")) },
-            });
+            var fileSystem = new MockFileSystem(new Dictionary<string, MockFileData> { });
+            var eventHandler = new TestValidateVariablesDependenciesInstallStepEventHandler();
+            var step = new ValidateVariablesDependenciesInstallStep(DefaultDependencyValidator, eventHandler);
+            var stepData = new ValidateVariablesDependenciesInstallStepData();
+            var configuration = new MockDependencyValidationConfiguration
+            {
+                Variables = new Dictionary<string, string> {
+                    { "content_1_output_1", "value1" },
+                    { "content_3_output_1", "value3" },
+                },
+                Contents = new Dictionary<string, MockContent> {
+                    { "content_1", new MockContent { OutputVariables = ["content_1_output_1"] } },
+                    { "content_2", new MockContent { OutputVariables = ["content_2_output_1"] } },
+                    { "content_3", new MockContent { OutputVariables = ["content_3_output_1"] } },
+                    { "content_4", new MockContent { OutputVariables = ["content_4_output_1"] } },
+                },
+                SourceMods = new Dictionary<string, MockSourceModConfigEntry> {
+                    {  "sourcemod_1", new MockSourceModConfigEntry{
+                        Dependencies = new MockSourceModConfigDependencies {
+                            Required = [["content_1", "content_2"]],
+                            Optional = [["content_3", "content_4"]]
+                        }
+                    } }
+                }
+            };
 
-            var stepsLoader = new StepsLoader<JSONInstallStep>(fileSystem, NullWriter, new JSONConfigurationSerializer<IList<JSONInstallStep>>(), new SourceModPatcher.InstallStepMapper<JSONInstallStep>());
+            var result = step.DoStep(new Context(fileSystem, configuration) { SourceModID = "sourcemod_1" }, stepData, NullWriter);
 
-            var stepsList = stepsLoader.Load("C:/step_validate_variables_dependencies.json");
+            Assert.AreEqual(PipelineStepStatus.Complete, result);
+            Assert.AreEqual(0, eventHandler.MissingSingleVariableRequiredDependencyTotal);
+            Assert.AreEqual(0, eventHandler.MissingMultiVariableRequiredDependencyTotal);
+            Assert.AreEqual(0, eventHandler.MissingSingleVariableOptionalDependencyTotal);
+            Assert.AreEqual(0, eventHandler.MissingMultiVariableOptionalDependencyTotal);
+        }
 
-            Assert.IsNotNull(stepsList);
-            var stepData = (ValidateVariablesDependenciesInstallStepData)stepsList[0];
-            Assert.AreEqual("step_validate_variables_dependencies", stepData.Name);
-            Assert.AreEqual("Validate sourcemod variables dependencies", stepData.Description);
-            CollectionAssert.AreEquivalent(new List<string> { "previous_step1" }, stepData.DependsOn);
+        [TestMethod]
+        public void ValidateDependenciesStep_RequiredMultiFulfilled_OptionalMultiNotFulfilled_WithMissingVariables_ReturnsCompleted()
+        {
+            var fileSystem = new MockFileSystem(new Dictionary<string, MockFileData> { });
+            var eventHandler = new TestValidateVariablesDependenciesInstallStepEventHandler();
+            var step = new ValidateVariablesDependenciesInstallStep(DefaultDependencyValidator, eventHandler);
+            var stepData = new ValidateVariablesDependenciesInstallStepData();
+            var configuration = new MockDependencyValidationConfiguration
+            {
+                Variables = new Dictionary<string, string> {
+                    { "content_1_output_1", "value1" },
+                },
+                Contents = new Dictionary<string, MockContent> {
+                    { "content_1", new MockContent { OutputVariables = ["content_1_output_1"] } },
+                    { "content_2", new MockContent { OutputVariables = ["content_2_output_1"] } },
+                    { "content_3", new MockContent { OutputVariables = ["content_3_output_1"] } },
+                    { "content_4", new MockContent { OutputVariables = ["content_4_output_1"] } },
+                },
+                SourceMods = new Dictionary<string, MockSourceModConfigEntry> {
+                    {  "sourcemod_1", new MockSourceModConfigEntry{
+                        Dependencies = new MockSourceModConfigDependencies {
+                            Required = [["content_1", "content_2"]],
+                            Optional = [["content_3", "content_4"]]
+                        }
+                    } }
+                }
+            };
 
-            Assert.IsNotNull(stepData.Dependencies);
-            Assert.AreEqual(3, stepData.Dependencies.Count);
-            CollectionAssert.AreEquivalent(new List<string> { "dependency_1" }, stepData.Dependencies[0]);
-            CollectionAssert.AreEquivalent(new List<string> { "dependency_2a", "dependency_2b" }, stepData.Dependencies[1]);
-            CollectionAssert.AreEquivalent(new List<string> { "dependency_3" }, stepData.Dependencies[2]);
+            var result = step.DoStep(new Context(fileSystem, configuration) { SourceModID = "sourcemod_1" }, stepData, NullWriter);
+
+            Assert.AreEqual(PipelineStepStatus.Complete, result);
+            Assert.AreEqual(0, eventHandler.MissingSingleVariableRequiredDependencyTotal);
+            Assert.AreEqual(0, eventHandler.MissingMultiVariableRequiredDependencyTotal);
+            Assert.AreEqual(0, eventHandler.MissingSingleVariableOptionalDependencyTotal);
+            Assert.AreEqual(1, eventHandler.MissingMultiVariableOptionalDependencyTotal);
+        }
+
+
+        [TestMethod]
+        public void ValidateDependenciesStep_RequiredMultiNotFulfilled_OptionalMultiFulfilled_WithMissingVariables_ReturnsFailed()
+        {
+            var fileSystem = new MockFileSystem(new Dictionary<string, MockFileData> { });
+            var eventHandler = new TestValidateVariablesDependenciesInstallStepEventHandler();
+            var step = new ValidateVariablesDependenciesInstallStep(DefaultDependencyValidator, eventHandler);
+            var stepData = new ValidateVariablesDependenciesInstallStepData();
+            var configuration = new MockDependencyValidationConfiguration
+            {
+                Variables = new Dictionary<string, string> {
+                    { "content_3_output_1", "value3" },
+                },
+                Contents = new Dictionary<string, MockContent> {
+                    { "content_1", new MockContent { OutputVariables = ["content_1_output_1"] } },
+                    { "content_2", new MockContent { OutputVariables = ["content_2_output_1"] } },
+                    { "content_3", new MockContent { OutputVariables = ["content_3_output_1"] } },
+                    { "content_4", new MockContent { OutputVariables = ["content_4_output_1"] } },
+                },
+                SourceMods = new Dictionary<string, MockSourceModConfigEntry> {
+                    {  "sourcemod_1", new MockSourceModConfigEntry{
+                        Dependencies = new MockSourceModConfigDependencies {
+                            Required = [["content_1", "content_2"]],
+                            Optional = [["content_3", "content_4"]]
+                        }
+                    } }
+                }
+            };
+
+            var result = step.DoStep(new Context(fileSystem, configuration) { SourceModID = "sourcemod_1" }, stepData, NullWriter);
+
+            Assert.AreEqual(PipelineStepStatus.Failed, result);
+            Assert.AreEqual(0, eventHandler.MissingSingleVariableRequiredDependencyTotal);
+            Assert.AreEqual(1, eventHandler.MissingMultiVariableRequiredDependencyTotal);
+            Assert.AreEqual(0, eventHandler.MissingSingleVariableOptionalDependencyTotal);
+            Assert.AreEqual(0, eventHandler.MissingMultiVariableOptionalDependencyTotal);
+        }
+
+        [TestMethod]
+        public void ValidateDependenciesStep_RequiredMultiNotFulfilled_OptionalMultiNotFulfilled_ReturnsFailed()
+        {
+            var fileSystem = new MockFileSystem(new Dictionary<string, MockFileData> { });
+            var eventHandler = new TestValidateVariablesDependenciesInstallStepEventHandler();
+            var step = new ValidateVariablesDependenciesInstallStep(DefaultDependencyValidator, eventHandler);
+            var stepData = new ValidateVariablesDependenciesInstallStepData();
+            var configuration = new MockDependencyValidationConfiguration
+            {
+                Variables = new Dictionary<string, string> {},
+                Contents = new Dictionary<string, MockContent> {
+                    { "content_1", new MockContent { OutputVariables = ["content_1_output_1"] } },
+                    { "content_2", new MockContent { OutputVariables = ["content_2_output_1"] } },
+                    { "content_3", new MockContent { OutputVariables = ["content_3_output_1"] } },
+                    { "content_4", new MockContent { OutputVariables = ["content_4_output_1"] } },
+                },
+                SourceMods = new Dictionary<string, MockSourceModConfigEntry> {
+                    {  "sourcemod_1", new MockSourceModConfigEntry{
+                        Dependencies = new MockSourceModConfigDependencies {
+                            Required = [["content_1", "content_2"]],
+                            Optional = [["content_3", "content_4"]]
+                        }
+                    } }
+                }
+            };
+
+            var result = step.DoStep(new Context(fileSystem, configuration) { SourceModID = "sourcemod_1" }, stepData, NullWriter);
+
+            Assert.AreEqual(PipelineStepStatus.Failed, result);
+            Assert.AreEqual(0, eventHandler.MissingSingleVariableRequiredDependencyTotal);
+            Assert.AreEqual(1, eventHandler.MissingMultiVariableRequiredDependencyTotal);
+            Assert.AreEqual(0, eventHandler.MissingSingleVariableOptionalDependencyTotal);
+            Assert.AreEqual(1, eventHandler.MissingMultiVariableOptionalDependencyTotal);
         }
     }
 }

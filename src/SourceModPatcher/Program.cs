@@ -22,9 +22,11 @@ namespace SourceModPatcher
                 cfg.ShouldMapMethod = m => false;
                 cfg.CreateMap<JSONInstallStep, IPipelineStepData>()
                     .Include<JSONCopyFilesInstallStep, CopyFilesInstallStepData>()
+                    .Include<JSONCopyDirectoryInstallStep, CopyDirectoryInstallStepData>()
                     .Include<JSONReplaceTokensInstallStep, ReplaceTokensInstallStepData>()
                     .Include<JSONValidateVariablesDependenciesInstallStep, ValidateVariablesDependenciesInstallStepData>();
                 cfg.CreateMap<JSONCopyFilesInstallStep, CopyFilesInstallStepData>();
+                cfg.CreateMap<JSONCopyDirectoryInstallStep, CopyDirectoryInstallStepData>();
                 cfg.CreateMap<JSONCopyFilesInstallStepFile, CopyFilesInstallStepDataFile>();
                 cfg.CreateMap<JSONReplaceTokensInstallStep, ReplaceTokensInstallStepData>();
                 cfg.CreateMap<JSONValidateVariablesDependenciesInstallStep, ValidateVariablesDependenciesInstallStepData>();
@@ -50,13 +52,14 @@ namespace SourceModPatcher
         static readonly Dictionary<Type, IPipelineStep<Context>> _stepsDataToInstallStep = new()
         {
             { typeof(CopyFilesInstallStepData), new CopyFilesInstallStep(new FileCopier()) },
+            { typeof(CopyDirectoryInstallStepData), new CopyDirectoryInstallStep(new DirectoryCopier()) },
             { typeof(ReplaceTokensInstallStepData), new ReplaceTokensInstallStep(new FileTokenReplacer(new TokenReplacer { Prefix = "${{", Suffix = "}}" }))},
-            { typeof(ValidateVariablesDependenciesInstallStepData), new ValidateVariablesDependenciesInstallStep() }
+            { typeof(ValidateVariablesDependenciesInstallStepData), new ValidateVariablesDependenciesInstallStep(new DependencyValidation()) }
         };
 
         public override void SetupContext(Context context)
         {
-            context.SourceModKey = SourceModKey;
+            context.SourceModID = SourceModKey;
         }
 
         public override IPipelineStep<Context> GetStepForStepData(IPipelineStepData stepData)
@@ -69,12 +72,13 @@ namespace SourceModPatcher
     {
         public Dictionary<string, string> GetVariables(Context context)
         {
-            var result = context.GetInstallVariables().ToDictionary();
-            result.Add("sourcemod_name", context.GetSourceModName());
-            result.Add("sourcemod_folder", context.GetSourceModFolder());
-            result.Add("sourcemod_dir", context.GetSourceModDir());
-            result.Add("data_sourcemod_dir", context.GetSourceModDataDir());
-            return result;
+            return new Dictionary<string, string>
+            {
+                { "sourcemod_name", context.GetSourceModName() },
+                { "sourcemod_folder", context.GetSourceModFolder() },
+                { "sourcemod_dir", context.GetSourceModDir() },
+                { "data_sourcemod_dir", context.GetSourceModDataDir() }
+            };
         }
     }
 
@@ -82,6 +86,8 @@ namespace SourceModPatcher
     internal class Program
     {
         const string INSTALL_ENVVAR = "TEST_INSTALLSOURCECONTENT";
+        const string VARIABLES_CONFIG_FILENAME = "variables.json";
+        const string CONTENTS_CONFIG_FILENAME = "contents.json";
         const string COMMON_CONFIG_FILENAME = "sourcemods.common.json";
         const string SOURCEMODS_CONFIG_FILENAME = "sourcemods.json";
         const string INSTALL_SETTINGS_FILENAME = "sourcemods.install.settings.json";
@@ -135,15 +141,15 @@ namespace SourceModPatcher
 
                     string MakeFullPath(string x) => PathExtensions.JoinWithSeparator(fileSystem, Environment.CurrentDirectory, x);
 
-                    var variablesConfigFilePath = PathExtensions.JoinWithSeparator(fileSystem, sourceContentInstallDirectory, "variables.json");
+                    var contentsConfig = new ContentsConfig(fileSystem, writer, MakeFullPath(CONTENTS_CONFIG_FILENAME), new JSONConfigurationSerializer<JSONContentsConfig>());
+                    contentsConfig.LoadConfig();
+
+                    var variablesConfigFilePath = PathExtensions.JoinWithSeparator(fileSystem, sourceContentInstallDirectory, VARIABLES_CONFIG_FILENAME);
                     var variablesConfig = new VariablesConfig(fileSystem, writer, variablesConfigFilePath, new JSONConfigurationSerializer<JSONVariablesConfig>());
                     variablesConfig.LoadConfig();
 
                     var commonConfig = new CommonConfig(fileSystem, writer, MakeFullPath(COMMON_CONFIG_FILENAME), new JSONConfigurationSerializer<JSONCommonConfig>());
                     commonConfig.LoadConfig();
-
-                    var installVariablesConfig = new InstallVariablesConfig(fileSystem, writer, MakeFullPath("sourcemods.install.variables.json"), new JSONConfigurationSerializer<JSONInstallVariablesConfig>());
-                    installVariablesConfig.LoadConfig();
 
                     string? SourceModInstallPath;
 
@@ -273,7 +279,7 @@ namespace SourceModPatcher
                     };
                     var tokenReplacerVariablesProvider = new TokenReplacerVariablesProvider();
 
-                    var configuration = new Configuration(sourceModsConfig, installVariablesConfig, variablesConfig);
+                    var configuration = new Configuration(sourceModsConfig, contentsConfig, variablesConfig);
                     var pauseHandler = new ConsolePauseHandler(writer);
                     var context = new Context(fileSystem, configuration);
 

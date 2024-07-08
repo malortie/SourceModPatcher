@@ -1,0 +1,10 @@
+[
+  {
+    "$type": "copy_directory",
+    "name": "step_copy_directory",
+    "description": "Copy sourcemod directory",
+    "depends_on": ["previous_step1"],
+    "src": "C:/source",
+    "dest": "C:/destination"
+  }
+]

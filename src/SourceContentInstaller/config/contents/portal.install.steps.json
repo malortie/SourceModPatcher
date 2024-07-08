@@ -1,0 +1,25 @@
+[
+  {
+    "$type": "extract_vpk",
+    "name": "portal_extract_content",
+    "description": "Extract Portal content",
+    "steamappid": 400,
+    "vpks": [{"vpk": "portal/portal_pak_dir.vpk"}],
+    "files_to_exclude": [
+      "^.*\\.dll$",
+      "^.*\\.bin$",
+      "^.*\\.so$",
+      "^.*\\.dylib$",
+      "^maps/.*$"
+    ],
+    "outdir": "$(install_settings_install_dir)"
+  },
+  {
+    "$type": "save_variable",
+    "name": "portal_save_variable",
+    "description": "Add $(content_name) install path to $(variables_config_file_name)",
+    "depends_on": ["portal_extract_content"],
+    "variable_name": "portal_content_path",
+    "variable_value": "$(install_settings_install_dir)"
+  }
+]

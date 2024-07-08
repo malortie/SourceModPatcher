@@ -1,0 +1,40 @@
+[
+  {
+    "$type": "extract_vpk",
+    "name": "sdkbase2013mp_hl2mp_extract_content",
+    "description": "Extract Source SDK Base 2013 Multiplayer (HL2MP) content",
+    "steamappid": 243750,
+    "vpks": [{"vpk": "hl2mp/hl2mp_pak_dir.vpk"}],
+    "files_to_exclude": [
+      "^.*\\.dll$",
+      "^.*\\.bin$",
+      "^.*\\.so$",
+      "^.*\\.dylib$"
+    ],
+    "outdir": "$(install_settings_install_dir)"
+  },
+  {
+    "$type": "save_variable",
+    "name": "sdkbase2013mp_hl2mp_save_variable",
+    "description": "Add $(content_name) HL2MP install path to $(variables_config_file_name)",
+    "depends_on": ["sdkbase2013mp_hl2mp_extract_content"],
+    "variable_name": "sdkbase2013mp_hl2mp_content_path",
+    "variable_value": "$(install_settings_install_dir)"
+  },
+  {
+    "$type": "save_variable",
+    "name": "source2006_hl2mp_alias_save_variable",
+    "description": "Add $(content_name) HL2MP (source2006 alias) install path to $(variables_config_file_name)",
+    "depends_on": ["sdkbase2013mp_hl2mp_extract_content"],
+    "variable_name": "source2006_hl2mp_content_path",
+    "variable_value": "$(install_settings_install_dir)"
+  },
+  {
+    "$type": "save_variable",
+    "name": "source2007_hl2mp_alias_save_variable",
+    "description": "Add $(content_name) HL2MP (source2007 alias) install path to $(variables_config_file_name)",
+    "depends_on": ["sdkbase2013mp_hl2mp_extract_content"],
+    "variable_name": "source2007_hl2mp_content_path",
+    "variable_value": "$(install_settings_install_dir)"
+  }
+]

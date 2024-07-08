@@ -9,16 +9,21 @@ namespace SourceContentInstaller
 
         public IFileSystem FileSystem { get { return _fileSystem; } }
 
-        public int AppID { get; set; } = 0;
+        public string ContentID { get; set; } = string.Empty;
 
-        public string GetSteamAppName()
+        public string GetSteamAppName(int AppID)
         {
             return _configuration.GetSteamAppName(AppID);
         }
 
-        public string GetSteamAppInstallDir()
+        public string GetSteamAppInstallDir(int AppID)
         {
             return _configuration.GetSteamAppInstallDir(AppID);
+        }
+
+        public Dictionary<string, string> GetSteamAppsInstallDirVariables()
+        {
+            return _configuration.GetSteamAppsInstallDirVariables();
         }
 
         public void SaveVariable(string name, string value)
@@ -26,9 +31,14 @@ namespace SourceContentInstaller
             _configuration.SaveVariable(name, value);
         }
 
+        public string GetContentName()
+        {
+            return _configuration.GetContentName(ContentID);
+        }
+
         public string GetContentInstallDir()
         {
-            return _configuration.GetContentInstallDir(AppID);
+            return _configuration.GetContentInstallDir(ContentID);
         }
 
         public string GetVariablesFileName()

@@ -1,0 +1,31 @@
+[
+  {
+    "$type": "extract_vpk",
+    "name": "lostcoast_maps_extract_content",
+    "description": "Extract Half-Life 2: Lost Coast maps content",
+    "steamappid": 340,
+    "vpks": [
+      {"vpk": "lostcoast/lostcoast_pak_dir.vpk"}
+    ],
+    "files_to_extract": [
+      "^maps/.*$"
+    ],
+    "outdir": "$(install_settings_install_dir)"
+  },
+  {
+    "$type": "save_variable",
+    "name": "lostcoast_maps_save_variable",
+    "description": "Add $(content_name) install path to $(variables_config_file_name)",
+    "depends_on": ["lostcoast_maps_extract_content"],
+    "variable_name": "lostcoast_maps_content_path",
+    "variable_value": "$(install_settings_install_dir)"
+  },
+  {
+    "$type": "save_variable",
+    "name": "lostcoast_gamedir_save_variable",
+    "description": "Add Half-Life 2: Lost Coast game directory to $(variables_config_file_name)",
+    "depends_on": ["lostcoast_maps_extract_content"],
+    "variable_name": "lostcoast_gamedir",
+    "variable_value": "$(steamapps_lostcoast_install_dir)/lostcoast"
+  }
+]

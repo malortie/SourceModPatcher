@@ -1,0 +1,31 @@
+[
+  {
+    "$type": "extract_vpk",
+    "name": "dod_maps_extract_content",
+    "description": "Extract Day of Defeat: Source maps content",
+    "steamappid": 300,
+    "vpks": [
+      {"vpk": "dod/dod_pak_dir.vpk"}
+    ],
+    "files_to_extract": [
+      "^maps/.*$"
+    ],
+    "outdir": "$(install_settings_install_dir)"
+  },
+  {
+    "$type": "save_variable",
+    "name": "dod_maps_save_variable",
+    "description": "Add $(content_name) install path to $(variables_config_file_name)",
+    "depends_on": ["dod_maps_extract_content"],
+    "variable_name": "dod_maps_content_path",
+    "variable_value": "$(install_settings_install_dir)"
+  },
+  {
+    "$type": "save_variable",
+    "name": "dod_gamedir_save_variable",
+    "description": "Add Day of Defeat: Source game directory to $(variables_config_file_name)",
+    "depends_on": ["dod_maps_extract_content"],
+    "variable_name": "dod_gamedir",
+    "variable_value": "$(steamapps_dod_install_dir)/dod"
+  }
+]

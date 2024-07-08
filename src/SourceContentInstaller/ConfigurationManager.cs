@@ -16,7 +16,8 @@ namespace SourceContentInstaller
         readonly string _filePath = filePath;
         readonly IConfigurationSerializer<ConfigT> _configSerializer = configSerializer;
 
-        public virtual string GetFileName() { return _fileSystem.Path.GetFileName(_filePath); }
+        public virtual string GetFileName() { return _fileSystem.Path.GetFileName(FilePath); }
+        public string FilePath => filePath;
 
         public ConfigT Config { get; protected set; } = new();
 
@@ -25,10 +26,11 @@ namespace SourceContentInstaller
 
         public void LoadConfig()
         {
-            Writer.Info($"Reading {_fileSystem.Path.GetFileName(_filePath)}");
-            var deserializedData = _configSerializer.Deserialize(_fileSystem.File.ReadAllText(_filePath));
+            PreLoadConfig();
+            Writer.Info($"Reading {_fileSystem.Path.GetFileName(FilePath)}");
+            var deserializedData = _configSerializer.Deserialize(_fileSystem.File.ReadAllText(FilePath));
             if (null == deserializedData)
-                throw new Exception($"Failed to deserialize {_filePath}");
+                throw new Exception($"Failed to deserialize {FilePath}");
             Config = deserializedData;
             PostLoadConfig();
         }
@@ -36,7 +38,11 @@ namespace SourceContentInstaller
         public void SaveConfig()
         {
             var serializedConfig = _configSerializer.Serialize(Config);
-            _fileSystem.File.WriteAllText(_filePath, serializedConfig);
+            _fileSystem.File.WriteAllText(FilePath, serializedConfig);
+        }
+
+        protected virtual void PreLoadConfig()
+        {
         }
 
         protected virtual void PostLoadConfig()

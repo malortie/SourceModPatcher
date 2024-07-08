@@ -6,7 +6,6 @@
 	type	singleplayer_only
 	"icon"			"resource/game"
 
-	
 	FileSystem
 	{
 		SteamAppId				215
@@ -14,8 +13,10 @@
 
 		SearchPaths
 		{
-			Game				|gameinfo_path|.
-			Game				hl2
+			Game	|gameinfo_path|.
+			Game	"${{source2004_hl2_patches_path}}"
+			Game	"${{source2004_hl2_content_path}}"
+			Game	hl2
 		}
 	}
 }

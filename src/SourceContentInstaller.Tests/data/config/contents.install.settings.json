@@ -1,0 +1,18 @@
+{
+  "sdkbase2006": {
+    "install": false,
+    "install_dir": "C:/sdkbase2006"
+  },
+  "sdkbase2007": {
+    "install": true,
+    "install_dir": "C:/sdkbase2007"
+  },
+  "hl2": {
+    "install": false,
+    "install_dir": "C:/hl2"
+  },
+  "cstrike": {
+    "install": true,
+    "install_dir": "C:/cstrike"
+  }
+}

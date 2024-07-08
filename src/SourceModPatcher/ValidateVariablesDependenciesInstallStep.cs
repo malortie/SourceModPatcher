@@ -1,4 +1,5 @@
 using Pipelines;
+using SourceContentInstaller;
 
 namespace SourceModPatcher
 {
@@ -8,63 +9,90 @@ namespace SourceModPatcher
         [PipelineStepReplaceToken]
         public string Description { get; set; } = string.Empty;
         public List<string> DependsOn { get; set; } = [];
-        public List<List<string>> Dependencies { get; set; } = [];
     }
 
     public interface IValidateVariablesDependenciesInstallStepEventHandler
     {
-        void NoDependenciesSpecified();
-        void MissingSingleVariableDependency();
-        void MissingMultiVariableDependency();
-        void MissingDependencies();
+        void MissingSingleVariableRequiredDependency();
+        void MissingMultiVariableRequiredDependency();
+
+        void MissingSingleVariableOptionalDependency();
+        void MissingMultiVariableOptionalDependency();
     }
 
-    public class ValidateVariablesDependenciesInstallStep(IValidateVariablesDependenciesInstallStepEventHandler? eventHandler = null) : IPipelineStep<Context>
+    public class ValidateVariablesDependenciesInstallStep(IDependencyValidation dependencyValidation, IValidateVariablesDependenciesInstallStepEventHandler? eventHandler = null) : IPipelineStep<Context>
     {
+        readonly IDependencyValidation _dependencyValidation = dependencyValidation;
         readonly IValidateVariablesDependenciesInstallStepEventHandler? _eventHandler = eventHandler;
 
         public PipelineStepStatus DoStep(Context context, IPipelineStepData stepData, IWriter writer)
         {
             var validateVariablesDependenciesStepData = (ValidateVariablesDependenciesInstallStepData)stepData;
-            var Dependencies = validateVariablesDependenciesStepData.Dependencies;
 
-            if (null == Dependencies || 0 == Dependencies.Count)
+            // Validate dependencies.
+            var requiredDependenciesValidationResults = new List<DependencyValidationResult>();
+            var optionalDependenciesValidationResults = new List<DependencyValidationResult>();
+
+            PipelineStepStatus status = PipelineStepStatus.Complete;
+
+            foreach (var dependency in context.GetRequiredContentDependencies())
             {
-                _eventHandler?.NoDependenciesSpecified();
-                writer.Error("No dependencies specified.");
-                return PipelineStepStatus.Failed;
+                requiredDependenciesValidationResults.Add(_dependencyValidation.Validate(context, dependency));
             }
 
-            var sourceContentVariablesNames = context.GetSourceContentVariables().Keys.ToList();
-
-            int numMissingDependencies = 0;
-            PipelineStepStatus status = PipelineStepStatus.Complete;
-            foreach (var entry in Dependencies)
+            foreach (var dependency in context.GetOptionalContentDependencies())
             {
-                // Check that at least one of the variables defined in each entry is present.
-                var fulfilledDependencies = entry.Intersect(sourceContentVariablesNames);
-                if (!fulfilledDependencies.Any())
+                optionalDependenciesValidationResults.Add(_dependencyValidation.Validate(context, dependency));
+            }
+
+            if (requiredDependenciesValidationResults.Any(d => !d.FulFilled))
+            {
+                status = PipelineStepStatus.Failed; // At least one required dependency wasn't fulfilled.
+
+                // Write all unfulfilled required dependencies.
+                foreach (var dependency in requiredDependenciesValidationResults.Where(d => !d.FulFilled).ToList())
                 {
-                    if (entry.Count == 1)
+                    if (dependency.EquivalentContent.Count == 1)
                     {
-                        _eventHandler?.MissingSingleVariableDependency();
-                        writer.Error($"Missing variable in {context.GetVariablesFileName()} : {entry.First()}");
+                        _eventHandler?.MissingSingleVariableRequiredDependency();
+                        DependencyValidationContentEntry contentEntry = dependency.EquivalentContent.First();
+                        writer.Error($"Missing variable(s) in {context.GetVariablesFileName()} : [{string.Join(',', contentEntry.MissingVariables)}]");
+                        writer.Error($"Install content: {context.GetContentName(contentEntry.ContentID)}");
                     }
                     else
                     {
-                        _eventHandler?.MissingMultiVariableDependency();
-                        writer.Error($"Missing one of the following variables in {context.GetVariablesFileName()} : [{string.Join(" OR ", entry)}]");
-                    }
+                        _eventHandler?.MissingMultiVariableRequiredDependency();
+                        var allMissingVariables = dependency.EquivalentContent.Select(c => c.MissingVariables);
+                        var allContentNames = dependency.EquivalentContent.Select(c => context.GetContentName(c.ContentID));
 
-                    ++numMissingDependencies;
+                        writer.Error($"Missing variable(s) in {context.GetVariablesFileName()} : [{string.Join(',', allMissingVariables)}]");
+                        writer.Error($"Install either one of the following content: {string.Join(" OR ", allContentNames)}");
+                    }
                 }
             }
 
-            // If at least one dependency is missing, mark it as failed.
-            if (numMissingDependencies > 0)
+            if (optionalDependenciesValidationResults.Any(d => !d.FulFilled))
             {
-                _eventHandler?.MissingDependencies();
-                status = PipelineStepStatus.Failed;
+                // Write all unfulfilled optional dependencies.
+                foreach (var dependency in optionalDependenciesValidationResults.Where(d => !d.FulFilled).ToList())
+                {
+                    if (dependency.EquivalentContent.Count == 1)
+                    {
+                        _eventHandler?.MissingSingleVariableOptionalDependency();
+                        DependencyValidationContentEntry contentEntry = dependency.EquivalentContent.First();
+                        writer.Warning($"Missing variable(s) in {context.GetVariablesFileName()} : [{string.Join(',', contentEntry.MissingVariables)}]");
+                        writer.Warning($"Optionally install content: {context.GetContentName(contentEntry.ContentID)}");
+                    }
+                    else
+                    {
+                        _eventHandler?.MissingMultiVariableOptionalDependency();
+                        var allMissingVariables = dependency.EquivalentContent.Select(c => c.MissingVariables);
+                        var allContentNames = dependency.EquivalentContent.Select(c => context.GetContentName(c.ContentID));
+
+                        writer.Warning($"Missing variable(s) in {context.GetVariablesFileName()} : [{string.Join(',', allMissingVariables)}]");
+                        writer.Warning($"Optionally install either one of the following content: {string.Join(" OR ", allContentNames)}");
+                    }
+                }
             }
 
             return status;

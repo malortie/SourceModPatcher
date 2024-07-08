@@ -35,6 +35,8 @@ namespace SourceContentInstaller
         public List<string>? FilesToExclude { get; set; }
         [JsonPropertyName("files_to_extract")]
         public List<string>? FilesToExtract { get; set; }
+        [JsonPropertyName("steamappid")]
+        public int? SteamAppID { get; set; }
         [JsonPropertyName("outdir")]
         public string? OutDir { get; set; }
     }
@@ -47,7 +49,7 @@ namespace SourceContentInstaller
         public string? VariableValue { get; set; }
     }
 
-    public class JSONInstallStepsConfig : Dictionary<int, string>
+    public class JSONInstallStepsConfig : Dictionary<string, string>
     {
     }
 

@@ -3,21 +3,22 @@
 	game	"Get a Life"
 	type	singleplayer_only
 
-
-        "homepage"              "www.getalife-mod.com"
-	"developer" 		"GetaLife Team"
-	"developer_url" 	"www.getalife-mod.com"
-        "icon" 			"miligal" 
+	"homepage"	"www.getalife-mod.com"
+	"developer"		"GetaLife Team"
+	"developer_url"	"www.getalife-mod.com"
+	"icon"	"miligal" 
 
 	FileSystem
 	{
-		SteamAppId				215
-		ToolsAppId			211
+		SteamAppId		215
+		ToolsAppId		211
 		
 		SearchPaths
 		{
-			Game				|gameinfo_path|.
-			Game				hl2
+			Game	|gameinfo_path|.
+			Game	"${{source2006_hl2_patches_path}}"
+			Game	"${{source2006_hl2_content_path}}"
+			Game	hl2
 		}
 	}
 }

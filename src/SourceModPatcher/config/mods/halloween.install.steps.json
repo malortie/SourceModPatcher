@@ -1,25 +1,24 @@
 [
   {
-    "$type": "copy_files",
-    "name": "halloween_copy_files",
-    "description": "Copy files to $(sourcemod_folder)",
+    "$type": "validate_variables_dependencies",
+    "name": "halloween_validate_dependencies",
+    "description": "Validate $(sourcemod_name) variables dependencies"
+  },
+  {
+    "$type": "copy_directory",
+    "name": "halloween_copy_directory",
+    "description": "Copy directory to $(sourcemod_folder)",
+    "depends_on": ["halloween_validate_dependencies"],
+    "src": "$(data_sourcemod_dir)",
+    "dest": "$(sourcemod_dir)"
+  },
+  {
+    "$type": "replace_tokens",
+    "name": "halloween_replace_tokens",
+    "description": "Replace tokens in $(sourcemod_folder)/gameinfo.txt",
+    "depends_on": ["halloween_copy_directory"],
     "files": [
-      {
-        "src": "$(data_sourcemod_dir)/gameinfo.txt",
-        "dest": "$(sourcemod_dir)/gameinfo.txt"
-      },
-      {
-        "src": "$(data_sourcemod_dir)/maps/hood01_final_l_0.lmp",
-        "dest": "$(sourcemod_dir)/maps/hood01_final_l_0.lmp"
-      },
-      {
-        "src": "$(data_sourcemod_dir)/materials/console/background01_widescreen.vtf",
-        "dest": "$(sourcemod_dir)/materials/console/background01_widescreen.vtf"
-      },
-      {
-        "src": "$(data_sourcemod_dir)/resource/Halloween_english.txt",
-        "dest": "$(sourcemod_dir)/resource/Halloween_english.txt"
-      }
+      "$(sourcemod_dir)/gameinfo.txt"
     ]
   }
 ]

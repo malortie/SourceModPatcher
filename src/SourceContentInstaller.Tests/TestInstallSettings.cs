@@ -30,15 +30,15 @@ namespace SourceContentInstaller.Tests
             var serializer = new JSONConfigurationSerializer<JSONInstallSettings>();
             var deserialized = serializer.Deserialize("""
                 {
-                    "215": {
+                    "sdkbase2006": {
                         "install": false,
                         "install_dir": "C:/Documents/SourceContent/sdkbase2006"
                     },
-                    "218": {
+                    "sdkbase2007": {
                         "install": true,
                         "install_dir": "C:/Documents/SourceContent/sdkbase2007"
                     },
-                    "220": {
+                    "hl2": {
                         "install": false,
                         "install_dir": "C:/Documents/SourceContent/hl2"
                     }
@@ -46,97 +46,97 @@ namespace SourceContentInstaller.Tests
                 """);
 
             Assert.IsNotNull(deserialized);
-            Assert.IsTrue(deserialized.ContainsKey(215));
-            Assert.IsTrue(deserialized.ContainsKey(218));
-            Assert.IsTrue(deserialized.ContainsKey(220));
+            Assert.IsTrue(deserialized.ContainsKey("sdkbase2006"));
+            Assert.IsTrue(deserialized.ContainsKey("sdkbase2007"));
+            Assert.IsTrue(deserialized.ContainsKey("hl2"));
 
-            Assert.IsFalse(deserialized[215].Install);
-            Assert.AreEqual("C:/Documents/SourceContent/sdkbase2006", deserialized[215].InstallDir);
+            Assert.IsFalse(deserialized["sdkbase2006"].Install);
+            Assert.AreEqual("C:/Documents/SourceContent/sdkbase2006", deserialized["sdkbase2006"].InstallDir);
 
-            Assert.IsTrue(deserialized[218].Install);
-            Assert.AreEqual("C:/Documents/SourceContent/sdkbase2007", deserialized[218].InstallDir);
+            Assert.IsTrue(deserialized["sdkbase2007"].Install);
+            Assert.AreEqual("C:/Documents/SourceContent/sdkbase2007", deserialized["sdkbase2007"].InstallDir);
 
-            Assert.IsFalse(deserialized[220].Install);
-            Assert.AreEqual("C:/Documents/SourceContent/hl2", deserialized[220].InstallDir);
+            Assert.IsFalse(deserialized["hl2"].Install);
+            Assert.AreEqual("C:/Documents/SourceContent/hl2", deserialized["hl2"].InstallDir);
         }
 
         [TestMethod]
         public void LoadConfig_Simple()
         {
             var fileSystem = new MockFileSystem(new Dictionary<string, MockFileData> {
-                { "C:/steamapps.install.settings.json", new MockFileData(File.ReadAllBytes("../../../data/config/steamapps.install.settings.json")) }
+                { "C:/contents.install.settings.json", new MockFileData(File.ReadAllBytes("../../../data/config/contents.install.settings.json")) }
             });
 
-            var installSettings = new InstallSettings(fileSystem, NullWriter, "C:/steamapps.install.settings.json", new JSONConfigurationSerializer<JSONInstallSettings>());
+            var installSettings = new InstallSettings(fileSystem, NullWriter, "C:/contents.install.settings.json", new JSONConfigurationSerializer<JSONInstallSettings>());
             installSettings.LoadConfig();
 
             var config = installSettings.Config;
             Assert.IsNotNull(config);
-            Assert.IsTrue(config.ContainsKey(215));
-            Assert.IsTrue(config.ContainsKey(218));
-            Assert.IsTrue(config.ContainsKey(220));
-            Assert.IsTrue(config.ContainsKey(240));
+            Assert.IsTrue(config.ContainsKey("sdkbase2006"));
+            Assert.IsTrue(config.ContainsKey("sdkbase2007"));
+            Assert.IsTrue(config.ContainsKey("hl2"));
+            Assert.IsTrue(config.ContainsKey("cstrike"));
 
-            var steamApp = config[215];
-            Assert.IsFalse(steamApp.Install);
-            Assert.AreEqual("C:/sdkbase2006", steamApp.InstallDir);
+            var contentID = config["sdkbase2006"];
+            Assert.IsFalse(contentID.Install);
+            Assert.AreEqual("C:/sdkbase2006", contentID.InstallDir);
 
-            steamApp = config[218];
-            Assert.IsTrue(steamApp.Install);
-            Assert.AreEqual("C:/sdkbase2007", steamApp.InstallDir);
+            contentID = config["sdkbase2007"];
+            Assert.IsTrue(contentID.Install);
+            Assert.AreEqual("C:/sdkbase2007", contentID.InstallDir);
 
-            steamApp = config[220];
-            Assert.IsFalse(steamApp.Install);
-            Assert.AreEqual("C:/hl2", steamApp.InstallDir);
+            contentID = config["hl2"];
+            Assert.IsFalse(contentID.Install);
+            Assert.AreEqual("C:/hl2", contentID.InstallDir);
 
-            steamApp = config[240];
-            Assert.IsTrue(steamApp.Install);
-            Assert.AreEqual("C:/cstrike", steamApp.InstallDir);
+            contentID = config["cstrike"];
+            Assert.IsTrue(contentID.Install);
+            Assert.AreEqual("C:/cstrike", contentID.InstallDir);
         }
 
         [TestMethod]
-        public void GetSteamAppsToInstall()
+        public void GetContentsToInstall()
         {
             var fileSystem = new MockFileSystem(new Dictionary<string, MockFileData> {
-                { "C:/steamapps.install.settings.json", new MockFileData(File.ReadAllBytes("../../../data/config/steamapps.install.settings.json")) }
+                { "C:/contents.install.settings.json", new MockFileData(File.ReadAllBytes("../../../data/config/contents.install.settings.json")) }
             });
 
-            var installSettings = new InstallSettings(fileSystem, NullWriter, "C:/steamapps.install.settings.json", new JSONConfigurationSerializer<JSONInstallSettings>());
+            var installSettings = new InstallSettings(fileSystem, NullWriter, "C:/contents.install.settings.json", new JSONConfigurationSerializer<JSONInstallSettings>());
             installSettings.LoadConfig();
 
-            CollectionAssert.AreEquivalent(new List<int> { 218, 240 }, installSettings.GetSteamAppsToInstall());
+            CollectionAssert.AreEquivalent(new List<string> { "sdkbase2007", "cstrike" }, installSettings.GetContentsToInstall());
         }
 
         [TestMethod]
         public void IsSteamAppMarkedForInstall()
         {
             var fileSystem = new MockFileSystem(new Dictionary<string, MockFileData> {
-                { "C:/steamapps.install.settings.json", new MockFileData(File.ReadAllBytes("../../../data/config/steamapps.install.settings.json")) }
+                { "C:/contents.install.settings.json", new MockFileData(File.ReadAllBytes("../../../data/config/contents.install.settings.json")) }
             });
 
-            var installSettings = new InstallSettings(fileSystem, NullWriter, "C:/steamapps.install.settings.json", new JSONConfigurationSerializer<JSONInstallSettings>());
+            var installSettings = new InstallSettings(fileSystem, NullWriter, "C:/contents.install.settings.json", new JSONConfigurationSerializer<JSONInstallSettings>());
             installSettings.LoadConfig();
 
-            Assert.IsFalse(installSettings.IsSteamAppMarkedForInstall(215));
-            Assert.IsTrue(installSettings.IsSteamAppMarkedForInstall(218));
-            Assert.IsFalse(installSettings.IsSteamAppMarkedForInstall(220));
-            Assert.IsTrue(installSettings.IsSteamAppMarkedForInstall(240));
+            Assert.IsFalse(installSettings.IsContentMarkedForInstall("sdkbase2006"));
+            Assert.IsTrue(installSettings.IsContentMarkedForInstall("sdkbase2007"));
+            Assert.IsFalse(installSettings.IsContentMarkedForInstall("hl2"));
+            Assert.IsTrue(installSettings.IsContentMarkedForInstall("cstrike"));
         }
 
         [TestMethod]
         public void GetContentInstallDir()
         {
             var fileSystem = new MockFileSystem(new Dictionary<string, MockFileData> {
-                { "C:/steamapps.install.settings.json", new MockFileData(File.ReadAllBytes("../../../data/config/steamapps.install.settings.json")) }
+                { "C:/contents.install.settings.json", new MockFileData(File.ReadAllBytes("../../../data/config/contents.install.settings.json")) }
             });
 
-            var installSettings = new InstallSettings(fileSystem, NullWriter, "C:/steamapps.install.settings.json", new JSONConfigurationSerializer<JSONInstallSettings>());
+            var installSettings = new InstallSettings(fileSystem, NullWriter, "C:/contents.install.settings.json", new JSONConfigurationSerializer<JSONInstallSettings>());
             installSettings.LoadConfig();
 
-            Assert.AreEqual("C:/sdkbase2006", installSettings.GetContentInstallDir(215));
-            Assert.AreEqual("C:/sdkbase2007", installSettings.GetContentInstallDir(218));
-            Assert.AreEqual("C:/hl2", installSettings.GetContentInstallDir(220));
-            Assert.AreEqual("C:/cstrike", installSettings.GetContentInstallDir(240));
+            Assert.AreEqual("C:/sdkbase2006", installSettings.GetContentInstallDir("sdkbase2006"));
+            Assert.AreEqual("C:/sdkbase2007", installSettings.GetContentInstallDir("sdkbase2007"));
+            Assert.AreEqual("C:/hl2", installSettings.GetContentInstallDir("hl2"));
+            Assert.AreEqual("C:/cstrike", installSettings.GetContentInstallDir("cstrike"));
         }
     }
 }

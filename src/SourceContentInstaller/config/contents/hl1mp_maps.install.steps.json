@@ -1,0 +1,31 @@
+[
+  {
+    "$type": "extract_vpk",
+    "name": "hl1mp_maps_extract_content",
+    "description": "Extract Half-Life Deathmatch: Source maps content",
+    "steamappid": 360,
+    "vpks": [
+      {"vpk": "hl1mp/hl1mp_pak_dir.vpk"}
+    ],
+    "files_to_extract": [
+      "^maps/.*$"
+    ],
+    "outdir": "$(install_settings_install_dir)"
+  },
+  {
+    "$type": "save_variable",
+    "name": "hl1mp_maps_save_variable",
+    "description": "Add $(content_name) install path to $(variables_config_file_name)",
+    "depends_on": ["hl1mp_maps_extract_content"],
+    "variable_name": "hl1mp_maps_content_path",
+    "variable_value": "$(install_settings_install_dir)"
+  },
+  {
+    "$type": "save_variable",
+    "name": "hl1mp_gamedir_save_variable",
+    "description": "Add Half-Life Deathmatch: Source game directory to $(variables_config_file_name)",
+    "depends_on": ["hl1mp_maps_extract_content"],
+    "variable_name": "hl1mp_gamedir",
+    "variable_value": "$(steamapps_hl1mp_install_dir)/hl1mp"
+  }
+]

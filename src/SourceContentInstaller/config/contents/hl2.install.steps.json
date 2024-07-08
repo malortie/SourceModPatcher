@@ -1,0 +1,31 @@
+[
+  {
+    "$type": "extract_vpk",
+    "name": "hl2_extract_content",
+    "description": "Extract Half-Life 2 content",
+    "steamappid": 220,
+    "vpks": [
+      {"vpk": "hl2/hl2_misc_dir.vpk"},
+      {"vpk": "hl2/hl2_pak_dir.vpk"},
+      {"vpk": "hl2/hl2_sound_misc_dir.vpk"},
+      {"vpk": "hl2/hl2_sound_vo_*_dir.vpk"},
+      {"vpk": "hl2/hl2_textures_dir.vpk"}
+    ],
+    "files_to_exclude": [
+      "^.*\\.dll$",
+      "^.*\\.bin$",
+      "^.*\\.so$",
+      "^.*\\.dylib$",
+      "^maps/.*$"
+    ],
+    "outdir": "$(install_settings_install_dir)"
+  },
+  {
+    "$type": "save_variable",
+    "name": "hl2_save_variable",
+    "description": "Add $(content_name) install path to $(variables_config_file_name)",
+    "depends_on": ["hl2_extract_content"],
+    "variable_name": "hl2_content_path",
+    "variable_value": "$(install_settings_install_dir)"
+  }
+]

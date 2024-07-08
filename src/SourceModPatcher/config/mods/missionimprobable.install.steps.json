@@ -2,68 +2,21 @@
   {
     "$type": "validate_variables_dependencies",
     "name": "missionimprobable_validate_dependencies",
-    "description": "Validate $(sourcemod_name) variables dependencies",
-    "dependencies": [
-      ["sdkbase2013sp_hl2ep2_content_path"]
-    ]
+    "description": "Validate $(sourcemod_name) variables dependencies"
   },
   {
-    "$type": "copy_files",
-    "name": "missionimprobable_copy_files",
-    "description": "Copy files to $(sourcemod_folder)",
+    "$type": "copy_directory",
+    "name": "missionimprobable_copy_directory",
+    "description": "Copy directory to $(sourcemod_folder)",
     "depends_on": ["missionimprobable_validate_dependencies"],
-    "files": [
-      {
-        "src": "$(data_sdks_source2007_ep2_dir)/bin/client.dll",
-        "dest": "$(sourcemod_dir)/bin/client.dll"
-      },
-      {
-        "src": "$(data_sdks_source2007_ep2_dir)/bin/server.dll",
-        "dest": "$(sourcemod_dir)/bin/server.dll"
-      },
-      {
-        "src": "$(data_sdks_source2007_ep2_dir)/scripts/hudlayout.res",
-        "dest": "$(sourcemod_dir)/scripts/hudlayout.res"
-      },
-      {
-        "src": "$(data_sdks_source2007_episodic_dir)/models/Humans/female_shared.ani",
-        "dest": "$(sourcemod_dir)/models/Humans/female_shared.ani"
-      },
-      {
-        "src": "$(data_sdks_source2007_episodic_dir)/models/Humans/female_shared.mdl",
-        "dest": "$(sourcemod_dir)/models/Humans/female_shared.mdl"
-      },
-      {
-        "src": "$(data_sdks_source2007_episodic_dir)/models/Humans/male_gestures.ani",
-        "dest": "$(sourcemod_dir)/models/Humans/male_gestures.ani"
-      },
-      {
-        "src": "$(data_sdks_source2007_episodic_dir)/models/Humans/male_gestures.mdl",
-        "dest": "$(sourcemod_dir)/models/Humans/male_gestures.mdl"
-      },
-      {
-        "src": "$(data_sdks_source2007_episodic_dir)/models/Humans/male_shared.ani",
-        "dest": "$(sourcemod_dir)/models/Humans/male_shared.ani"
-      },
-      {
-        "src": "$(data_sdks_source2007_episodic_dir)/models/Humans/male_shared.mdl",
-        "dest": "$(sourcemod_dir)/models/Humans/male_shared.mdl"
-      },
-      {
-        "src": "$(data_sourcemod_dir)/gameinfo.txt",
-        "dest": "$(sourcemod_dir)/gameinfo.txt"
-      },
-      {
-        "src": "$(data_sourcemod_dir)/resource/ClientScheme.res",
-        "dest": "$(sourcemod_dir)/resource/ClientScheme.res"
-      }
-    ]
+    "src": "$(data_sourcemod_dir)",
+    "dest": "$(sourcemod_dir)"
   },
   {
     "$type": "replace_tokens",
     "name": "missionimprobable_replace_tokens",
     "description": "Replace tokens in $(sourcemod_folder)/gameinfo.txt",
-    "depends_on": ["missionimprobable_copy_files"],
+    "depends_on": ["missionimprobable_copy_directory"],
     "files": [
       "$(sourcemod_dir)/gameinfo.txt"
     ]

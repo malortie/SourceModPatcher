@@ -1,145 +1,24 @@
 [
   {
-    "$type": "copy_files",
-    "name": "get_a_life_copy_files",
-    "description": "Copy files to $(sourcemod_folder)",
+    "$type": "validate_variables_dependencies",
+    "name": "get_a_life_validate_dependencies",
+    "description": "Validate $(sourcemod_name) variables dependencies"
+  },
+  {
+    "$type": "copy_directory",
+    "name": "get_a_life_copy_directory",
+    "description": "Copy directory to $(sourcemod_folder)",
+    "depends_on": ["get_a_life_validate_dependencies"],
+    "src": "$(data_sourcemod_dir)",
+    "dest": "$(sourcemod_dir)"
+  },
+  {
+    "$type": "replace_tokens",
+    "name": "get_a_life_replace_tokens",
+    "description": "Replace tokens in $(sourcemod_folder)/gameinfo.txt",
+    "depends_on": ["get_a_life_copy_directory"],
     "files": [
-      {
-        "src": "$(data_sourcemod_dir)/gameinfo.txt",
-        "dest": "$(sourcemod_dir)/gameinfo.txt"
-      },
-      {
-        "src": "$(data_sourcemod_dir)/materials/console/background01_widescreen.vtf",
-        "dest": "$(sourcemod_dir)/materials/console/background01_widescreen.vtf"
-      },
-      {
-        "src": "$(data_sourcemod_dir)/resource/closecaption_english.dat",
-        "dest": "$(sourcemod_dir)/resource/closecaption_english.dat"
-      },
-      {
-        "src": "$(data_sourcemod_dir)/resource/closecaption_finnish.dat",
-        "dest": "$(sourcemod_dir)/resource/closecaption_finnish.dat"
-      },
-      {
-        "src": "$(data_sourcemod_dir)/resource/closecaption_french.dat",
-        "dest": "$(sourcemod_dir)/resource/closecaption_french.dat"
-      },
-      {
-        "src": "$(data_sourcemod_dir)/resource/closecaption_german.dat",
-        "dest": "$(sourcemod_dir)/resource/closecaption_german.dat"
-      },
-      {
-        "src": "$(data_sourcemod_dir)/resource/closecaption_italian.dat",
-        "dest": "$(sourcemod_dir)/resource/closecaption_italian.dat"
-      },
-      {
-        "src": "$(data_sourcemod_dir)/resource/closecaption_japanese.dat",
-        "dest": "$(sourcemod_dir)/resource/closecaption_japanese.dat"
-      },
-      {
-        "src": "$(data_sourcemod_dir)/resource/closecaption_korean.dat",
-        "dest": "$(sourcemod_dir)/resource/closecaption_korean.dat"
-      },
-      {
-        "src": "$(data_sourcemod_dir)/resource/closecaption_koreana.dat",
-        "dest": "$(sourcemod_dir)/resource/closecaption_koreana.dat"
-      },
-      {
-        "src": "$(data_sourcemod_dir)/resource/closecaption_portuguese.dat",
-        "dest": "$(sourcemod_dir)/resource/closecaption_portuguese.dat"
-      },
-      {
-        "src": "$(data_sourcemod_dir)/resource/closecaption_russian.dat",
-        "dest": "$(sourcemod_dir)/resource/closecaption_russian.dat"
-      },
-      {
-        "src": "$(data_sourcemod_dir)/resource/closecaption_schinese.dat",
-        "dest": "$(sourcemod_dir)/resource/closecaption_schinese.dat"
-      },
-      {
-        "src": "$(data_sourcemod_dir)/resource/closecaption_spanish.dat",
-        "dest": "$(sourcemod_dir)/resource/closecaption_spanish.dat"
-      },
-      {
-        "src": "$(data_sourcemod_dir)/resource/closecaption_swedish.dat",
-        "dest": "$(sourcemod_dir)/resource/closecaption_swedish.dat"
-      },
-      {
-        "src": "$(data_sourcemod_dir)/resource/closecaption_tchinese.dat",
-        "dest": "$(sourcemod_dir)/resource/closecaption_tchinese.dat"
-      },
-      {
-        "src": "$(data_sourcemod_dir)/resource/closecaption_thai.dat",
-        "dest": "$(sourcemod_dir)/resource/closecaption_thai.dat"
-      },
-      {
-        "src": "$(data_sourcemod_dir)/resource/closecaption_english.txt",
-        "dest": "$(sourcemod_dir)/resource/closecaption_english.txt"
-      },
-      {
-        "src": "$(data_sourcemod_dir)/resource/closecaption_finnish.txt",
-        "dest": "$(sourcemod_dir)/resource/closecaption_finnish.txt"
-      },
-      {
-        "src": "$(data_sourcemod_dir)/resource/closecaption_french.txt",
-        "dest": "$(sourcemod_dir)/resource/closecaption_french.txt"
-      },
-      {
-        "src": "$(data_sourcemod_dir)/resource/closecaption_german.txt",
-        "dest": "$(sourcemod_dir)/resource/closecaption_german.txt"
-      },
-      {
-        "src": "$(data_sourcemod_dir)/resource/closecaption_italian.txt",
-        "dest": "$(sourcemod_dir)/resource/closecaption_italian.txt"
-      },
-      {
-        "src": "$(data_sourcemod_dir)/resource/closecaption_japanese.txt",
-        "dest": "$(sourcemod_dir)/resource/closecaption_japanese.txt"
-      },
-      {
-        "src": "$(data_sourcemod_dir)/resource/closecaption_korean.txt",
-        "dest": "$(sourcemod_dir)/resource/closecaption_korean.txt"
-      },
-      {
-        "src": "$(data_sourcemod_dir)/resource/closecaption_koreana.txt",
-        "dest": "$(sourcemod_dir)/resource/closecaption_koreana.txt"
-      },
-      {
-        "src": "$(data_sourcemod_dir)/resource/closecaption_portuguese.txt",
-        "dest": "$(sourcemod_dir)/resource/closecaption_portuguese.txt"
-      },
-      {
-        "src": "$(data_sourcemod_dir)/resource/closecaption_russian.txt",
-        "dest": "$(sourcemod_dir)/resource/closecaption_russian.txt"
-      },
-      {
-        "src": "$(data_sourcemod_dir)/resource/closecaption_schinese.txt",
-        "dest": "$(sourcemod_dir)/resource/closecaption_schinese.txt"
-      },
-      {
-        "src": "$(data_sourcemod_dir)/resource/closecaption_spanish.txt",
-        "dest": "$(sourcemod_dir)/resource/closecaption_spanish.txt"
-      },
-      {
-        "src": "$(data_sourcemod_dir)/resource/closecaption_swedish.txt",
-        "dest": "$(sourcemod_dir)/resource/closecaption_swedish.txt"
-      },
-      {
-        "src": "$(data_sourcemod_dir)/resource/closecaption_tchinese.txt",
-        "dest": "$(sourcemod_dir)/resource/closecaption_tchinese.txt"
-      },
-      {
-        "src": "$(data_sourcemod_dir)/resource/closecaption_thai.txt",
-        "dest": "$(sourcemod_dir)/resource/closecaption_thai.txt"
-      },
-      {
-        "src": "$(data_sourcemod_dir)/scripts/credits.txt",
-        "dest": "$(sourcemod_dir)/scripts/credits.txt"
-      },
-      {
-        "src": "$(data_sourcemod_dir)/scripts/HudLayout.res",
-        "dest": "$(sourcemod_dir)/scripts/HudLayout.res"
-      }
+      "$(sourcemod_dir)/gameinfo.txt"
     ]
   }
 ]

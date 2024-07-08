@@ -7,17 +7,20 @@ namespace SourceModPatcher
     {
         ReadOnlyDictionary<string, string> GetVariables();
         string GetVariablesFileName();
-        ReadOnlyDictionary<string, string> GetInstallVariables();
-        string GetSourceModName(string key);
-        string GetSourceModFolder(string key);
-        string GetSourceModDir(string key);
-        string GetSourceModDataDir(string key);
+        string GetSourceModName(string sourcemodID);
+        string GetSourceModFolder(string sourcemodID);
+        string GetSourceModDir(string sourcemodID);
+        string GetSourceModDataDir(string sourcemodID);
+        List<List<string>> GetRequiredContentDependencies(string sourcemodID);
+        List<List<string>> GetOptionalContentDependencies(string sourcemodID);
+        string GetContentName(string contentID);
+        List<string> GetContentOutputVariables(string contentID);
     }
 
-    public class Configuration(SourceModsConfig sourceModsConfig, InstallVariablesConfig installVariablesConfig, VariablesConfig variablesConfig) : IConfiguration
+    public class Configuration(SourceModsConfig sourceModsConfig, ContentsConfig contentsConfig, VariablesConfig variablesConfig) : IConfiguration
     {
         readonly SourceModsConfig _sourceModsConfig = sourceModsConfig;
-        readonly InstallVariablesConfig _installVariablesConfig = installVariablesConfig;
+        readonly ContentsConfig _contentsConfig = contentsConfig;
         readonly VariablesConfig _variablesConfig = variablesConfig;
 
         public ReadOnlyDictionary<string, string> GetVariables()
@@ -30,29 +33,43 @@ namespace SourceModPatcher
             return _variablesConfig.GetFileName();
         }
 
-        public ReadOnlyDictionary<string, string> GetInstallVariables()
+        public string GetSourceModName(string sourcemodID)
         {
-            return new ReadOnlyDictionary<string, string>(_installVariablesConfig.Config);
+            return _sourceModsConfig.GetSourceModName(sourcemodID);
         }
 
-        public string GetSourceModName(string key)
+        public string GetSourceModFolder(string sourcemodID)
         {
-            return _sourceModsConfig.GetSourceModName(key);
+            return _sourceModsConfig.GetSourceModFolder(sourcemodID);
         }
 
-        public string GetSourceModFolder(string key)
+        public string GetSourceModDir(string sourcemodID)
         {
-            return _sourceModsConfig.GetSourceModFolder(key);
+            return _sourceModsConfig.GetSourceModDir(sourcemodID);
         }
 
-        public string GetSourceModDir(string key)
+        public string GetSourceModDataDir(string sourcemodID)
         {
-            return _sourceModsConfig.GetSourceModDir(key);
+            return _sourceModsConfig.GetSourceModDataDir(sourcemodID);
         }
 
-        public string GetSourceModDataDir(string key)
+        public List<List<string>> GetRequiredContentDependencies(string sourcemodID)
         {
-            return _sourceModsConfig.GetSourceModDataDir(key);
+            return _sourceModsConfig.GetRequiredContentDependencies(sourcemodID);
+        }
+
+        public List<List<string>> GetOptionalContentDependencies(string sourcemodID)
+        {
+            return _sourceModsConfig.GetOptionalContentDependencies(sourcemodID);
+        }
+        public string GetContentName(string contentID)
+        {
+            return _contentsConfig.GetContentName(contentID);
+        }
+
+        public List<string> GetContentOutputVariables(string contentID)
+        {
+            return _contentsConfig.GetContentOutputVariables(contentID);
         }
     }
 }

@@ -1,0 +1,24 @@
+[
+  {
+    "$type": "extract_vpk",
+    "name": "hl2ep1_extract_content",
+    "description": "Extract Half-Life 2: Episode One content",
+    "steamappid": 380,
+    "vpks": [{"vpk": "episodic/ep1_pak_dir.vpk"}],
+    "files_to_exclude": [
+      "^.*\\.dll$",
+      "^.*\\.bin$",
+      "^.*\\.so$",
+      "^.*\\.dylib$"
+    ],
+    "outdir": "$(install_settings_install_dir)"
+  },
+  {
+    "$type": "save_variable",
+    "name": "hl2ep1_save_variable",
+    "description": "Add $(content_name) install path to $(variables_config_file_name)",
+    "depends_on": ["hl2ep1_extract_content"],
+    "variable_name": "hl2ep1_content_path",
+    "variable_value": "$(install_settings_install_dir)"
+  }
+]

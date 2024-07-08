@@ -254,6 +254,24 @@ namespace SourceContentInstaller.Tests
         }
 
         [TestMethod]
+        public void GetSteamAppInstallDirVariable()
+        {
+            var fileSystem = new MockFileSystem(new Dictionary<string, MockFileData> {
+                { "C:/steamapps.json", new MockFileData(File.ReadAllBytes("../../../data/config/steamapps.json")) }
+            });
+
+            var steamAppsConfig = new SteamAppsConfig(fileSystem, NullWriter, "C:/steamapps.json", new JSONConfigurationSerializer<JSONSteamAppsConfig>(), EmptySteamPathFinder)
+            {
+                UseConfigFile = true
+            };
+            steamAppsConfig.LoadConfig();
+
+            Assert.AreEqual("steamapps_sdkbase2006_install_dir", steamAppsConfig.GetSteamAppInstallDirVariable(215));
+            Assert.AreEqual("steamapps_sdkbase2007_install_dir", steamAppsConfig.GetSteamAppInstallDirVariable(218));
+            Assert.AreEqual("steamapps_hl2_install_dir", steamAppsConfig.GetSteamAppInstallDirVariable(220));
+        }
+
+        [TestMethod]
         public void IsSteamAppInstalled()
         {
             var fileSystem = new MockFileSystem(new Dictionary<string, MockFileData> {

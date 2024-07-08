@@ -1,0 +1,24 @@
+[
+  {
+    "$type": "extract_vpk",
+    "name": "sdkbase2013sp_hl2ep1_extract_content",
+    "description": "Extract Source SDK Base 2013 Singleplayer (EP1) content",
+    "steamappid": 243730,
+    "vpks": [{"vpk": "episodic/ep1_pak_dir.vpk"}],
+    "files_to_exclude": [
+      "^.*\\.dll$",
+      "^.*\\.bin$",
+      "^.*\\.so$",
+      "^.*\\.dylib$"
+    ],
+    "outdir": "$(install_settings_install_dir)"
+  },
+  {
+    "$type": "save_variable",
+    "name": "sdkbase2013sp_hl2ep1_save_variable",
+    "description": "Add $(content_name) EP1 install path to $(variables_config_file_name)",
+    "depends_on": ["sdkbase2013sp_hl2ep1_extract_content"],
+    "variable_name": "sdkbase2013sp_hl2ep1_content_path",
+    "variable_value": "$(install_settings_install_dir)"
+  }
+]

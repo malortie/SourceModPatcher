@@ -14,43 +14,43 @@ namespace SourceContentInstaller.Tests
             var serializer = new JSONConfigurationSerializer<JSONInstallStepsConfig>();
             var deserialized = serializer.Deserialize("""
                 {
-                    "215": "./215.install.steps.json",
-                    "218": "./218.install.steps.json",
-                    "220": "./220.install.steps.json"
+                    "sdkbase2006": "./sdkbase2006.install.steps.json",
+                    "sdkbase2007": "./sdkbase2007.install.steps.json",
+                    "hl2": "./hl2.install.steps.json"
                 }
                 """);
 
             Assert.IsNotNull(deserialized);
-            Assert.IsTrue(deserialized.ContainsKey(215));
-            Assert.IsTrue(deserialized.ContainsKey(218));
-            Assert.IsTrue(deserialized.ContainsKey(220));
+            Assert.IsTrue(deserialized.ContainsKey("sdkbase2006"));
+            Assert.IsTrue(deserialized.ContainsKey("sdkbase2007"));
+            Assert.IsTrue(deserialized.ContainsKey("hl2"));
 
-            Assert.AreEqual("./215.install.steps.json", deserialized[215]);
-            Assert.AreEqual("./218.install.steps.json", deserialized[218]);
-            Assert.AreEqual("./220.install.steps.json", deserialized[220]);
+            Assert.AreEqual("./sdkbase2006.install.steps.json", deserialized["sdkbase2006"]);
+            Assert.AreEqual("./sdkbase2007.install.steps.json", deserialized["sdkbase2007"]);
+            Assert.AreEqual("./hl2.install.steps.json", deserialized["hl2"]);
         }
 
         [TestMethod]
         public void LoadConfig_Simple()
         {
             var fileSystem = new MockFileSystem(new Dictionary<string, MockFileData> {
-                { "C:/steamapps.install.steps.json", new MockFileData(File.ReadAllBytes("../../../data/config/steamapps.install.steps.json")) }
+                { "C:/contents.install.steps.json", new MockFileData(File.ReadAllBytes("../../../data/config/contents.install.steps.json")) }
             });
 
-            var installStepsConfig = new InstallStepsConfig(fileSystem, NullWriter, "C:/steamapps.install.steps.json", new JSONConfigurationSerializer<JSONInstallStepsConfig>());
+            var installStepsConfig = new InstallStepsConfig(fileSystem, NullWriter, "C:/contents.install.steps.json", new JSONConfigurationSerializer<JSONInstallStepsConfig>());
             installStepsConfig.LoadConfig();
 
             var config = installStepsConfig.Config;
             Assert.IsNotNull(config);
-            Assert.IsTrue(config.ContainsKey(215));
-            Assert.IsTrue(config.ContainsKey(218));
-            Assert.IsTrue(config.ContainsKey(220));
-            Assert.IsTrue(config.ContainsKey(240));
+            Assert.IsTrue(config.ContainsKey("sdkbase2006"));
+            Assert.IsTrue(config.ContainsKey("sdkbase2007"));
+            Assert.IsTrue(config.ContainsKey("hl2"));
+            Assert.IsTrue(config.ContainsKey("cstrike"));
 
-            Assert.AreEqual("C:/215.install.steps.json", config[215]);
-            Assert.AreEqual("C:/218.install.steps.json", config[218]);
-            Assert.AreEqual("C:/220.install.steps.json", config[220]);
-            Assert.AreEqual("C:/240.install.steps.json", config[240]);
+            Assert.AreEqual("C:/sdkbase2006.install.steps.json", config["sdkbase2006"]);
+            Assert.AreEqual("C:/sdkbase2007.install.steps.json", config["sdkbase2007"]);
+            Assert.AreEqual("C:/hl2.install.steps.json", config["hl2"]);
+            Assert.AreEqual("C:/cstrike.install.steps.json", config["cstrike"]);
         }
     }
 }

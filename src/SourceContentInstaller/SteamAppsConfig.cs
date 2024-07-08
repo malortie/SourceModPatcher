@@ -13,6 +13,8 @@ namespace SourceContentInstaller
         public string AppManifestFile { get; set; } = string.Empty;
         [JsonPropertyName("install_dir")]
         public string InstallDir { get; set; } = string.Empty;
+        [JsonPropertyName("install_dir_variable")]
+        public string InstallDirVariable { get; set; } = string.Empty;
     }
 
     public class JSONSteamAppsConfig : SortedDictionary<int, JSONSteamAppsConfigEntry>
@@ -45,6 +47,18 @@ namespace SourceContentInstaller
         {
             return Config[appID].InstallDir;
         }
+
+        public virtual string GetSteamAppInstallDirVariable(int appID)
+        {
+            return Config[appID].InstallDirVariable;
+        }
+
+
+        public virtual Dictionary<string, string> GetSteamAppsInstallDirVariables()
+        {
+            return Config.Keys.Select(appID => (Config[appID].InstallDirVariable, Config[appID].InstallDir)).ToDictionary();
+        }
+
 
         public virtual bool IsSteamAppInstalled(int appID)
         {

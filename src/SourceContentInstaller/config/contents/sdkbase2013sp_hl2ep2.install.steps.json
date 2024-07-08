@@ -1,0 +1,34 @@
+[
+  {
+    "$type": "extract_vpk",
+    "name": "sdkbase2013sp_hl2ep2_extract_content",
+    "description": "Extract Source SDK Base 2013 Singleplayer (EP2) content",
+    "steamappid": 243730,
+    "vpks": [{"vpk": "ep2/ep2_pak_dir.vpk"}],
+    "files_to_exclude": [
+      "^.*\\.dll$",
+      "^.*\\.bin$",
+      "^.*\\.so$",
+      "^.*\\.dylib$",
+      "^.*\\.dem$",
+      "^maps/.*$"
+    ],
+    "outdir": "$(install_settings_install_dir)"
+  },
+  {
+    "$type": "save_variable",
+    "name": "sdkbase2013sp_hl2ep2_save_variable",
+    "description": "Add $(content_name) EP2 install path to $(variables_config_file_name)",
+    "depends_on": ["sdkbase2013sp_hl2ep2_extract_content"],
+    "variable_name": "sdkbase2013sp_hl2ep2_content_path",
+    "variable_value": "$(install_settings_install_dir)"
+  },
+  {
+    "$type": "save_variable",
+    "name": "source2007_ep2_save_variable",
+    "description": "Add $(content_name) EP2 (source2007 alias) install path to $(variables_config_file_name)",
+    "depends_on": ["sdkbase2013sp_hl2ep2_extract_content"],
+    "variable_name": "source2007_ep2_content_path",
+    "variable_value": "$(install_settings_install_dir)"
+  }
+]

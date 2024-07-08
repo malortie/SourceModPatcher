@@ -1,0 +1,16 @@
+[
+  {
+    "$type": "validate_variables_dependencies",
+    "name": "source_2007_mod_hl2mp_validate_dependencies",
+    "description": "Validate $(sourcemod_name) variables dependencies"
+  },
+  {
+    "$type": "replace_tokens",
+    "name": "source_2007_mod_hl2mp_replace_tokens",
+    "description": "Replace tokens in $(sourcemod_folder)/gameinfo.txt",
+    "depends_on": ["source_2007_mod_hl2mp_validate_dependencies"],
+    "files": [
+      "$(sourcemod_dir)/gameinfo.txt"
+    ]
+  }
+]

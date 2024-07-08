@@ -23,6 +23,7 @@ namespace SourceContentInstaller
         public List<ExtractVPKInstallStepDataVPK> Vpks { get; set; } = [];
         public List<string> FilesToExclude { get; set; } = [];
         public List<string> FilesToExtract { get; set; } = [];
+        public int SteamAppID { get; set; } = -1;
         [PipelineStepReplaceToken]
         public string OutDir { get; set; } = string.Empty;
     }
@@ -139,6 +140,7 @@ namespace SourceContentInstaller
             var OutDir = stepDataVPK.OutDir;
             var FilesToExclude = stepDataVPK.FilesToExclude;
             var FilesToExtract = stepDataVPK.FilesToExtract;
+            var SteamAppID = stepDataVPK.SteamAppID;
 
             if (null == Vpks || Vpks.Count <= 0)
             {
@@ -187,7 +189,7 @@ namespace SourceContentInstaller
 
             var vpks = Vpks.Select(vpk => new ExtractVPKInstallStepDataVPK
             {
-                VPKFile = PathExtensions.JoinWithSeparator(context.FileSystem, context.GetSteamAppInstallDir(), vpk.VPKFile),
+                VPKFile = PathExtensions.JoinWithSeparator(context.FileSystem, context.GetSteamAppInstallDir(SteamAppID), vpk.VPKFile),
                 FilesToExclude = vpk.FilesToExclude,
                 FilesToExtract = vpk.FilesToExtract
             }).ToList();

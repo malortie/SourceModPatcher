@@ -33,9 +33,10 @@ namespace SourceContentInstaller.Tests
             });
 
             var extractor = new VPKExtractor();
-            extractor.Extract(fileSystem, new NullWriter(), "C:/vpks/simple_vpk.vpk", "C:/output", new ExcludeAllVPKFiles());
+            var vpkExtractionResult = extractor.Extract(fileSystem, new NullWriter(), "C:/vpks/simple_vpk.vpk", "C:/output", new ExcludeAllVPKFiles());
             var expected = new string[] { };
             var actual = fileSystem.Directory.GetFiles("C:/output").Select(a => PathExtensions.ConvertToUnixDirectorySeparator(fileSystem, a)).ToArray();
+            Assert.AreEqual(VPKExtractionResult.Complete, vpkExtractionResult);
             CollectionAssert.AreEquivalent(expected, actual);
         }
 
@@ -48,13 +49,14 @@ namespace SourceContentInstaller.Tests
             });
 
             var extractor = new VPKExtractor();
-            extractor.Extract(fileSystem, new NullWriter(), "C:/vpks/simple_vpk.vpk", "C:/output", new AllowAllVPKFiles());
+            var vpkExtractionResult = extractor.Extract(fileSystem, new NullWriter(), "C:/vpks/simple_vpk.vpk", "C:/output", new AllowAllVPKFiles());
             var expected = new string[] {
                 "C:/output/file1.txt",
                 "C:/output/model.mdl",
                 "C:/output/sound.wav",
             };
             var actual = fileSystem.Directory.GetFiles("C:/output").Select(a => PathExtensions.ConvertToUnixDirectorySeparator(fileSystem, a)).ToArray();
+            Assert.AreEqual(VPKExtractionResult.Complete, vpkExtractionResult);
             CollectionAssert.AreEquivalent(expected, actual);
         }
 
@@ -67,12 +69,13 @@ namespace SourceContentInstaller.Tests
             });
 
             var extractor = new VPKExtractor();
-            extractor.Extract(fileSystem, new NullWriter(), "C:/vpks/simple_vpk.vpk", "C:/output", new NoSoundWavFilter());
+            var vpkExtractionResult = extractor.Extract(fileSystem, new NullWriter(), "C:/vpks/simple_vpk.vpk", "C:/output", new NoSoundWavFilter());
             var expected = new string[] {
                 "C:/output/file1.txt",
                 "C:/output/model.mdl"
             };
             var actual = fileSystem.Directory.GetFiles("C:/output").Select(a => PathExtensions.ConvertToUnixDirectorySeparator(fileSystem, a)).ToArray();
+            Assert.AreEqual(VPKExtractionResult.Complete, vpkExtractionResult);
             CollectionAssert.AreEquivalent(expected, actual);
         }
     }

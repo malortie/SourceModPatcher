@@ -4,6 +4,7 @@
     "name": "step_extract_content",
     "description": "Extract game content",
     "depends_on": ["previous_step1"],
+    "steamappid": 0,
     "vpks": [
       {
         "vpk": "test.vpk",

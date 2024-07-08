@@ -1,29 +1,24 @@
 [
   {
-    "$type": "copy_files",
-    "name": "eclipse_copy_files",
-    "description": "Copy files to $(sourcemod_folder)",
+    "$type": "validate_variables_dependencies",
+    "name": "eclipse_validate_dependencies",
+    "description": "Validate $(sourcemod_name) variables dependencies"
+  },
+  {
+    "$type": "copy_directory",
+    "name": "eclipse_copy_directory",
+    "description": "Copy directory to $(sourcemod_folder)",
+    "depends_on": ["eclipse_validate_dependencies"],
+    "src": "$(data_sourcemod_dir)",
+    "dest": "$(sourcemod_dir)"
+  },
+  {
+    "$type": "replace_tokens",
+    "name": "eclipse_replace_tokens",
+    "description": "Replace tokens in $(sourcemod_folder)/gameinfo.txt",
+    "depends_on": ["eclipse_copy_directory"],
     "files": [
-      {
-        "src": "$(data_sourcemod_dir)/gameinfo.txt",
-        "dest": "$(sourcemod_dir)/gameinfo.txt"
-      },
-      {
-        "src": "$(data_sourcemod_dir)/materials/console/background01_widescreen.vtf",
-        "dest": "$(sourcemod_dir)/materials/console/background01_widescreen.vtf"
-      },
-      {
-        "src": "$(data_sourcemod_dir)/materials/console/background02_widescreen.vtf",
-        "dest": "$(sourcemod_dir)/materials/console/background02_widescreen.vtf"
-      },
-      {
-        "src": "$(data_sourcemod_dir)/materials/console/background03_widescreen.vtf",
-        "dest": "$(sourcemod_dir)/materials/console/background03_widescreen.vtf"
-      },
-      {
-        "src": "$(data_sourcemod_dir)/materials/models/player/violet_tx_tmp.vmt",
-        "dest": "$(sourcemod_dir)/materials/models/player/violet_tx_tmp.vmt"
-      }
+      "$(sourcemod_dir)/gameinfo.txt"
     ]
   }
 ]

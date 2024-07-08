@@ -2,71 +2,85 @@
   "215": {
     "name": "Source SDK Base 2006",
     "appmanifest_file": "appmanifest_215.acf",
-    "install_dir": "C:/Program Files (x86)/Steam/steamapps/common/Source SDK Base"
+    "install_dir": "C:/Program Files (x86)/Steam/steamapps/common/Source SDK Base",
+    "install_dir_variable": "steamapps_sdkbase2006_install_dir"
   },
   "218": {
     "name": "Source SDK Base 2007",
     "appmanifest_file": "appmanifest_218.acf",
-    "install_dir": "C:/Program Files (x86)/Steam/steamapps/common/Source SDK Base 2007"
+    "install_dir": "C:/Program Files (x86)/Steam/steamapps/common/Source SDK Base 2007",
+    "install_dir_variable": "steamapps_sdkbase2007_install_dir"
   },
   "220": {
     "name": "Half-Life 2",
     "appmanifest_file": "appmanifest_220.acf",
-    "install_dir": "C:/Program Files (x86)/Steam/steamapps/common/Half-Life 2"
+    "install_dir": "C:/Program Files (x86)/Steam/steamapps/common/Half-Life 2",
+    "install_dir_variable": "steamapps_hl2_install_dir"
   },
   "240": {
     "name": "Counter-Strike: Source",
     "appmanifest_file": "appmanifest_240.acf",
-    "install_dir": "C:/Program Files (x86)/Steam/steamapps/common/Counter-Strike Source"
+    "install_dir": "C:/Program Files (x86)/Steam/steamapps/common/Counter-Strike Source",
+    "install_dir_variable": "steamapps_cstrike_install_dir"
   },
   "280": {
     "name": "Half-Life: Source",
     "appmanifest_file": "appmanifest_280.acf",
-    "install_dir": "C:/Program Files (x86)/Steam/steamapps/common/Half-Life 2"
+    "install_dir": "C:/Program Files (x86)/Steam/steamapps/common/Half-Life 2",
+    "install_dir_variable": "steamapps_hl1_install_dir"
   },
   "300": {
     "name": "Day of Defeat: Source",
     "appmanifest_file": "appmanifest_300.acf",
-    "install_dir": "C:/Program Files (x86)/Steam/steamapps/common/day of defeat source"
+    "install_dir": "C:/Program Files (x86)/Steam/steamapps/common/day of defeat source",
+    "install_dir_variable": "steamapps_dod_install_dir"
   },
   "320": {
     "name": "Half-Life 2: Deathmatch",
     "appmanifest_file": "appmanifest_320.acf",
-    "install_dir": "C:/Program Files (x86)/Steam/steamapps/common/Half-Life 2 Deathmatch"
+    "install_dir": "C:/Program Files (x86)/Steam/steamapps/common/Half-Life 2 Deathmatch",
+    "install_dir_variable": "steamapps_hl2mp_install_dir"
   },
   "340": {
     "name": "Half-Life 2: Lost Coast",
     "appmanifest_file": "appmanifest_340.acf",
-    "install_dir": "C:/Program Files (x86)/Steam/steamapps/common/Half-Life 2"
+    "install_dir": "C:/Program Files (x86)/Steam/steamapps/common/Half-Life 2",
+    "install_dir_variable": "steamapps_lostcoast_install_dir"
   },
   "360": {
     "name": "Half-Life Deathmatch: Source",
     "appmanifest_file": "appmanifest_360.acf",
-    "install_dir": "C:/Program Files (x86)/Steam/steamapps/common/Half-Life 1 Source Deathmatch"
+    "install_dir": "C:/Program Files (x86)/Steam/steamapps/common/Half-Life 1 Source Deathmatch",
+    "install_dir_variable": "steamapps_hl1mp_install_dir"
   },
   "380": {
     "name": "Half-Life 2: Episode One",
     "appmanifest_file": "appmanifest_380.acf",
-    "install_dir": "C:/Program Files (x86)/Steam/steamapps/common/Half-Life 2"
+    "install_dir": "C:/Program Files (x86)/Steam/steamapps/common/Half-Life 2",
+    "install_dir_variable": "steamapps_hl2ep1_install_dir"
   },
   "400": {
     "name": "Portal",
     "appmanifest_file": "appmanifest_400.acf",
-    "install_dir": "C:/Program Files (x86)/Steam/steamapps/common/Portal"
+    "install_dir": "C:/Program Files (x86)/Steam/steamapps/common/Portal",
+    "install_dir_variable": "steamapps_portal_install_dir"
   },
   "420": {
     "name": "Half-Life 2: Episode Two",
     "appmanifest_file": "appmanifest_420.acf",
-    "install_dir": "C:/Program Files (x86)/Steam/steamapps/common/Half-Life 2"
+    "install_dir": "C:/Program Files (x86)/Steam/steamapps/common/Half-Life 2",
+    "install_dir_variable": "steamapps_hl2ep2_install_dir"
   },
   "243730": {
     "name": "Source SDK Base 2013 Singleplayer",
     "appmanifest_file": "appmanifest_243730.acf",
-    "install_dir": "C:/Program Files (x86)/Steam/steamapps/common/Source SDK Base 2013 Singleplayer"
+    "install_dir": "C:/Program Files (x86)/Steam/steamapps/common/Source SDK Base 2013 Singleplayer",
+    "install_dir_variable": "steamapps_sdkbase2013sp_install_dir"
   },
   "243750": {
     "name": "Source SDK Base 2013 Multiplayer",
     "appmanifest_file": "appmanifest_243750.acf",
-    "install_dir": "C:/Program Files (x86)/Steam/steamapps/common/Source SDK Base 2013 Multiplayer"
+    "install_dir": "C:/Program Files (x86)/Steam/steamapps/common/Source SDK Base 2013 Multiplayer",
+    "install_dir_variable": "steamapps_sdkbase2013mp_install_dir"
   }
 }

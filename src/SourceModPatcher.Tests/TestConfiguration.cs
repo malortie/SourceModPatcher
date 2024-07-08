@@ -50,9 +50,29 @@ namespace SourceModPatcher.Tests
         }
     }
 
-    public class InstallVariablesConfigMock(IFileSystem fileSystem, IWriter writer, string filePath, IConfigurationSerializer<JSONInstallVariablesConfig> configSerializer) : InstallVariablesConfig(fileSystem, writer, filePath, configSerializer)
+    public class ContentsConfigMock(IFileSystem fileSystem, IWriter writer, string filePath, IConfigurationSerializer<JSONContentsConfig> configSerializer) : ContentsConfig(fileSystem, writer, filePath, configSerializer)
     {
-        public JSONInstallVariablesConfig ConfigSetter { set { Config = value; } }
+        public int GetContentNameTotal { get; private set; } = 0;
+        public int GetContentSteamAppsDependenciesTotal { get; private set; } = 0;
+        public int GetContentOutputVariablesTotal { get; private set; } = 0;
+
+        public override string GetContentName(string contentID)
+        {
+            ++GetContentNameTotal;
+            return string.Empty;
+        }
+
+        public override List<int> GetContentSteamAppsDependencies(string contentID)
+        {
+            ++GetContentSteamAppsDependenciesTotal;
+            return [];
+        }
+
+        public override List<string> GetContentOutputVariables(string contentID)
+        {
+            ++GetContentOutputVariablesTotal;
+            return [];
+        }
     }
 
     public class VariablesConfigMock(IFileSystem fileSystem, IWriter writer, string filePath, IConfigurationSerializer<JSONVariablesConfig> configSerializer) : VariablesConfig(fileSystem, writer, filePath, configSerializer)
@@ -74,6 +94,7 @@ namespace SourceModPatcher.Tests
     {
         static readonly IWriter NullWriter = new NullWriter();
         static readonly IConfigurationSerializer<JSONSourceModsConfig> NullSourceModsConfigSerializer = new NullConfigurationSerializer<JSONSourceModsConfig>();
+        static readonly IConfigurationSerializer<JSONContentsConfig> NullContentsConfigSerializer = new NullConfigurationSerializer<JSONContentsConfig>();
         static readonly IConfigurationSerializer<JSONInstallVariablesConfig> NullInstallVariablesConfigSerializer = new NullConfigurationSerializer<JSONInstallVariablesConfig>();
         static readonly IConfigurationSerializer<JSONVariablesConfig> NullVariablesConfigSerializer = new NullConfigurationSerializer<JSONVariablesConfig>();
 
@@ -82,7 +103,7 @@ namespace SourceModPatcher.Tests
         {
             var fileSystem = new MockFileSystem();
             var sourceModsConfig = new SourceModsConfigMock(fileSystem, NullWriter, string.Empty, NullSourceModsConfigSerializer, string.Empty);
-            var installVariablesConfig = new InstallVariablesConfigMock(fileSystem, NullWriter, string.Empty, NullInstallVariablesConfigSerializer);
+            var contentsConfig = new ContentsConfigMock(fileSystem, NullWriter, string.Empty, NullContentsConfigSerializer);
             var variablesConfig = new VariablesConfigMock(fileSystem, NullWriter, string.Empty, NullVariablesConfigSerializer)
             {
                 ConfigSetter = new JSONVariablesConfig
@@ -93,7 +114,7 @@ namespace SourceModPatcher.Tests
             }
             };
 
-            var configuration = new Configuration(sourceModsConfig, installVariablesConfig, variablesConfig);
+            var configuration = new Configuration(sourceModsConfig, contentsConfig, variablesConfig);
             var variables = configuration.GetVariables();
 
             Assert.AreEqual(3, variables.Keys.Count);
@@ -110,40 +131,13 @@ namespace SourceModPatcher.Tests
         {
             var fileSystem = new MockFileSystem();
             var sourceModsConfig = new SourceModsConfigMock(fileSystem, NullWriter, string.Empty, NullSourceModsConfigSerializer, string.Empty);
-            var installVariablesConfig = new InstallVariablesConfigMock(fileSystem, NullWriter, string.Empty, NullInstallVariablesConfigSerializer);
+            var contentsConfig = new ContentsConfigMock(fileSystem, NullWriter, string.Empty, NullContentsConfigSerializer);
             var variablesConfig = new VariablesConfigMock(fileSystem, NullWriter, string.Empty, NullVariablesConfigSerializer);
 
-            var configuration = new Configuration(sourceModsConfig, installVariablesConfig, variablesConfig);
+            var configuration = new Configuration(sourceModsConfig, contentsConfig, variablesConfig);
             configuration.GetVariablesFileName();
 
             Assert.AreEqual(1, variablesConfig.FileNameTotal);
-        }
-
-        [TestMethod]
-        public void GetInstallVariables_Returns_InstallVariablesConfig_Variables()
-        {
-            var fileSystem = new MockFileSystem();
-            var sourceModsConfig = new SourceModsConfigMock(fileSystem, NullWriter, string.Empty, NullSourceModsConfigSerializer, string.Empty);
-            var installVariablesConfig = new InstallVariablesConfigMock(fileSystem, NullWriter, string.Empty, NullInstallVariablesConfigSerializer);
-            var variablesConfig = new VariablesConfigMock(fileSystem, NullWriter, string.Empty, NullVariablesConfigSerializer);
-
-            installVariablesConfig.ConfigSetter = new JSONInstallVariablesConfig
-            {
-                { "data_dir", "C:/data" },
-                { "data_mods_dir", "C:/data/mods" },
-                { "data_sdks_dir", "C:/data/sdks" }
-            };
-
-            var configuration = new Configuration(sourceModsConfig, installVariablesConfig, variablesConfig);
-            var variables = configuration.GetInstallVariables();
-
-            Assert.AreEqual(3, variables.Keys.Count);
-            Assert.IsTrue(variables.ContainsKey("data_dir"));
-            Assert.IsTrue(variables.ContainsKey("data_mods_dir"));
-            Assert.IsTrue(variables.ContainsKey("data_sdks_dir"));
-            Assert.AreEqual("C:/data", variables["data_dir"]);
-            Assert.AreEqual("C:/data/mods", variables["data_mods_dir"]);
-            Assert.AreEqual("C:/data/sdks", variables["data_sdks_dir"]);
         }
 
         [TestMethod]
@@ -151,10 +145,10 @@ namespace SourceModPatcher.Tests
         {
             var fileSystem = new MockFileSystem();
             var sourceModsConfig = new SourceModsConfigMock(fileSystem, NullWriter, string.Empty, NullSourceModsConfigSerializer, string.Empty);
-            var installVariablesConfig = new InstallVariablesConfigMock(fileSystem, NullWriter, string.Empty, NullInstallVariablesConfigSerializer);
+            var contentsConfig = new ContentsConfigMock(fileSystem, NullWriter, string.Empty, NullContentsConfigSerializer);
             var variablesConfig = new VariablesConfigMock(fileSystem, NullWriter, string.Empty, NullVariablesConfigSerializer);
 
-            var configuration = new Configuration(sourceModsConfig, installVariablesConfig, variablesConfig);
+            var configuration = new Configuration(sourceModsConfig, contentsConfig, variablesConfig);
             configuration.GetSourceModName(string.Empty);
 
             Assert.AreEqual(1, sourceModsConfig.GetSourceModNameTotal);
@@ -165,10 +159,10 @@ namespace SourceModPatcher.Tests
         {
             var fileSystem = new MockFileSystem();
             var sourceModsConfig = new SourceModsConfigMock(fileSystem, NullWriter, string.Empty, NullSourceModsConfigSerializer, string.Empty);
-            var installVariablesConfig = new InstallVariablesConfigMock(fileSystem, NullWriter, string.Empty, NullInstallVariablesConfigSerializer);
+            var contentsConfig = new ContentsConfigMock(fileSystem, NullWriter, string.Empty, NullContentsConfigSerializer);
             var variablesConfig = new VariablesConfigMock(fileSystem, NullWriter, string.Empty, NullVariablesConfigSerializer);
 
-            var configuration = new Configuration(sourceModsConfig, installVariablesConfig, variablesConfig);
+            var configuration = new Configuration(sourceModsConfig, contentsConfig, variablesConfig);
             configuration.GetSourceModFolder(string.Empty);
 
             Assert.AreEqual(1, sourceModsConfig.GetSourceModFolderTotal);
@@ -179,10 +173,10 @@ namespace SourceModPatcher.Tests
         {
             var fileSystem = new MockFileSystem();
             var sourceModsConfig = new SourceModsConfigMock(fileSystem, NullWriter, string.Empty, NullSourceModsConfigSerializer, string.Empty);
-            var installVariablesConfig = new InstallVariablesConfigMock(fileSystem, NullWriter, string.Empty, NullInstallVariablesConfigSerializer);
+            var contentsConfig = new ContentsConfigMock(fileSystem, NullWriter, string.Empty, NullContentsConfigSerializer);
             var variablesConfig = new VariablesConfigMock(fileSystem, NullWriter, string.Empty, NullVariablesConfigSerializer);
 
-            var configuration = new Configuration(sourceModsConfig, installVariablesConfig, variablesConfig);
+            var configuration = new Configuration(sourceModsConfig, contentsConfig, variablesConfig);
             configuration.GetSourceModDir(string.Empty);
 
             Assert.AreEqual(1, sourceModsConfig.GetSourceModDirTotal);
@@ -193,10 +187,10 @@ namespace SourceModPatcher.Tests
         {
             var fileSystem = new MockFileSystem();
             var sourceModsConfig = new SourceModsConfigMock(fileSystem, NullWriter, string.Empty, NullSourceModsConfigSerializer, string.Empty);
-            var installVariablesConfig = new InstallVariablesConfigMock(fileSystem, NullWriter, string.Empty, NullInstallVariablesConfigSerializer);
+            var contentsConfig = new ContentsConfigMock(fileSystem, NullWriter, string.Empty, NullContentsConfigSerializer);
             var variablesConfig = new VariablesConfigMock(fileSystem, NullWriter, string.Empty, NullVariablesConfigSerializer);
 
-            var configuration = new Configuration(sourceModsConfig, installVariablesConfig, variablesConfig);
+            var configuration = new Configuration(sourceModsConfig, contentsConfig, variablesConfig);
             configuration.GetSourceModDataDir(string.Empty);
 
             Assert.AreEqual(1, sourceModsConfig.GetSourceModDataDirTotal);

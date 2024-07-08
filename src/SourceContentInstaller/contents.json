@@ -1,0 +1,167 @@
+{
+  "cstrike": {
+    "name": "Counter-Strike: Source (base)",
+    "steamapps_dependencies": [240],
+    "output_variables": ["cstrike_content_path"]
+  },
+  "cstrike_maps": {
+    "name": "Counter-Strike: Source (maps)",
+    "steamapps_dependencies": [240],
+    "output_variables": ["cstrike_maps_content_path", "cstrike_gamedir"]
+  },
+  "dod": {
+    "name": "Day of Defeat: Source (base)",
+    "steamapps_dependencies": [300],
+    "output_variables": ["dod_content_path"]
+  },
+  "dod_maps": {
+    "name": "Day of Defeat: Source (maps)",
+    "steamapps_dependencies": [300],
+    "output_variables": ["dod_maps_content_path", "dod_gamedir"]
+  },
+  "hl1": {
+    "name": "Half-Life: Source (base)",
+    "steamapps_dependencies": [280],
+    "output_variables": ["hl1_content_path"]
+  },
+  "hl1_hd": {
+    "name": "Half-Life: Source (HD content)",
+    "steamapps_dependencies": [280],
+    "output_variables": ["hl1_hd_content_path"]
+  },
+  "hl1_maps": {
+    "name": "Half-Life: Source (maps)",
+    "steamapps_dependencies": [280],
+    "output_variables": ["hl1_maps_content_path", "hl1_gamedir"]
+  },
+  "hl1mp": {
+    "name": "Half-Life Deathmatch: Source (base)",
+    "steamapps_dependencies": [360],
+    "output_variables": ["hl1mp_content_path"]
+  },
+  "hl1mp_maps": {
+    "name": "Half-Life Deathmatch: Source (maps)",
+    "steamapps_dependencies": [360],
+    "output_variables": ["hl1mp_maps_content_path", "hl1mp_gamedir"]
+  },
+  "hl2": {
+    "name": "Half-Life 2 (base)",
+    "steamapps_dependencies": [220],
+    "output_variables": ["hl2_content_path"]
+  },
+  "hl2_maps": {
+    "name": "Half-Life 2 (maps)",
+    "steamapps_dependencies": [220],
+    "output_variables": ["hl2_maps_content_path", "hl2_gamedir"]
+  },
+  "hl2ep1": {
+    "name": "Half-Life 2: Episode One",
+    "steamapps_dependencies": [380],
+    "output_variables": ["hl2ep1_content_path"]
+  },
+  "hl2ep2": {
+    "name": "Half-Life 2: Episode Two",
+    "steamapps_dependencies": [420],
+    "output_variables": ["hl2ep2_content_path"]
+  },
+  "hl2mp": {
+    "name": "Half-Life 2 Deathmatch (base)",
+    "steamapps_dependencies": [320],
+    "output_variables": ["hl2mp_content_path"]
+  },
+  "hl2mp_maps": {
+    "name": "Half-Life 2 Deathmatch (maps)",
+    "steamapps_dependencies": [320],
+    "output_variables": ["hl2mp_maps_content_path", "hl2mp_gamedir"]
+  },
+  "lostcoast": {
+    "name": "Half-Life 2: Lost Coast (base)",
+    "steamapps_dependencies": [340],
+    "output_variables": ["lostcoast_content_path"]
+  },
+  "lostcoast_maps": {
+    "name": "Half-Life 2: Lost Coast (maps)",
+    "steamapps_dependencies": [340],
+    "output_variables": ["lostcoast_maps_content_path", "lostcoast_gamedir"]
+  },
+  "portal": {
+    "name": "Portal (base)",
+    "steamapps_dependencies": [400],
+    "output_variables": ["portal_content_path"]
+  },
+  "portal_maps": {
+    "name": "Portal (maps)",
+    "steamapps_dependencies": [400],
+    "output_variables": ["portal_maps_content_path", "portal_gamedir"]
+  },
+  "sdkbase2006": {
+    "name": "Source SDK Base 2006",
+    "steamapps_dependencies": [215],
+    "output_variables": ["sdkbase2006_content_path"]
+  },
+  "sdkbase2007": {
+    "name": "Source SDK Base 2007",
+    "steamapps_dependencies": [218],
+    "output_variables": ["sdkbase2007_content_path"]
+  },
+  "sdkbase2013mp_hl2": {
+    "name": "Source SDK Base 2013 Multiplayer (HL2)",
+    "steamapps_dependencies": [243750],
+    "output_variables": ["sdkbase2013mp_hl2_content_path"]
+  },
+  "sdkbase2013mp_hl2mp": {
+    "name": "Source SDK Base 2013 Multiplayer (HL2:DM)",
+    "steamapps_dependencies": [243750],
+    "output_variables": ["sdkbase2013mp_hl2mp_content_path", "source2006_hl2mp_content_path", "source2007_hl2mp_content_path"]
+  },
+  "sdkbase2013sp_hl2": {
+    "name": "Source SDK Base 2013 Singleplayer (HL2)",
+    "steamapps_dependencies": [243730],
+    "output_variables": ["sdkbase2013sp_hl2_content_path"]
+  },
+  "sdkbase2013sp_hl2ep1": {
+    "name": "Source SDK Base 2013 Singleplayer (HL2:EP1)",
+    "steamapps_dependencies": [243730],
+    "output_variables": ["sdkbase2013sp_hl2ep1_content_path"]
+  },
+  "sdkbase2013sp_hl2ep2": {
+    "name": "Source SDK Base 2013 Singleplayer (HL2:EP2)",
+    "steamapps_dependencies": [243730],
+    "output_variables": ["sdkbase2013sp_hl2ep2_content_path", "source2007_ep2_content_path"]
+  },
+  "sdkbase2013sp_hl2ep2_maps": {
+    "name": "Source SDK Base 2013 Singleplayer (HL2:EP2) (maps)",
+    "steamapps_dependencies": [243730],
+    "output_variables": ["sdkbase2013sp_hl2ep2_maps_content_path", "source2007_ep2_maps_content_path"]
+  },
+  "source2006_episodic": {
+    "name": "Source 2006 (Episodic) (base)",
+    "steamapps_dependencies": [215],
+    "output_variables": ["source2006_episodic_content_path"]
+  },
+  "source2006_episodic_maps": {
+    "name": "Source 2006 (Episodic) (maps)",
+    "steamapps_dependencies": [215],
+    "output_variables": ["source2006_episodic_maps_content_path"]
+  },
+  "source2006_hl2": {
+    "name": "Source 2006 (HL2)",
+    "steamapps_dependencies": [215],
+    "output_variables": ["source2006_hl2_content_path"]
+  },
+  "source2007_episodic": {
+    "name": "Source 2007 (Episodic) (base)",
+    "steamapps_dependencies": [218],
+    "output_variables": ["source2007_episodic_content_path"]
+  },
+  "source2007_episodic_maps": {
+    "name": "Source 2007 (Episodic) (maps)",
+    "steamapps_dependencies": [218],
+    "output_variables": ["source2007_episodic_maps_content_path"]
+  },
+  "source2007_hl2": {
+    "name": "Source 2007 (HL2)",
+    "steamapps_dependencies": [218],
+    "output_variables": ["source2007_hl2_content_path"]
+  }
+}

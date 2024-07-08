@@ -1,0 +1,25 @@
+[
+  {
+    "$type": "extract_vpk",
+    "name": "cstrike_extract_content",
+    "description": "Extract Counter-Strike: Source content",
+    "steamappid": 240,
+    "vpks": [{"vpk": "cstrike/cstrike_pak_dir.vpk"}],
+    "files_to_exclude": [
+      "^.*\\.dll$",
+      "^.*\\.bin$",
+      "^.*\\.so$",
+      "^.*\\.dylib$",
+      "^maps/.*$"
+    ],
+    "outdir": "$(install_settings_install_dir)"
+  },
+  {
+    "$type": "save_variable",
+    "name": "cstrike_save_variable",
+    "description": "Add $(content_name) install path to $(variables_config_file_name)",
+    "depends_on": ["cstrike_extract_content"],
+    "variable_name": "cstrike_content_path",
+    "variable_value": "$(install_settings_install_dir)"
+  }
+]

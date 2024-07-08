@@ -71,24 +71,13 @@ namespace SourceModPatcher.Tests
             {
                 Name = "step3",
                 Description = "simple step",
-                DependsOn = ["step1", "step2"],
-                Dependencies = [
-                    ["dependency_1"],
-                    ["dependency_2a", "dependency_2b"],
-                    ["dependency_3"]
-                ]
+                DependsOn = ["step1", "step2"]
             });
 
             Assert.IsNotNull(mappedStepData);
             Assert.AreEqual("step3", mappedStepData.Name);
             Assert.AreEqual("simple step", mappedStepData.Description);
             CollectionAssert.AreEquivalent(new List<string> { "step1", "step2" }, mappedStepData.DependsOn);
-
-            Assert.IsNotNull(mappedStepData.Dependencies);
-            Assert.AreEqual(3, mappedStepData.Dependencies.Count);
-            CollectionAssert.AreEquivalent(new List<string> { "dependency_1" }, mappedStepData.Dependencies[0]);
-            CollectionAssert.AreEquivalent(new List<string> { "dependency_2a", "dependency_2b" }, mappedStepData.Dependencies[1]);
-            CollectionAssert.AreEquivalent(new List<string> { "dependency_3" }, mappedStepData.Dependencies[2]);
         }
     }
 }

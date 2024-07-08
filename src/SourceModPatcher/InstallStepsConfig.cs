@@ -7,6 +7,7 @@ namespace SourceModPatcher
 {
     [JsonPolymorphic(TypeDiscriminatorPropertyName = "$type")]
     [JsonDerivedType(typeof(JSONCopyFilesInstallStep), typeDiscriminator: "copy_files")]
+    [JsonDerivedType(typeof(JSONCopyDirectoryInstallStep), typeDiscriminator: "copy_directory")]
     [JsonDerivedType(typeof(JSONReplaceTokensInstallStep), typeDiscriminator: "replace_tokens")]
     [JsonDerivedType(typeof(JSONValidateVariablesDependenciesInstallStep), typeDiscriminator: "validate_variables_dependencies")]
     public class JSONInstallStep
@@ -31,6 +32,14 @@ namespace SourceModPatcher
     {
         [JsonPropertyName("files")]
         public List<JSONCopyFilesInstallStepFile>? Files { get; set; }
+    }
+
+    public class JSONCopyDirectoryInstallStep : JSONInstallStep
+    {
+        [JsonPropertyName("src")]
+        public string? Source { get; set; }
+        [JsonPropertyName("dest")]
+        public string? Destination { get; set; }
     }
 
     public class JSONReplaceTokensInstallStep : JSONInstallStep

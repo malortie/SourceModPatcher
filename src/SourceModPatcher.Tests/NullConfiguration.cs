@@ -38,5 +38,25 @@ namespace SourceModPatcher.Tests
         {
             return string.Empty;
         }
+
+        public List<List<string>> GetRequiredContentDependencies(string sourcemodID)
+        {
+            return [];
+        }
+
+        public List<List<string>> GetOptionalContentDependencies(string sourcemodID)
+        {
+            return [];
+        }
+
+        public string GetContentName(string contentID)
+        {
+            return string.Empty;
+        }
+
+        public List<string> GetContentOutputVariables(string contentID)
+        {
+            return [];
+        }
     }
 }

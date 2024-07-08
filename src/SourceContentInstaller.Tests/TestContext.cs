@@ -6,7 +6,9 @@ namespace SourceContentInstaller.Tests
     {
         public int GetSteamAppNameTotal { get; private set; } = 0;
         public int GetSteamAppInstallDirTotal { get; private set; } = 0;
+        public int GetSteamAppsInstallDirVariablesTotal { get; private set; } = 0;
         public int SaveVariableTotal { get; private set; } = 0;
+        public int GetContentNameTotal { get; private set; } = 0;
         public int GetContentInstallDirTotal { get; private set; } = 0;
         public int GetVariablesFileNameTotal { get; private set; } = 0;
 
@@ -22,12 +24,23 @@ namespace SourceContentInstaller.Tests
             return string.Empty;
         }
 
+        public virtual Dictionary<string, string> GetSteamAppsInstallDirVariables()
+        {
+            ++GetSteamAppsInstallDirVariablesTotal;
+            return new();
+        }
+
         public void SaveVariable(string name, string value)
         {
             ++SaveVariableTotal;
         }
+        public string GetContentName(string ContentID)
+        {
+            ++GetContentNameTotal;
+            return string.Empty;
+        }
 
-        public string GetContentInstallDir(int AppID)
+        public string GetContentInstallDir(string ContentID)
         {
             ++GetContentInstallDirTotal;
             return string.Empty;
@@ -48,7 +61,7 @@ namespace SourceContentInstaller.Tests
         {
             var configuration = new ConfigurationMock();
             var context = new Context(new MockFileSystem(), configuration);
-            context.GetSteamAppName();
+            context.GetSteamAppName(0);
             Assert.AreEqual(1, configuration.GetSteamAppNameTotal);
         }
 
@@ -57,7 +70,7 @@ namespace SourceContentInstaller.Tests
         {
             var configuration = new ConfigurationMock();
             var context = new Context(new MockFileSystem(), configuration);
-            context.GetSteamAppInstallDir();
+            context.GetSteamAppInstallDir(0);
             Assert.AreEqual(1, configuration.GetSteamAppInstallDirTotal);
         }
 
@@ -68,6 +81,15 @@ namespace SourceContentInstaller.Tests
             var context = new Context(new MockFileSystem(), configuration);
             context.SaveVariable("hl2_content_path", "C:/Half-Life 2");
             Assert.AreEqual(1, configuration.SaveVariableTotal);
+        }
+
+        [TestMethod]
+        public void Call_Configuration_GetContentName()
+        {
+            var configuration = new ConfigurationMock();
+            var context = new Context(new MockFileSystem(), configuration);
+            context.GetContentName();
+            Assert.AreEqual(1, configuration.GetContentNameTotal);
         }
 
         [TestMethod]
