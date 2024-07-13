@@ -1,0 +1,8 @@
+"sky"
+{
+	"$hdrcompressedTexture" "skybox/sky_day02_03_hdrrt"
+	"$nofog" "1"
+	"$ignorez" "1"
+	"$basetexture" "skybox/sky_day02_03rt"
+
+}
