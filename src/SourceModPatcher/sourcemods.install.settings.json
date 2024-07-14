@@ -6,75 +6,75 @@
     "install": false
   },
   "blacksnow": {
-    "install": true
+    "install": false
   },
   "coastline_to_atmosphere": {
-    "install": true
+    "install": false
   },
   "eclipse": {
-    "install": true
+    "install": false
   },
   "eots": {
-    "install": true
+    "install": false
   },
   "get_a_life": {
-    "install": true
+    "install": false
   },
   "halloween": {
-    "install": true
+    "install": false
   },
   "halloween_redux": {
-    "install": true
+    "install": false
   },
   "hoe": {
-    "install": true
+    "install": false
   },
   "human_error": {
-    "install": true
+    "install": false
   },
   "missionimprobable": {
-    "install": true
+    "install": false
   },
   "ravenholmncz": {
-    "install": true
+    "install": false
   },
   "research_and_development": {
-    "install": true
+    "install": false
   },
   "shantytown": {
-    "install": true
+    "install": false
   },
   "source_2004_mod_hl2": {
-    "install": true
+    "install": false
   },
   "source_2004_mod_sdk": {
-    "install": true
+    "install": false
   },
   "source_2006_mod_episodic": {
-    "install": true
+    "install": false
   },
   "source_2006_mod_hl2": {
-    "install": true
+    "install": false
   },
   "source_2006_mod_hl2mp": {
-    "install": true
+    "install": false
   },
   "source_2006_mod_sdksample": {
-    "install": true
+    "install": false
   },
   "source_2007_mod_ep2": {
-    "install": true
+    "install": false
   },
   "source_2007_mod_episodic": {
-    "install": true
+    "install": false
   },
   "source_2007_mod_hl2": {
-    "install": true
+    "install": false
   },
   "source_2007_mod_hl2mp": {
-    "install": true
+    "install": false
   },
   "source_2007_mod_template": {
-    "install": true
+    "install": false
   }
 }
