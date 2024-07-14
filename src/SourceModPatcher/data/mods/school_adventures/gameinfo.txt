@@ -1,0 +1,24 @@
+"GameInfo"
+{
+	game	"School Adventures"
+	title	" "
+	type	singleplayer_only
+        developer_url 	"http://mods.moddb.com/8116/school-adventures/"
+              icon        "icon_sa"
+              developer    "Dosia36"
+
+	FileSystem
+	{
+		SteamAppId				215
+		ToolsAppId				211
+		
+		SearchPaths
+		{
+			Game	|gameinfo_path|.
+			Game	"${{source2006_hl2_binaries_path}}"
+			Game	"${{source2006_hl2_patches_path}}"
+			Game	"${{source2006_hl2_content_path}}"
+			Game	hl2
+		}
+	}
+}

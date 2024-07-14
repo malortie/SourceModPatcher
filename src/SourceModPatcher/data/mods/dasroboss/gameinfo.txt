@@ -1,0 +1,25 @@
+"GameInfo"
+{
+	game	"Das Roboss"
+	title	"Das Roboss"
+	type	"singleplayer_only"
+	developer	"www.tylak.com"
+	developer_url	 "www.tylak.com"
+
+	icon	""
+
+	FileSystem
+	{
+		SteamAppId				215
+		ToolsAppId				211
+
+		SearchPaths
+		{
+			Game	|gameinfo_path|.
+			Game	"${{source2004_hl2_binaries_path}}"
+			Game	"${{source2004_hl2_patches_path}}"
+			Game	"${{source2004_hl2_content_path}}"
+			Game	hl2
+		}
+	}
+}

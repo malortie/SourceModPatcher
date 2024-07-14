@@ -1,0 +1,27 @@
+"GameInfo"
+{
+	// This is what shows up in the 'Third Party Games' area of the Steam games list.
+	game						"Ravenholm: The Lost Chapter"
+	title		"Ravenholm:"		
+	title2		"The Lost Chapter"	
+	developer		"Anthony Nichols"
+	developer_url 	"http://www.levelarchitect.com"
+	icon 			"v" 
+	manual	"http://www.levelarchitect.com"
+	type		singleplayer_only			
+
+	FileSystem
+	{
+		SteamAppId				215		// This will mount all the GCFs we need (240=CS:S, 220=HL2).
+		ToolsAppId				211		// Tools will load this (ie: source SDK caches) to get things like materials\debug, materials\editor, etc.
+
+		SearchPaths
+		{
+			Game	|gameinfo_path|.
+			Game	"${{source2004_hl2_binaries_path}}"
+			Game	"${{source2004_hl2_patches_path}}"
+			Game	"${{source2004_hl2_content_path}}"
+			Game	hl2
+		}
+	}
+}

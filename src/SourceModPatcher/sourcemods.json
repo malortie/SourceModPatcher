@@ -23,6 +23,16 @@
       ]
     }
   },
+  "awakening": {
+    "name": "Awakening",
+    "sourcemod_folder": "Awakening",
+    "data_dir": "./data/mods/Awakening",
+    "dependencies": {
+      "required": [
+        ["source2006_hl2"]
+      ]
+    }
+  },
   "blacksnow": {
     "name": "BLACK SNOW",
     "sourcemod_folder": "blacksnow",
@@ -35,10 +45,34 @@
       ]
     }
   },
+  "cite_14": {
+    "name": "Cite 14",
+    "sourcemod_folder": "Cite 14",
+    "data_dir": "./data/mods/Cite 14",
+    "dependencies": {
+      "required": [["source2006_hl2"]]
+    }
+  },
+  "city_7": {
+    "name": "City 7: Toronto Conflict",
+    "sourcemod_folder": "City_7",
+    "data_dir": "./data/mods/City_7",
+    "dependencies": {
+      "required": [["source2006_hl2"]]
+    }
+  },
   "coastline_to_atmosphere": {
     "name": "Coastline to Atmosphere",
     "sourcemod_folder": "Coastline_to_Atmosphere",
     "data_dir": "./data/mods/Coastline_to_Atmosphere",
+    "dependencies": {
+      "required": [["source2006_hl2"]]
+    }
+  },
+  "dasroboss": {
+    "name": "Das Roboss",
+    "sourcemod_folder": "dasroboss",
+    "data_dir": "./data/mods/dasroboss",
     "dependencies": {
       "required": [["source2006_hl2"]]
     }
@@ -67,6 +101,14 @@
     "name": "Get a Life",
     "sourcemod_folder": "Get_A_Life",
     "data_dir": "./data/mods/Get_A_Life",
+    "dependencies": {
+      "required": [["source2006_hl2"]]
+    }
+  },
+  "gmod9": {
+    "name": "Garry's Mod 9",
+    "sourcemod_folder": "gmod9",
+    "data_dir": "./data/mods/gmod9",
     "dependencies": {
       "required": [["source2006_hl2"]]
     }
@@ -112,6 +154,33 @@
       ]
     }
   },
+  "mace": {
+    "name": "MACe the Adventure",
+    "sourcemod_folder": "MACe",
+    "data_dir": "./data/mods/MACe",
+    "dependencies": {
+      "required": [["source2006_hl2"]]
+    }
+  },
+  "metastasis_2": {
+    "name": "MINERVA: Metastasis 2",
+    "sourcemod_folder": "metastasis",
+    "data_dir": "./data/mods/metastasis_2",
+    "dependencies": {
+      "required": [["source2006_hl2"]]
+    }
+  },
+  "metastasis_3": {
+    "name": "MINERVA: Metastasis 3",
+    "sourcemod_folder": "metastasis",
+    "data_dir": "./data/mods/metastasis_3",
+    "dependencies": {
+      "required": [
+        ["source2006_episodic"],
+        ["source2006_hl2"]
+      ]
+    }
+  },
   "missionimprobable": {
     "name": "Mission Improbable",
     "sourcemod_folder": "missionimprobable",
@@ -122,6 +191,14 @@
         ["source2007_episodic"],
         ["source2007_hl2"]
       ]
+    }
+  },
+  "ravenholmlc": {
+    "name": "Ravenholm: The Lost Chapter",
+    "sourcemod_folder": "Ravenholm- The Lost Chapter",
+    "data_dir": "./data/mods/Ravenholm- The Lost Chapter",
+    "dependencies": {
+      "required": [["source2006_hl2"]]
     }
   },
   "ravenholmncz": {
@@ -139,6 +216,27 @@
     "dependencies": {
       "required": [
         ["sdkbase2013sp_hl2ep2"],
+        ["source2007_episodic"],
+        ["source2007_hl2"]
+      ]
+    }
+  },
+  "school_adventures": {
+    "name": "School Adventures",
+    "sourcemod_folder": "school_adventures",
+    "data_dir": "./data/mods/school_adventures",
+    "dependencies": {
+      "required": [
+        ["source2006_hl2"]
+      ]
+    }
+  },
+  "sebastian": {
+    "name": "Sebastian",
+    "sourcemod_folder": "sebastian",
+    "data_dir": "./data/mods/sebastian",
+    "dependencies": {
+      "required": [
         ["source2007_episodic"],
         ["source2007_hl2"]
       ]
@@ -260,6 +358,38 @@
     "data_dir": "./data/mods/source_2007_mod_template",
     "dependencies": {
       "required": [["source2007_hl2"]]
+    }
+  },
+  "the_island": {
+    "name": "The Island",
+    "sourcemod_folder": "Half-Life 2 - The Island",
+    "data_dir": "./data/mods/Half-Life 2 - The Island",
+    "dependencies": {
+      "required": [["source2006_hl2"]]
+    }
+  },
+  "the_lost_city": {
+    "name": "The Lost City",
+    "sourcemod_folder": "The Lost City",
+    "data_dir": "./data/mods/The Lost City",
+    "dependencies": {
+      "required": [["source2006_hl2"]]
+    }
+  },
+  "wivenhoe": {
+    "name": "Wivenhoe: The Fall of Ravenholm",
+    "sourcemod_folder": "TheFallOfRavenholm",
+    "data_dir": "./data/mods/TheFallOfRavenholm",
+    "dependencies": {
+      "required": [["source2006_hl2"]]
+    }
+  },
+  "zombie_stress": {
+    "name": "Zombie Stress",
+    "sourcemod_folder": "Zombie Stress",
+    "data_dir": "./data/mods/Zombie Stress",
+    "dependencies": {
+      "required": [["source2006_hl2"]]
     }
   }
 }

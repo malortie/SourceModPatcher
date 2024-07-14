@@ -1,0 +1,24 @@
+[
+  {
+    "$type": "validate_variables_dependencies",
+    "name": "mace_validate_dependencies",
+    "description": "Validate $(sourcemod_name) variables dependencies"
+  },
+  {
+    "$type": "copy_directory",
+    "name": "mace_copy_directory",
+    "description": "Copy directory to $(sourcemod_folder)",
+    "depends_on": ["mace_validate_dependencies"],
+    "src": "$(data_sourcemod_dir)",
+    "dest": "$(sourcemod_dir)"
+  },
+  {
+    "$type": "replace_tokens",
+    "name": "mace_replace_tokens",
+    "description": "Replace tokens in $(sourcemod_folder)/gameinfo.txt",
+    "depends_on": ["mace_copy_directory"],
+    "files": [
+      "$(sourcemod_dir)/gameinfo.txt"
+    ]
+  }
+]

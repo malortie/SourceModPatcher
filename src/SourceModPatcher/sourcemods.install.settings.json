@@ -5,10 +5,22 @@
   "1187_roguetrain": {
     "install": false
   },
+  "awakening": {
+    "install": false
+  },
   "blacksnow": {
     "install": false
   },
+  "cite_14": {
+    "install": false
+  },
+  "city_7": {
+    "install": false
+  },
   "coastline_to_atmosphere": {
+    "install": false
+  },
+  "dasroboss": {
     "install": false
   },
   "eclipse": {
@@ -18,6 +30,9 @@
     "install": false
   },
   "get_a_life": {
+    "install": false
+  },
+  "gmod9": {
     "install": false
   },
   "halloween": {
@@ -32,13 +47,31 @@
   "human_error": {
     "install": false
   },
+  "mace": {
+    "install": false
+  },
+  "metastasis_2": {
+    "install": false
+  },
+  "metastasis_3": {
+    "install": false
+  },
   "missionimprobable": {
+    "install": false
+  },
+  "ravenholmlc": {
     "install": false
   },
   "ravenholmncz": {
     "install": false
   },
   "research_and_development": {
+    "install": false
+  },
+  "school_adventures": {
+    "install": false
+  },
+  "sebastian": {
     "install": false
   },
   "shantytown": {
@@ -75,6 +108,18 @@
     "install": false
   },
   "source_2007_mod_template": {
+    "install": false
+  },
+  "the_island": {
+    "install": false
+  },
+  "the_lost_city": {
+    "install": false
+  },
+  "wivenhoe": {
+    "install": false
+  },
+  "zombie_stress": {
     "install": false
   }
 }

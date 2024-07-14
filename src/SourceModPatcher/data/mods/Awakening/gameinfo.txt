@@ -1,0 +1,24 @@
+"GameInfo"
+{
+	game		"Awakening"
+	icon		logo
+	type		"singleplayer_only"
+	developer 	"Bluestrike"
+	developer_url	"http://www.bluestrike.be"
+
+	FileSystem
+	{
+		SteamAppId				215		// This will mount all the GCFs we need (240=CS:S, 220=HL2).
+		ToolsAppId				211		// Tools will load this (ie: source SDK caches) to get things like materials\debug, materials\editor, etc.
+
+		SearchPaths
+		{
+			Game	|gameinfo_path|.
+			Game	"${{source2006_episodic_binaries_path}}" // Used as an equivalence, instead of the default Source SDK Base one
+			Game	sourcetest
+			Game	"${{source2006_hl2_patches_path}}"
+			Game	"${{source2006_hl2_content_path}}"
+			Game	hl2
+		}
+	}
+}

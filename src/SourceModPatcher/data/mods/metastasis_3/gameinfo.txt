@@ -1,0 +1,29 @@
+"GameInfo"
+{
+	game	"MINERVA: Metastasis"
+	title	"MINERVA: Metastasis"
+	title2	"MINERVA: Metastasis"
+	type	singleplayer_only
+
+	developer	"Adam Foster"
+	developer_url	"http://www.hylobatidae.org/minerva/"
+	icon		"icon"
+
+	FileSystem
+	{
+		SteamAppId				215
+		ToolsAppId				211
+
+		SearchPaths
+		{
+			Game	|gameinfo_path|.
+			Game	"${{source2006_episodic_binaries_path}}"
+			Game	"${{source2006_episodic_patches_path}}"
+			Game	"${{source2006_episodic_content_path}}"
+			Game	episodic
+			Game	"${{source2006_hl2_patches_path}}"
+			Game	"${{source2006_hl2_content_path}}"
+			Game	hl2
+		}
+	}
+}

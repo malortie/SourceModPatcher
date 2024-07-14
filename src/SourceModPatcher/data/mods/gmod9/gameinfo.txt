@@ -1,0 +1,34 @@
+"GameInfo"
+{
+	game	"Garry's Mod 9"
+	title	"Garry's Mod"
+	title2	"Nine"
+	
+	"developer" 		"TEAM GARRY"
+	"developer_url" 	"http://gmod.garry.tv/"
+	"icon" 			"v" 
+	"manual"               "http://gmwiki.garry.tv"
+
+
+
+	hidden_maps
+	{
+		"test_speakers"		1
+		"test_hardware"		1
+	}
+
+
+	FileSystem
+	{
+		SteamAppId				215		// This will mount all the GCFs we need (240=CS:S, 220=HL2).
+		ToolsAppId				211		// Tools will load this (ie: source SDK caches) to get things like materials\debug, materials\editor, etc.
+		
+		SearchPaths
+		{
+			Game	|gameinfo_path|.
+			Game	"${{source2004_hl2_patches_path}}"
+			Game	"${{source2004_hl2_content_path}}"
+			Game	hl2
+		}
+	}
+}
