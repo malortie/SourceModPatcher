@@ -6,6 +6,12 @@
     "steamappid": 215,
     "vpks": [
       {
+        "vpk": "vpks/depot_212_dir.vpk",
+        "files_to_extract": [
+          "^hl2/resource/.*$"
+        ]
+      },
+      {
         "vpk": "vpks/depot_381_dir.vpk",
         "files_to_extract": [
           "^hl2/scenes/k_lab/teleport04.vcd",
