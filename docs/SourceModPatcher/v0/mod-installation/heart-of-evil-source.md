@@ -2,9 +2,14 @@
 
 ## Prerequisites
 
-- [Half-Life: Source content](../../../SourceContentInstaller/v0/content-installation/half-life-source.md)
-- [Source SDK Base 2007](../../../game-installation/game-installation/source-sdk-base-2007.md)
-- [Source SDK Base 2013 Singleplayer content](../../../SourceContentInstaller/v0/content-installation/source-sdk-base-2013-singleplayer.md)
+- Games
+  - [Source SDK Base 2007](../../../game-installation/game-installation/source-sdk-base-2007.md)
+
+- Contents
+  - [Half-Life: Source (base)](../../../SourceContentInstaller/v0/content-installation/half-life-source.md#base-content)
+  - [Source SDK Base 2013 Singleplayer (HL2:EP2)](../../../SourceContentInstaller/v0/content-installation/source-sdk-base-2013-singleplayer.md#hl2ep2-content)
+  - [Source 2007 (Episodic) (base)](../../../SourceContentInstaller/v0/content-installation/source-2007.md#episodic-base-content)
+  - [Source 2007 (HL2)](../../../SourceContentInstaller/v0/content-installation/source-2007.md#hl2-content)
 
 ## Installation
 

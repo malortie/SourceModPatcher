@@ -10,6 +10,8 @@
 - [Half-Life Deathmatch: Source](content-installation/half-life-deathmatch-source.md)
 - [Half-Life: Source](content-installation/half-life-source.md)
 - [Portal](content-installation/portal.md)
+- [Source 2006](content-installation/source-2006.md)
+- [Source 2007](content-installation/source-2007.md)
 - [Source SDK Base 2007](content-installation/source-sdk-base-2007.md)
 - [Source SDK Base 2013 Multiplayer](content-installation/source-sdk-base-2013-multiplayer.md)
 - [Source SDK Base 2013 Singleplayer](content-installation/source-sdk-base-2013-singleplayer.md)

@@ -6,12 +6,12 @@
 
 ## Installation
 
-1. Enable `218` in `steamapps.install.settings.json`
+1. Enable `sdkbase2007` in `contents.install.settings.json`
 
    > **Note:** You can change `install_dir` to a different directory if you want.
 
    ```json
-   "218": {
+   "sdkbase2007": {
      "install": true,
      "install_dir": "..."
    }

@@ -6,12 +6,12 @@
 
 ## Installation
 
-1. Enable `380` in `steamapps.install.settings.json`
+1. Enable `hl2ep1` in `contents.install.settings.json`
 
    > **Note:** You can change `install_dir` to a different directory if you want.
 
    ```json
-   "380": {
+   "hl2ep1": {
      "install": true,
      "install_dir": "..."
    }

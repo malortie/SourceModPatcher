@@ -26,10 +26,6 @@ Defines Source mods content to install during the installation.
 
 Defines which install steps file to use for a specific Source mod.
 
-## sourcemods.install.variables.json
-
-Defines variables related to installation.
-
 ## sourcemods.json
 
 Defines properties for each supported Source mods. They have the form:
@@ -39,7 +35,15 @@ Defines properties for each supported Source mods. They have the form:
   "<id>": {
     "name": "...",
     "sourcemod_folder": "...",
-    "data_dir": "..."
+    "data_dir": "...",
+    "dependencies": {
+      "required": [
+        ["..."]
+      ],
+      "optional": [
+        ["..."]
+      ]
+    }
   },
   ...
 }
@@ -51,3 +55,4 @@ Defines properties for each supported Source mods. They have the form:
 | name | string | The mod name |
 | sourcemod_folder | string | The expected mod folder's name in `Steam/steamapps/sourcemods` directory |
 | data_dir | string | The full or relative path to the directory that contains patch files for the mod |
+| dependencies | object | Contains `required` and `optional` properties that define the required and optional dependencies |

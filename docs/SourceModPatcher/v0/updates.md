@@ -19,3 +19,9 @@ Procedure:
 
 4. Replace the new files with your saved files:
    - `variables - Copy.json` -> `variables.json`
+
+## v0.2.0
+
+Various changes were made to SourceContentInstaller and SourceModPatcher in the way content is managed and how dependencies are checked.
+
+It is **recommended** to clean your previous SourceContentInstaller and SourceModPatcher installation and start anew from v0.2.0.

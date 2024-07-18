@@ -2,7 +2,11 @@
 
 ## Prerequisites
 
-- [Source SDK Base](../../../game-installation/game-installation/source-sdk-base.md)
+- Games
+  - [Source SDK Base](../../../game-installation/game-installation/source-sdk-base.md)
+
+- Contents
+  - [Source 2006 (HL2)](../../../SourceContentInstaller/v0/content-installation/source-2006.md#hl2-content)
 
 ## Installation
 

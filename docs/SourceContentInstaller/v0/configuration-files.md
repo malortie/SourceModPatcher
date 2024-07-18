@@ -1,6 +1,28 @@
 # Configuration files
 
-## steamapps.install.settings.json
+## contents.json
+
+Defines properties for each supported content. They have the form:
+
+```json
+{
+  "<id>": {
+    "name": "...",
+    "steamapps_dependencies": "...",
+    "output_variables": "..."
+  },
+  ...
+}
+```
+
+| Name | Type | Description |
+| ---- | -----| ----------- |
+| id | string | The content ID |
+| name | string | The content name |
+| steamapps_dependencies | list | The list of Steam apps on which this content depends on |
+| output_variables | list | The list of variables that will be written to `variables.json` |
+
+## contents.install.settings.json
 
 Defines Source game content to install during the installation.
 
@@ -16,13 +38,17 @@ Defines Source game content to install during the installation.
 
 | Name | Type | Description |
 | ---- | -----| ----------- |
-| id | string | The Steam app ID |
-| install | boolean | Whether to install this Steam app's content |
+| id | string | The content ID |
+| install | boolean | Whether to install this content |
 | install_dir | string | Content install location |
 
-## steamapps.install.steps.json
+## contents.install.steps.json
 
-Defines which install steps file to use for a specific Steam app content.
+Defines which install steps file to use for a specific content.
+
+## sourcecontentinstaller.install.variables.json
+
+Defines variables related to installation.
 
 ## steamapps.json
 
@@ -33,7 +59,8 @@ Defines properties for each supported Steam app. They have the form:
   "<id>": {
     "name": "...",
     "appmanifest_file": "...",
-    "install_dir": "..."
+    "install_dir": "...",
+    "install_dir_variable": "..."
   },
   ...
 }
@@ -45,6 +72,7 @@ Defines properties for each supported Steam app. They have the form:
 | name | string | The Steam app name |
 | appmanifest_file | string | The app manifest file |
 | install_dir | string | The full path to the Steam app's install location |
+| install_dir_variable | string | The variable name to give to `install_dir` variable during installation |
 
 ## variables.json
 

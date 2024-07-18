@@ -7,6 +7,86 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Steps
+  - CopyDirectory
+
+- Mods
+  - Awakeking
+  - Cite 14
+  - City 7: Toronto Conflict
+  - Das Roboss
+  - Garry's mod 9
+  - MACe the Adventure
+  - Minverva: Metastasis 2
+  - Minverva: Metastasis 3
+  - Ravenholm - The Lost Chapter
+  - School Adventures
+  - Sebastian
+  - Source 2004 (Mod HL2)
+  - Source 2004 (Mod SDK)
+  - Source 2006 (Mod Episodic)
+  - Source 2006 (Mod HL2)
+  - Source 2006 (Mod HL2MP)
+  - Source 2006 (Mod SDK Sample)
+  - Source 2007 (Mod EP2)
+  - Source 2007 (Mod Episodic)
+  - Source 2007 (Mod HL2)
+  - Source 2007 (Mod HL2MP)
+  - Source 2007 (Mod SDK Template)
+  - The Lost City
+  - The Island
+  - Wivenhoe: The Fall of Ravenholm
+  - Zombie Stress
+
+### Changed
+
+- Removed binaries and SDK patch files (Now part of SourceContentInstaller)
+- Gameinfo.txt now uses the new structure
+- Cleaned mod data files that are now handled in SourceContentInstaller
+- Reworked content dependency validation
+  - Supports optional dependencies
+  - Improved validation
+  - Display names of missing dependencies in addition to missing variables
+
+### Fixed
+
+- Mods
+  - City 7: Toronto Conflict
+    - Map dundas_square_f
+      - Fix APC crashing the game
+    - Map yonge_st_f
+      - Fix APC crashing the game
+
+  - Das Roboss
+    - Localization strings
+    - Main menu title
+
+  - The Island
+    - Localization strings
+    - Missing widescreen background materials
+
+  - The Lost City
+    - Localization strings
+    - Missing widescreen background materials
+
+  - MACe the Adventure
+    - Missing widescreen background materials
+
+  - Minverva: Metastasis 2
+    - Missing widescreen background materials
+
+  - School Adventures
+    - Missing widescreen background materials
+
+  - Wivenhoe: The Fall of Ravenholm
+    - Localization strings
+    - Missing widescreen background materials
+
+  - Zombie Stress
+    - Missing widescreen background materials
+
 ## [0.1.0] - 2024-05-31
 
 ### Added

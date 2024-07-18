@@ -7,6 +7,61 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Content
+  - Counter-Strike: Source (maps)
+  - Day of Defeat: Source (maps)
+  - Half-Life: Source (maps)
+  - Half-Life: Source (HD content)
+  - Half-Life Deathmatch: Source (maps)
+  - Half-Life 2 (maps)
+  - Half-Life 2: Deathmatch (maps)
+  - Half-Life 2: Lost Coast (maps)
+  - Portal (maps)
+  - Source SDK Base 2013 Singleplayer (HL2:EP2) (maps)
+  - Source 2006 Episodic
+  - Source 2006 Episodic (maps)
+  - Source 2006 HL2
+  - Source 2007 Episodic
+  - Source 2007 Episodic (maps)
+  - Source 2007 HL2
+
+### Changed
+
+- Updated .NET project dependencies
+- Reworked content management
+  - More modular instead of extracting all content from a specific SteamApp
+  - Supports checking for multiple Steam apps before installing content
+  - Now uses binaries from SDK repos:
+    - source-sdk-2004
+    - source-sdk-2006
+    - source-sdk-2007
+  - Renamed `steamapps.install.settings.json` to `contents.install.settings.json`
+  - Renamed `steamapps.install.steps.json` to `contents.install.steps.json`
+  - Various changes in extract step
+  - Display installed content
+
+- Disable CRC verification during extraction
+- Content
+  - Counter-Strike: Source now extracts base content only
+  - Day of Defeat: Source now extracts base content only
+  - Half-Life: Source now extracts base content only
+  - Half-Life Deathmath: Source now extracts base content only
+  - Half-Life 2 now extracts base content only
+  - Half-Life 2: Deathmatch now extracts base content only
+  - Half-Life 2: Lost Coast now extracts base content only
+  - Portal now extracts base content only
+  - Source SDK Base 2013 Multiplayer is now separated (HL2/HL2MP)
+  - Source SDK Base 2013 Singleplayer is now separated (HL2/EP1/EP2)
+- Creates variables.json if it does not exist
+- On app startup, inexistant paths are removed from variables.json
+
+### Fixed
+
+- VPKExtractor
+  - Now compares the expected number of files to be extracted and the number of files extracted to determine if an error occured. Previously, it would assume that no files extracted means that an error occured but the case when regex can't find find files was not handled.
+
 ## [0.0.0] - 2024-05-18
 
 ### Added

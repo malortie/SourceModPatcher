@@ -6,12 +6,30 @@
 
 ## Installation
 
-1. Enable `243750` in `steamapps.install.settings.json`
+### HL2 content
+
+1. Enable `sdkbase2013mp_hl2` in `contents.install.settings.json`
 
    > **Note:** You can change `install_dir` to a different directory if you want.
 
    ```json
-   "243750": {
+   "sdkbase2013mp_hl2": {
+     "install": true,
+     "install_dir": "..."
+   }
+   ```
+
+2. Run SourceContentInstaller
+3. (**Optional**) Uninstall Source SDK Base 2013 Multiplayer if you want since it's no longer needed
+
+### HL2:DM content
+
+1. Enable `sdkbase2013mp_hl2mp` in `contents.install.settings.json`
+
+   > **Note:** You can change `install_dir` to a different directory if you want.
+
+   ```json
+   "sdkbase2013mp_hl2mp": {
      "install": true,
      "install_dir": "..."
    }
