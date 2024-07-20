@@ -24,6 +24,10 @@
     <ProjectReference Include="..\Pipelines\Pipelines.csproj" />
   </ItemGroup>
 
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Exec Command="call update_binaries.bat" WorkingDirectory="$(ProjectDir)..\..\scripts\update_binaries" />
+  </Target>
+
   <ItemGroup>
     <None Update="config\**">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
