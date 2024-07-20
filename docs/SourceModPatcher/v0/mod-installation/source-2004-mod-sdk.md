@@ -12,7 +12,7 @@
 
 1. Download the mod
 
-   - <url>
+   - <https://github.com/malortie/source-sdk-2004/releases>
 
 2. Install the mod to your sourcemods folder i.e.
 

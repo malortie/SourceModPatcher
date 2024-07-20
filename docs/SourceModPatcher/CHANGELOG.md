@@ -42,6 +42,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Updated .NET project dependencies
+  - SourceModPatcher.Tests
+    - Bump Microsoft.NET.Test.Sdk from 17.6.0 to 17.10.0
+    - Bump MSTest.TestAdapter from 3.0.4 to 3.4.3
+    - Bump MSTest.TestFramework from 3.0.4 to 3.4.3
+    - Bump coverlet.collector from 6.0.0 to 6.0.2
+    - Bump System.IO.Abstractions.TestingHelpers from 19.2.87 to 21.0.22
 - Removed binaries and SDK patch files (Now part of SourceContentInstaller)
 - Gameinfo.txt now uses the new structure
 - Cleaned mod data files that are now handled in SourceContentInstaller

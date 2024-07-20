@@ -30,6 +30,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Updated .NET project dependencies
+  - SourceContentInstaller
+    - Bump AutoMapper from 12.0.1 to 13.0.1
+    - Bump NLog from 5.2.7 to 5.3.2
+    - Bump Pastel from 4.2.0 to 5.1.0
+    - Bump System.IO.Abstractions from 19.2.87 to 21.0.22
+    - Bump ValvePak from 1.6.2.76 to 2.0.1.107
+  - SourceContentInstaller.Tests
+    - Bump Microsoft.NET.Test.Sdk from 17.6.0 to 17.10.0
+    - Bump MSTest.TestAdapter from 3.0.4 to 3.4.3
+    - Bump MSTest.TestFramework from 3.0.4 to 3.4.3
+    - Bump coverlet.collector from 6.0.0 to 6.0.2
+    - Bump System.IO.Abstractions.TestingHelpers from 19.2.87 to 21.0.22
 - Reworked content management
   - More modular instead of extracting all content from a specific SteamApp
   - Supports checking for multiple Steam apps before installing content
