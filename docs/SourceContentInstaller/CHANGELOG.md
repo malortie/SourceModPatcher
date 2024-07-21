@@ -46,9 +46,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - More modular instead of extracting all content from a specific SteamApp
   - Supports checking for multiple Steam apps before installing content
   - Now uses binaries from SDK repos:
-    - source-sdk-2004
-    - source-sdk-2006
-    - source-sdk-2007
+    - source-sdk-2004 (v1.0.0)
+    - source-sdk-2006 (v1.0.0)
+    - source-sdk-2007 (v1.0.0)
   - Renamed `steamapps.install.settings.json` to `contents.install.settings.json`
   - Renamed `steamapps.install.steps.json` to `contents.install.steps.json`
   - Various changes in extract step
