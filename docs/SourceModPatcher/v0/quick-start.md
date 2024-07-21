@@ -209,6 +209,7 @@ You will be presented this menu. It is divided in 3 sections:
 ```text
 Installed Source games:
         ...
+        [*] [218] Source SDK Base 2007
         [*] [280] Half-Life: Source
         [*] [243730] Source SDK Base 2013 Singleplayer
         ...
