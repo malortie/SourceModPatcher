@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Mods
+  - A Frayed Stitch in Time
+
 ## [0.2.0] - 2024-07-21
 
 ### Added
