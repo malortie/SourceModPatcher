@@ -1,0 +1,26 @@
+"GameInfo"
+{
+	game 		"A Frayed Stitch in Time"
+	title		"HALF-LIFE'"
+	type		singleplayer_only
+
+	developer	"belboz"
+	developer_url	"http://www.belboz.cooldudes.co.uk/mod/index.html"
+	icon		"icon"
+	manual	"http://www.belboz.cooldudes.co.uk/mod/manual.html"
+
+	FileSystem
+	{
+		SteamAppId				215
+		ToolsAppId				211
+		
+		SearchPaths
+		{
+			Game	|gameinfo_path|.
+			Game	"${{source2004_hl2_binaries_path}}"
+			Game	"${{source2004_hl2_patches_path}}"
+			Game	"${{source2004_hl2_content_path}}"
+			Game	hl2
+		}
+	}
+}

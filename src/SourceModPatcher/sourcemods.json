@@ -23,6 +23,14 @@
       ]
     }
   },
+  "a_frayed_stitch_in_time": {
+    "name": "A Frayed Stitch in Time",
+    "sourcemod_folder": "cascade",
+    "data_dir": "./data/mods/cascade",
+    "dependencies": {
+      "required": [["source2006_hl2"]]
+    }
+  },
   "awakening": {
     "name": "Awakening",
     "sourcemod_folder": "Awakening",
