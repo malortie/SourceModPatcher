@@ -4,6 +4,7 @@
 | -- | ---- |
 | 1187 | 1187: Episode One |
 | 1187_roguetrain | 1187: Rogue Train |
+| a_frayed_stitch_in_time | A Frayed Stitch in Time |
 | awakening | Awakening |
 | blacksnow | Black Snow |
 | cite_14 | Cite 14 |
