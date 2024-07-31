@@ -14,6 +14,7 @@
 | eots | Eye of the Storm |
 | get_a_life | Get a Life |
 | gmod9 | Garry's Mod 9 |
+| half_mind | Half-Mind |
 | halloween | Halloween HL2: Pumpkin Night |
 | halloween_redux | Halloween HL2: Pumpkin Night (Redux) |
 | hoe | Heart of Evil: Source |

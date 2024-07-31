@@ -11,6 +11,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Mods
   - A Frayed Stitch in Time
+  - Half-Mind
+
+### Fixed
+
+- Mods
+  - Half-Mind
+    - Remove Multiplayer tab in Options
 
 ## [0.2.0] - 2024-07-21
 

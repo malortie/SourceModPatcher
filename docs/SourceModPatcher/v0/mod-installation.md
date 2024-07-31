@@ -13,6 +13,7 @@
 - [Eye of the Storm](mod-installation/eye-of-the-storm.md)
 - [Get A Life](mod-installation/get-a-life.md)
 - [Garry's mod 9](mod-installation/gmod9.md)
+- [Half-Mind](mod-installation/half-mind.md)
 - [Halloween HL2: Pumpkin Night](mod-installation/halloween.md)
 - [Halloween HL2: Pumpkin Night (Redux)](mod-installation/halloween-redux.md)
 - [Heart of Evil: Source](mod-installation/heart-of-evil-source.md)
