@@ -29,6 +29,7 @@
   "shantytown": "./config/mods/shantytown.install.steps.json",
   "slums": "./config/mods/slums.install.steps.json",
   "slums_2": "./config/mods/slums_2.install.steps.json",
+  "smod": "./config/mods/smod.install.steps.json",
   "source_2004_mod_hl2": "./config/mods/source_2004_mod_hl2.install.steps.json",
   "source_2004_mod_sdk": "./config/mods/source_2004_mod_sdk.install.steps.json",
   "source_2006_mod_episodic": "./config/mods/source_2006_mod_episodic.install.steps.json",

@@ -89,6 +89,9 @@
   "slums_2": {
     "install": false
   },
+  "smod": {
+    "install": false
+  },
   "source_2004_mod_hl2": {
     "install": false
   },
