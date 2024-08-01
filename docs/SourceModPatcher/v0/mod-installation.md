@@ -30,6 +30,7 @@
 - [Shantytown](mod-installation/shantytown.md)
 - [Slums](mod-installation/slums.md)
 - [Slums 2](mod-installation/slums-2.md)
+- [SMOD](mod-installation/smod.md)
 - [Source 2004 (Mod HL2)](mod-installation/source-2004-mod-hl2.md)
 - [Source 2004 (Mod SDK)](mod-installation/source-2004-mod-sdk.md)
 - [Source 2006 (Mod Episodic)](mod-installation/source-2006-mod-episodic.md)

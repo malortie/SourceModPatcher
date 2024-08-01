@@ -14,6 +14,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Half-Mind
   - Slums
   - Slums 2
+  - SMOD 4.0
+
+### Changed
+
+- Mods
+  - SMOD 4.0
+    - Add Episodic content support in gameinfo.txt
+    - Add HL1MP content support in gameinfo.txt
 
 ### Fixed
 
