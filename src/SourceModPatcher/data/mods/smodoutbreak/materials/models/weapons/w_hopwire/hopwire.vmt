@@ -1,0 +1,17 @@
+"VertexLitGeneric"
+{
+	"$basetexture" "models/Weapons/w_hopwire/hopwire"
+	"$envmap" "env_cubemap"
+	"$envmapcontrast" 1
+	"$basealphaenvmapmask" 1
+	"$bumpmap" "models/Weapons/w_hopwire/hopwire_e"
+	"$normalmapalphaenvmapmask" 1
+	"$envmaptint" "[ 1 1 1 ]"
+	
+	
+	"$phong" "1"
+	"$phongboost" "2"	
+	"$phongfresnelranges"	"[1 4 6]"
+	"$phongexponent" "41"
+
+}
