@@ -1,0 +1,34 @@
+"GameInfo"
+{
+	game		"SMOD:OUTBREAK"
+	title		"SMOD OUTBREAK"
+	type		"singleplayer_only"
+	icon		"smodicon" 
+
+	FileSystem
+	{
+		SteamAppId				215
+		ToolsAppId				211
+
+		SearchPaths
+		{
+			Game	|gameinfo_path|.
+			Game	"${{source2004_hl2_patches_path}}"
+			Game	"${{source2004_hl2_content_path}}"
+			Game	hl2
+
+			// Uncomment the following sections to mount additional content
+
+			// Half-Life 2: Deathmatch
+			//Game	"${{source2006_hl2mp_patches_path}}" // Apply specific HL2MP 2006 patches
+			//Game	"${{source2006_hl2mp_content_path}}" // Make sure HL2MP 2006 content has priority
+			//Game	"${{hl2mp_maps_content_path}}" // Make sure HL2MP maps content has priority
+			//Game	"${{hl2mp_gamedir}}" // Add path to HL2MP .BSP maps
+
+			// Counter-Strike: Source
+			//Game	"${{cstrike_content_path}}" // Add base content
+			//Game	"${{cstrike_maps_content_path}}" // Add map lumps and nodegraph files
+			//Game	"${{cstrike_gamedir}}" // Add .BSP files
+		}
+	}
+}
