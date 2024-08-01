@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Slums
   - Slums 2
   - SMOD 4.0
+  - SMOD Outbreak
 
 ### Changed
 
@@ -28,6 +29,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Mods
   - Half-Mind
     - Remove Multiplayer tab in Options
+
+  - SMOD Outbreak
+    - Localization strings
+    - Missing Alyx gun model
+    - Missing Hopwire model
+    - Missing Hopwire materials
 
 ## [0.2.0] - 2024-07-21
 
