@@ -270,6 +270,14 @@
       "required": [["source2006_hl2"]]
     }
   },
+  "slums": {
+    "name": "Slums",
+    "sourcemod_folder": "Slums",
+    "data_dir": "./data/mods/Slums",
+    "dependencies": {
+      "required": [["source2006_hl2"]]
+    }
+  },
   "source_2004_mod_hl2": {
     "name": "Source 2004 (Mod HL2)",
     "sourcemod_folder": "source_2004_mod_hl2",

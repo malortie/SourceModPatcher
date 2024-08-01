@@ -1,0 +1,24 @@
+"GameInfo"
+{
+	game	"Slums"
+	title	"Slums"
+	type	singleplayer_only
+
+	developer	"Diolator"
+	developer_url	"http://www.diolator.pdj.ru"
+	icon		"icon"
+
+	FileSystem
+	{
+		SteamAppId				215
+		ToolsAppId				211
+		
+		SearchPaths
+		{
+			Game	|gameinfo_path|.
+			Game	"${{source2006_hl2_patches_path}}"
+			Game	"${{source2006_hl2_content_path}}"
+			Game	hl2
+		}
+	}
+}
