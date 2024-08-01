@@ -278,6 +278,18 @@
       "required": [["source2006_hl2"]]
     }
   },
+  "slums_2": {
+    "name": "Slums 2: Extended",
+    "sourcemod_folder": "Slums 2",
+    "data_dir": "./data/mods/Slums 2",
+    "dependencies": {
+      "required": [
+        ["sdkbase2013sp_hl2ep2"],
+        ["source2007_episodic"],
+        ["source2007_hl2"]
+      ]
+    }
+  },
   "source_2004_mod_hl2": {
     "name": "Source 2004 (Mod HL2)",
     "sourcemod_folder": "source_2004_mod_hl2",
