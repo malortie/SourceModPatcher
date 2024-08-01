@@ -31,6 +31,7 @@
 | sebastian | Sebastian |
 | shantytown | Shantytown |
 | slums | Slums |
+| slums_2 | Slums 2 |
 | source_2004_mod_hl2 | Source 2004 (Mod HL2) |
 | source_2004_mod_sdk | Source 2004 (Mod SDK) |
 | source_2006_mod_episodic | Source 2006 (Mod Episodic) |

@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - A Frayed Stitch in Time
   - Half-Mind
   - Slums
+  - Slums 2
 
 ### Fixed
 
