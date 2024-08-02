@@ -95,6 +95,9 @@
   "smodoutbreak": {
     "install": false
   },
+  "smodredux": {
+    "install": false
+  },
   "source_2004_mod_hl2": {
     "install": false
   },
