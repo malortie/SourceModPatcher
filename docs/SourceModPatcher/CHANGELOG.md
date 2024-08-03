@@ -23,6 +23,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Mods
+  - Garry's mod 9
+    - Add Counter-Strike: Source content support in gameinfo.txt
+    - Add Day of Defeat: Source content support in gameinfo.txt
+    - Add Episodic content support in gameinfo.txt
+    - Add HL1 content support in gameinfo.txt
+    - Add HL1MP content support in gameinfo.txt
+    - Add HL2MP content support in gameinfo.txt
+    - Add Lost Coast content support in gameinfo.txt
+
   - SMOD 4.0
     - Add Episodic content support in gameinfo.txt
     - Add HL1MP content support in gameinfo.txt

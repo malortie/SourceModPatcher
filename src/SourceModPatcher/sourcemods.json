@@ -118,7 +118,22 @@
     "sourcemod_folder": "gmod9",
     "data_dir": "./data/mods/gmod9",
     "dependencies": {
-      "required": [["source2006_hl2"]]
+      "required": [["source2006_hl2"]],
+      "optional": [
+        ["cstrike"],
+        ["cstrike_maps"],
+        ["dod"],
+        ["dod_maps"],
+        ["hl1"],
+        ["hl1_maps"],
+        ["hl1mp"],
+        ["hl1mp_maps"],
+        ["hl2mp_maps"],
+        ["lostcoast_maps"],
+        ["sdkbase2013mp_hl2mp"],
+        ["source2006_episodic"],
+        ["source2006_episodic_maps"]
+      ]
     }
   },
   "half_mind": {
