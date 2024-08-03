@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - SMOD 4.0
   - SMOD Outbreak
   - SMOD Redux Version 8
+  - SMOD: Tactical Delta 5.56
 
 ### Changed
 
@@ -26,6 +27,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - Add HL1MP content support in gameinfo.txt
 
   - SMOD Redux Version 8
+    - Add HL1MP content support in gameinfo.txt
+
+  - SMOD: Tactical Delta 5.56
+    - Add Episodic content support in gameinfo.txt
     - Add HL1MP content support in gameinfo.txt
 
 ### Fixed
@@ -39,6 +44,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - Missing Alyx gun model
     - Missing Hopwire model
     - Missing Hopwire materials
+
+  - SMOD: Tactical Delta 5.56
+    - - Missing entry for HL2_Flamethrower
 
 ## [0.2.0] - 2024-07-21
 
