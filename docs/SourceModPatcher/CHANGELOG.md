@@ -25,6 +25,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - Add Episodic content support in gameinfo.txt
     - Add HL1MP content support in gameinfo.txt
 
+  - SMOD Redux Version 8
+    - Add HL1MP content support in gameinfo.txt
+
 ### Fixed
 
 - Mods
