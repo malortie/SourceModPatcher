@@ -101,6 +101,9 @@
   "smodtactical": {
     "install": false
   },
+  "smodtroopers": {
+    "install": false
+  },
   "source_2004_mod_hl2": {
     "install": false
   },

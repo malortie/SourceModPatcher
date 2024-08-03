@@ -373,6 +373,29 @@
       ]
     }
   },
+  "smodtroopers": {
+    "name": "SMOD Troopers 0.9.9",
+    "sourcemod_folder": "SmodTroopers",
+    "data_dir": "./data/mods/SmodTroopers",
+    "dependencies": {
+      "required": [["source2006_hl2"]],
+      "optional": [
+        ["cstrike"],
+        ["cstrike_maps"],
+        ["dod"],
+        ["dod_maps"],
+        ["hl1"],
+        ["hl1_maps"],
+        ["hl1mp"],
+        ["hl1mp_maps"],
+        ["hl2mp_maps"],
+        ["lostcoast_maps"],
+        ["sdkbase2013mp_hl2mp"],
+        ["source2006_episodic"],
+        ["source2006_episodic_maps"]
+      ]
+    }
+  },
   "source_2004_mod_hl2": {
     "name": "Source 2004 (Mod HL2)",
     "sourcemod_folder": "source_2004_mod_hl2",
