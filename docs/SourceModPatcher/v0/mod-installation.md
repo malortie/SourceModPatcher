@@ -34,6 +34,7 @@
 - [SMOD Outbreak v.45](mod-installation/smod-outbreak.md)
 - [SMOD Redux Version 8](mod-installation/smod-redux.md)
 - [SMOD: Tactical Delta 5.56](mod-installation/smod-tactical.md)
+- [SMOD Troopers 0.9.9](mod-installation/smod-troopers.md)
 - [Source 2004 (Mod HL2)](mod-installation/source-2004-mod-hl2.md)
 - [Source 2004 (Mod SDK)](mod-installation/source-2004-mod-sdk.md)
 - [Source 2006 (Mod Episodic)](mod-installation/source-2006-mod-episodic.md)

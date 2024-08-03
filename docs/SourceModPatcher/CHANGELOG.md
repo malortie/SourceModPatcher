@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - SMOD Outbreak
   - SMOD Redux Version 8
   - SMOD: Tactical Delta 5.56
+  - SMOD Troopers 0.9.9
 
 ### Changed
 
@@ -30,6 +31,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - Add HL1MP content support in gameinfo.txt
 
   - SMOD: Tactical Delta 5.56
+    - Add Episodic content support in gameinfo.txt
+    - Add HL1MP content support in gameinfo.txt
+
+  - SMOD Troopers 0.9.9
     - Add Episodic content support in gameinfo.txt
     - Add HL1MP content support in gameinfo.txt
 
