@@ -33,7 +33,7 @@
 | slums | Slums |
 | slums_2 | Slums 2 |
 | smod | SMOD 4.0 |
-| smodoutbreak | SMOD Outbreak |
+| smodoutbreak | SMOD Outbreak v.45 |
 | smodredux | SMOD Redux Version 8 |
 | source_2004_mod_hl2 | Source 2004 (Mod HL2) |
 | source_2004_mod_sdk | Source 2004 (Mod SDK) |

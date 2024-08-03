@@ -31,7 +31,7 @@
 - [Slums](mod-installation/slums.md)
 - [Slums 2](mod-installation/slums-2.md)
 - [SMOD](mod-installation/smod.md)
-- [SMOD Outbreak](mod-installation/smod-outbreak.md)
+- [SMOD Outbreak v.45](mod-installation/smod-outbreak.md)
 - [SMOD Redux Version 8](mod-installation/smod-redux.md)
 - [Source 2004 (Mod HL2)](mod-installation/source-2004-mod-hl2.md)
 - [Source 2004 (Mod SDK)](mod-installation/source-2004-mod-sdk.md)

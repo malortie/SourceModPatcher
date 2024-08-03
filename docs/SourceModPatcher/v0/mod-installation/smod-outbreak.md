@@ -1,4 +1,4 @@
-# SMOD Outbreak installation
+# SMOD Outbreak v.45 installation
 
 > **Important!** For campaign maps, see [Campaign maps](#campaign-maps).
 
