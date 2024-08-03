@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Slums 2
   - SMOD 4.0
   - SMOD Outbreak
+  - SMOD Redux Version 8
 
 ### Changed
 
