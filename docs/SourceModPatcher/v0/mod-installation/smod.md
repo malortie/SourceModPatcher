@@ -18,6 +18,8 @@
   - [Half-Life: Source (maps) (**Optional**)](../../../SourceContentInstaller/v0/content-installation/half-life-source.md#maps-content)
   - [Half-Life 2: Deathmatch (maps) (**Optional**)](../../../SourceContentInstaller/v0/content-installation/half-life-2-deathmatch.md#maps-content)
   - [Half-Life 2: Loast Coast (maps) (**Optional**)](../../../SourceContentInstaller/v0/content-installation/half-life-2-lost-coast.md#maps-content)
+  - [Half-Life Deathmatch: Source (base) (**Optional**)](../../../SourceContentInstaller/v0/content-installation/half-life-deathmatch-source.md#base-content)
+  - [Half-Life Deathmatch: Source (maps) (**Optional**)](../../../SourceContentInstaller/v0/content-installation/half-life-deathmatch-source.md#maps-content)
   - [Source SDK Base 2013 Multiplayer (HL2:DM) (**Optional**)](../../../SourceContentInstaller/v0/content-installation/source-sdk-base-2013-multiplayer.md#hl2dm-content)
   - [Source 2006 (Episodic) (base) (**Optional**)](../../../SourceContentInstaller/v0/content-installation/source-2006.md#episodic-base-content)
   - [Source 2006 (Episodic) (maps) (**Optional**)](../../../SourceContentInstaller/v0/content-installation/source-2006.md#episodic-maps-content)
