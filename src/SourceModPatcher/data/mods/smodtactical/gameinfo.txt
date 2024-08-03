@@ -1,0 +1,60 @@
+"GameInfo"
+{
+	game		"SMOD: Tactical Delta 5.56"
+	title		"SMOD: Tactical Delta 5.56"
+	type		"singleplayer_only"
+	icon		"smodicon" 
+
+	FileSystem
+	{
+		SteamAppId				215		// This will mount all the GCFs we need (240=CS:S, 220=HL2).
+		ToolsAppId				211		// Tools will load this (ie: source SDK caches) to get things like materials\debug, materials\editor, etc.
+		
+		SearchPaths
+		{
+			Game	|gameinfo_path|.
+			Game	"${{source2004_hl2_patches_path}}"
+			Game	"${{source2004_hl2_content_path}}"
+			Game	hl2
+
+			// Uncomment the following sections to mount additional content
+
+			// Half-Life 2: Deathmatch
+			//Game	"${{source2006_hl2mp_patches_path}}" // Apply specific HL2MP 2006 patches
+			//Game	"${{source2006_hl2mp_content_path}}" // Make sure HL2MP 2006 content has priority
+			//Game	"${{hl2mp_maps_content_path}}" // Make sure HL2MP maps content has priority
+			//Game	"${{hl2mp_gamedir}}" // Add path to HL2MP .BSP maps
+
+			// Half-Life: Source
+			//Game	"${{hl1_content_path}}" // Add base content
+			//Game	"${{hl1_maps_content_path}}" // Add map lumps and nodegraph files
+			//Game	"${{hl1_gamedir}}" // Add .BSP files
+
+			// Counter-Strike: Source
+			//Game	"${{cstrike_content_path}}" // Add base content
+			//Game	"${{cstrike_maps_content_path}}" // Add map lumps and nodegraph files
+			//Game	"${{cstrike_gamedir}}" // Add .BSP files
+
+			// Day of Defeat: Source
+			//Game	"${{dod_content_path}}" // Add base content
+			//Game	"${{dod_maps_content_path}}" // Add map lumps and nodegraph files
+			//Game	"${{dod_gamedir}}" // Add .BSP files
+
+			// Half-Life 2: Lost Coast
+			//Game	sourcetest // Add base content
+			//Game	"${{lostcoast_maps_content_path}}" // Add map lumps and nodegraph files
+			//Game	"${{lostcoast_gamedir}}" // Add .BSP files
+
+			// Half-Life Deathmatch: Source
+			//Game	"${{hl1mp_content_path}}" // Add base content
+			//Game	"${{hl1mp_maps_content_path}}" // Add map lumps and nodegraph files
+			//Game	"${{hl1mp_gamedir}}" // Add .BSP files
+
+			// Half-Life 2: Episode One
+			//Game	"${{source2006_episodic_patches_path}}" // Apply specific EP1 2006 patches
+			//Game	"${{source2006_episodic_content_path}}" // Make sure EP1 2006 content has priority
+			//Game	"${{source2006_episodic_maps_content_path}}" // Make sure EP1 2006 maps content has priority
+			//Game	episodic
+		}
+	}
+}
