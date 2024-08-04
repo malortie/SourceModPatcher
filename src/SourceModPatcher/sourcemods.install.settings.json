@@ -26,6 +26,9 @@
   "dasroboss": {
     "install": false
   },
+  "day_hard": {
+    "install": false
+  },
   "eclipse": {
     "install": false
   },

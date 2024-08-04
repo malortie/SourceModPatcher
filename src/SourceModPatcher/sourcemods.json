@@ -85,6 +85,14 @@
       "required": [["source2006_hl2"]]
     }
   },
+  "day_hard": {
+    "name": "Day Hard",
+    "sourcemod_folder": "DayHard",
+    "data_dir": "./data/mods/DayHard",
+    "dependencies": {
+      "required": [["source2006_hl2"]]
+    }
+  },
   "eclipse": {
     "name": "Eclipse",
     "sourcemod_folder": "Eclipse",
