@@ -1,0 +1,23 @@
+"GameInfo"
+{
+	game	"Mistake Of Pythagoras"
+	title	"Mistake Of Pythagoras"
+	type	"singleplayer_only"
+	developer	"K.S.(Koumei satou)/JAPAN"
+	developer_url	"http://www2d.biglobe.ne.jp/~ks_wca/mop/index.htm"
+	icon	"icon"
+
+	FileSystem
+	{
+		SteamAppId				215
+		ToolsAppId				211
+		
+		SearchPaths
+		{
+			Game	|gameinfo_path|.
+			Game	"${{source2004_hl2_patches_path}}"
+			Game	"${{source2004_hl2_content_path}}"
+			Game	hl2
+		}
+	}
+}

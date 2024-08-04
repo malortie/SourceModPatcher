@@ -21,6 +21,7 @@
   "metastasis_2": "./config/mods/metastasis_2.install.steps.json",
   "metastasis_3": "./config/mods/metastasis_3.install.steps.json",
   "missionimprobable": "./config/mods/missionimprobable.install.steps.json",
+  "mop": "./config/mods/mop.install.steps.json",
   "ravenholmlc": "./config/mods/ravenholmlc.install.steps.json",
   "ravenholmncz": "./config/mods/ravenholmncz.install.steps.json",
   "research_and_development": "./config/mods/research_and_development.install.steps.json",

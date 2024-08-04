@@ -228,6 +228,14 @@
       ]
     }
   },
+  "mop": {
+    "name": "Mistake Of Pythagoras",
+    "sourcemod_folder": "MOP",
+    "data_dir": "./data/mods/MOP",
+    "dependencies": {
+      "required": [["source2006_hl2"]]
+    }
+  },
   "ravenholmlc": {
     "name": "Ravenholm: The Lost Chapter",
     "sourcemod_folder": "Ravenholm- The Lost Chapter",

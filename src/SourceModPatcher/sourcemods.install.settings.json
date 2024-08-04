@@ -65,6 +65,9 @@
   "missionimprobable": {
     "install": false
   },
+  "mop": {
+    "install": false
+  },
   "ravenholmlc": {
     "install": false
   },
