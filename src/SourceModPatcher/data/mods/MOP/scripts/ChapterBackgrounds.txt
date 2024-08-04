@@ -1,0 +1,6 @@
+"chapters"
+{
+	1	"ks_background1"
+	2	"ks_background2"
+	3	"ks_background3"
+}
