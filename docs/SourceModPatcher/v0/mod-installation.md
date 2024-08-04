@@ -9,6 +9,7 @@
 - [City 7: Toronto Conflict](mod-installation/city-7-toronto-conflict.md)
 - [Coastline to Atmosphere](mod-installation/coastline-to-atmosphere.md)
 - [Das Roboss](mod-installation/dasroboss.md)
+- [Day Hard](mod-installation/day-hard.md)
 - [Eclipse](mod-installation/eclipse.md)
 - [Eye of the Storm](mod-installation/eye-of-the-storm.md)
 - [Get A Life](mod-installation/get-a-life.md)

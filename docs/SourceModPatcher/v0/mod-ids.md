@@ -11,6 +11,7 @@
 | city_7 | City 7: Toronto Conflict |
 | coastline_to_atmosphere | Coastline to Atmosphere |
 | dasroboss | Das Roboss |
+| day_hard | Day Hard |
 | eclipse | Eclipse |
 | eots | Eye of the Storm |
 | get_a_life | Get a Life |

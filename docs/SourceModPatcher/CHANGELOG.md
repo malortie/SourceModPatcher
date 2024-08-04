@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Mods
   - A Frayed Stitch in Time
+  - Day Hard
   - Half-Mind
   - Mistake Of Pythagoras
   - Slums
@@ -24,6 +25,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Mods
+  - Day Hard
+    - Make *Fast weapon switch* visible in advanced Keyboard options
+    - Make *Enable Developer Console* visible in advanced Keyboard options
+
   - Garry's mod 9
     - Add Counter-Strike: Source content support in gameinfo.txt
     - Add Day of Defeat: Source content support in gameinfo.txt
@@ -51,6 +56,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Mods
+  - Day Hard
+    - Remove Voice and Multiplayer tab in Options
+
   - Half-Mind
     - Remove Multiplayer tab in Options
 
