@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Mods
   - A Frayed Stitch in Time
   - Half-Mind
+  - Mistake Of Pythagoras
   - Slums
   - Slums 2
   - SMOD 4.0
@@ -52,6 +53,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Mods
   - Half-Mind
     - Remove Multiplayer tab in Options
+
+  - Mistake Of Pythagoras
+    - Remove HL2 backgrounds from ChapterBackgrounds.txt
 
   - SMOD Outbreak
     - Localization strings

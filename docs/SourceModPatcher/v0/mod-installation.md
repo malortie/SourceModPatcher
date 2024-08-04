@@ -22,6 +22,7 @@
 - [MINERVA: Metastasis 2](mod-installation/metastasis-2.md)
 - [MINERVA: Metastasis 3](mod-installation/metastasis-3.md)
 - [Mission Improbable](mod-installation/mission-improbable.md)
+- [Mistake Of Pythagoras](mod-installation/mop.md)
 - [Ravenholm](mod-installation/ravenholm.md)
 - [Ravenholm: The Lost Chapter](mod-installation/ravenholm-the-lost-chapter.md)
 - [Research and Development](mod-installation/research-and-development.md)
