@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Mods
   - A Frayed Stitch in Time
+  - Combine Destiny
   - Day Hard
   - Half-Mind
   - Mistake Of Pythagoras
@@ -56,6 +57,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Mods
+  - Combine Destiny
+    - HUD message ammo 'full' not showing up
+
   - Day Hard
     - Remove Voice and Multiplayer tab in Options
 
