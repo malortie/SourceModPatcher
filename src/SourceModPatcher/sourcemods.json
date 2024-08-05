@@ -280,6 +280,14 @@
       ]
     }
   },
+  "riot_act": {
+    "name": "Half-Life 2: Riot Act",
+    "sourcemod_folder": "half-life 2 riot act",
+    "data_dir": "./data/mods/half-life 2 riot act",
+    "dependencies": {
+      "required": [["source2006_hl2"]]
+    }
+  },
   "school_adventures": {
     "name": "School Adventures",
     "sourcemod_folder": "school_adventures",

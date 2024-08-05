@@ -83,6 +83,9 @@
   "research_and_development": {
     "install": false
   },
+  "riot_act": {
+    "install": false
+  },
   "school_adventures": {
     "install": false
   },
