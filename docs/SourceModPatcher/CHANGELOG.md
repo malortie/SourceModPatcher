@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - A Frayed Stitch in Time
   - Combine Destiny
   - Day Hard
+  - Half-Life 2: Riot Act
   - Half-Mind
   - Mistake Of Pythagoras
   - Slums
@@ -62,6 +63,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
   - Day Hard
     - Remove Voice and Multiplayer tab in Options
+
+  - Half-Life 2: Riot Act
+    - Closed captions not showing up
+    - Missing topoffset in HudCloseCaption
 
   - Half-Mind
     - Remove Multiplayer tab in Options
