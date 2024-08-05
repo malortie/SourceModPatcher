@@ -23,6 +23,9 @@
   "coastline_to_atmosphere": {
     "install": false
   },
+  "combine_destiny": {
+    "install": false
+  },
   "dasroboss": {
     "install": false
   },

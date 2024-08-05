@@ -77,6 +77,14 @@
       "required": [["source2006_hl2"]]
     }
   },
+  "combine_destiny": {
+    "name": "Combine Destiny",
+    "sourcemod_folder": "CombineDestiny",
+    "data_dir": "./data/mods/CombineDestiny",
+    "dependencies": {
+      "required": [["source2006_hl2"]]
+    }
+  },
   "dasroboss": {
     "name": "Das Roboss",
     "sourcemod_folder": "dasroboss",
