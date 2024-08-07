@@ -85,6 +85,18 @@
       "required": [["source2006_hl2"]]
     }
   },
+  "dangerous_world": {
+    "name": "Dangerous World",
+    "sourcemod_folder": "DangerousWorld",
+    "data_dir": "./data/mods/DangerousWorld",
+    "dependencies": {
+      "required": [
+        ["sdkbase2013sp_hl2ep2"],
+        ["source2007_episodic"],
+        ["source2007_hl2"]
+      ]
+    }
+  },
   "dasroboss": {
     "name": "Das Roboss",
     "sourcemod_folder": "dasroboss",

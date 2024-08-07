@@ -26,6 +26,9 @@
   "combine_destiny": {
     "install": false
   },
+  "dangerous_world": {
+    "install": false
+  },
   "dasroboss": {
     "install": false
   },
