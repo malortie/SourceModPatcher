@@ -9,6 +9,7 @@
   "coastline_to_atmosphere": "./config/mods/coastline_to_atmosphere.install.steps.json",
   "combine_destiny": "./config/mods/combine_destiny.install.steps.json",
   "dangerous_world": "./config/mods/dangerous_world.install.steps.json",
+  "dangerous_world_2": "./config/mods/dangerous_world_2.install.steps.json",
   "dasroboss": "./config/mods/dasroboss.install.steps.json",
   "day_hard": "./config/mods/day_hard.install.steps.json",
   "eclipse": "./config/mods/eclipse.install.steps.json",

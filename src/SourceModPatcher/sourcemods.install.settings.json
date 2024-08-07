@@ -29,6 +29,9 @@
   "dangerous_world": {
     "install": false
   },
+  "dangerous_world_2": {
+    "install": false
+  },
   "dasroboss": {
     "install": false
   },

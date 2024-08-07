@@ -97,6 +97,18 @@
       ]
     }
   },
+  "dangerous_world_2": {
+    "name": "DangerousWorld 2 Demo",
+    "sourcemod_folder": "DangerousWorld 2 Demo",
+    "data_dir": "./data/mods/DangerousWorld 2 Demo",
+    "dependencies": {
+      "required": [
+        ["sdkbase2013sp_hl2ep2"],
+        ["source2007_episodic"],
+        ["source2007_hl2"]
+      ]
+    }
+  },
   "dasroboss": {
     "name": "Das Roboss",
     "sourcemod_folder": "dasroboss",
