@@ -10,6 +10,7 @@
 - [Coastline to Atmosphere](mod-installation/coastline-to-atmosphere.md)
 - [Combine Destiny](mod-installation/combine-destiny.md)
 - [Dangerous World](mod-installation/dangerous-world.md)
+- [Dangerous World 2 Demo](mod-installation/dangerous-world-2.md)
 - [Das Roboss](mod-installation/dasroboss.md)
 - [Day Hard](mod-installation/day-hard.md)
 - [Eclipse](mod-installation/eclipse.md)

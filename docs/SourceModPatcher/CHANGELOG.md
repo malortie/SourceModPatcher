@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - A Frayed Stitch in Time
   - Combine Destiny
   - Dangerous World
+  - Dangerous World 2 Demo
   - Day Hard
   - Half-Life 2: Riot Act
   - Half-Mind

@@ -12,6 +12,7 @@
 | coastline_to_atmosphere | Coastline to Atmosphere |
 | combine_destiny | Combine Destiny |
 | dangerous_world | Dangerous World |
+| dangerous_world_2 | Dangerous World 2 Demo |
 | dasroboss | Das Roboss |
 | day_hard | Day Hard |
 | eclipse | Eclipse |
