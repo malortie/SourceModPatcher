@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Half-Life 2: Riot Act
   - Half-Mind
   - Mistake Of Pythagoras
+  - Rebellion
   - Slums
   - Slums 2
   - SMOD 4.0
@@ -75,6 +76,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
   - Mistake Of Pythagoras
     - Remove HL2 backgrounds from ChapterBackgrounds.txt
+
+  - Rebellion
+    - Missing widescreen background materials
 
   - SMOD Outbreak
     - Localization strings

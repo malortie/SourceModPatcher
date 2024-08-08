@@ -31,6 +31,7 @@
 | mop | Mistake Of Pythagoras |
 | ravenholmlc | Ravenholm: The Lost Chapter |
 | ravenholmncz | Ravenholm |
+| rebellion | R e b e l l i o n |
 | research_and_development | Research and Development |
 | riot_act | Half-Life 2: Riot Act |
 | school_adventures | School Adventures |

@@ -30,6 +30,7 @@
 - [Mistake Of Pythagoras](mod-installation/mop.md)
 - [Ravenholm](mod-installation/ravenholm.md)
 - [Ravenholm: The Lost Chapter](mod-installation/ravenholm-the-lost-chapter.md)
+- [R e b e l l i o n](mod-installation/rebellion.md)
 - [Research and Development](mod-installation/research-and-development.md)
 - [School Adventures](mod-installation/school-adventures.md)
 - [Sebastian](mod-installation/sebastian.md)
