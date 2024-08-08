@@ -28,6 +28,7 @@
   "mop": "./config/mods/mop.install.steps.json",
   "ravenholmlc": "./config/mods/ravenholmlc.install.steps.json",
   "ravenholmncz": "./config/mods/ravenholmncz.install.steps.json",
+  "rebellion": "./config/mods/rebellion.install.steps.json",
   "research_and_development": "./config/mods/research_and_development.install.steps.json",
   "riot_act": "./config/mods/riot_act.install.steps.json",
   "school_adventures": "./config/mods/school_adventures.install.steps.json",

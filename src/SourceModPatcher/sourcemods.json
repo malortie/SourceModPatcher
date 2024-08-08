@@ -292,6 +292,14 @@
       "required": [["source2006_hl2"]]
     }
   },
+  "rebellion": {
+    "name": "R e b e l l i o n",
+    "sourcemod_folder": "Rebellion",
+    "data_dir": "./data/mods/Rebellion",
+    "dependencies": {
+      "required": [["source2006_hl2"]]
+    }
+  },
   "research_and_development": {
     "name": "Research and Development",
     "sourcemod_folder": "Research and Development",
