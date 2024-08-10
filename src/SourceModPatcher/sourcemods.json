@@ -145,6 +145,18 @@
       ]
     }
   },
+  "final_project_diary": {
+    "name": "Final Project Diary",
+    "sourcemod_folder": "final_project_diary",
+    "data_dir": "./data/mods/final_project_diary",
+    "dependencies": {
+      "required": [
+        ["sdkbase2013sp_hl2ep2"],
+        ["source2007_episodic"],
+        ["source2007_hl2"]
+      ]
+    }
+  },
   "get_a_life": {
     "name": "Get a Life",
     "sourcemod_folder": "Get_A_Life",

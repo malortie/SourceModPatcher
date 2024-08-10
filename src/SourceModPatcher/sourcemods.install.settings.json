@@ -44,6 +44,9 @@
   "eots": {
     "install": false
   },
+  "final_project_diary": {
+    "install": false
+  },
   "get_a_life": {
     "install": false
   },

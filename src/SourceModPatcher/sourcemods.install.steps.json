@@ -14,6 +14,7 @@
   "day_hard": "./config/mods/day_hard.install.steps.json",
   "eclipse": "./config/mods/eclipse.install.steps.json",
   "eots": "./config/mods/eots.install.steps.json",
+  "final_project_diary": "./config/mods/final_project_diary.install.steps.json",
   "get_a_life": "./config/mods/get_a_life.install.steps.json",
   "gmod9": "./config/mods/gmod9.install.steps.json",
   "half_mind": "./config/mods/half_mind.install.steps.json",
