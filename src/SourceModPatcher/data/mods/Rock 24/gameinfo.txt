@@ -1,0 +1,26 @@
+"GameInfo"
+{
+	name	"Rock 24"
+	game	"Rock 24"
+	title	"R O C K  2 4"
+	title2	""
+	type	"singleplayer_only"
+	developer	"Two Blokes"
+	developer_url	"http://developer.valvesoftware.com/wiki/Rock_24"
+	icon	"resource/game"
+
+	FileSystem
+	{
+		SteamAppId				215		// This will mount all the GCFs we need (240=CS:S, 220=HL2).
+		ToolsAppId				211		// Tools will load this (ie: source SDK caches) to get things like materials\debug, materials\editor, etc.
+
+		SearchPaths
+		{
+			Game	|gameinfo_path|.
+			Game	"${{source2004_hl2_binaries_path}}"
+			Game	"${{source2004_hl2_patches_path}}"
+			Game	"${{source2004_hl2_content_path}}"
+			Game	hl2
+		}
+	}
+}

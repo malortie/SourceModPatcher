@@ -320,6 +320,14 @@
       "required": [["source2006_hl2"]]
     }
   },
+  "rock_24": {
+    "name": "Rock 24",
+    "sourcemod_folder": "Rock 24",
+    "data_dir": "./data/mods/Rock 24",
+    "dependencies": {
+      "required": [["source2006_hl2"]]
+    }
+  },
   "school_adventures": {
     "name": "School Adventures",
     "sourcemod_folder": "school_adventures",
