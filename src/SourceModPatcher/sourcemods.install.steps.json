@@ -54,6 +54,7 @@
   "source_2007_mod_hl2": "./config/mods/source_2007_mod_hl2.install.steps.json",
   "source_2007_mod_hl2mp": "./config/mods/source_2007_mod_hl2mp.install.steps.json",
   "source_2007_mod_template": "./config/mods/source_2007_mod_template.install.steps.json",
+  "strider_mountain": "./config/mods/strider_mountain.install.steps.json",
   "the_island": "./config/mods/the_island.install.steps.json",
   "the_lost_city": "./config/mods/the_lost_city.install.steps.json",
   "wivenhoe": "./config/mods/wivenhoe.install.steps.json",

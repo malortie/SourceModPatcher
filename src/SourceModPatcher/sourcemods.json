@@ -605,6 +605,14 @@
       "required": [["source2007_hl2"]]
     }
   },
+  "strider_mountain": {
+    "name": "Strider Mountain",
+    "sourcemod_folder": "Strider_Mountain",
+    "data_dir": "./data/mods/Strider_Mountain",
+    "dependencies": {
+      "required": [["source2006_hl2"]]
+    }
+  },
   "the_island": {
     "name": "The Island",
     "sourcemod_folder": "Half-Life 2 - The Island",

@@ -1,0 +1,24 @@
+"GameInfo"
+{
+	game	"Strider Mountain"
+	title	""
+	type	"singleplayer_only"
+	developer	"SPY Baltic TB Cubedude89"
+	developer_url	"http://www.stridermountain.com"
+	icon	"icon"
+
+	FileSystem
+	{
+		SteamAppId				215
+		ToolsAppId				211
+
+		SearchPaths
+		{
+			Game	|gameinfo_path|.
+			Game	sourcetest
+			Game	"${{source2006_hl2_patches_path}}"
+			Game	"${{source2006_hl2_content_path}}"
+			Game	hl2
+		}
+	}
+}
