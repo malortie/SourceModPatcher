@@ -15,6 +15,7 @@
 - [Day Hard](mod-installation/day-hard.md)
 - [Eclipse](mod-installation/eclipse.md)
 - [Eye of the Storm](mod-installation/eye-of-the-storm.md)
+- [Final Project Diary](mod-installation/final-project-diary.md)
 - [Get A Life](mod-installation/get-a-life.md)
 - [Garry's mod 9](mod-installation/gmod9.md)
 - [Half-Life 2: Riot Act](mod-installation/riot-act.md)

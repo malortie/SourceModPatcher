@@ -17,6 +17,7 @@
 | day_hard | Day Hard |
 | eclipse | Eclipse |
 | eots | Eye of the Storm |
+| final_project_diary | Final Project Diary |
 | get_a_life | Get a Life |
 | gmod9 | Garry's Mod 9 |
 | half_mind | Half-Mind |

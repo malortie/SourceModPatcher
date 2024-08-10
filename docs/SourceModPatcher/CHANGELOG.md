@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Dangerous World
   - Dangerous World 2 Demo
   - Day Hard
+  - Final Project Diary
   - Half-Life 2: Riot Act
   - Half-Mind
   - Mistake Of Pythagoras
@@ -67,6 +68,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
   - Day Hard
     - Remove Voice and Multiplayer tab in Options
+
+  - Final Project Diary
+    - Missing flashlight icon
+    - Missing ammo icon
 
   - Half-Life 2: Riot Act
     - Closed captions not showing up
