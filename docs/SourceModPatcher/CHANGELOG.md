@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Half-Mind
   - Mistake Of Pythagoras
   - Rebellion
+  - Rock 24
   - Slums
   - Slums 2
   - SMOD 4.0

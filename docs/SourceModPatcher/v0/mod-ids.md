@@ -34,6 +34,7 @@
 | rebellion | R e b e l l i o n |
 | research_and_development | Research and Development |
 | riot_act | Half-Life 2: Riot Act |
+| rock_24 | Rock 24 |
 | school_adventures | School Adventures |
 | sebastian | Sebastian |
 | shantytown | Shantytown |
