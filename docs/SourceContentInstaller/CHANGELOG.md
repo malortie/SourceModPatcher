@@ -10,6 +10,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Content
+  - Source 2007 Episodic
+    - Added hevsuit_sheet.vtf
   - Source 2007 HL2:EP2
     - Added skill_episodic.cfg
 
