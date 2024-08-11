@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Content
+  - Source 2007 HL2:EP2
+    - Added skill_episodic.cfg
+
 ## [0.1.0] - 2024-07-21
 
 ### Added
