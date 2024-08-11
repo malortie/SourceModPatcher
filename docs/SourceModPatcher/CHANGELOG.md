@@ -28,6 +28,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - SMOD Redux Version 8
   - SMOD: Tactical Delta 5.56
   - SMOD Troopers 0.9.9
+  - Strider Mountain
 
 ### Changed
 
@@ -93,7 +94,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - Missing Hopwire materials
 
   - SMOD: Tactical Delta 5.56
-    - - Missing entry for HL2_Flamethrower
+    - Missing entry for HL2_Flamethrower
+
+  - Strider Mountain
+    - Missing widescreen background materials
+    - Missing topoffset in HudCloseCaption
 
 ## [0.2.0] - 2024-07-21
 

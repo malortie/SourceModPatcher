@@ -57,6 +57,7 @@
 | source_2007_mod_hl2 | Source 2007 (Mod HL2) |
 | source_2007_mod_hl2mp | Source 2007 (Mod HL2MP) |
 | source_2007_mod_template | Source 2007 (Mod SDK Template) |
+| strider_mountain | Strider Mountain |
 | the_island | The Island |
 | the_lost_city | The Lost City |
 | wivenhoe | Wivenhoe: The Fall of Ravenholm |

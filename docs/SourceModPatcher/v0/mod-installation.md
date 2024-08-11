@@ -55,6 +55,7 @@
 - [Source 2007 (Mod HL2)](mod-installation/source-2007-mod-hl2.md)
 - [Source 2007 (Mod HL2MP)](mod-installation/source-2007-mod-hl2mp.md)
 - [Source 2007 (Mod SDK Sample)](mod-installation/source-2007-mod-template.md)
+- [Strider Mountain](mod-installation/strider-mountain.md)
 - [The Island](mod-installation/the-island.md)
 - [The Lost City](mod-installation/the-lost-city.md)
 - [Wivenhoe: The Fall of Ravenholm](mod-installation/wivenhoe.md)
