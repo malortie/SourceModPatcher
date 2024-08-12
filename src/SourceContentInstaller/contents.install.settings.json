@@ -115,6 +115,10 @@
     "install": false,
     "install_dir": "./content/source2006_episodic_maps"
   },
+  "source2006_episodic_maps_bsps": {
+    "install": false,
+    "install_dir": "./content/source2006_episodic_maps_bsps"
+  },
   "source2006_hl2": {
     "install": false,
     "install_dir": "./content/source2006"

@@ -1,0 +1,33 @@
+[
+  {
+    "$type": "extract_vpk",
+    "name": "source2006_episodic_maps_bsps_extract_content",
+    "description": "Extract Source SDK Base 2006 (Episodic) maps BSPs content",
+    "steamappid": 215,
+    "vpks": [
+      {
+        "vpk": "vpks/depot_381_dir.vpk",
+        "files_to_extract": [
+          "^episodic/maps/.*\\.bsp$"
+        ]
+      }
+    ],
+    "outdir": "$(install_settings_install_dir)"
+  },
+  {
+    "$type": "save_variable",
+    "name": "source2006_episodic_maps_bsps_save_variable",
+    "description": "Add $(content_name) install path to $(variables_config_file_name)",
+    "depends_on": ["source2006_episodic_maps_bsps_extract_content"],
+    "variable_name": "source2006_episodic_maps_bsps_content_path",
+    "variable_value": "$(install_settings_install_dir)/episodic"
+  },
+  {
+    "$type": "save_variable",
+    "name": "source2007_episodic_maps_bsps_save_variable",
+    "description": "Add $(content_name) (source2007 alias) install path to $(variables_config_file_name)",
+    "depends_on": ["source2006_episodic_maps_bsps_extract_content"],
+    "variable_name": "source2007_episodic_maps_bsps_content_path",
+    "variable_value": "$(install_settings_install_dir)/episodic"
+  }
+]

@@ -83,6 +83,9 @@
   "mop": {
     "install": false
   },
+  "obsidian": {
+    "install": false
+  },
   "ravenholmlc": {
     "install": false
   },

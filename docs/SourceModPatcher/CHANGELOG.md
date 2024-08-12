@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Half-Life 2: Riot Act
   - Half-Mind
   - Mistake Of Pythagoras
+  - Obsidian Conflict 1.35
   - Rebellion
   - Rock 24
   - Slums
@@ -45,6 +46,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - Add HL1MP content support in gameinfo.txt
     - Add HL2MP content support in gameinfo.txt
     - Add Lost Coast content support in gameinfo.txt
+
+  - Obsidian Conflict 1.35
+    - Add HL1MP content support
+    - Add HL2MP content support
+    - Add Portal content support
 
   - SMOD 4.0
     - Add Episodic content support in gameinfo.txt

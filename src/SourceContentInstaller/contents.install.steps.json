@@ -28,6 +28,7 @@
   "sdkbase2013sp_hl2ep2_maps": "./config/contents/sdkbase2013sp_hl2ep2_maps.install.steps.json",
   "source2006_episodic": "./config/contents/source2006_episodic.install.steps.json",
   "source2006_episodic_maps": "./config/contents/source2006_episodic_maps.install.steps.json",
+  "source2006_episodic_maps_bsps": "./config/contents/source2006_episodic_maps_bsps.install.steps.json",
   "source2006_hl2": "./config/contents/source2006_hl2.install.steps.json",
   "source2007_episodic": "./config/contents/source2007_episodic.install.steps.json",
   "source2007_episodic_maps": "./config/contents/source2007_episodic_maps.install.steps.json",

@@ -118,6 +118,7 @@ The following variables are autowritten to `variables.json` and define the path 
 | Name | Description |
 | ---- | ----------- |
 | source2006_episodic_content_path | Episodic 2006 (base) content install path |
+| source2006_episodic_maps_bsps_content_path | Episodic 2006 (maps) (bsps) content install path |
 | source2006_episodic_maps_content_path | Episodic 2006 (maps) content install path |
 | source2006_hl2_content_path | HL2 2006 content install path |
 | source2006_hl2mp_content_path | Same as `sdkbase2013mp_hl2mp_content_path` |
@@ -127,6 +128,7 @@ The following variables are autowritten to `variables.json` and define the path 
 | Name | Description |
 | ---- | ----------- |
 | source2007_ep2_maps_content_path | Same as `sdkbase2013sp_hl2ep2_maps_content_path` |
+| source2007_episodic_maps_bsps_content_path | Episodic 2007 (maps) (bsps) content install path |
 | source2007_episodic_content_path | Episodic 2007 (base) content install path |
 | source2007_episodic_maps_content_path | Episodic 2007 (maps) content install path |
 | source2007_hl2_content_path | HL2 2007 content install path |

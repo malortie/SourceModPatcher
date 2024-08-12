@@ -1,0 +1,32 @@
+"GameInfo"
+{
+	game	"Obsidian Conflict 0.1.3.5"
+	title	"OBSIDIAN CONFLICT 0.1.3.5"
+	title2	"OBSIDIAN CONFLICT 0.1.3.5"
+	type "multiplayer_only"
+	nomodels 0
+	nohimodel 1
+	nocrosshair 1
+	hidden_maps
+	{
+		"test_speakers"		1
+		"test_hardware"		1
+	}
+
+	developer "Obsidian Conflict Team"
+	developer_url "http://obsidianconflict.net"
+	manual "http://wiki.obsidianconflict.net"
+	icon "resource/obsidian"
+
+	FileSystem
+	{
+		SteamAppId				218		// This will mount all the GCFs we need (240=CS:S, 220=HL2).
+		ToolsAppId				211		// Tools will load this (ie: source SDK caches) to get things like materials\debug, materials\editor, etc.
+
+		SearchPaths
+		{
+			Game	|gameinfo_path|.
+			Game	|all_source_engine_paths|hl2
+		}
+	}
+}

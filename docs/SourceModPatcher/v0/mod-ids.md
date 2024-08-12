@@ -30,6 +30,7 @@
 | metastasis_3 | MINERVA: Metastasis 3 |
 | missionimprobable | Mission Improbable |
 | mop | Mistake Of Pythagoras |
+| obsidian | Obsidian Conflict 1.35 |
 | ravenholmlc | Ravenholm: The Lost Chapter |
 | ravenholmncz | Ravenholm |
 | rebellion | R e b e l l i o n |

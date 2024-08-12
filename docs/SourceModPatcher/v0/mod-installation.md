@@ -29,6 +29,7 @@
 - [MINERVA: Metastasis 3](mod-installation/metastasis-3.md)
 - [Mission Improbable](mod-installation/mission-improbable.md)
 - [Mistake Of Pythagoras](mod-installation/mop.md)
+- [Obsidian Conflict 1.35](mod-installation/obsidian-conflict.md)
 - [Ravenholm](mod-installation/ravenholm.md)
 - [Ravenholm: The Lost Chapter](mod-installation/ravenholm-the-lost-chapter.md)
 - [R e b e l l i o n](mod-installation/rebellion.md)

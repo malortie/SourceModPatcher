@@ -36,6 +36,21 @@
 
 2. Run SourceContentInstaller
 
+### Episodic Maps BSPs content
+
+1. Enable `source2006_episodic_maps_bsps` in `contents.install.settings.json`
+
+   > **Note:** You can change `install_dir` to a different directory if you want.
+
+   ```json
+   "source2006_episodic_maps_bsps": {
+     "install": true,
+     "install_dir": "..."
+   }
+   ```
+
+2. Run SourceContentInstaller
+
 ### HL2 content
 
 1. Enable `source2006_hl2` in `contents.install.settings.json`

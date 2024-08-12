@@ -288,6 +288,33 @@
       "required": [["source2006_hl2"]]
     }
   },
+  "obsidian": {
+    "name": "Obsidian Conflict 0.1.3.5",
+    "sourcemod_folder": "obsidian",
+    "data_dir": "./data/mods/obsidian",
+    "dependencies": {
+      "optional": [
+        ["cstrike"],
+        ["cstrike_maps"],
+        ["dod"],
+        ["dod_maps"],
+        ["hl1"],
+        ["hl1_maps"],
+        ["hl1mp"],
+        ["hl1mp_maps"],
+        ["hl2_maps"],
+        ["hl2mp_maps"],
+        ["lostcoast"],
+        ["lostcoast_maps"],
+        ["portal"],
+        ["portal_maps"],
+        ["sdkbase2013sp_hl2ep2"],
+        ["sdkbase2013sp_hl2ep2_maps"],
+        ["source2006_episodic_maps_bsps"],
+        ["source2007_episodic_maps"]
+      ]
+    }
+  },
   "ravenholmlc": {
     "name": "Ravenholm: The Lost Chapter",
     "sourcemod_folder": "Ravenholm- The Lost Chapter",

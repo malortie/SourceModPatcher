@@ -144,6 +144,11 @@
     "steamapps_dependencies": [215],
     "output_variables": ["source2006_episodic_maps_content_path"]
   },
+  "source2006_episodic_maps_bsps": {
+    "name": "Source 2006 (Episodic) (maps) (bsps)",
+    "steamapps_dependencies": [215],
+    "output_variables": ["source2006_episodic_maps_bsps_content_path"]
+  },
   "source2006_hl2": {
     "name": "Source 2006 (HL2)",
     "steamapps_dependencies": [215],

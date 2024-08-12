@@ -27,6 +27,7 @@
   "metastasis_3": "./config/mods/metastasis_3.install.steps.json",
   "missionimprobable": "./config/mods/missionimprobable.install.steps.json",
   "mop": "./config/mods/mop.install.steps.json",
+  "obsidian": "./config/mods/obsidian.install.steps.json",
   "ravenholmlc": "./config/mods/ravenholmlc.install.steps.json",
   "ravenholmncz": "./config/mods/ravenholmncz.install.steps.json",
   "rebellion": "./config/mods/rebellion.install.steps.json",
