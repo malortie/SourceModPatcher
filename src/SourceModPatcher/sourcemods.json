@@ -311,7 +311,9 @@
         ["sdkbase2013sp_hl2ep2"],
         ["sdkbase2013sp_hl2ep2_maps"],
         ["source2006_episodic_maps_bsps"],
-        ["source2007_episodic_maps"]
+        ["source2007_episodic"],
+        ["source2007_episodic_maps"],
+        ["source2007_hl2"]
       ]
     }
   },

@@ -27,7 +27,9 @@
   - [Source SDK Base 2013 Singleplayer (HL2:EP2) (**Optional**)](../../../SourceContentInstaller/v0/content-installation/source-sdk-base-2013-singleplayer.md#hl2ep2-content)
   - [Source SDK Base 2013 Singleplayer (HL2:EP2) (maps) (**Optional**)](../../../SourceContentInstaller/v0/content-installation/source-sdk-base-2013-singleplayer.md#hl2ep2-maps-content)
   - [Source 2006 (Episodic) (maps) (bsps) (**Optional**)](../../../SourceContentInstaller/v0/content-installation/source-2006.md#episodic-maps-bsps-content)
+  - [Source 2007 (Episodic) (base) (**Optional**)](../../../SourceContentInstaller/v0/content-installation/source-2007.md#episodic-base-content)
   - [Source 2007 (Episodic) (maps) (**Optional**)](../../../SourceContentInstaller/v0/content-installation/source-2007.md#episodic-maps-content)
+  - [Source 2007 (HL2) (**Optional**)](../../../SourceContentInstaller/v0/content-installation/source-2007.md#hl2-content)
 
 ## Installation
 

@@ -13,4 +13,8 @@ if exist "${{hl2_maps_content_path}}" (
   call makelinks.bat "..\add-ons\%_addonprefix%_hl2_maps" "${{hl2_maps_content_path}}"
 )
 
+if exist "${{source2007_hl2_content_path}}" (
+  call makelinks.bat "..\add-ons\%_addonprefix%_source2007_hl2" "${{source2007_hl2_content_path}}"
+)
+
 endlocal
