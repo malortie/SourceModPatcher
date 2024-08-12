@@ -4,6 +4,7 @@ prompt $
 cls
 
 call clean.bat
+call setup_patches.bat
 
 rem Uncomment the following to mount additional content 
 

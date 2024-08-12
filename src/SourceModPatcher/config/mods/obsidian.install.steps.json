@@ -28,6 +28,7 @@
       "$(sourcemod_dir)/sourcemodpatcher_scripts/setup_hl2.bat",
       "$(sourcemod_dir)/sourcemodpatcher_scripts/setup_hl2mp.bat",
       "$(sourcemod_dir)/sourcemodpatcher_scripts/setup_lostcoast.bat",
+      "$(sourcemod_dir)/sourcemodpatcher_scripts/setup_patches.bat",
       "$(sourcemod_dir)/sourcemodpatcher_scripts/setup_portal.bat"
     ]
   }
