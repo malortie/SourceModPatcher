@@ -35,7 +35,7 @@
 
 1. Download the mod
 
-   - <url>
+   - <https://github.com/malortie/SourceModPatcher-Mods-Registry/releases/download/downloads/obsidian_conflict_135_+_client_hotfix_without_mountfix.zip>
 
 2. Install the mod to your sourcemods folder i.e.
 
