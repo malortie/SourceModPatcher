@@ -7,6 +7,7 @@
 ## Prerequisites
 
 - Games
+  - [Source SDK Base](../../../game-installation/game-installation/source-sdk-base.md)
   - [Source SDK Base 2007](../../../game-installation/game-installation/source-sdk-base-2007.md)
 
 - Contents
