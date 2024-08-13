@@ -60,18 +60,20 @@
 1. Open `obsidian/sourcemodpatcher_scripts/setup.bat`
 2. Uncomment each line of the content you want to mount by removing `rem` at the beginning of the line
 
-    ```text
-    rem call setup_cstrike.bat
-    rem call setup_dod.bat
-    rem call setup_ep2.bat
-    rem call setup_episodic.bat
-    rem call setup_hl1.bat
-    rem call setup_hl1mp.bat
-    rem call setup_hl2.bat
-    rem call setup_hl2mp.bat
-    rem call setup_lostcoast.bat
-    rem call setup_portal.bat
-    ```
+   > **Note:** For now, Half-Life Deathmatch: Source maps depend on [Half-Life: Source (base)](../../../SourceContentInstaller/v0/content-installation/half-life-source.md#base-content) content installed and mounted using `setup_hl1.bat`.
+
+   ```text
+   rem call setup_cstrike.bat
+   rem call setup_dod.bat
+   rem call setup_ep2.bat
+   rem call setup_episodic.bat
+   rem call setup_hl1.bat
+   rem call setup_hl1mp.bat
+   rem call setup_hl2.bat
+   rem call setup_hl2mp.bat
+   rem call setup_lostcoast.bat
+   rem call setup_portal.bat
+   ```
 
 3. Open a command prompt
 4. Execute `setup.bat`
