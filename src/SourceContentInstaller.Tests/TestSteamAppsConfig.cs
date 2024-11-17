@@ -275,7 +275,9 @@ namespace SourceContentInstaller.Tests
         public void IsSteamAppInstalled()
         {
             var fileSystem = new MockFileSystem(new Dictionary<string, MockFileData> {
-                { "C:/steamapps_not_installed.json", new MockFileData(File.ReadAllBytes("../../../data/config/steamapps_not_installed.json")) }
+                { "C:/steamapps_not_installed.json", new MockFileData(File.ReadAllBytes("../../../data/config/steamapps_not_installed.json")) },
+                { "C:/SteamLibrary/Source SDK Base", new MockDirectoryData() },
+                { "E:/SteamLibrary/Half-Life 2", new MockDirectoryData() }
             });
 
             var steamAppsConfig = new SteamAppsConfig(fileSystem, NullWriter, "C:/steamapps_not_installed.json", new JSONConfigurationSerializer<JSONSteamAppsConfig>(), EmptySteamPathFinder)
@@ -287,13 +289,16 @@ namespace SourceContentInstaller.Tests
             Assert.IsTrue(steamAppsConfig.IsSteamAppInstalled(215));
             Assert.IsFalse(steamAppsConfig.IsSteamAppInstalled(218));
             Assert.IsTrue(steamAppsConfig.IsSteamAppInstalled(220));
+            Assert.IsFalse(steamAppsConfig.IsSteamAppInstalled(320));
         }
 
         [TestMethod]
         public void GetInstalledSteamApps()
         {
             var fileSystem = new MockFileSystem(new Dictionary<string, MockFileData> {
-                { "C:/steamapps_not_installed.json", new MockFileData(File.ReadAllBytes("../../../data/config/steamapps_not_installed.json")) }
+                { "C:/steamapps_not_installed.json", new MockFileData(File.ReadAllBytes("../../../data/config/steamapps_not_installed.json")) },
+                { "C:/SteamLibrary/Source SDK Base", new MockDirectoryData() },
+                { "E:/SteamLibrary/Half-Life 2", new MockDirectoryData() }
             });
 
             var steamAppsConfig = new SteamAppsConfig(fileSystem, NullWriter, "C:/steamapps_not_installed.json", new JSONConfigurationSerializer<JSONSteamAppsConfig>(), EmptySteamPathFinder)

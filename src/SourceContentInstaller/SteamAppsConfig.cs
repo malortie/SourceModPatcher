@@ -62,12 +62,12 @@ namespace SourceContentInstaller
 
         public virtual bool IsSteamAppInstalled(int appID)
         {
-            return Config[appID].InstallDir != string.Empty;
+            return Config[appID].InstallDir != string.Empty && FileSystem.Path.Exists(Config[appID].InstallDir);
         }
 
         public virtual List<int> GetInstalledSteamApps()
         {
-            return Config.Where(kv => kv.Value.InstallDir != string.Empty).Select(kv => kv.Key).ToList();
+            return Config.Where(kv => IsSteamAppInstalled(kv.Key)).Select(kv => kv.Key).ToList();
         }
 
         protected override void PostLoadConfig()

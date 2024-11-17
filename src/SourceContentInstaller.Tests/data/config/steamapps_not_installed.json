@@ -16,5 +16,11 @@
     "appmanifest_file": "appmanifest_220.acf",
     "install_dir": "E:/SteamLibrary/Half-Life 2",
     "install_dir_variable": "steamapps_hl2_install_dir"
+  },
+  "320": {
+    "name": "Half-Life 2: Deathmatch",
+    "appmanifest_file": "appmanifest_320.acf",
+    "install_dir": "<invalid path>",
+    "install_dir_variable": "steamapps_hl2mp_install_dir"
   }
 }
