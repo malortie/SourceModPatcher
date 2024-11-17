@@ -1,5 +1,7 @@
 # README
 
+> **Important!** See [Half-Life 2 20th Anniversary Update (breaking changes)](Half-Life_2_20th_Anniversary_Update_(breaking_changes).md)
+
 ## About The Project
 
 Since the Steampipe update from 2013, game content mounting in older Source engine branches doesn't work. As a result, Pre-Steampipe Source mods that depend on other Source games content will either fail to launch or have errors due to missing resources. Though it's possible to make them playable, this requires many manual fixes and other resources e.g. vanilla game DLLs compatible with the designed engine branch for mods that don't provide their own.
