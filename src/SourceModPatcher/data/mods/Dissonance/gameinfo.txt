@@ -1,0 +1,31 @@
+"GameInfo"
+{
+	// This is what shows up in the 'Third Party Games' area of the Steam games list.
+	game						"Dissonance"
+	type 						singleplayer_only
+	
+	developer					"Load-bearing Headcrabs"
+	developer_url					"http://guildhall.smu.edu"
+	icon						"Dissonance"
+
+	FileSystem
+	{
+		SteamAppId				218 	// GCF for Source SDK Base
+		ToolsAppId				211		// Tools will load this (ie: source SDK caches) to get things like materials\debug, materials\editor, etc.
+
+		SearchPaths
+		{
+			Game	|gameinfo_path|.
+			Game	|all_source_engine_paths|sourcetest
+			Game	"${{source2007_ep2_patches_path}}"
+			Game	"${{source2007_ep2_content_path}}"
+			Game	|all_source_engine_paths|ep2
+			Game	"${{source2007_episodic_patches_path}}"
+			Game	"${{source2007_episodic_content_path}}"
+			Game	|all_source_engine_paths|episodic
+			Game	"${{source2007_hl2_patches_path}}"
+			Game	"${{source2007_hl2_content_path}}"
+			Game	|all_source_engine_paths|hl2
+		}
+	}
+}

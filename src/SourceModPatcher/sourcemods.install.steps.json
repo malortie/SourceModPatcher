@@ -12,6 +12,7 @@
   "dangerous_world_2": "./config/mods/dangerous_world_2.install.steps.json",
   "dasroboss": "./config/mods/dasroboss.install.steps.json",
   "day_hard": "./config/mods/day_hard.install.steps.json",
+  "dissonance": "./config/mods/dissonance.install.steps.json",
   "eclipse": "./config/mods/eclipse.install.steps.json",
   "eots": "./config/mods/eots.install.steps.json",
   "final_project_diary": "./config/mods/final_project_diary.install.steps.json",

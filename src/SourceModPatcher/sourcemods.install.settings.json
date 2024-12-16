@@ -38,6 +38,9 @@
   "day_hard": {
     "install": false
   },
+  "dissonance": {
+    "install": false
+  },
   "eclipse": {
     "install": false
   },

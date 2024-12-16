@@ -125,6 +125,18 @@
       "required": [["source2006_hl2"]]
     }
   },
+  "dissonance": {
+    "name": "Dissonance",
+    "sourcemod_folder": "Dissonance",
+    "data_dir": "./data/mods/Dissonance",
+    "dependencies": {
+      "required": [
+        ["sdkbase2013sp_hl2ep2"],
+        ["source2007_episodic"],
+        ["source2007_hl2"]
+      ]
+    }
+  },
   "eclipse": {
     "name": "Eclipse",
     "sourcemod_folder": "Eclipse",
