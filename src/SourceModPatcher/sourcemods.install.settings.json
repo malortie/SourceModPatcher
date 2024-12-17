@@ -38,6 +38,9 @@
   "day_hard": {
     "install": false
   },
+  "deja_vudu": {
+    "install": false
+  },
   "dissonance": {
     "install": false
   },

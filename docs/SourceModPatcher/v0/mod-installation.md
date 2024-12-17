@@ -13,6 +13,7 @@
 - [Dangerous World 2 Demo](mod-installation/dangerous-world-2.md)
 - [Das Roboss](mod-installation/dasroboss.md)
 - [Day Hard](mod-installation/day-hard.md)
+- [Deja Vudu Episode 1](mod-installation/deja-vudu.md)
 - [Dissonance](mod-installation/dissonance.md)
 - [Eclipse](mod-installation/eclipse.md)
 - [Eye of the Storm](mod-installation/eye-of-the-storm.md)

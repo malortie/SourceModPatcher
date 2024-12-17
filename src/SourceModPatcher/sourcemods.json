@@ -125,6 +125,16 @@
       "required": [["source2006_hl2"]]
     }
   },
+  "deja_vudu": {
+    "name": "Deja Vudu Episode 1",
+    "sourcemod_folder": "Deja Vudu Episode 1",
+    "data_dir": "./data/mods/Deja Vudu Episode 1",
+    "dependencies": {
+      "required": [
+        ["source2006_hl2"]
+      ]
+    }
+  },
   "dissonance": {
     "name": "Dissonance",
     "sourcemod_folder": "Dissonance",
