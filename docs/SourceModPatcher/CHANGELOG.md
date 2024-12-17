@@ -14,6 +14,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Dissonance
   - Son of Ithaca
 
+### Fixed
+
+- Mods
+  - Son of Ithaca
+    - Enable culling on player textures
+
 ## [0.3.0] - 2024-08-13
 
 ### Added

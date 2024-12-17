@@ -1,0 +1,6 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models\soi_telemachus/soi_diff_telemachus_hairbangs"
+	//"$nocull" 1
+	"$alphatest" 1
+}
