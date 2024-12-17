@@ -546,6 +546,16 @@
       ]
     }
   },
+  "soi": {
+    "name": "Son of Ithaca",
+    "sourcemod_folder": "SOI",
+    "data_dir": "./data/mods/SOI",
+    "dependencies": {
+      "required": [
+        ["source2006_hl2"]
+      ]
+    }
+  },
   "source_2004_mod_hl2": {
     "name": "Source 2004 (Mod HL2)",
     "sourcemod_folder": "source_2004_mod_hl2",
