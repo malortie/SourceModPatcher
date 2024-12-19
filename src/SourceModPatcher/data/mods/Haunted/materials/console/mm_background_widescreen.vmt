@@ -1,0 +1,5 @@
+"UnlitGeneric"
+{
+	"$baseTexture" "console/mm_background_widescreen"
+	"$translucent" 1
+}

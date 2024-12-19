@@ -18,6 +18,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Mods
+  - Haunted
+    - Missing widescreen background materials
   - Son of Ithaca
     - Enable culling on player textures
 
