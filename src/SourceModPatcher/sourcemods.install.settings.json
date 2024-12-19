@@ -68,6 +68,9 @@
   "halloween_redux": {
     "install": false
   },
+  "haunted": {
+    "install": false
+  },
   "hoe": {
     "install": false
   },

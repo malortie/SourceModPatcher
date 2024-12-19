@@ -24,6 +24,7 @@
 - [Half-Mind](mod-installation/half-mind.md)
 - [Halloween HL2: Pumpkin Night](mod-installation/halloween.md)
 - [Halloween HL2: Pumpkin Night (Redux)](mod-installation/halloween-redux.md)
+- [Haunted v1.5](mod-installation/haunted.md)
 - [Heart of Evil: Source](mod-installation/heart-of-evil-source.md)
 - [Human Error](mod-installation/human-error.md)
 - [MACe the Adventure](mod-installation/mace-the-adventure.md)

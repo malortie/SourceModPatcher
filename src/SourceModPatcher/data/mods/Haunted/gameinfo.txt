@@ -1,0 +1,25 @@
+"GameInfo"
+{
+	game            "Haunted v1.5"                               // game name shown in the Steam Games list
+	title           ""                                      // game title shown on the main menu
+	title2          ""                                      // game sub-title shown on the main menu
+	type            singleplayer_only                       // player type
+	icon            "resource/logo"                         // icon directory
+ 	developer       "YBIPC: Yea Buddy its Project Chronos"  // developer name
+	developer_url	"http://www.guildhall.smu.edu"          // website
+	manual        	"http://www.guildhall.smu.edu"          // manual on website
+
+	FileSystem
+	{
+		SteamAppId	215
+		ToolsAppId	211
+
+		SearchPaths
+		{
+			Game	|gameinfo_path|.
+			Game	"${{source2006_hl2_patches_path}}"
+			Game	"${{source2006_hl2_content_path}}"
+			Game	hl2
+		}
+	}
+}

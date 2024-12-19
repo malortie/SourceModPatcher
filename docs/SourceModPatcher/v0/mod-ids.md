@@ -25,6 +25,7 @@
 | half_mind | Half-Mind |
 | halloween | Halloween HL2: Pumpkin Night |
 | halloween_redux | Halloween HL2: Pumpkin Night (Redux) |
+| haunted | Haunted v1.5 |
 | hoe | Heart of Evil: Source |
 | human_error | Human Error |
 | mace | MACe the Adventure |

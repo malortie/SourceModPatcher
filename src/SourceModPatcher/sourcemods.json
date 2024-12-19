@@ -238,6 +238,16 @@
       "required": [["source2006_hl2"]]
     }
   },
+  "haunted": {
+    "name": "Haunted v1.5",
+    "sourcemod_folder": "Haunted",
+    "data_dir": "./data/mods/Haunted",
+    "dependencies": {
+      "required": [
+        ["source2006_hl2"]
+      ]
+    }
+  },
   "hoe": {
     "name": "Heart of Evil: Source",
     "sourcemod_folder": "hoe",
