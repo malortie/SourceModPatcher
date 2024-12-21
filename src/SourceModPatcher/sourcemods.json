@@ -676,6 +676,17 @@
       "required": [["source2007_hl2"]]
     }
   },
+  "sourceforts": {
+    "name": "SourceForts v1.9.4",
+    "sourcemod_folder": "sourceforts",
+    "data_dir": "./data/mods/sourceforts",
+    "dependencies": {
+      "required": [
+        ["sdkbase2013mp_hl2mp"],
+        ["source2006_hl2"]
+      ]
+    }
+  },
   "strider_mountain": {
     "name": "Strider Mountain",
     "sourcemod_folder": "Strider_Mountain",

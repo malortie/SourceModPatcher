@@ -60,6 +60,7 @@
 - [Source 2007 (Mod HL2)](mod-installation/source-2007-mod-hl2.md)
 - [Source 2007 (Mod HL2MP)](mod-installation/source-2007-mod-hl2mp.md)
 - [Source 2007 (Mod SDK Sample)](mod-installation/source-2007-mod-template.md)
+- [SourceForts v1.9.4](mod-installation/sourceforts.md)
 - [Strider Mountain](mod-installation/strider-mountain.md)
 - [The Island](mod-installation/the-island.md)
 - [The Lost City](mod-installation/the-lost-city.md)

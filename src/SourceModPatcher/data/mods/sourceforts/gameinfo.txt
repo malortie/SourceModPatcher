@@ -1,0 +1,36 @@
+"GameInfo" 
+{
+	game		"SourceForts v1.9.4"
+	title		"SourceForts"
+	developer	"SourceForts Team"
+	developer_url	"http://www.sourcefortsmod.com"
+	manual		"http://www.sourcefortsmod.com/userguide"
+	icon		"resource\sourceforts"
+	type 		multiplayer_only
+	nomodels 	0
+	nohimodel 	1
+	nocrosshair	1
+	
+	hidden_maps 
+	{
+		"test_speakers"	1
+		"test_hardware"	1
+	}
+
+	FileSystem 
+	{
+		SteamAppId 215
+		ToolsAppId 211
+
+		SearchPaths 
+		{ 
+			Game |gameinfo_path|.
+			Game	"${{source2006_hl2mp_patches_path}}" // Apply specific HL2MP 2006 patches
+			Game	"${{source2006_hl2mp_content_path}}" // Make sure HL2MP 2006 content has priority
+			Game hl2mp
+			Game	"${{source2006_hl2_patches_path}}"
+			Game	"${{source2006_hl2_content_path}}"
+			Game hl2
+		}
+	}
+}

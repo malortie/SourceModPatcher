@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Dissonance
   - Haunted
   - Son of Ithaca
+  - SourceForts v1.9.4
   - Weekday Warrior
 
 ### Changed

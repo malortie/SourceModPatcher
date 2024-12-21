@@ -179,6 +179,9 @@
   "source_2007_mod_template": {
     "install": false
   },
+  "sourceforts": {
+    "install": false
+  },
   "strider_mountain": {
     "install": false
   },
