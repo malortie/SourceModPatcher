@@ -700,6 +700,14 @@
       "required": [["source2006_hl2"]]
     }
   },
+  "weekday_warrior": {
+    "name": "Weekday Warrior",
+    "sourcemod_folder": "WeekdayWarrior",
+    "data_dir": "./data/mods/WeekdayWarrior",
+    "dependencies": {
+      "required": [["source2006_hl2"]]
+    }
+  },
   "wivenhoe": {
     "name": "Wivenhoe: The Fall of Ravenholm",
     "sourcemod_folder": "TheFallOfRavenholm",

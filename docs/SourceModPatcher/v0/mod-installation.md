@@ -63,5 +63,6 @@
 - [Strider Mountain](mod-installation/strider-mountain.md)
 - [The Island](mod-installation/the-island.md)
 - [The Lost City](mod-installation/the-lost-city.md)
+- [Weekday Warrior](mod-installation/weekday-warrior.md)
 - [Wivenhoe: The Fall of Ravenholm](mod-installation/wivenhoe.md)
 - [Zombie Stress](mod-installation/zombie-stress.md)

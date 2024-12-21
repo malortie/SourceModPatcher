@@ -65,5 +65,6 @@
 | strider_mountain | Strider Mountain |
 | the_island | The Island |
 | the_lost_city | The Lost City |
+| weekday_warrior | Weekday Warrior |
 | wivenhoe | Wivenhoe: The Fall of Ravenholm |
 | zombie_stress | Zombie Stress |
