@@ -2,6 +2,7 @@
 {
 	// This is what shows up in the 'Third Party Games' area of the Steam games list.
 	game						"Weekday Warrior"
+	type	singleplayer_only
 	"developer"	"Cut Corner Company Productions"
 	"developer_url"	"http://students.guildhall.smu.edu/~weekdaywarrior"
 	"icon"		"ww_icon"

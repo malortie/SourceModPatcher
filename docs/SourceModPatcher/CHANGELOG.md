@@ -23,6 +23,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - Missing widescreen background materials
   - Son of Ithaca
     - Enable culling on player textures
+  - Weekday Warrior
+    - Missing game type in gameinfo.txt
 
 ## [0.3.0] - 2024-08-13
 
