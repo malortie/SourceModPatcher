@@ -25,6 +25,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - Enable culling on player textures
   - Weekday Warrior
     - Missing game type in gameinfo.txt
+    - Encoding in dialogues
 
 ## [0.3.0] - 2024-08-13
 
