@@ -1,0 +1,113 @@
+"Todd"
+ca<10,0,10>
+0. "What's up buddy?  You sleep through your alarm again?" ("scenes/TODD_Desk_01.vcd") <o: "eventDoneTalkToTodd" -1>
+	a. "Something like that, yeah.  Brandi said you wanted to see me?"<1>
+        b. "Shut up Todd, you're late more often than I am.  What did you want to see me for?"<1>
+        c. "It's hard to get up in the morning knowing I have to talk to you every day.  What do you want?"<1>
+
+1. "I was going to see if you wanted to get some food over at Shenanigan's, but lunch ended over an hour ago so never mind."("scenes/TODD_Desk_02.vcd")
+	a. "Oh.  So what now?"<2>
+
+2. "As I see it, we have two options.  Either we go on a coffee break, or we get to work.  What do you think?"("scenes/TODD_Desk_03.vcd")
+        a. "Coffee break sounds good to me."<3>
+        b. "I should probably get to work."<7>
+
+3. "Tell ya what...I really need to read this e-mail, so if you could just grab me a %gcup of coffee%0 while you're in the %ykitchen%0, that would be great.  Thanks buddy." ("scenes/TODD_Coffee_01.vcd") <o: "eventTaskGetCoffee" -1>
+	--<4>
+
+4. "Hey Doug, where's that %gcoffee%0 I ordered?  Try the %ykitchen%0 there genius.  It's a good thing you don't work at Starbucks." ("scenes/TODD_Coffee_Hint.vcd")<ir: "CoffeeCupFull" 5>
+	--<4>
+
+5. "Thanks Doug...... Ughh this tastes awful.  Where did you learn to make coffee?  Go do work or something.  I'll talk to you later." ("scenes/TODD_Coffee_Win.vcd") <o: "eventDoneGetCoffee" -1>
+	--<6>
+
+6. "You're lost?  Look, I know everything looks the same in this place, but c'mon Doug.  This is a little ridiculous.  I'll give you a hint...you work right across from me." ("scenes/TODD_Work_Hint.vcd") <e: "readEncryptedEmail" 8>
+        --<6>
+
+7. "Wow, no coffee?  If it wasn't already 2:00 PM, I'd start to wonder if you were a workaholic.  %gGo turn on your computer and check your mail%0.  I'll talk to you later." ("scenes/TODD_Work_01.vcd") <o: "eventTaskCheckEmail" -1> <e: "readEncryptedEmail" 8>
+        --<6>
+
+8. "What's up Doug?  Lost again?" ("scenes/TODD_Desk2_01.vcd")
+        a. "Very funny...Hey I got this weird e-mail from upstairs.  I can't figure out what it says.  Could you take a look at it?"<9>
+
+9. "Sure, hang on... Wow, this is strange.  You can't read it because it’s %yencrypted%0.  Those jerks upstairs must think this e-mail is really important. We need to figure out what's on it." ("scenes/TODD_Desk2_02.vcd")
+        a. "Well, I figured that out myself, but how do we break the code?"<10>
+
+10. "Well I can't do it, but codes are a hobby of %rDick's%0.  You should take it to him.  Maybe he can crack it for you." ("scenes/TODD_Desk2_03.vcd")
+        a. "Dick?  Who's Dick?"<11>
+
+11. "If you came to work a little more often, you might actually learn everyone's name.  You know %rDick%0.  He's the creepy guy that nobody wants to talk to." ("scenes/TODD_Desk2_04.vcd") <o: "needDecryptionProgram" -1>
+        a. "The guy who has to do everything in sets of three?"<12>
+
+12. "Yeah.  Plus he keeps trying to steal my stapler.  That's %rDick.%0  Go talk to him." ("scenes/TODD_Desk2_05.vcd")
+        --<13>
+
+13. "Still looking for %rDick%0?  I think he works in the cubicles with us.  Keep searching." ("scenes/TODD_DICK_HINT.vcd") <e: "decryptedEmail" 14>
+	--<13>
+
+14. "Whoa, this is bad.  Whatever it is, it sounds like they're going to use it to get us all fired.  You need to talk to %rMr Joshi%0." ("scenes/TODD_Desk3_01.vcd") <o: "toddSentEmailToBoss" -1>
+	--<15>
+
+15. "Ha!  You don't even know where %rMr Joshi%0 works?  I can't believe that no one has fired you yet.  Go to the far end of the office by %yBrandi's desk and go up the stairs.%0" ("scenes/TODD_Joshi_Hint.vcd") <e: "talkedToBoss" 16>
+	--<15>
+
+16. "Okay, here's my %gthumbdrive%0.  It's got a virus on it that I created specifically to destroy the files on the upstairs computer.  You understand me so far?" ("scenes/TODD_Desk4_01.vcd") <ig: "1" 2>
+        a. "Yes."<17>
+        b. "Not at all."<16>
+
+17. "They're not going to just let you walk right in, you know.  Hmmm...I don't see any way of forging an ID card, so you'll just have to hotwire it.  Try to find something to pry the cover of the gate open with, like a %gscrewdriver%0.  I think %rBrandi%0 has one on her desk.  Understand?" ("scenes/TODD_Desk4_02.vcd") <o: "de_needScrewDriver" -1>
+        a. "Yeah a screwdriver, I get it."<18>
+        b. "This doesn't make any sense at all."<17>
+
+18. "You can't go dressed as you are.  The upstairs office is more casual than we are.  If you go up there wearing a suit and tie, they'll spot you in no time.  What you need are some %gcasual clothes%0 so that you can blend in better." ("scenes/TODD_Desk4_03.vcd")
+        a. "Where can I get casual clothes?"<19>
+
+19. "Let's see...I have some %gsneakers%0 you could use, and I know %rPeter%0 has some %ggolf pants%0 in his cubicle.  But for shirts, you're gonna have to search around the office." ("scenes/TODD_Desk4_04.vcd")
+        a. "I'll go and get the Golf Pants from Peter."<26>
+
+20. "I already told you.  You need a good disguise.  %gShoes, pants, a t-shirt, and a casual button down.%0  Go see %rPeter%0 for the %gpants%0 and scrounge around for the rest.  Get going." ("scenes/TODD_Clothes_Hint.vcd") <ir: "GolfPants" 21>
+	--<20>
+
+21.  "You want my %gsneakers%0 huh?  I'd be lying if I said part of me doesn't want to see you get caught, so I can't just let you have my sneakers.  But maybe there's a way you could earn them." ("scenes/TODD_Sneakers_01.vcd")
+        a. "Thanks a lot Todd, you're a real friend.  So how can I earn them?"<22>
+
+22. "If you can beat me in Trash Ball, I'll give you my %gsneakers%0.  Sound fair?" ("scenes/TODD_Sneakers_02.vcd")
+        a. "Yeah, lets do it." <27>
+
+23. "What's happing Doug?" ("scenes/TODD_TRASH_UP.vcd") <e: "wonTrashball" 24>
+        a. "I need those shoes, lets play for them."<27>
+        b. "Never mind."<31>
+
+24. "Good game, and here's the %gsneakers%0 I promised you.  By the way, good luck up there.  You've got the %gthumbdrive%0, and you're on your way to having a good, solid disguise.  If you have any trouble, just think to yourself, WWMD?" ("scenes/TODD_Trash_Win.vcd") <ig: "0" -1>
+	a. "WWMD?  What's that stand for?"<25>
+
+25. "What Would Mongoose Do.  He's your favorite comic book hero, remember?" ("scenes/TODD_WWMD.vcd")
+        --<28>
+
+26. "Okay."
+        --<20>
+
+27. "Let's play." <o: "beginTrashBall" 23!>
+	--<23>
+
+28. "What's happening Doug?" ("scenes/TODD_TRASH_UP.vcd") 
+	a. "The secretary won't let me have her screwdriver." <29>
+	b. "Err, nevermind." <30>
+
+29. "You need to get %rBrandi%0 away from her desk, huh? You'll need to find some way to...distract her. Try the front desk... that might work." ("scenes/TODD_Screw_01")
+	--<28>
+
+30. "See ya."
+	--<28>
+
+31. "a" <e: "wonTrashball" 23!>
+	--<23>
+
+************************
+0. "Shoes"
+   "ui/shoes"
+   "ui/shoes"
+
+1. "FlashDrive"
+"ui/Flashdrive"
+"ui/Flashdrive"
