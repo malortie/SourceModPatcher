@@ -16,6 +16,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Son of Ithaca
   - Weekday Warrior
 
+### Changed
+
+- Mods
+  - Weekday Warrior
+    - Add Office key in chapter 2 (needed for chapter 3)
+
 ### Fixed
 
 - Mods
