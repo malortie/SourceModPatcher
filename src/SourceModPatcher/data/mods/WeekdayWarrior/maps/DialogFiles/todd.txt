@@ -30,7 +30,7 @@ ca<10,0,10>
 8. "What's up Doug?  Lost again?" ("scenes/TODD_Desk2_01.vcd")
         a. "Very funny...Hey I got this weird e-mail from upstairs.  I can't figure out what it says.  Could you take a look at it?"<9>
 
-9. "Sure, hang on... Wow, this is strange.  You can't read it because it’s %yencrypted%0.  Those jerks upstairs must think this e-mail is really important. We need to figure out what's on it." ("scenes/TODD_Desk2_02.vcd")
+9. "Sure, hang on... Wow, this is strange.  You can't read it because it's %yencrypted%0.  Those jerks upstairs must think this e-mail is really important. We need to figure out what's on it." ("scenes/TODD_Desk2_02.vcd")
         a. "Well, I figured that out myself, but how do we break the code?"<10>
 
 10. "Well I can't do it, but codes are a hobby of %rDick's%0.  You should take it to him.  Maybe he can crack it for you." ("scenes/TODD_Desk2_03.vcd")
