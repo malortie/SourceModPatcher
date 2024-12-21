@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Patches
+  - Source 2006 HL2MP
+    - HL2 and HL2MP fonts
+
 ## [0.2.1] - 2024-11-16
 
 ### Fixed
