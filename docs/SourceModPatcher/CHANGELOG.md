@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Grimoire
   - Haunted
   - Kompressor
+  - Save the Monk 2
   - Son of Ithaca
   - SourceForts v1.9.4
   - Weekday Warrior

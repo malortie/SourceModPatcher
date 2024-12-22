@@ -1,0 +1,36 @@
+"GameInfo"
+{
+	game				"Save the Monk 2"
+	title		""
+	title2		""
+	type				singleplayer_only
+	developer "Ruslan Goffman"
+	developer_url "http://www.moddb.com/members/ruslangoffman"
+	icon "resource/game"
+
+	FileSystem
+	{
+		SteamAppId			218 		// GCF for Episode 2
+		ToolsAppId			211		// Tools will load this (ie: source SDK caches) to get things like materials\debug, materials\editor, etc.
+
+		AdditionalContentId
+		{
+			420			//Ep2
+			220			//HL2
+		}
+
+		SearchPaths
+		{
+			Game	|gameinfo_path|.
+			Game	"${{source2007_ep2_patches_path}}"
+			Game	"${{source2007_ep2_content_path}}"
+			Game	|all_source_engine_paths|ep2
+			Game	"${{source2007_episodic_patches_path}}"
+			Game	"${{source2007_episodic_content_path}}"
+			Game	|all_source_engine_paths|episodic
+			Game	"${{source2007_hl2_patches_path}}"
+			Game	"${{source2007_hl2_content_path}}"
+			Game	|all_source_engine_paths|hl2
+		}
+	}
+}

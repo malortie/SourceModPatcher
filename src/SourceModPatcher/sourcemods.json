@@ -420,6 +420,18 @@
       "required": [["source2006_hl2"]]
     }
   },
+  "save_the_monk_2": {
+    "name": "Save the Monk 2",
+    "sourcemod_folder": "savethemonk2",
+    "data_dir": "./data/mods/savethemonk2",
+    "dependencies": {
+      "required": [
+        ["sdkbase2013sp_hl2ep2"],
+        ["source2007_episodic"],
+        ["source2007_hl2"]
+      ]
+    }
+  },
   "school_adventures": {
     "name": "School Adventures",
     "sourcemod_folder": "school_adventures",

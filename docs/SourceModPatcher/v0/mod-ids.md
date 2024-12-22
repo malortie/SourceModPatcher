@@ -42,6 +42,7 @@
 | research_and_development | Research and Development |
 | riot_act | Half-Life 2: Riot Act |
 | rock_24 | Rock 24 |
+| save_the_monk_2 | Save the Monk 2 |
 | school_adventures | School Adventures |
 | sebastian | Sebastian |
 | shantytown | Shantytown |

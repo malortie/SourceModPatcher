@@ -40,6 +40,7 @@
 - [R e b e l l i o n](mod-installation/rebellion.md)
 - [Research and Development](mod-installation/research-and-development.md)
 - [Rock 24](mod-installation/rock-24.md)
+- [Save the Monk 2](mod-installation/save-the-monk-2.md)
 - [School Adventures](mod-installation/school-adventures.md)
 - [Sebastian](mod-installation/sebastian.md)
 - [Shantytown](mod-installation/shantytown.md)
