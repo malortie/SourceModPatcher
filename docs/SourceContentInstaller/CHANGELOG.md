@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Patches
+  - Source 2004 SDK
+    - Added playerlistdialog.res
+
 ### Fixed
 
 - Patches
