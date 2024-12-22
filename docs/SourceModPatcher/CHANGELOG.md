@@ -39,6 +39,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - OptionsSubMultiplayer UI
   - Save the Monk 2
     - HUDHistoryResource glitch
+    - ClientScheme issues
   - Son of Ithaca
     - Enable culling on player textures
   - SourceForts v1.9.4
