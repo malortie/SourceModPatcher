@@ -22,7 +22,7 @@
    C:\Program Files (x86)\Steam\steamapps\sourcemods\savethemonk2
    ```
 
-3. Enable `savethemonk2` in `sourcemods.install.settings.json`
+3. Enable `save_the_monk_2` in `sourcemods.install.settings.json`
 
    ```json
    "save_the_monk_2": {
