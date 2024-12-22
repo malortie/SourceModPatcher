@@ -34,6 +34,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - Missing widescreen background materials
   - Kompressor
     - Player list UI
+    - OptionsSubMultiplayer UI
   - Son of Ithaca
     - Enable culling on player textures
   - SourceForts v1.9.4
