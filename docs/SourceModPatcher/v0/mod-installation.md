@@ -20,6 +20,7 @@
 - [Final Project Diary](mod-installation/final-project-diary.md)
 - [Get A Life](mod-installation/get-a-life.md)
 - [Garry's mod 9](mod-installation/gmod9.md)
+- [Grimoire](mod-installation/grimoire.md)
 - [Half-Life 2: Riot Act](mod-installation/riot-act.md)
 - [Half-Mind](mod-installation/half-mind.md)
 - [Halloween HL2: Pumpkin Night](mod-installation/halloween.md)

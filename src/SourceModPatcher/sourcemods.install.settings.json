@@ -59,6 +59,9 @@
   "gmod9": {
     "install": false
   },
+  "grimoire": {
+    "install": false
+  },
   "half_mind": {
     "install": false
   },

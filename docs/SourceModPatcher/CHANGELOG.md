@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Mods
   - Deja Vudu Episode 1
   - Dissonance
+  - Grimoire
   - Haunted
   - Kompressor
   - Son of Ithaca

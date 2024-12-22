@@ -210,6 +210,17 @@
       ]
     }
   },
+  "grimoire": {
+    "name": "Grimoire",
+    "sourcemod_folder": "Azure",
+    "data_dir": "./data/mods/Azure",
+    "dependencies": {
+      "required": [
+        ["sdkbase2013mp_hl2mp"],
+        ["source2006_hl2"]
+      ]
+    }
+  },
   "half_mind": {
     "name": "Half-Mind",
     "sourcemod_folder": "Half-Mind",

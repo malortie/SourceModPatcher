@@ -22,6 +22,7 @@
 | final_project_diary | Final Project Diary |
 | get_a_life | Get a Life |
 | gmod9 | Garry's Mod 9 |
+| grimoire | Grimoire |
 | half_mind | Half-Mind |
 | halloween | Halloween HL2: Pumpkin Night |
 | halloween_redux | Halloween HL2: Pumpkin Night (Redux) |

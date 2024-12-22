@@ -19,6 +19,7 @@
   "final_project_diary": "./config/mods/final_project_diary.install.steps.json",
   "get_a_life": "./config/mods/get_a_life.install.steps.json",
   "gmod9": "./config/mods/gmod9.install.steps.json",
+  "grimoire": "./config/mods/grimoire.install.steps.json",
   "half_mind": "./config/mods/half_mind.install.steps.json",
   "halloween": "./config/mods/halloween.install.steps.json",
   "halloween_redux": "./config/mods/halloween_redux.install.steps.json",
