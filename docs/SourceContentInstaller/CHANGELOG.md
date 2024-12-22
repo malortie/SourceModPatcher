@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - Added playerlistdialog.res
   - Source 2006 HL2MP
     - Added HL2 and HL2MP fonts
+    - Added optionssubmultiplayer.res
 
 ## [0.2.1] - 2024-11-16
 
