@@ -21,6 +21,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Mods
+  - Kompressor
+    - Removed 'Report bug' from game menu
+    - Removed 'Video stress test' from game menu
   - Weekday Warrior
     - Add Office key in chapter 2 (needed for chapter 3)
 
