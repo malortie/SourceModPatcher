@@ -25,6 +25,7 @@
   "haunted": "./config/mods/haunted.install.steps.json",
   "hoe": "./config/mods/hoe.install.steps.json",
   "human_error": "./config/mods/human_error.install.steps.json",
+  "kompressor": "./config/mods/kompressor.install.steps.json",
   "mace": "./config/mods/mace.install.steps.json",
   "metastasis_2": "./config/mods/metastasis_2.install.steps.json",
   "metastasis_3": "./config/mods/metastasis_3.install.steps.json",

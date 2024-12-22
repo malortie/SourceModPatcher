@@ -273,6 +273,14 @@
       ]
     }
   },
+  "kompressor": {
+    "name": "Kompressor",
+    "sourcemod_folder": "Kompressor",
+    "data_dir": "./data/mods/Kompressor",
+    "dependencies": {
+      "required": [["source2006_hl2"]]
+    }
+  },
   "mace": {
     "name": "MACe the Adventure",
     "sourcemod_folder": "MACe",

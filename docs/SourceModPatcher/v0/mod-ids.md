@@ -28,6 +28,7 @@
 | haunted | Haunted v1.5 |
 | hoe | Heart of Evil: Source |
 | human_error | Human Error |
+| kompressor | Kompressor |
 | mace | MACe the Adventure |
 | metastasis_2 | MINERVA: Metastasis 2 |
 | metastasis_3 | MINERVA: Metastasis 3 |
