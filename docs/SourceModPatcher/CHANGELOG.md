@@ -32,6 +32,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Mods
   - Haunted
     - Missing widescreen background materials
+  - Kompressor
+    - Player list UI
   - Son of Ithaca
     - Enable culling on player textures
   - SourceForts v1.9.4
