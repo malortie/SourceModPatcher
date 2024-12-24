@@ -46,6 +46,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - Enable culling on player textures
   - SourceForts v1.9.4
     - Missing widescreen background materials
+  - The Color of Doom
+    - Chapter title in New game menu
   - Weekday Warrior
     - Missing game type in gameinfo.txt
     - Encoding in dialogues
