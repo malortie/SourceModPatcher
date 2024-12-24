@@ -21,6 +21,7 @@
 | eots | Eye of the Storm |
 | final_project_diary | Final Project Diary |
 | get_a_life | Get a Life |
+| ghastleybriar | The Ghastleybriar Zoo Incident |
 | gmod9 | Garry's Mod 9 |
 | grimoire | Grimoire |
 | half_mind | Half-Mind |

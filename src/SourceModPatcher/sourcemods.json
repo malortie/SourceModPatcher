@@ -187,6 +187,16 @@
       "required": [["source2006_hl2"]]
     }
   },
+  "ghastleybriar": {
+    "name": "The Ghastleybriar Zoo Incident",
+    "sourcemod_folder": "Ghastleybriar",
+    "data_dir": "./data/mods/Ghastleybriar",
+    "dependencies": {
+      "required": [
+        ["source2006_hl2"]
+      ]
+    }
+  },
   "gmod9": {
     "name": "Garry's Mod 9",
     "sourcemod_folder": "gmod9",

@@ -67,6 +67,7 @@
 - [Strider Mountain](mod-installation/strider-mountain.md)
 - [The Color of Doom](mod-installation/the-color-of-doom.md)
 - [The Fiona Project](mod-installation/the-fiona-project.md)
+- [The Ghastleybriar Zoo Incident](mod-installation/the-ghastleybriar-zoo-incident.md)
 - [The Island](mod-installation/the-island.md)
 - [The Lost City](mod-installation/the-lost-city.md)
 - [Weekday Warrior](mod-installation/weekday-warrior.md)

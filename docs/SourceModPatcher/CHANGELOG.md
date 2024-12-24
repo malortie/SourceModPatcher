@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - SourceForts v1.9.4
   - The Color of Doom
   - The Fiona Project
+  - The Ghastleybriar Zoo Incident
   - Weekday Warrior
 
 ### Changed
