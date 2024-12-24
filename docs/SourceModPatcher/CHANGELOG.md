@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Save the Monk 2
   - Son of Ithaca
   - SourceForts v1.9.4
+  - The Color of Doom
   - The Fiona Project
   - Weekday Warrior
 

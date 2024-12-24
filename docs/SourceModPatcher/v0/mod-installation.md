@@ -65,6 +65,7 @@
 - [Source 2007 (Mod SDK Sample)](mod-installation/source-2007-mod-template.md)
 - [SourceForts v1.9.4](mod-installation/sourceforts.md)
 - [Strider Mountain](mod-installation/strider-mountain.md)
+- [The Color of Doom](mod-installation/the-color-of-doom.md)
 - [The Fiona Project](mod-installation/the-fiona-project.md)
 - [The Island](mod-installation/the-island.md)
 - [The Lost City](mod-installation/the-lost-city.md)

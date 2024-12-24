@@ -1,0 +1,23 @@
+"GameInfo"
+{
+	// This is what shows up in the 'Third Party Games' area of the Steam games list.
+	game						"The Color of Doom"
+	type 						singleplayer_only	
+	developer					"Overscope"
+	"icon"						"cod_small"
+
+	FileSystem
+	{
+		SteamAppId				215		// GCF for Source SDK Base
+		ToolsAppId				211		// Tools will load this (ie: source SDK caches) to get things like materials\debug, materials\editor, etc.
+
+		SearchPaths
+		{
+			Game	|gameinfo_path|.
+			Game	sourcetest
+			Game	"${{source2006_hl2_patches_path}}"
+			Game	"${{source2006_hl2_content_path}}"
+			Game	hl2
+		}
+	}
+}

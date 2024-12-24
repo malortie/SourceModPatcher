@@ -726,6 +726,16 @@
       "required": [["source2006_hl2"]]
     }
   },
+  "the_color_of_doom": {
+    "name": "The Color of Doom",
+    "sourcemod_folder": "ColorOfDeath",
+    "data_dir": "./data/mods/ColorOfDeath",
+    "dependencies": {
+      "required": [
+        ["source2006_hl2"]
+      ]
+    }
+  },
   "the_fiona_project": {
     "name": "The Fiona Project",
     "sourcemod_folder": "TheFionaProject",
