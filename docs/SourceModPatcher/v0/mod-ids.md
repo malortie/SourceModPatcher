@@ -67,6 +67,7 @@
 | source_2007_mod_template | Source 2007 (Mod SDK Template) |
 | sourceforts | SourceForts v1.9.4 |
 | strider_mountain | Strider Mountain |
+| the_fiona_project | The Fiona Project |
 | the_island | The Island |
 | the_lost_city | The Lost City |
 | weekday_warrior | Weekday Warrior |
