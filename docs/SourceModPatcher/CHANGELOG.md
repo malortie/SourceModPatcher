@@ -42,6 +42,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Deep6
     - Missing server.cfg
     - Player list UI
+    - Map d6_intro
+      - Missing materials
+    - Map d6_trench
+      - Missing materials
   - Haunted
     - Missing widescreen background materials
   - IRIS

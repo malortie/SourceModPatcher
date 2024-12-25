@@ -1,0 +1,9 @@
+"SDK_LightmappedGeneric_DX9"
+{
+
+ "$baseTexture" "ruins/ruin_wall_big_001"
+ 
+"$bumpmap" "ruins/ruin_wall_big_001_normal"
+ 
+ "$surfaceprop" "concrete"
+}

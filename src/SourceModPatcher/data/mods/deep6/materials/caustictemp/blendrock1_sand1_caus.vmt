@@ -1,0 +1,10 @@
+"SDK_LightmappedGeneric_DX9"
+{
+	 
+	"$basetexture" "nature/sandfloor_bleached"
+	"$basetexture2" "nature/rockface01a"
+	//"$normalmapalphaenvmapmask"	"1"
+	"$surfaceprop" 	"rock"
+	"$surfaceprop2"	"sand"
+
+}

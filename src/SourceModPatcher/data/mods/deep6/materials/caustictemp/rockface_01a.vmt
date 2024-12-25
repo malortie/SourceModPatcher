@@ -1,0 +1,7 @@
+"SDK_LightmappedGeneric_DX9"
+{
+
+"$baseTexture" "nature/rockface01a"
+"$surfaceprop" "rock"
+"$bumpmap" "nature/rockface01a_normal"
+}
