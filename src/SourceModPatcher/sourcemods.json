@@ -294,6 +294,14 @@
       ]
     }
   },
+  "iris": {
+    "name": "IRIS",
+    "sourcemod_folder": "iris",
+    "data_dir": "./data/mods/iris",
+    "dependencies": {
+      "required": [["source2006_hl2"]]
+    }
+  },
   "kompressor": {
     "name": "Kompressor",
     "sourcemod_folder": "Kompressor",

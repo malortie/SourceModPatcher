@@ -83,6 +83,9 @@
   "human_error": {
     "install": false
   },
+  "iris": {
+    "install": false
+  },
   "kompressor": {
     "install": false
   },

@@ -28,6 +28,7 @@
 - [Haunted v1.5](mod-installation/haunted.md)
 - [Heart of Evil: Source](mod-installation/heart-of-evil-source.md)
 - [Human Error](mod-installation/human-error.md)
+- [IRIS](mod-installation/iris.md)
 - [Kompressor](mod-installation/kompressor.md)
 - [MACe the Adventure](mod-installation/mace-the-adventure.md)
 - [MINERVA: Metastasis 2](mod-installation/metastasis-2.md)

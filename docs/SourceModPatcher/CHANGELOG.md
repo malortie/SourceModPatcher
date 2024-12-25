@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Dissonance
   - Grimoire
   - Haunted
+  - IRIS
   - Kompressor
   - Save the Monk 2
   - Son of Ithaca
