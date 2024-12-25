@@ -1,0 +1,32 @@
+"GameInfo"
+{
+	// This is what shows up in the 'Third Party Games' area of the Steam games list.
+	game						"Deep6"
+	type multiplayer_only
+	developer	"Leaping Lizard Software Inc."
+	developer_url	"http://www.deep6game.com"
+	icon		"d6_icon"			//The icon must be an uncompressed TGA 16x16 pixels in size 24 bits
+	nomodels 1
+	nohimodel 1
+	nocrosshair 1
+	advcrosshair 1
+	hidden_maps
+	{
+		"test_speakers"		1
+		"test_hardware"		1
+	}
+	nodegraph 0
+	FileSystem
+	{
+		SteamAppId				215		// This will mount all the GCFs we need (240=CS:S, 220=HL2).
+		ToolsAppId				211		// Tools will load this (ie: source SDK caches) to get things like materials\debug, materials\editor, etc.
+
+		SearchPaths
+		{
+			Game	|gameinfo_path|.
+			Game	"${{source2006_hl2_patches_path}}"
+			Game	"${{source2006_hl2_content_path}}"
+			Game	hl2
+		}
+	}
+}

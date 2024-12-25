@@ -15,6 +15,7 @@
 | dangerous_world_2 | Dangerous World 2 Demo |
 | dasroboss | Das Roboss |
 | day_hard | Day Hard |
+| deep6 | Deep6 |
 | deja_vudu | Deja Vudu Episode 1 |
 | dissonance | Dissonance |
 | eclipse | Eclipse |
