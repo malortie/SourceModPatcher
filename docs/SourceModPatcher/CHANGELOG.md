@@ -41,6 +41,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Mods
   - Deep6
     - Missing server.cfg
+    - Player list UI
   - Haunted
     - Missing widescreen background materials
   - IRIS
