@@ -28,6 +28,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Mods
+  - Deep6
+    - Add 'Create game' menu option
   - Kompressor
     - Removed 'Report bug' from game menu
     - Removed 'Video stress test' from game menu
