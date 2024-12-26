@@ -3,6 +3,7 @@
 - [1187: Episode One](mod-installation/1187-episode-one.md)
 - [1187: Rogue Train](mod-installation/1187-rogue-train.md)
 - [A Frayed Stitch in Time](mod-installation/a-frayed-stitch-in-time.md)
+- [Age of Chivalry v1.1](mod-installation/age-of-chivalry.md)
 - [Awakening](mod-installation/awakening.md)
 - [Black Snow](mod-installation/black-snow.md)
 - [Cite 14](mod-installation/cite-14.md)
