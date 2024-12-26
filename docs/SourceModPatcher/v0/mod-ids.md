@@ -30,6 +30,7 @@
 | halloween | Halloween HL2: Pumpkin Night |
 | halloween_redux | Halloween HL2: Pumpkin Night (Redux) |
 | haunted | Haunted v1.5 |
+| hl2as | Half-Life 2: Assault |
 | hoe | Heart of Evil: Source |
 | human_error | Human Error |
 | iris | IRIS |

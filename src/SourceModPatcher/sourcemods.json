@@ -285,6 +285,17 @@
       ]
     }
   },
+  "hl2as": {
+    "name": "Half-Life 2: Assault",
+    "sourcemod_folder": "hl2as",
+    "data_dir": "./data/mods/hl2as",
+    "dependencies": {
+      "required": [
+        ["sdkbase2013mp_hl2mp"],
+        ["source2006_hl2"]
+      ]
+    }
+  },
   "hoe": {
     "name": "Heart of Evil: Source",
     "sourcemod_folder": "hoe",

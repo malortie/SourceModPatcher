@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Deja Vudu Episode 1
   - Dissonance
   - Grimoire
+  - Half-Life 2: Assault
   - Haunted
   - IRIS
   - Kompressor

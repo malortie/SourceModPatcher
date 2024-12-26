@@ -27,6 +27,7 @@
   "halloween": "./config/mods/halloween.install.steps.json",
   "halloween_redux": "./config/mods/halloween_redux.install.steps.json",
   "haunted": "./config/mods/haunted.install.steps.json",
+  "hl2as": "./config/mods/hl2as.install.steps.json",
   "hoe": "./config/mods/hoe.install.steps.json",
   "human_error": "./config/mods/human_error.install.steps.json",
   "iris": "./config/mods/iris.install.steps.json",

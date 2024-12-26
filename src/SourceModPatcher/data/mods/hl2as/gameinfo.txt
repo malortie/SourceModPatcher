@@ -1,0 +1,36 @@
+"GameInfo"
+{
+	game	"Half-Life 2: Assault"
+	title	""
+	title2	""
+	type multiplayer_only
+	nomodels 0
+	nohimodel 1
+	nocrosshair 1
+	icon		"resource\hl2as"
+	developer	"UB Games"
+	developer_url	"http://www.hl2assault.com"
+	hidden_maps
+	{
+		"test_speakers"		1
+		"test_hardware"		1
+		"deathball"		1
+	}
+
+	FileSystem
+	{
+		SteamAppId				215		// This will mount all the GCFs we need (240=CS:S, 220=HL2).
+		ToolsAppId				211		// Tools will load this (ie: source SDK caches) to get things like materials\debug, materials\editor, etc.
+
+		SearchPaths
+		{
+			Game	|gameinfo_path|.
+			Game	"${{source2006_hl2mp_patches_path}}" // No support for 2004 HL2MP. Use 2006.
+			Game	"${{source2006_hl2mp_content_path}}"
+			Game	hl2mp
+			Game	"${{source2004_hl2_patches_path}}"
+			Game	"${{source2004_hl2_content_path}}"
+			Game	hl2
+		}
+	}
+}

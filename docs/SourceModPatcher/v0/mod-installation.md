@@ -28,6 +28,7 @@
 - [Halloween HL2: Pumpkin Night](mod-installation/halloween.md)
 - [Halloween HL2: Pumpkin Night (Redux)](mod-installation/halloween-redux.md)
 - [Haunted v1.5](mod-installation/haunted.md)
+- [Half-Life 2: Assault](mod-installation/hl2-assault.md)
 - [Heart of Evil: Source](mod-installation/heart-of-evil-source.md)
 - [Human Error](mod-installation/human-error.md)
 - [IRIS](mod-installation/iris.md)

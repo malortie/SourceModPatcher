@@ -83,6 +83,9 @@
   "haunted": {
     "install": false
   },
+  "hl2as": {
+    "install": false
+  },
   "hoe": {
     "install": false
   },
