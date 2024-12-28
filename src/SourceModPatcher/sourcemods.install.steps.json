@@ -68,6 +68,7 @@
   "source_2007_mod_hl2mp": "./config/mods/source_2007_mod_hl2mp.install.steps.json",
   "source_2007_mod_template": "./config/mods/source_2007_mod_template.install.steps.json",
   "sourceforts": "./config/mods/sourceforts.install.steps.json",
+  "strider_mod": "./config/mods/strider_mod.install.steps.json",
   "strider_mountain": "./config/mods/strider_mountain.install.steps.json",
   "the_color_of_doom": "./config/mods/the_color_of_doom.install.steps.json",
   "the_fiona_project": "./config/mods/the_fiona_project.install.steps.json",

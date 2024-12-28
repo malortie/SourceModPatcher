@@ -763,6 +763,17 @@
       ]
     }
   },
+  "strider_mod": {
+    "name": "Pilotable Strider Mod 0.3.5.1",
+    "sourcemod_folder": "StriderMod35",
+    "data_dir": "./data/mods/StriderMod35",
+    "dependencies": {
+      "required": [
+        ["sdkbase2013mp_hl2mp"],
+        ["source2006_hl2"]
+      ]
+    }
+  },
   "strider_mountain": {
     "name": "Strider Mountain",
     "sourcemod_folder": "Strider_Mountain",

@@ -71,6 +71,7 @@
 | source_2007_mod_hl2mp | Source 2007 (Mod HL2MP) |
 | source_2007_mod_template | Source 2007 (Mod SDK Template) |
 | sourceforts | SourceForts v1.9.4 |
+| strider_mod | Pilotable Strider Mod 0.3.5.1 |
 | strider_mountain | Strider Mountain |
 | the_color_of_doom | The Color of Doom |
 | the_fiona_project | The Fiona Project |

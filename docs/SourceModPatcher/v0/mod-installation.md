@@ -68,6 +68,7 @@
 - [Source 2007 (Mod HL2MP)](mod-installation/source-2007-mod-hl2mp.md)
 - [Source 2007 (Mod SDK Sample)](mod-installation/source-2007-mod-template.md)
 - [SourceForts v1.9.4](mod-installation/sourceforts.md)
+- [Pilotable Strider Mod 0.3.5.1](mod-installation/strider-mod.md)
 - [Strider Mountain](mod-installation/strider-mountain.md)
 - [The Color of Doom](mod-installation/the-color-of-doom.md)
 - [The Fiona Project](mod-installation/the-fiona-project.md)
