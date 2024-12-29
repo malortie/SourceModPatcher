@@ -56,6 +56,9 @@
   "eots": {
     "install": false
   },
+  "exp": {
+    "install": false
+  },
   "final_project_diary": {
     "install": false
   },

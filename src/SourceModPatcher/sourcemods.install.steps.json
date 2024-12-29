@@ -18,6 +18,7 @@
   "dissonance": "./config/mods/dissonance.install.steps.json",
   "eclipse": "./config/mods/eclipse.install.steps.json",
   "eots": "./config/mods/eots.install.steps.json",
+  "exp": "./config/mods/exp.install.steps.json",
   "final_project_diary": "./config/mods/final_project_diary.install.steps.json",
   "get_a_life": "./config/mods/get_a_life.install.steps.json",
   "ghastleybriar": "./config/mods/ghastleybriar.install.steps.json",

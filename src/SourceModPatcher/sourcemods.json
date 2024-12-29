@@ -183,6 +183,14 @@
       ]
     }
   },
+  "exp": {
+    "name": "The Extraction Point",
+    "sourcemod_folder": "EXP",
+    "data_dir": "./data/mods/EXP",
+    "dependencies": {
+      "required": [["source2006_hl2"]]
+    }
+  },
   "final_project_diary": {
     "name": "Final Project Diary",
     "sourcemod_folder": "final_project_diary",

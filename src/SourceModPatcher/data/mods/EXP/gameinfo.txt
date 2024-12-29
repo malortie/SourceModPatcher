@@ -1,0 +1,24 @@
+"GameInfo"
+{
+	game		"The Extraction Point"
+	title		"The Extraction Point"
+	title2		""
+	type		singleplayer_only
+	"icon"		"EXP_icon"
+	"developer" 		"VahN! Destroyer oF WorlDs! NiAiS"
+	"developer_url" 	""
+	FileSystem
+	{
+		SteamAppId				215
+		ToolsAppId				211
+		
+		SearchPaths
+		{
+			Game	|gameinfo_path|.
+			Game	"${{source2004_hl2_binaries_path}}"
+			Game	"${{source2004_hl2_patches_path}}"
+			Game	"${{source2004_hl2_content_path}}"
+			Game	hl2
+		}
+	}
+}

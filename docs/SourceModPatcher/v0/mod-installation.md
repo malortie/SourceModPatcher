@@ -71,6 +71,7 @@
 - [Pilotable Strider Mod 0.3.5.1](mod-installation/strider-mod.md)
 - [Strider Mountain](mod-installation/strider-mountain.md)
 - [The Color of Doom](mod-installation/the-color-of-doom.md)
+- [The Extraction Point](mod-installation/the-extraction-point.md)
 - [The Fiona Project](mod-installation/the-fiona-project.md)
 - [The Ghastleybriar Zoo Incident](mod-installation/the-ghastleybriar-zoo-incident.md)
 - [The Island](mod-installation/the-island.md)

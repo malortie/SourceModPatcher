@@ -21,6 +21,7 @@
 | dissonance | Dissonance |
 | eclipse | Eclipse |
 | eots | Eye of the Storm |
+| exp | The Extraction Point |
 | final_project_diary | Final Project Diary |
 | get_a_life | Get a Life |
 | ghastleybriar | The Ghastleybriar Zoo Incident |
