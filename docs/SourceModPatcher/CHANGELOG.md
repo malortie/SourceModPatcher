@@ -55,6 +55,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - IRIS
     - Missing widescreen background materials
     - Main menu strings
+    - Missing sdk/translucent material
   - Kompressor
     - Player list UI
     - OptionsSubMultiplayer UI
