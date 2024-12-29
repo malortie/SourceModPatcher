@@ -119,6 +119,9 @@
   "obsidian": {
     "install": false
   },
+  "powerstation_17": {
+    "install": false
+  },
   "ravenholmlc": {
     "install": false
   },

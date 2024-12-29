@@ -42,6 +42,7 @@
 | missionimprobable | Mission Improbable |
 | mop | Mistake Of Pythagoras |
 | obsidian | Obsidian Conflict 1.35 |
+| powerstation_17 | Powerstation 17 |
 | ravenholmlc | Ravenholm: The Lost Chapter |
 | ravenholmncz | Ravenholm |
 | rebellion | R e b e l l i o n |

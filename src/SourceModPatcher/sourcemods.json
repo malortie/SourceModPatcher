@@ -421,6 +421,16 @@
       ]
     }
   },
+  "powerstation_17": {
+    "name": "Powerstation 17",
+    "sourcemod_folder": "Powerstation 17",
+    "data_dir": "./data/mods/Powerstation 17",
+    "dependencies": {
+      "required": [
+        ["source2006_hl2"]
+      ]
+    }
+  },
   "ravenholmlc": {
     "name": "Ravenholm: The Lost Chapter",
     "sourcemod_folder": "Ravenholm- The Lost Chapter",

@@ -69,6 +69,7 @@
 - [Source 2007 (Mod SDK Sample)](mod-installation/source-2007-mod-template.md)
 - [SourceForts v1.9.4](mod-installation/sourceforts.md)
 - [Pilotable Strider Mod 0.3.5.1](mod-installation/strider-mod.md)
+- [Powerstation 17](mod-installation/powerstation-17.md)
 - [Strider Mountain](mod-installation/strider-mountain.md)
 - [The Color of Doom](mod-installation/the-color-of-doom.md)
 - [The Extraction Point](mod-installation/the-extraction-point.md)
