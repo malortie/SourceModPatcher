@@ -67,6 +67,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - Missing widescreen background materials
   - The Color of Doom
     - Chapter title in New game menu
+  - The Extraction Point
+    - Missing widescreen background materials
   - The Ghastleybriar Zoo Incident
     - Chapter title in New game menu
   - Weekday Warrior
