@@ -21,6 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Kompressor
   - Pilotable Strider Mod 0.3.5.1
   - Powerstation 17
+  - Random 17
   - Save the Monk 2
   - Son of Ithaca
   - SourceForts v1.9.4

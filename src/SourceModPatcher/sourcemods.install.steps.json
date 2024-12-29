@@ -40,6 +40,7 @@
   "mop": "./config/mods/mop.install.steps.json",
   "obsidian": "./config/mods/obsidian.install.steps.json",
   "powerstation_17": "./config/mods/powerstation_17.install.steps.json",
+  "random_17": "./config/mods/random_17.install.steps.json",
   "ravenholmlc": "./config/mods/ravenholmlc.install.steps.json",
   "ravenholmncz": "./config/mods/ravenholmncz.install.steps.json",
   "rebellion": "./config/mods/rebellion.install.steps.json",

@@ -431,6 +431,18 @@
       ]
     }
   },
+  "random_17": {
+    "name": "Random 17",
+    "sourcemod_folder": "random17",
+    "data_dir": "./data/mods/random17",
+    "dependencies": {
+      "required": [
+        ["sdkbase2013sp_hl2ep2"],
+        ["source2007_episodic"],
+        ["source2007_hl2"]
+      ]
+    }
+  },
   "ravenholmlc": {
     "name": "Ravenholm: The Lost Chapter",
     "sourcemod_folder": "Ravenholm- The Lost Chapter",
