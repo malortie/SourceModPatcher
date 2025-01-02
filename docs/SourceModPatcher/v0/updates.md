@@ -29,3 +29,7 @@ It is **recommended** to clean your previous SourceContentInstaller and SourceMo
 ## v0.3.0
 
 It is **recommended** to clean your previous SourceContentInstaller and SourceModPatcher installation and start anew from v0.3.0.
+
+## v0.4.0
+
+It is **recommended** to clean your previous SourceContentInstaller and SourceModPatcher installation and start anew from v0.4.0.
