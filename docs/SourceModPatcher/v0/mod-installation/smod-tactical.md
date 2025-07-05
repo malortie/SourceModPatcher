@@ -1,4 +1,4 @@
-# SMOD Redux Version 8 installation
+# SMOD: Tactical Delta 5.56 installation
 
 > **Important!** For campaign maps, see [Campaign maps](#campaign-maps).
 
